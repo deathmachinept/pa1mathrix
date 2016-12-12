@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - MatrizC
+  - MatrizA
+  - Transposta
+  - Inversas
+  - ParentesesDireito
+  - ParentesesEsquerdo
+  - MatrizB
+  - Matriz
+  - EquacaoOrtogonal
+  - Equacoes
+  - MaterialText
+  - MaterialButtonLayer
+  - OptionA
+  - OptionB
+  - OptionC
+  - OptionD
+  - ListaQuizQuestions
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Floor
+    uniqueID: 4047953309
+    locked: 0
+  - name: ActiveObjects
+    uniqueID: 3978184593
+    locked: 0
