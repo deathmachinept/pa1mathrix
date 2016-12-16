@@ -12,6 +12,7 @@ public class GM_Object : MonoBehaviour {
     public static List<Question> unansweredQuestions;
     public Question currentQuestion;
     private int userAnswer;
+    public bool acertou = false, updatedA = false, updatedB = false, updatedC = false, updatedD = false;
 
     [SerializeField]
     private Text factText;
@@ -52,9 +53,26 @@ public class GM_Object : MonoBehaviour {
         }
         if (currentQuestion.answer == userAnswer)
         {
-            Debug.Log(true);
             StartCoroutine(TransitionToNextQuestion());
+            acertou = true;
+            Debug.Log(true);
         }
+
+    }
+
+    void Update()
+    {
+        if (updatedA)
+            if(updatedB)
+                if(updatedC)
+                   if(updatedD){
+                       acertou = false;
+                       updatedA = false;
+                       updatedB = false;
+                       updatedC = false;
+                       updatedD = false;
+                           }
+
 
     }
 

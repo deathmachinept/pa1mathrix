@@ -10,48 +10,83 @@ public class BtnInterface : MonoBehaviour {
     [SerializeField]
     public Text factText;
     int runOnce = 0;
+    int questionID = 0;
+
 
     GM_Object findObjQuestion;
 
     void Start () {
+        findObjQuestion = GameObject.FindGameObjectWithTag("ListaQuizQuestions").GetComponent<GM_Object>();
 
-
-
-        //if (this.transform)
-        //factText.text = findObjQuestion.;
 
     }
 	
 	// Update is called once per frame
 	void Update () {
-	//if(runOnce == 0)
- //       {
- //           runOnce = 1;
 
- //           findObjQuestion = GameObject.FindGameObjectWithTag("ListaQuizQuestions").GetComponent<GM_Object>();
+        if (runOnce == 0)
+        {
+            runOnce = 1;
+            Question questao = findObjQuestion.currentQuestion;
+            //Question findObjQuestion = GameObject.Find("ListaQuizQuestions").GetComponent(GM_Object).currentQuestion;
+            if (transform.parent.parent.tag == "OptionA")
+            {
+                //string textFact = "A)";
+                //textFact = textFact + questao.solutionA;
+                string textFact = string.Concat("A) " + questao.solutionA);
 
- //           Question questao = findObjQuestion.currentQuestion;
- //           //Question findObjQuestion = GameObject.Find("ListaQuizQuestions").GetComponent(GM_Object).currentQuestion;
- //           Debug.Log("Tag this transform " + transform.parent.parent.tag);
- //           if (transform.parent.parent.tag == "OptionA")
- //           {
- //               factText.text = questao.solutionA;
- //           }
- //           if (transform.parent.parent.tag == "OptionB")
- //           {
- //               factText.text = questao.solutionB;
+                factText.text = textFact;
+                questionID = 1;
+            }
+            if (transform.parent.parent.tag == "OptionB")
+            {
+               // string textFact = "A)";
+                string textFact = string.Concat("B) " + questao.solutionB);
 
- //           }
- //           if (transform.parent.parent.tag == "OptionC")
- //           {
- //               factText.text = questao.solutionC;
+                factText.text = textFact;
+                questionID = 2;
 
- //           }
- //           if (transform.parent.parent.tag == "OptionD")
- //           {
- //               factText.text = questao.solutionD;
+            }
+            if (transform.parent.parent.tag == "OptionC")
+            {
+                string textFact = string.Concat("C) " + questao.solutionC);
 
- //           }
- //       }
+                factText.text = textFact;
+                questionID = 3;
+
+
+            }
+            if (transform.parent.parent.tag == "OptionD")
+            {
+                string textFact = string.Concat("D) " + questao.solutionD);
+
+                factText.text = textFact;
+                questionID = 4;
+            }
+        }
+
+        if (findObjQuestion)
+        {
+            runOnce = 0;
+             if (questionID == 1)
+            {
+                findObjQuestion.updatedA = true;
+            }
+            if (questionID == 2)
+            {
+                findObjQuestion.updatedB = true;
+
+            }
+            if (questionID == 3)
+            {
+                findObjQuestion.updatedC = true;
+
+            }
+            if (questionID == 4)
+            {
+                findObjQuestion.updatedD = true;
+            }
+        }
+
 	}
 }
