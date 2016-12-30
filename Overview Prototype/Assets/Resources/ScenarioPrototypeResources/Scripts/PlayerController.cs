@@ -11,10 +11,6 @@ public class PlayerController : NetworkBehaviour
     public float posGridY;
     private GameObject TA, TB;
 
-    public void Awake()
-    {
-        DontDestroyOnLoad(GameObject.Find("Player(Clone)"));
-    }
 
     void Start()
     {
@@ -31,11 +27,11 @@ public class PlayerController : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            PlayerPrefs.SetFloat("PosX", this.transform.position.x);
-            PlayerPrefs.SetFloat("PosY", this.transform.position.y);
-            PlayerPrefs.SetFloat("PosZ", this.transform.position.z);
-            PlayerPrefs.Save();
-            SceneManager.LoadSceneAsync("SimplificacaoMatrizes",LoadSceneMode.Single);
+            SceneManager.LoadSceneAsync("SimplificacaoMatrizes",LoadSceneMode.Additive);
+            GameObject.Find("MainSceneObjectsHolder").SetActive(false);
+            GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().CurrentSceneName = "SimplificacaoMatrizes";
+            this.transform.position=Vector3.zero;
+            GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().PlayerList.SetActive(false);
         }
     }
 
@@ -43,11 +39,11 @@ public class PlayerController : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            PlayerPrefs.SetFloat("PosX", this.transform.position.x);
-            PlayerPrefs.SetFloat("PosY", this.transform.position.y);
-            PlayerPrefs.SetFloat("PosZ", this.transform.position.z);
-            PlayerPrefs.Save();
-            SceneManager.LoadSceneAsync("Desenho Polígono",LoadSceneMode.Single);
+            SceneManager.LoadSceneAsync("Desenho Polígono",LoadSceneMode.Additive);
+            GameObject.Find("MainSceneObjectsHolder").SetActive(false);
+            GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().CurrentSceneName = "Desenho Polígono";
+            this.transform.position = Vector3.zero;
+            GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().PlayerList.SetActive(false);
         }
     }
 

@@ -12,6 +12,7 @@ public class MapDraw : MonoBehaviour
         {
             TilesHolder = new GameObject();
             TilesHolder.transform.position = Vector3.zero;
+            TilesHolder.transform.SetParent(GameObject.Find("MainSceneObjectsHolder").transform);
             TilesHolder.name = "Tiles Holder";
             tileSize = 10;
             PlaceTiles();
