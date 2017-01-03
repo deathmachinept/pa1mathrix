@@ -63,6 +63,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Resources\ScenarioPrototypeResources\Scripts\ChatBoxController.cs" />
+    <Compile Include="Assets\Resources\ScenarioPrototypeResources\Scripts\ChatController.cs" />
     <Compile Include="Assets\Resources\ScenarioPrototypeResources\Scripts\GameController.cs" />
     <Compile Include="Assets\Resources\ScenarioPrototypeResources\Scripts\MapDraw.cs" />
     <Compile Include="Assets\Resources\ScenarioPrototypeResources\Scripts\MyNetworkManager.cs" />

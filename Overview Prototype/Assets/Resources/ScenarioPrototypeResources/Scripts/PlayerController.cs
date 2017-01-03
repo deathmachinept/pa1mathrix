@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class PlayerController : NetworkBehaviour
 {
@@ -10,7 +11,7 @@ public class PlayerController : NetworkBehaviour
     public float posGridX;
     public float posGridY;
     private GameObject TA, TB;
-
+    public bool isFocused=true;
 
     void Start()
     {
@@ -19,8 +20,11 @@ public class PlayerController : NetworkBehaviour
 
     void Update()
     {
-        ProcessMovement();
-        CheckForExit();
+        if (!GameObject.Find("InputField").GetComponent<InputField>().isFocused)
+        {
+            ProcessMovement();
+            CheckForExit();
+        }
     }
 
     public void ChangeToSimplificationGame()
