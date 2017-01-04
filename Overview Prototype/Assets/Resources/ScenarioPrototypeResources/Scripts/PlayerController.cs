@@ -55,7 +55,7 @@ public class PlayerController : NetworkBehaviour
             GameObject.Find("MainSceneObjectsHolder").SetActive(false);
             GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().CurrentSceneName = "SimplificacaoMatrizes";
             this.transform.position = Vector3.zero;
-            GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().PlayerList.SetActive(false);
+            GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().players.SetActive(false);
         }
     }
 
@@ -67,7 +67,7 @@ public class PlayerController : NetworkBehaviour
             GameObject.Find("MainSceneObjectsHolder").SetActive(false);
             GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().CurrentSceneName = "Desenho Polígono";
             this.transform.position = Vector3.zero;
-            GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().PlayerList.SetActive(false);
+            GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().players.SetActive(false);
         }
     }
 

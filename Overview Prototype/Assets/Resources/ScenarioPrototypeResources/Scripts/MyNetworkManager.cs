@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEditor;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,15 +8,19 @@ using UnityEngine.UI;
 public class MyNetworkManager : NetworkManager
 {
     public GameObject MainSceneObjects;
-    public GameObject PlayerList;
+    public GameObject players;
     public string Address;
     public int Port;
     public string CurrentSceneName = "TestBuild";
 
-    public void Start()
+    public void Awake()
     {
         MainSceneObjects = GameObject.Find("MainSceneObjectsHolder");
-        PlayerList = transform.FindChild("Players").gameObject;
+        players = transform.FindChild("Players").gameObject;
+    }
+
+    public void Start()
+    {
         Address = "localhost";
         Port = 7777;
     }
@@ -31,7 +36,7 @@ public class MyNetworkManager : NetworkManager
         {
             if (obj.tag=="Player")
             {
-                obj.transform.SetParent(PlayerList.transform);
+                obj.transform.SetParent(players.transform);
             }
         }
     }
@@ -49,7 +54,7 @@ public class MyNetworkManager : NetworkManager
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
         var player = (GameObject) GameObject.Instantiate(singleton.playerPrefab, Vector3.zero, Quaternion.identity);
-        player.transform.SetParent(PlayerList.transform);
+        player.transform.SetParent(players.transform);
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
     }
 
