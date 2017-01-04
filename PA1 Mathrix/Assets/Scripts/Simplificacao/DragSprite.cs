@@ -506,10 +506,7 @@ public class DragSprite : MonoBehaviour {
 
         }
 
-        //foreach (GameObject debuggMatriz in subEquacaoFinal)
-        //{
-        //    Debug.Log(debuggMatriz.name + " tag " + debuggMatriz.tag);
-        //}
+
 
         return new List<GameObject>(subEquacaoFinal);
     }
