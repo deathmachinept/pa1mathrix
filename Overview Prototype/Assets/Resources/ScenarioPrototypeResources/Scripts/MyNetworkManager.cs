@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MyNetworkManager : NetworkManager
 {
@@ -37,9 +38,12 @@ public class MyNetworkManager : NetworkManager
 
     public void Pressed_Solo_Button()
     {
-        singleton.networkPort = Port;
-        singleton.StartHost();
-        HideNetworkingHUD();
+        if (PlayerPrefs.GetString("Player Name") != "")
+        {
+            singleton.networkPort = Port;
+            singleton.StartHost();
+            HideNetworkingHUD();
+        }
     }
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
@@ -51,10 +55,13 @@ public class MyNetworkManager : NetworkManager
 
     public void Pressed_Client_Button()
     {
-        singleton.networkAddress = Address;
-        singleton.networkPort = Port;
-        singleton.StartClient();
-        HideNetworkingHUD();
+        if (PlayerPrefs.GetString("Player Name") != "")
+        {
+            singleton.networkAddress = Address;
+            singleton.networkPort = Port;
+            singleton.StartClient();
+            HideNetworkingHUD();
+        }
     }
 
     public void Pressed_Host_Button()
@@ -62,6 +69,14 @@ public class MyNetworkManager : NetworkManager
         singleton.networkPort = Port;
         singleton.StartServer();
         HideNetworkingHUD();
+        PlayerPrefs.SetString("Player Name","Server");
+        PlayerPrefs.Save();
+    }
+
+    public void InsertedName()
+    {
+        PlayerPrefs.SetString("Player Name", GameObject.Find("NameInput").GetComponent<InputField>().text);
+        PlayerPrefs.Save();
     }
 
     public void HideNetworkingHUD()

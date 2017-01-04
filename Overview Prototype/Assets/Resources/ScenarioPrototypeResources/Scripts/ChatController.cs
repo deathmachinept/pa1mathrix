@@ -7,11 +7,10 @@ public class ChatController : NetworkBehaviour
 {
     //[SyncVar(hook = "OnChatUpdate")]
     //private string chatString;
-
-    public SyncListString chatString=new SyncListString();
-
-    private InputField input;
-    private Text textBox;
+    
+    public SyncListString chatMessages=new SyncListString();
+    public InputField input;
+    public Text textBox;
 
     public void Awake()
     {
@@ -19,10 +18,21 @@ public class ChatController : NetworkBehaviour
         textBox = transform.FindChild("Scroll View").FindChild("Viewport").FindChild("Content").FindChild("Text").GetComponent<Text>();
     }
 
+    public void Start()
+    {
+        chatMessages.Add("TEST");
+        chatMessages.Callback = OnChatMessagesChanged;
+    }
+
+    private void OnChatMessagesChanged(SyncList<string>.Operation op, int index)
+    {
+        Debug.Log(op + " at index of " + index);
+    }
+
     public void AddMessage()
     {
         //chatString += input.text;
-        chatString.Add(input.text);
+        chatMessages.Add(input.text);
         input.text = "";
     }
 
