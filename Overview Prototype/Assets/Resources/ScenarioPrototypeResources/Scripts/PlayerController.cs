@@ -3,26 +3,33 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
+using UnityEngine.Networking.Types;
 using UnityEngine.UI;
 
 public class PlayerController : NetworkBehaviour
 {
     public bool isPlayingMinigame;
 
-    [SyncVar(hook="CmdSendNameToServer")]
+    [SyncVar(hook = "CmdSendNameToServer")]
     public string PLAYERNAME;
 
+    public GameObject PlayersHolder;
     public float posGridX;
     public float posGridY;
     private GameObject TA, TB;
+
+    void Awake()
+    {
+        PlayersHolder = GameObject.Find("Players");
+    }
 
     void Start()
     {
         isPlayingMinigame = false;
         PLAYERNAME = PlayerPrefs.GetString("Player Name");
-        if (isLocalPlayer)
+        if (!isServer)
         {
-            CmdSendNameToServer(PlayerPrefs.GetString("Player Name"));
+            CmdSendNameToServer(PLAYERNAME);
         }
     }
 
@@ -35,7 +42,28 @@ public class PlayerController : NetworkBehaviour
     [ClientRpc]
     void RpcSetPlayerName(string name)
     {
-        gameObject.transform.FindChild("Canvas").transform.FindChild("Text").GetComponent<Text>().text = name;
+        if (isLocalPlayer)
+        {
+            gameObject.transform.FindChild("Canvas").transform.FindChild("Text").GetComponent<Text>().text = name;
+        }
+    }
+
+    [ClientRpc]
+    void RpcUpdatePlayerNamesOnClient()
+    {
+        foreach (Transform t in transform.parent)
+        {
+            UpdateOtherPlayersNames(t.GetComponent<PlayerController>().PLAYERNAME, t.GetComponent<NetworkIdentity>().netId);
+        }
+    }
+
+    [Client]
+    void UpdateOtherPlayersNames(string name, NetworkInstanceId id)
+    {
+        foreach (Transform t in transform.parent)
+        {
+            t.GetComponent<PlayerController>().PLAYERNAME = name;
+        }
     }
 
     void Update()
@@ -45,6 +73,10 @@ public class PlayerController : NetworkBehaviour
             ProcessMovement();
             CheckForExit();
         }
+        if (isServer)
+        {
+            RpcUpdatePlayerNamesOnClient();
+        }
     }
 
     public void ChangeToSimplificationGame()
@@ -53,7 +85,8 @@ public class PlayerController : NetworkBehaviour
         {
             SceneManager.LoadSceneAsync("SimplificacaoMatrizes", LoadSceneMode.Additive);
             GameObject.Find("MainSceneObjectsHolder").SetActive(false);
-            GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().CurrentSceneName = "SimplificacaoMatrizes";
+            GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().CurrentSceneName =
+                "SimplificacaoMatrizes";
             this.transform.position = Vector3.zero;
             GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().players.SetActive(false);
         }
