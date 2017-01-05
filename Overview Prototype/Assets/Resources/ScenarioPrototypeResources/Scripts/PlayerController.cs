@@ -10,7 +10,7 @@ public class PlayerController : NetworkBehaviour
 {
     public bool isPlayingMinigame;
 
-    [SyncVar(hook = "CmdSendNameToServer")]
+    [SyncVar]
     public string PLAYERNAME;
 
     public GameObject PlayersHolder;
@@ -26,44 +26,7 @@ public class PlayerController : NetworkBehaviour
     void Start()
     {
         isPlayingMinigame = false;
-        PLAYERNAME = PlayerPrefs.GetString("Player Name");
-        if (!isServer)
-        {
-            CmdSendNameToServer(PLAYERNAME);
-        }
-    }
-
-    [Command]
-    void CmdSendNameToServer(string nameToSend)
-    {
-        RpcSetPlayerName(nameToSend);
-    }
-
-    [ClientRpc]
-    void RpcSetPlayerName(string name)
-    {
-        if (isLocalPlayer)
-        {
-            gameObject.transform.FindChild("Canvas").transform.FindChild("Text").GetComponent<Text>().text = name;
-        }
-    }
-
-    [ClientRpc]
-    void RpcUpdatePlayerNamesOnClient()
-    {
-        foreach (Transform t in transform.parent)
-        {
-            UpdateOtherPlayersNames(t.GetComponent<PlayerController>().PLAYERNAME, t.GetComponent<NetworkIdentity>().netId);
-        }
-    }
-
-    [Client]
-    void UpdateOtherPlayersNames(string name, NetworkInstanceId id)
-    {
-        foreach (Transform t in transform.parent)
-        {
-            t.GetComponent<PlayerController>().PLAYERNAME = name;
-        }
+        transform.FindChild("Canvas").FindChild("Text").GetComponent<Text>().text = PLAYERNAME;
     }
 
     void Update()
@@ -72,10 +35,6 @@ public class PlayerController : NetworkBehaviour
         {
             ProcessMovement();
             CheckForExit();
-        }
-        if (isServer)
-        {
-            RpcUpdatePlayerNamesOnClient();
         }
     }
 

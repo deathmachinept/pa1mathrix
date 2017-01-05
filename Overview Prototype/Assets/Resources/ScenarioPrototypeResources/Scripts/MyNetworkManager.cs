@@ -61,6 +61,7 @@ public class MyNetworkManager : NetworkManager
     {
         var player = (GameObject) GameObject.Instantiate(singleton.playerPrefab, Vector3.zero, Quaternion.identity);
         player.transform.SetParent(players.transform);
+        player.GetComponent<PlayerController>().PLAYERNAME = PlayerPrefs.GetString("Player Name");
         player.tag = "Player";
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
     }

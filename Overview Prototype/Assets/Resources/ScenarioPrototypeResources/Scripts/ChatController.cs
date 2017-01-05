@@ -8,8 +8,9 @@ public class ChatController : NetworkBehaviour
 {
     //[SyncVar(hook = "OnChatUpdate")]
     //private string chatString;
-    
+
     public SyncListString chatMessages=new SyncListString();
+
     public InputField input;
     public Text textBox;
 
@@ -27,13 +28,16 @@ public class ChatController : NetworkBehaviour
     private void OnChatMessagesChanged(SyncListString.Operation op, int index)
     {
         Debug.Log(op + " at index of " + index);
+        if (op == SyncListString.Operation.OP_ADD)
+        {
+            textBox.text += chatMessages[index] + "\n";
+        }
     }
 
     public void AddMessage()
     {
-        //chatString += input.text;
         chatMessages.Add(input.text);
-        textBox.text += input.text+"\n";
+        //textBox.text += input.text+"\n";
         input.text = "";
     }
 
