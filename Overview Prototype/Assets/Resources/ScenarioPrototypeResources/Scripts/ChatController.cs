@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -7,8 +8,9 @@ public class ChatController : NetworkBehaviour
 {
     //[SyncVar(hook = "OnChatUpdate")]
     //private string chatString;
-    
+
     public SyncListString chatMessages=new SyncListString();
+
     public InputField input;
     public Text textBox;
 
@@ -20,19 +22,22 @@ public class ChatController : NetworkBehaviour
 
     public void Start()
     {
-        chatMessages.Add("TEST");
         chatMessages.Callback = OnChatMessagesChanged;
     }
 
-    private void OnChatMessagesChanged(SyncList<string>.Operation op, int index)
+    private void OnChatMessagesChanged(SyncListString.Operation op, int index)
     {
         Debug.Log(op + " at index of " + index);
+        if (op == SyncListString.Operation.OP_ADD)
+        {
+            textBox.text += chatMessages[index] + "\n";
+        }
     }
 
     public void AddMessage()
     {
-        //chatString += input.text;
         chatMessages.Add(input.text);
+        //textBox.text += input.text+"\n";
         input.text = "";
     }
 

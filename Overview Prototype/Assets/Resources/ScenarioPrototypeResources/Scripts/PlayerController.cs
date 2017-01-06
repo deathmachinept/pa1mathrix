@@ -3,39 +3,30 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
+using UnityEngine.Networking.Types;
 using UnityEngine.UI;
 
 public class PlayerController : NetworkBehaviour
 {
     public bool isPlayingMinigame;
 
-    [SyncVar(hook="CmdSendNameToServer")]
+    [SyncVar]
     public string PLAYERNAME;
 
+    public GameObject PlayersHolder;
     public float posGridX;
     public float posGridY;
     private GameObject TA, TB;
 
+    void Awake()
+    {
+        PlayersHolder = GameObject.Find("Players");
+    }
+
     void Start()
     {
         isPlayingMinigame = false;
-        PLAYERNAME = PlayerPrefs.GetString("Player Name");
-        if (isLocalPlayer)
-        {
-            CmdSendNameToServer(PlayerPrefs.GetString("Player Name"));
-        }
-    }
-
-    [Command]
-    void CmdSendNameToServer(string nameToSend)
-    {
-        RpcSetPlayerName(nameToSend);
-    }
-
-    [ClientRpc]
-    void RpcSetPlayerName(string name)
-    {
-        gameObject.transform.FindChild("Canvas").transform.FindChild("Text").GetComponent<Text>().text = name;
+        transform.FindChild("Canvas").FindChild("Text").GetComponent<Text>().text = PLAYERNAME;
     }
 
     void Update()
@@ -53,9 +44,10 @@ public class PlayerController : NetworkBehaviour
         {
             SceneManager.LoadSceneAsync("SimplificacaoMatrizes", LoadSceneMode.Additive);
             GameObject.Find("MainSceneObjectsHolder").SetActive(false);
-            GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().CurrentSceneName = "SimplificacaoMatrizes";
+            GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().CurrentSceneName =
+                "SimplificacaoMatrizes";
             this.transform.position = Vector3.zero;
-            GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().PlayerList.SetActive(false);
+            GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().players.SetActive(false);
         }
     }
 
@@ -67,7 +59,7 @@ public class PlayerController : NetworkBehaviour
             GameObject.Find("MainSceneObjectsHolder").SetActive(false);
             GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().CurrentSceneName = "Desenho Polígono";
             this.transform.position = Vector3.zero;
-            GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().PlayerList.SetActive(false);
+            GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().players.SetActive(false);
         }
     }
 

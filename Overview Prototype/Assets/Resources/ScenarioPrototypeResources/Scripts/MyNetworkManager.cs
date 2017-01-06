@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class MyNetworkManager : NetworkManager
 {
     public GameObject MainSceneObjects;
-    public GameObject PlayerList;
+    public GameObject players;
     public string Address;
     public int Port;
     public string CurrentSceneName = "TestBuild";
@@ -15,7 +15,7 @@ public class MyNetworkManager : NetworkManager
     public void Start()
     {
         MainSceneObjects = GameObject.Find("MainSceneObjectsHolder");
-        PlayerList = transform.FindChild("Players").gameObject;
+        players = transform.FindChild("Players").gameObject;
         Address = "localhost";
         Port = 7777;
     }
@@ -23,6 +23,7 @@ public class MyNetworkManager : NetworkManager
     public void Update()
     {
         OrganizePlayers();
+        IdentifyPlayers();
     }
 
     public void OrganizePlayers()
@@ -31,8 +32,18 @@ public class MyNetworkManager : NetworkManager
         {
             if (obj.tag=="Player")
             {
-                obj.transform.SetParent(PlayerList.transform);
+                obj.transform.SetParent(players.transform);
             }
+        }
+    }
+
+
+    void IdentifyPlayers()
+    {
+        foreach (Transform t in transform.FindChild("Players").transform)
+        {
+            t.FindChild("Canvas").FindChild("Text").GetComponent<Text>().text =
+                t.GetComponent<PlayerController>().PLAYERNAME;
         }
     }
 
@@ -49,7 +60,9 @@ public class MyNetworkManager : NetworkManager
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
         var player = (GameObject) GameObject.Instantiate(singleton.playerPrefab, Vector3.zero, Quaternion.identity);
-        player.transform.SetParent(PlayerList.transform);
+        player.transform.SetParent(players.transform);
+        player.GetComponent<PlayerController>().PLAYERNAME = PlayerPrefs.GetString("Player Name");
+        player.tag = "Player";
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
     }
 
