@@ -28,22 +28,54 @@ public class DragSprite : MonoBehaviour {
     List<GameObject> recebeLista = new List<GameObject>();
     List<GameObject> tempInversa = new List<GameObject>();
     List<GameObject> ListaSubEquacao = new List<GameObject>();
+    List<GameObject> ListaEquacaoesPassadas = new List<GameObject>();
+    List<int> numeroMembrosDeCadaEquacaoPassada = new List<int>();
+
     private bool mouseDrag = false;
     private bool mouseClick = false;
     private bool removeDuplaInversa = false;
+    private bool removeMatrizInversa = false;
     private BoxCollider2D box;
     public int ScoreSprite;
+
+    //mouse button
+    private float doubleClickTime = 1.0f;
+    private float lastClickTime = 0f;
+    private float timeDelta = 0f;
+    private float timer = 0f;
+    private bool canClick = true;
     // Update is called once per frame
+
+    private int countJogadas = 0; // para escrever a equacao passada
 
     void saveOldPosition()
     {
         oldPosition = transform.position;
     }
 
+    void Update()
+    {
+
+        if (canClick && Input.GetMouseButton(1))
+        {
+            StartCoroutine(CoolDown());
+        }
+    }
+
+     IEnumerator CoolDown()
+     {
+        // Wait 3 seconds...
+         Debug.Log("Entrei");
+         yield return new WaitForSeconds(2);
+         canClick = true;
+         Debug.Log("Chegei");
+
+     }
 
 
     void OnMouseDown()
     {
+        Debug.Log("Down!");
         if (count == 0)
         {
             saveOldPosition();
@@ -60,6 +92,8 @@ public class DragSprite : MonoBehaviour {
 
     void OnMouseDrag()
     {
+        Debug.Log("Drag!");
+
         mPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
         Vector3 objPosition = Camera.main.ScreenToWorldPoint(mPos) + offset;
 
@@ -78,8 +112,32 @@ public class DragSprite : MonoBehaviour {
         return new List<GameObject>(ListaRetornar);
     }
 
+    void GuardarEquacaoPassada()
+    {
+        GameObject encontrarEquacao = GameObject.FindWithTag("Equacoes");
+        int countFilhos = encontrarEquacao.transform.childCount;
 
-    void ReEscreverEquacao(List<GameObject> MatrizPrint)
+        for (int i = 0; i < countFilhos; i++)
+        {
+            ListaEquacaoesPassadas.Add(encontrarEquacao.transform.GetChild(i).gameObject);
+
+        }
+        numeroMembrosDeCadaEquacaoPassada.Add(countFilhos);
+
+        
+    }
+
+    void EscreverEquacaoPassada()
+    {
+        
+        //GameObject tempMembroPassado = (GameObject)Instantiate(MatrizPrint[i], currentPosition, Quaternion.identity);
+        //tempMembroPassado.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        //tempMembroPassado.transform.position = new Vector3(18f + i, 25f, 0f);
+        //ListaEquacaoesPassadas.Add(tempMembroPassado);
+    }
+
+
+    void ReEscreverEquacao(List<GameObject> MatrizPrint, int njogadas)
     {
         int nElementos = MatrizPrint.Count;
         GameObject parent = GameObject.FindGameObjectWithTag("Equacoes");
@@ -92,8 +150,24 @@ public class DragSprite : MonoBehaviour {
         bool lastParEsq = false;
         bool lastParDir = false;
 
-
-
+        //Debug.Log("Antes de Entrar Count Jogadas " + countJogadas + " contar Filhos " + contarFilhos);
+        //if (countJogadas > 1)
+        //{
+        //    Debug.Log("debugging");
+        //    Debug.Log("debugging" + MatrizPrint[0].name);
+        //    Debug.Log("debugging "+ MatrizPrint[1].tag + " contar filhos "+ contarFilhos);
+        //    for (int i = 0; i < contarFilhos; i++)
+        //    {
+        //        //insatiate
+        //        GameObject tempMembroPassado = (GameObject)Instantiate(MatrizPrint[i], currentPosition, Quaternion.identity);
+        //        tempMembroPassado.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        //        tempMembroPassado.transform.position = new Vector3(18f + i, 25f, 0f);
+        //        ListaEquacaoesPassadas.Add(tempMembroPassado);
+        //        //ListaEquacaoesPassadas[i].transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        //        //ListaEquacaoesPassadas[i].transform.position = new Vector3(18f + i, 25f, 0f);
+        //        Debug.Log("Tag " + ListaEquacaoesPassadas[i].tag);
+        //    }
+        //}
 
         for (int i = 0; i < nElementos; i++)
         {
@@ -105,7 +179,6 @@ public class DragSprite : MonoBehaviour {
       MatrizPrint[i].tag == "Inversas")
                 {
                     currentPosition.y = 0.5f;
-
                     if (lastInvTrans)
                     {
                         if (lastParDir)
@@ -185,6 +258,7 @@ public class DragSprite : MonoBehaviour {
             //Debug.Log(tempMembro.transform.position);
         }
 
+        //caso a accao foi bem sucedida adicionar aos pais
         if (executouAccao)
         {
             var children = new List<GameObject>();
@@ -227,6 +301,8 @@ public class DragSprite : MonoBehaviour {
         //Debug.Log("Not number_" + idPosicao);
         return idPosicao;
     }
+
+
 
     List<GameObject> InverterLista(List<GameObject> TempListDesorganizada)
     {
@@ -344,8 +420,7 @@ public class DragSprite : MonoBehaviour {
         }
         numeroMatrizesInteriores = contarMatriz;
         numeroSubMatrizes = subEquacoes;
-        //Debug.Log("Matrizes Singulares Dentro de Equacao " + contarMatriz);
-        //Debug.Log("Subequacoes " + subEquacoes);
+
 
         if (subEquacoes > 1)
         {
@@ -365,25 +440,39 @@ public class DragSprite : MonoBehaviour {
         }
     }
 
-    List<GameObject> resolverInversaSubEquacao(int posicao, int tamanhoLista, GameObject pai)
+    List<GameObject> resolverInversaSubEquacao(int posicao, int tamanhoLista, GameObject pai, bool inversa)
     {
         int contarMatriz = 0, contarMatrizSub = 0, oldContarMatrizSub = 0;
         int contarParenteses = 0, contarElemento = 0;
         int subEquacoes = 0;
         bool abriu = false, esperaConfirmacaoQnaoEumParenteses = true;
         int contarAbretura = 0, oldContarAbertura = 0;
-        GameObject objectoInversa = new GameObject();
+        GameObject objectoInversaTransposta = new GameObject();
 
-        for (int i = 0; i < tamanhoLista; i++)
+        //apenas procura a primeira ocurrencia de uma inversa para a duplicar
+        if (inversa)
         {
-            if (pai.transform.GetChild(i).tag == "Inversas")
+            for (int i = 0; i < tamanhoLista; i++)
             {
-                objectoInversa = pai.transform.GetChild(i).gameObject;
-                break;
+                if (pai.transform.GetChild(i).tag == "Inversas")
+                {
+                    objectoInversaTransposta = pai.transform.GetChild(i).gameObject;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < tamanhoLista; i++)
+            {
+                if (pai.transform.GetChild(i).tag == "Transposta")
+                {
+                    objectoInversaTransposta = pai.transform.GetChild(i).gameObject;
+                    break;
+                }
             }
         }
 
-        Debug.Log(7);
 
         List<GameObject> subEquacaoTemporaria = new List<GameObject>();
         List<GameObject> subEquacaoResolvida = new List<GameObject>();
@@ -393,7 +482,6 @@ public class DragSprite : MonoBehaviour {
 
         for (int i = posicao; i > 0; i--)
         {
-            //Debug.Log("Find Bug"+novaLista[0].MembroEquacao[i].tag + " i " + i + " nome " + novaLista[0].MembroEquacao[i].name);
 
             if (pai.transform.GetChild(i).tag != "ParentesesEsquerdo" && pai.transform.GetChild(i).tag != "ParentesesDireito")
             {
@@ -426,7 +514,7 @@ public class DragSprite : MonoBehaviour {
                                 subEquacaoFinal.Add(transInversa);
 
                             }
-                            subEquacaoFinal.Add(objectoInversa);
+                            subEquacaoFinal.Add(objectoInversaTransposta);
                             contarElemento = 0;
                             subEquacaoTemporaria.Clear();
 
@@ -435,14 +523,14 @@ public class DragSprite : MonoBehaviour {
                         {
                             subEquacaoFinal.Add(pai.transform.GetChild(i).gameObject);
                             subEquacaoFinal.Add(subEquacaoTemporaria[0]);
-                            subEquacaoFinal.Add(objectoInversa);
+                            subEquacaoFinal.Add(objectoInversaTransposta);
                             contarElemento = 0;
                             subEquacaoTemporaria.Clear();
                         }
                         else if (contarElemento == 0)
                         {
                             subEquacaoFinal.Add(pai.transform.GetChild(i).gameObject);
-                            subEquacaoFinal.Add(objectoInversa);
+                            subEquacaoFinal.Add(objectoInversaTransposta);
 
                         }
 
@@ -472,11 +560,25 @@ public class DragSprite : MonoBehaviour {
 
                         subEquacaoResolvida = InverterLista(subEquacaoResolvida);
 
+                        //GameObject objecto = (GameObject)Instantiate(findTest.transform.GetChild(i).gameObject, findTest.transform.GetChild(i).localPosition, Quaternion.identity);
+                        //objecto.name = objecto.name.Substring(0, objecto.name.Length - 7);
+                        //objecto.name = objecto.name + " Ju";
+
+
+
+                        for (int j = 0 ; j <= i-2; j++)
+                        {
+
+                            GameObject objectosInicias = (GameObject)Instantiate(pai.transform.GetChild(j).gameObject, pai.transform.GetChild(j).localPosition, Quaternion.identity);
+                            subEquacaoFinal.Add(objectosInicias);
+                            Debug.Log(objectosInicias.name);
+                        }
+
                         foreach (GameObject objecto in subEquacaoResolvida)
                         {
                             subEquacaoFinal.Add(objecto);
                         }
-                        subEquacaoFinal.Add(objectoInversa);
+                        subEquacaoFinal.Add(objectoInversaTransposta);
                         subEquacaoTemporaria.Clear();
                         subEquacaoResolvida.Clear();
                         subEquacoes++;
@@ -502,11 +604,8 @@ public class DragSprite : MonoBehaviour {
 
                 subEquacaoTemporaria.Add(pai.transform.GetChild(i).gameObject);
             }
-            //Debug.Log("Contar Abertura " + contarAbretura + " i " + i + " name " + novaLista[0].MembroEquacao[i].name);
 
         }
-
-
 
         return new List<GameObject>(subEquacaoFinal);
     }
@@ -515,6 +614,7 @@ public class DragSprite : MonoBehaviour {
     {
         if (mouseClick == true)
         {
+            Debug.Log("Clicking");
             if (executouAccao)
             {
                 NovaMatrizEquacao.Clear();
@@ -523,7 +623,6 @@ public class DragSprite : MonoBehaviour {
             int ContarParenteses = 0;
             GameObject findTest = GameObject.FindGameObjectWithTag("Equacoes");
             //ScoreSprite = findTest.GetComponent<Spawn>().score;
-
             if (mouseDrag)
             {
                 Debug.Log("Mouse Drag" + mouseDrag);
@@ -564,8 +663,10 @@ public class DragSprite : MonoBehaviour {
                                         OldMatrizEquacao = retornarListaGameObjects(NovaMatrizEquacao);
                                         findTest.GetComponent<Spawn>().updateScore(10);
                                         Debug.Log("Old Matriz " + OldMatrizEquacao.Count);
-                                        ReEscreverEquacao(NovaMatrizEquacao);
+                                        countJogadas++;
+                                        ReEscreverEquacao(NovaMatrizEquacao, countJogadas);
                                         executouAccao = true;
+                                        Debug.Log("CONTAR JOGADAS " + countJogadas);
 
                                     }
                                 }
@@ -590,7 +691,9 @@ public class DragSprite : MonoBehaviour {
                                         mouseClick = false;
                                         findTest.GetComponent<Spawn>().updateScore(10);
                                         OldMatrizEquacao = retornarListaGameObjects(NovaMatrizEquacao);
-                                        ReEscreverEquacao(NovaMatrizEquacao);
+                                        countJogadas++;
+                                        ReEscreverEquacao(NovaMatrizEquacao, countJogadas);
+
                                         executouAccao = true;
 
                                         Debug.Log("Old Matriz " + OldMatrizEquacao.Count);
@@ -600,8 +703,11 @@ public class DragSprite : MonoBehaviour {
                                 Debug.Log("novoCollider Index " + novoCollider.transform.GetSiblingIndex());
                                 Debug.Log("Matriz Index " + novoCollider.transform.GetSiblingIndex());
 
+                                Debug.Log("CONTAR JOGADAS " + countJogadas);
 
                             }
+                            Debug.Log("CONTAR JOGADAS " + countJogadas);
+
                             mouseDrag = false;
                             mouseClick = false;
                             break;
@@ -627,66 +733,70 @@ public class DragSprite : MonoBehaviour {
                     box = novoCollider.GetComponent<BoxCollider2D>();
 
 
-                    //if (box != null && box != novoCollider)
                     if (box != null)
                     {
 
-                        //novaLista = box.GetComponentInParent<Spawn>().ListaEquacoes;
-
-                        //findIdName = DaNomeMembroEquacao(box.transform.);
                         findIdName = box.tag;
                         arrayPos = transform.GetSiblingIndex();
-                        //arrayPos = DaIdMembroEquacao(box.transform.name);
+
                         bool parSubParenteses = false;
                         bool InputDentroEquacao = CheckIfInputIsInInnerEquation(arrayPos);
 
 
-                        Debug.Log("findIdName " + findIdName);
                         bool temSubEquacao = false;
+                        bool inversaOuTransposta = false; // inversa true
 
-                        if (findIdName == "Inversas")//(AB)^-1
+                        if (findIdName == "Inversas" || findIdName == "Transposta")//(AB)^-1
                         {
-                            Debug.Log("2 ");
-
+                            if (findIdName == "Inversas")
+                            {
+                                inversaOuTransposta = true;
+                            }
                             int TempArrayPos;
-                            Debug.Log("Entrei em inversa?");
+
+                            // O que está antes da inversa
                             string tempCheckPar = findTest.transform.GetChild(arrayPos - 1).tag;
-                            //string tempCheckPar = novaLista[0].MembroEquacao[arrayPos - 1].tag;
+                            string tempCheckCheckPar = findTest.transform.GetChild(arrayPos - 2).tag; // para ver se tem matriz a seguir a uma matriz
 
 
                             int OldPositionParEsquerdoSubEquacaoFinal = 0; //recebe valor sempre que é percorrido parte das Subequações
-                            int OldPositionParEsquerdoSubEquacaoInicial = arrayPos, contarDentroParenteses = 0;
+                            int OldPositionParEsquerdoSubEquacaoInicial = arrayPos;
 
                             #region Clique Na Inversa com Equacao Dentro de Parenteses
 
                             contarLista = findTest.transform.childCount;
-                            //novaLista[0].MembroEquacao.Length;
 
 
 
-                            // Debug.Log("tempCheckPar "+tempCheckPar +"arrayPos " + arrayPos +"arrayPos-1 "+ (arrayPos-1));
+                            bool acabouParentese = false;
 
                             if (tempCheckPar == "ParentesesDireito") //(AB)^1 != AB-1
                             {
+
                                 ContarParenteses++;
+                                if (ContarParenteses > 1)
+                                {
+                                    parSubParenteses = true;
+                                }
                                 Debug.Log("3 ");
 
                                 //Debug.Log("TESTES!! Novo Metodo");
 
-                                int oldposition1 = 0, oldposition2 = 0, contar = 0, posicaoParEsq = 0, posicaoInversa = arrayPos;
+                                int  posicaoInversa = arrayPos;
                                 bool encontrouInversaTransposta = false;
                                 bool podeDecrementar = false;
 
-                                parSubParenteses = CheckIfInputIsInInnerEquation(arrayPos);
-
                                 OldPositionParEsquerdoSubEquacaoInicial = arrayPos;
-                                GameObject objecto = new GameObject();
-                                //Debug.Log("VALOR INICIAL "+ (arrayPos-2));                              
 
+                                //Debug.Log("VALOR INICIAL "+ (arrayPos-2));                              
+                                List<GameObject> testTempMatriz= new List<GameObject>();
                                 for (int i = arrayPos - 2; i >= 0; ) // -2 começa apos parenteses direito Corre até encontrar -1
                                 { //pode correr if matriz, else ^-1 || ^T, Parenteses Esquerdo
-                                    // Debug.Log("I devia ser 4 "+i);
-                                    objecto = findTest.transform.GetChild(i).gameObject;
+
+                                    GameObject objecto = (GameObject)Instantiate(findTest.transform.GetChild(i).gameObject, findTest.transform.GetChild(i).localPosition, Quaternion.identity);
+                                    objecto.name = objecto.name.Substring(0, objecto.name.Length - 7);
+                                    objecto.name = objecto.name + " Ju";
+                                    Debug.Log(objecto.name + objecto.tag);
 
 
                                     if (i >= 0)
@@ -698,20 +808,17 @@ public class DragSprite : MonoBehaviour {
                                         podeDecrementar = false;
                                         break;
                                     }
-                                    int posicaoObjecto;
 
                                     if (objecto.tag == "Matriz") //(A B
                                     {
+
 
                                         /*TODO Vou ter que fazer reverse a subequacao smpre que encontre um matriz com pelo menos uma inversa   */
 
                                         #region Tem matriz dentro de uma inversa com um parDireito A)^-1
 
-                                        //Debug.Log("Matiz dentro de for_"+objecto.transform.tag+"_"+objecto.transform.name);
-
                                         if (encontrouInversaTransposta)
                                         {
-                                            //Debug.Log("Inseri uma Matriz " + objecto.tag + "Contagem TempInversa_ " + tempInversa.Count);
                                             ListaNormal.Add(objecto); // adiciona a lista B
                                             bool test = false;
                                             if (tempInversa.Count > 1)
@@ -723,15 +830,12 @@ public class DragSprite : MonoBehaviour {
                                                 {
                                                     ListaNormal.Add(recebeLista[j]);
                                                 }
-                                                //Debug.Log("Devia ter entrado aqui");
                                                 test = true;
                                             }
                                             else
                                             {
-                                                // Debug.Log("TempInversa maior que um = "+tempInversa[0].tag);
                                                 ListaNormal.Add(tempInversa[0]);
                                             }
-
 
 
                                             ListaNormal.Add(findTest.transform.GetChild(arrayPos).gameObject);
@@ -739,22 +843,19 @@ public class DragSprite : MonoBehaviour {
 
                                             recebeLista.Clear();
                                             tempInversa.Clear();
-
-
-                                            //Debug.Log("Removi tudo na TempInversa_ " + tempInversa.Count);
+                                            i--;
                                         }
                                         else
                                         {
+
                                             ListaNormal.Add(objecto); // adiciona a lista B
-                                            ListaNormal.Add(findTest.transform.GetChild(arrayPos).gameObject);
+                                            GameObject objectoInversa = (GameObject)Instantiate(findTest.transform.GetChild(arrayPos).gameObject, findTest.transform.GetChild(arrayPos).localPosition, Quaternion.identity);
+                                            objectoInversa.name = objectoInversa.name.Substring(0, objectoInversa.name.Length - 7);
+                                            ListaNormal.Add(objectoInversa);
+                                            i--;
 
                                         }
-                                        i--;
-                                        //add inversa com transform de posições erradas B^-1
-
-                                        //if (contarDentroParenteses > 0) // mais tarde evitar (A)^-1
-                                        //{
-                                        //}
+ 
 
                                         #endregion
                                     }
@@ -781,13 +882,8 @@ public class DragSprite : MonoBehaviour {
                                                 ListaNormal.Clear();
                                                 Debug.Log("6 ");
                                                 executouAccao = true;
-                                                ListaNormal = resolverInversaSubEquacao(i, contarLista, findTest);
+                                                ListaNormal = resolverInversaSubEquacao(i, contarLista, findTest, inversaOuTransposta);
                                                 temSubEquacao = true;
-
-                                                foreach (GameObject test in ListaNormal)
-                                                {
-                                                    Debug.Log("Nome " + test.name + " tag " + test.tag);
-                                                }
 
                                                 break;
                                                 //vou ter que correr que resolver a equacao toda
@@ -834,17 +930,7 @@ public class DragSprite : MonoBehaviour {
                                     }
                                     else if (objecto.tag == "ParentesesEsquerdo")
                                     {
-                                        if (ContarParenteses % 2 == 0) //
-                                        {
-                                            parSubParenteses = true;
-                                        }
                                         ContarParenteses--;
-
-                                        if (parSubParenteses)
-                                        {
-
-                                            parSubParenteses = false;
-                                        }
                                         OldPositionParEsquerdoSubEquacaoFinal = i;
 
                                         // alterei
@@ -867,20 +953,48 @@ public class DragSprite : MonoBehaviour {
 
                             }
                             #endregion
-                            else if (tempCheckPar == "Inversas")
+                            else if (tempCheckPar == "Inversas" && inversaOuTransposta )
                             {
-                                //Debug.Log("Clicou na segunda Inversa!!");
+                                    removeDuplaInversa = true;
+
+                            }
+                            else if (tempCheckPar == "Transposta" && inversaOuTransposta == false)
+                            {
                                 removeDuplaInversa = true;
 
                             }
+                            else if (tempCheckPar == "Matriz" && tempCheckCheckPar == "Matriz")
+                            {
+                                string matrizOne = findTest.transform.GetChild(arrayPos - 1).name.Substring(0, 1);
+                                string matrizTwo = findTest.transform.GetChild(arrayPos - 2).name.Substring(0, 1);
+                                if (matrizOne == matrizTwo)
+                                {
+                                    removeMatrizInversa = true;
+                                }
+
+                            }
+                            else if (tempCheckPar == "Identidade")
+                            {
+
+                                NovaMatrizEquacao.Clear();
+                                for (int i = 0; i < contarLista; i++)
+                                {
+                                    if (i != arrayPos)
+                                    {
+                                        NovaMatrizEquacao.Add(findTest.transform.GetChild(i).gameObject);
+                                    }
+                                }
+                                countJogadas++;
+                                ReEscreverEquacao(NovaMatrizEquacao, countJogadas);
+                            }
                             else
                             {
-                                Debug.Log("Last Hope " + NovaMatrizEquacao.Count + " old " + OldMatrizEquacao.Count);
-
                                 NovaMatrizEquacao = retornarListaGameObjects(OldMatrizEquacao);
                                 executouAccao = false;
 
-                                ReEscreverEquacao(NovaMatrizEquacao);
+                                countJogadas++;
+                                ReEscreverEquacao(NovaMatrizEquacao, countJogadas);
+
 
                             }
 
@@ -893,7 +1007,9 @@ public class DragSprite : MonoBehaviour {
                                 }
                                 mouseClick = false;
 
-                                ReEscreverEquacao(NovaMatrizEquacao);
+
+                                countJogadas++;
+                                ReEscreverEquacao(NovaMatrizEquacao, countJogadas);
 
                                 findTest.GetComponent<Spawn>().updateScore(20);
 
@@ -915,11 +1031,40 @@ public class DragSprite : MonoBehaviour {
                                     }
                                 }
                                 // Debug.Log("Fechei Dupla Inversaa Inversa!!");
-                                ReEscreverEquacao(NovaMatrizEquacao);
+                                countJogadas++;
+
+                                ReEscreverEquacao(NovaMatrizEquacao, countJogadas);
 
                                 mouseClick = false;
 
                                 removeDuplaInversa = false;
+                            }else if (removeMatrizInversa)
+                            {
+                                NovaMatrizEquacao.Clear();
+
+                                for (int i = 0; i < contarLista; i++)
+                                {
+                                    if (i != arrayPos - 2)
+                                    {
+                                        if (i != arrayPos - 1)
+                                        {
+                                            if (i != arrayPos)
+                                                NovaMatrizEquacao.Add(findTest.transform.GetChild(i).gameObject);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        GameObject identidade = GameObject.FindWithTag("Identidade");
+                                        NovaMatrizEquacao.Add(identidade);
+
+                                    }
+                                }
+
+                                countJogadas++;
+                                ReEscreverEquacao(NovaMatrizEquacao, countJogadas);
+                                mouseClick = false;
+                                removeDuplaInversa = false;
+
                             }
                             else
                             {
@@ -935,7 +1080,6 @@ public class DragSprite : MonoBehaviour {
                                 foreach (GameObject novoElemento in ListaNormal)
                                 {
                                     NovaMatrizEquacao.Add(novoElemento);
-                                    //Debug.Log("Antes de insercao a frente "+novoElemento.name);
                                 }
 
 
@@ -944,7 +1088,6 @@ public class DragSprite : MonoBehaviour {
                                     for (int i = OldPositionParEsquerdoSubEquacaoInicial + 1; i < contarLista; i++) // mais um para reescrever sobre a posicao inversa onde foi clickado
                                     {
                                         NovaMatrizEquacao.Add(findTest.transform.GetChild(i).gameObject);
-                                        // NovaMatrizEquacao.Add(novaLista[0].MembroEquacao[i]);   
                                     }
                                 }
                                 parSubParenteses = false;
@@ -956,48 +1099,21 @@ public class DragSprite : MonoBehaviour {
                                 findTest.GetComponent<Spawn>().updateScore(15);
 
                                 OldMatrizEquacao = retornarListaGameObjects(NovaMatrizEquacao);
-                                ReEscreverEquacao(NovaMatrizEquacao);
+                                countJogadas++;
+                                ReEscreverEquacao(NovaMatrizEquacao, countJogadas);
+
                                 executouAccao = true;
 
 
                             }
+                            Debug.Log("CONTAR JOGADAS " + countJogadas);
+
                             transform.position = oldPosition;
                             mouseClick = false;
                             break;
 
                         }
-                        else if (findIdName == "Transposta")
-                        {
-                            Debug.Log("Novo Collider tag " + novoCollider.transform.tag);
 
-                            Debug.Log("Novo Collider parent tag " + novoCollider.transform.parent.tag);
-                            Debug.Log("Box tag " + box.transform.tag);
-                            Debug.Log("Box transform parent tag " + box.transform.parent.tag);
-                            if (NovaMatrizEquacao.Count == 0)
-                            {
-                                NovaMatrizEquacao = retornarListaGameObjects(OldMatrizEquacao);
-                            }
-                            OldMatrizEquacao = retornarListaGameObjects(NovaMatrizEquacao);
-
-                            ReEscreverEquacao(NovaMatrizEquacao);
-                            transform.position = oldPosition;
-                            mouseClick = false;
-                            executouAccao = true;
-
-                            break;
-
-                        }
-
-
-                        Debug.Log("Nome Child Transform Name " + child.transform.name);
-                        Debug.Log("Nome NovoCollider Transform Name " + novoCollider.transform.name);
-                        Debug.Log("Box  Transform Name " + box.name + " " + box.tag);
-
-
-                        #region Clique Inversa
-
-
-                        #endregion
 
                     }
 
@@ -1006,6 +1122,7 @@ public class DragSprite : MonoBehaviour {
 
             transform.position = oldPosition;
             mouseClick = false;
+            Debug.Log("Jogadas: "+countJogadas);
         }
     }
 
@@ -1013,6 +1130,9 @@ public class DragSprite : MonoBehaviour {
 
     void OnMouseUp()
     {
+        Debug.Log("Up!");
         mouseClick = true;
     }
+
+
 }

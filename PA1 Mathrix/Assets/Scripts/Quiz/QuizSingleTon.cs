@@ -1,15 +1,9 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-
 
 public class QuizSingleTon : MonoBehaviour {
 
     public static QuizSingleTon quizData;
-    public List<Question> answeredQuestions = new List<Question>();
 	// Use this for initialization
 	void Awake () {
 
@@ -24,5 +18,9 @@ public class QuizSingleTon : MonoBehaviour {
         }
 
 	}
-
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
 }

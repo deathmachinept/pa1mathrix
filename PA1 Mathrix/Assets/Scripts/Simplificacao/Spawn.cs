@@ -38,7 +38,7 @@ public class Spawn : MonoBehaviour
         timerForNextTip = 7f;
         listaTips = new List<string>();
         ListaEquacoes = new List<ArrayMembros>();
-        ListaEquacoes.Add(GameObject.Find("saberEquacao").GetComponent<ArrayMembros>());
+        ListaEquacoes.Add(GameObject.Find("saberEquacao2").GetComponent<ArrayMembros>());
 
         Vector3 currentPosition = new Vector3(-30f, 0f, 0f);
 	    int contar;
@@ -82,13 +82,12 @@ public class Spawn : MonoBehaviour
                     }
                     lastInvTrans = true;
 
-                    //Debug.Log("Transposta inversa Y : " + currentPosition);
                 }
                 else if (ListaEquacoes[0].MembroEquacao[i].name == "ParDireito")
                 {
                     if (lastInvTrans)
                     {
-                        currentPosition += new Vector3(3f, 0f, 0f);
+                        currentPosition += new Vector3(4f, 0f, 0f);
                         lastInvTrans = false;
                         lastParDir = true;
                     }
@@ -97,7 +96,6 @@ public class Spawn : MonoBehaviour
                         currentPosition += new Vector3(2f, 0f, 0f);
                         lastParDir = true;
                     }
-                    //Debug.Log("Pardireito " + currentPosition);
 
                 }
                 else if (ListaEquacoes[0].MembroEquacao[i].name == "ParEsquerdo")
@@ -134,7 +132,7 @@ public class Spawn : MonoBehaviour
             }
 
             GameObject tempMembro = (GameObject)Instantiate(ListaEquacoes[0].MembroEquacao[i], currentPosition, Quaternion.identity);
-            tempMembro.transform.name =  ListaEquacoes[0].MembroEquacao[i].name;
+            tempMembro.transform.name =  ListaEquacoes[0].MembroEquacao[i].name + i;
             tempMembro.transform.parent = gameObject.transform;
 
         }

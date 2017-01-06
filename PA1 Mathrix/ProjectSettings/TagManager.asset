@@ -21,6 +21,7 @@ TagManager:
   - OptionC
   - OptionD
   - ListaQuizQuestions
+  - Identidade
   layers:
   - Default
   - TransparentFX
