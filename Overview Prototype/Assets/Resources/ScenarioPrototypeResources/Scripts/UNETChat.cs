@@ -4,8 +4,7 @@ using UnityEngine.Networking.NetworkSystem;
 
 public class UNETChat : Chat
 {
-	//just a random number
-	private const short chatMessage = 131;
+	private const short chatMessageID = 131;
 
 	private void Start()
 	{
@@ -13,11 +12,11 @@ public class UNETChat : Chat
 		if (NetworkServer.active) 
 		{
 			//registering the server handler
-			NetworkServer.RegisterHandler(chatMessage, ServerReceiveMessage);
+			NetworkServer.RegisterHandler(chatMessageID, ServerReceiveMessage);
 		}
 
 		//registering the client handler
-        NetworkManager.singleton.client.RegisterHandler(chatMessage, ReceiveMessage);
+        NetworkManager.singleton.client.RegisterHandler(chatMessageID, ReceiveMessage);
 	}
 
 	private void ReceiveMessage(NetworkMessage message)
@@ -31,20 +30,28 @@ public class UNETChat : Chat
 	private void ServerReceiveMessage(NetworkMessage message)
 	{
 		StringMessage myMessage = new StringMessage ();
-		//we are using the connectionId as player name only to exemplify
-		myMessage.value = message.conn.connectionId + ": " + message.ReadMessage<StringMessage> ().value;
-
-		//sending to all connected clients
-		NetworkServer.SendToAll (chatMessage, myMessage);
+		myMessage.value = message.ReadMessage<StringMessage> ().value;
+        
+		NetworkServer.SendToAll (chatMessageID, myMessage);
 	}
 
 	public override void SendMessage (UnityEngine.UI.InputField input)
 	{
 		StringMessage myMessage = new StringMessage ();
+	    string PlayerName="";
+
+	    foreach (Transform t in GameObject.Find("Players").transform)
+	    {
+	        if (t.GetComponent<PlayerController>().isLocalPlayer)
+	        {
+	            PlayerName = t.GetComponent<PlayerController>().PLAYERNAME;
+	        }
+	    }
+
 		//getting the value of the input
-		myMessage.value = input.text;
+		myMessage.value = PlayerName+"-"+input.text;
 
 		//sending to server
-		NetworkManager.singleton.client.Send (chatMessage, myMessage);
+		NetworkManager.singleton.client.Send (chatMessageID, myMessage);
 	}
 }
