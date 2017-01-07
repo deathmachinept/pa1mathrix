@@ -1,17 +1,20 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
+using System.Security.Principal;
+using System.Xml.Serialization;
 using UnityEngine.Networking;
+using UnityEngine.Networking.NetworkSystem;
 using UnityEngine.UI;
 
 public class ChatController : NetworkBehaviour
 {
-    //[SyncVar(hook = "OnChatUpdate")]
-    //private string chatString;
+    private const short chatMessage = 100;
 
-    public SyncListString chatMessages=new SyncListString();
-
+    [SerializeField]
     public InputField input;
+
+    [SerializeField]
     public Text textBox;
 
     public void Awake()
@@ -20,29 +23,25 @@ public class ChatController : NetworkBehaviour
         textBox = transform.FindChild("Scroll View").FindChild("Viewport").FindChild("Content").FindChild("Text").GetComponent<Text>();
     }
 
-    public void Start()
+    public void CreateMessage()
     {
-        chatMessages.Callback = OnChatMessagesChanged;
-    }
-
-    private void OnChatMessagesChanged(SyncListString.Operation op, int index)
-    {
-        Debug.Log(op + " at index of " + index);
-        if (op == SyncListString.Operation.OP_ADD)
+        string PlayerName = "";
+        bool isAPlayer = false;
+        foreach (Transform t in GameObject.Find("Players").transform)
         {
-            textBox.text += chatMessages[index] + "\n";
+            if (t.GetComponent<NetworkIdentity>().isLocalPlayer)
+            {
+                isAPlayer = true;
+                PlayerName = t.GetComponent<PlayerController>().PLAYERNAME;
+            }
         }
-    }
-
-    public void AddMessage()
-    {
-        chatMessages.Add(input.text);
-        //textBox.text += input.text+"\n";
+        if (!isAPlayer)
+        {
+            PlayerName = "Server";
+        }
         input.text = "";
     }
 
-    void OnChatUpdate(string message)
-    {
-        textBox.text = message + "\n";
-    }
+
+
 }
