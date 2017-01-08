@@ -125,6 +125,8 @@
     <Compile Include="Assets\Scripts\Quiz\Question.cs" />
     <Compile Include="Assets\Scripts\Quiz\QuizSingleTon.cs" />
     <Compile Include="Assets\Scripts\Quiz\SingletonAdjust.cs" />
+    <Compile Include="Assets\Scripts\RPG\Character\CharacterMovement.cs" />
+    <Compile Include="Assets\Scripts\RPG\Character\MovimentoJogador.cs" />
     <Compile Include="Assets\Scripts\Simplificacao\ArrayMembros.cs" />
     <Compile Include="Assets\Scripts\Simplificacao\DragSprite.cs" />
     <Compile Include="Assets\Scripts\Simplificacao\Spawn.cs" />
