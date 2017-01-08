@@ -79,7 +79,7 @@ public class PlayerController : NetworkBehaviour
 
         transform.FindChild("GridPos").position = new Vector3(posGridX, posGridY, 0);
     }
-
+    
     void CheckForExit()
     {
         TA = GameObject.Find("Terminal A");
