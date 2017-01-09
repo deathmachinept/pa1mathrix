@@ -30,8 +30,8 @@ public class MatrixDisplayController : MonoBehaviour
 	    _initialRightBracketsPosition = _rightBrackets.transform.position;
         _leftBrackets.SetActive(false);
         _rightBrackets.SetActive(false);
-        if(GameObject.Find("PolygonHandlerHolder").GetComponent<PolygonHandler>()._currentlySelectedPolygon!=null)
-            currentPolygon = GameObject.Find("PolygonHandlerHolder").GetComponent<PolygonHandler>()._currentlySelectedPolygon.GetComponent<Polygon>();
+        if(GameObject.Find("PolygonHandlerHolder").GetComponent<PolygonHandler>().CurrentlySelectedPolygon!=null)
+            currentPolygon = GameObject.Find("PolygonHandlerHolder").GetComponent<PolygonHandler>().CurrentlySelectedPolygon.GetComponent<Polygon>();
 	}
 
     public void RemoveLastPoint()
@@ -40,12 +40,12 @@ public class MatrixDisplayController : MonoBehaviour
     }
 
 	void Update () {
-	    if (GameObject.Find("PolygonHandlerHolder").GetComponent<PolygonHandler>()._currentlySelectedPolygon != null)
+	    if (GameObject.Find("PolygonHandlerHolder").GetComponent<PolygonHandler>().CurrentlySelectedPolygon != null)
 	    {
 	        currentPolygon =
 	            GameObject.Find("PolygonHandlerHolder")
 	                .GetComponent<PolygonHandler>()
-	                ._currentlySelectedPolygon.GetComponent<Polygon>();
+	                .CurrentlySelectedPolygon.GetComponent<Polygon>();
 	        if (_PreviousPolygon == currentPolygon)
 	        {
 	            if (currentPolygon.InsertedPoints.Count > 0)

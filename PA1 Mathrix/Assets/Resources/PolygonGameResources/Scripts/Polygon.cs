@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 
 public class Polygon : MonoBehaviour
 {
-    private Mesh _msh;
+    public Mesh _msh;
     private MeshFilter _filter;
 
     public int DecimalCases = 0;
@@ -21,6 +21,7 @@ public class Polygon : MonoBehaviour
     public Material SelectedMaterial;
     private Triangulator _triangulator;
     private int _previousPointCount;
+
     public bool Interactable;
     public bool hasInitialized;
     public bool IsSelected;
@@ -32,41 +33,29 @@ public class Polygon : MonoBehaviour
 
     private bool addedPoint = false;
 
-    void Start()
+    void Awake()
     {
         c = GameObject.Find("PolygonGame").transform.FindChild("Camera").gameObject.GetComponent<Camera>();
         camHeight = c.orthographicSize;
-        camWidth = c.aspect*camHeight;
+        camWidth = c.aspect * camHeight;
         _previousPointCount = 0;
-        SelectedMaterial= Resources.Load("PolygonGameResources/Materials/UserPolygonMaterial") as Material;
 
         InsertedPoints = new List<Vector2>();
         TransformationMatrices = new List<List<Vector2>>();
         hasInitialized = false;
-
-        if (Interactable)
-        {
-            gameObject.AddComponent(typeof(MeshRenderer));
-            gameObject.GetComponent<MeshRenderer>().material = SelectedMaterial;
-            gameObject.AddComponent<MeshCollider>();
-            gameObject.GetComponent<MeshCollider>().sharedMesh = _msh;
-            _filter = gameObject.AddComponent(typeof(MeshFilter)) as MeshFilter;
-            IsSelected = false;
-            hasInitialized = true;
-        }
-        else
-        {
-            SelectedMaterial = Resources.Load("PolygonGameResources/Materials/ShadowPolygon") as Material;
-            CreateRandomTriangle();
-        }
+        IsSelected = false;
     }
+
+
 
     void Update()
     {
         if (hasInitialized)
         {
             if (Interactable && IsSelected)
+            {
                 InputHandler();
+            }
             if (InsertedPoints.Count != _previousPointCount && InsertedPoints.Count >= 3)
             {
                 _previousPointCount = InsertedPoints.Count;
@@ -75,17 +64,28 @@ public class Polygon : MonoBehaviour
         }
         else
         {
-            if (InsertedPoints.Count >= 3)
-            {
-                gameObject.AddComponent(typeof(MeshRenderer));
-                gameObject.GetComponent<MeshRenderer>().material = SelectedMaterial;
-                gameObject.AddComponent<MeshCollider>();
-                gameObject.GetComponent<MeshCollider>().sharedMesh = _msh;
-                _filter = gameObject.AddComponent(typeof(MeshFilter)) as MeshFilter;
-                IsSelected = false;
-                hasInitialized = true;
-            }
+            if (InsertedPoints.Count>=3)
+                InitializePolygon();
         }
+    }
+
+    public void InitializePolygon()
+    {
+        if (Interactable)
+        {
+            SelectedMaterial = Resources.Load("PolygonGameResources/Materials/UserPolygonMaterial") as Material;
+        }
+        else
+        {
+            SelectedMaterial = Resources.Load("PolygonGameResources/Materials/ShadowPolygon") as Material;
+        }
+        gameObject.AddComponent(typeof(MeshRenderer));
+        gameObject.GetComponent<MeshRenderer>().material = SelectedMaterial;
+        gameObject.AddComponent<MeshCollider>();
+        gameObject.GetComponent<MeshCollider>().sharedMesh = _msh;
+        _filter = gameObject.AddComponent(typeof(MeshFilter)) as MeshFilter;
+        //_filter.mesh = _msh;
+        hasInitialized = true;
     }
 
     public void AddPoint(Vector3 input)
@@ -94,7 +94,7 @@ public class Polygon : MonoBehaviour
         InsertedPoints.Add(SelectedPoint);
     }
 
-    void CreateRandomTriangle()
+    public void CreateRandomTriangle()
     {
         List<Vector2> pointList = new List<Vector2>();
         Vector3 newPoint = new Vector3(0, 0, 0);
@@ -139,7 +139,7 @@ public class Polygon : MonoBehaviour
         }
     }
 
-    public void InputHandler()
+    private void InputHandler()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -218,6 +218,7 @@ public class Polygon : MonoBehaviour
         }
         Vertices2D = InsertedPoints.ToArray();
         UpdatePolygon();
+
         if (TransformationMatrices.Count != 0)
         {
             //Se a última matriz transformação aplicada tiver mais que um elemento, será uma matriz rotação, logo terá de ser criada uma nova translacção
@@ -300,14 +301,14 @@ public class Polygon : MonoBehaviour
         _msh.RecalculateNormals();
         _msh.RecalculateBounds();
 
-        if (GetComponent<MeshCollider>()==null)
-        {
-            gameObject.AddComponent<MeshCollider>();
-        }
+        //if (GetComponent<MeshCollider>() == null)
+        //{
+        //    gameObject.AddComponent<MeshCollider>();
+        //}
         _filter.mesh = _msh;
     }
 
-    public void Replace_Points(Vector3 point1, Vector3 point2, Vector3 point3)
+    public void Replace_Points(Vector2 point1, Vector2 point2, Vector2 point3)
     {
         InsertedPoints[0] = point1;
         InsertedPoints[1] = point2;

@@ -1,251 +1,275 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Random = UnityEngine.Random;
 
 public class PolygonHandler : MonoBehaviour
 {
-    public List<GameObject> _shadowPolygonList;
-    public List<GameObject> _userPolygonList;
-    public GameObject _currentlySelectedPolygon;
-    public GameObject StaticPolygons;
-    public GameObject UserPolygons;
+    public GameObject ShadowPolygonHolder;
+    public GameObject UserPolygonHolder;
 
-    public bool figureCreated;
-    private float camHeight;
-    private float camWidth;
+    public Polygon CurrentlySelectedPolygon;
 
-    private Camera c;
+    public int SelectedFigure;
+    public int PreviouslySelectedFigure;
 
-    private Vector2 A1;
-    private Vector2 A2;
-    private Vector2 A3;
+    void Awake()
+    {
+        ShadowPolygonHolder = new GameObject("Shadow Polygon Holder");
+        ShadowPolygonHolder.transform.SetParent(transform);
 
-    private Vector2 B1;
-    private Vector2 B2;
-    private Vector2 B3;
+        UserPolygonHolder = new GameObject("User Polygon Holder");
+        UserPolygonHolder.transform.SetParent(transform);
 
-    private Vector2 C1;
-    private Vector2 C2;
-    private Vector2 C3;
-
-    private Vector2 D1;
-    private Vector2 D2;
-    private Vector2 D3;
-
-    private Vector2 E1;
-    private Vector2 E2;
-    private Vector2 E3;
-
-    private Vector2 F1;
-    private Vector2 F2;
-    private Vector2 F3;
-
-    private Vector2 G1;
-    private Vector2 G2;
-    private Vector2 G3;
-
-    private Vector2 H1;
-    private Vector2 H2;
-    private Vector2 H3;
-
-    private Vector2 I1;
-    private Vector2 I2;
-    private Vector2 I3;
+        SelectedFigure = Random.Range(0, 2);
+        PreviouslySelectedFigure = SelectedFigure;
+    }
 
     void Start()
     {
-        _shadowPolygonList = new List<GameObject>();
-        _userPolygonList = new List<GameObject>();
-        StaticPolygons = new GameObject();
-        UserPolygons = new GameObject();
-        StaticPolygons.name = "Static Polygons";
-        UserPolygons.name = "User Polygons";
-
-        StaticPolygons.transform.SetParent(transform);
-        UserPolygons.transform.SetParent(transform);
-        figureCreated = false;
-
-        AddControllablePolygon();
-        AddControllablePolygon();
-        _currentlySelectedPolygon = UserPolygons.transform.GetChild(0).gameObject;
-
-        c = GameObject.Find("PolygonGame").transform.FindChild("Camera").gameObject.GetComponent<Camera>();
-        camHeight = c.orthographicSize;
-        camWidth = c.aspect * camHeight;
-
-        AddPolygon();
-
-        //for (int i = 0; i < 9; i++)
-        //{
-        //    AddPolygon();
-        //}
-
-    }
-
-    void InputHandling()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray r = c.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(r, out hit))
-            {
-                if (hit.transform.parent.transform.name == "User Polygons")
-                {
-                    _currentlySelectedPolygon = hit.transform.gameObject;
-                    foreach (GameObject g in _userPolygonList)
-                    {
-                        if(g!=_currentlySelectedPolygon)
-                            g.GetComponent<Polygon>().IsSelected = false;
-                        else
-                        {
-                            g.GetComponent<Polygon>().IsSelected = false;
-                        }
-                    }
-                }
-            }
-        }
+        StartShadowGame();
     }
 
     void Update()
     {
-        _currentlySelectedPolygon.GetComponent<Polygon>().IsSelected = true;
-        if (_currentlySelectedPolygon != null)
+        if (SelectedFigure != PreviouslySelectedFigure)
         {
-            if (ShadowGame())
+            StartShadowGame();
+        }
+        SelectionChecking();
+        //if (ShadowFigureCheck())
+        //    Debug.Log("YOU'RE WINNER");
+    }
+
+    void StartShadowGame()
+    {
+        CurrentlySelectedPolygon = null;
+        while (ShadowPolygonHolder.transform.childCount > 0)
+        {
+            Destroy(ShadowPolygonHolder.transform.GetChild(0));
+        }
+        while (UserPolygonHolder.transform.childCount > 0)
+        {
+            Destroy(UserPolygonHolder.transform.GetChild(0));
+        }
+
+        switch (SelectedFigure)
+        {
+            case 0:
+                DrawRabbit();
+                break;
+            case 1:
+                DrawCat();
+                break;
+        }
+        foreach (Transform t in ShadowPolygonHolder.transform)
+        {
+            CloneShadowToInteractablePolygon(t.GetComponent<Polygon>());
+        }
+    }
+
+    bool ShadowFigureCheck()
+    {
+        foreach (Transform shadow in ShadowPolygonHolder.transform)
+        {
+            bool hasPolygonMatch = false;
+            foreach (Transform controllable in UserPolygonHolder.transform)
             {
-                Debug.Log("You're Winner!");
+                if (PolygonMatchChecking(shadow.GetComponent<Polygon>(), controllable.GetComponent<Polygon>()))
+                {
+                    hasPolygonMatch = true;
+                }
+            }
+            //Fazer Func para verificar se todos os pontos dos poígonos do utilizador estão a ocupar posições dos estáticos
+            if (!hasPolygonMatch/* && !PointMatchChecking(shadow.GetComponent<Polygon>())*/)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    bool PolygonMatchChecking(Polygon A, Polygon B)
+    {
+        foreach (Vector2 pointA in A.InsertedPoints)
+        {
+            bool foundMatch = false;
+            foreach (Vector2 pointB in B.InsertedPoints)
+            {
+                if (pointA == pointB)
+                    foundMatch = true;
+            }
+            if (!foundMatch)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    bool PointMatchChecking(Polygon shadow)
+    {
+        foreach (Vector2 shadowPoint in shadow.InsertedPoints)
+        {
+            bool foundMatch = false;
+            foreach (Transform t in UserPolygonHolder.transform)
+            {
+                foreach (Vector2 point in t.GetComponent<Polygon>().InsertedPoints)
+                {
+                    if (point == shadowPoint)
+                        foundMatch = true;
+                }
+            }
+            if (!foundMatch)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    void SelectionChecking()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(r, out hit))
+            {
+                Debug.Log("Bateu nalgo");
+                if (hit.transform.tag == "Polygon")
+                {
+                    Debug.Log("Mais Especificamente um polygon");
+                    if (hit.transform.GetComponent<Polygon>().Interactable)
+                    {
+                        Debug.Log("Que é interagível");
+                        if (CurrentlySelectedPolygon != null)
+                            CurrentlySelectedPolygon.IsSelected = false;
+                        CurrentlySelectedPolygon = hit.transform.GetComponent<Polygon>();
+                        hit.transform.GetComponent<Polygon>().IsSelected = true;
+                    }
+                }
             }
         }
     }
 
-    void SimplePolygon()
+
+    void AddShadowPolygon()
     {
-        if (StaticPolygons.transform.GetChild(0).gameObject.GetComponent<Polygon>().hasInitialized)
-        {
-            StaticPolygons.transform.GetChild(0).gameObject.GetComponent<Polygon>().Replace_Points(new Vector3(0, 0, 140), new Vector3(0, 30, 140), new Vector3(30, 0, 140));
-        }
+        GameObject newPolygon = new GameObject();
+        newPolygon.tag = "Polygon";
+        newPolygon.transform.SetParent(ShadowPolygonHolder.transform, false);
+        newPolygon.name = "Shadow Polygon " + ShadowPolygonHolder.transform.childCount;
+        newPolygon.AddComponent<Polygon>();
+        newPolygon.GetComponent<Polygon>().CreateRandomTriangle();
+        newPolygon.GetComponent<MeshCollider>().sharedMesh = newPolygon.GetComponent<Polygon>()._msh;
     }
 
-    void RabbitFigure()
+    void AddShadowPolygon(Vector2 PointA, Vector2 PointB, Vector2 PointC)
     {
-        if (StaticPolygons.transform.GetChild(0).gameObject.GetComponent<Polygon>().hasInitialized)
-        {
-            StaticPolygons.transform.GetChild(0).gameObject.GetComponent<Polygon>().Replace_Points(new Vector3(0, -10, 140), new Vector3(0, 20, 140), new Vector3(30, -10, 140));
-        }
-        if (StaticPolygons.transform.GetChild(1).gameObject.GetComponent<Polygon>().hasInitialized)
-        {
-            StaticPolygons.transform.GetChild(1).gameObject.GetComponent<Polygon>().Replace_Points(new Vector3(0, 0, 140), new Vector3(-10, -10, 140), new Vector3(0, -20, 140));
-        }
-        if (StaticPolygons.transform.GetChild(2).gameObject.GetComponent<Polygon>().hasInitialized)
-        {
-            StaticPolygons.transform.GetChild(2).gameObject.GetComponent<Polygon>().Replace_Points(new Vector3(0, -10, 140), new Vector3(30, -10, 140), new Vector3(30, -40, 140));
-        }
-
-        if (StaticPolygons.transform.GetChild(3).gameObject.GetComponent<Polygon>().hasInitialized)
-        {
-            StaticPolygons.transform.GetChild(3).gameObject.GetComponent<Polygon>().Replace_Points(new Vector3(10, -20, 140), new Vector3(0, -30, 140), new Vector3(10, -40, 140));
-        }
-        if (StaticPolygons.transform.GetChild(4).gameObject.GetComponent<Polygon>().hasInitialized)
-        {
-            StaticPolygons.transform.GetChild(4).gameObject.GetComponent<Polygon>().Replace_Points(new Vector3(10, -20, 140), new Vector3(10, -40, 140), new Vector3(30, -40, 140));
-        }
-        if (StaticPolygons.transform.GetChild(5).gameObject.GetComponent<Polygon>().hasInitialized)
-        {
-            StaticPolygons.transform.GetChild(5).gameObject.GetComponent<Polygon>().Replace_Points(new Vector3(0, 20, 140), new Vector3(-20, 20, 140), new Vector3(-20, 40, 140));
-        }
-
-        if (StaticPolygons.transform.GetChild(6).gameObject.GetComponent<Polygon>().hasInitialized)
-        {
-            StaticPolygons.transform.GetChild(6).gameObject.GetComponent<Polygon>().Replace_Points(new Vector3(0, 20, 140), new Vector3(-20, 40, 140), new Vector3(0, 40, 140));
-        }
-        if (StaticPolygons.transform.GetChild(7).gameObject.GetComponent<Polygon>().hasInitialized)
-        {
-            StaticPolygons.transform.GetChild(7).gameObject.GetComponent<Polygon>().Replace_Points(new Vector3(0, 40, 140), new Vector3(-10, 40, 140), new Vector3(0, 60, 140));
-        }
-        if (StaticPolygons.transform.GetChild(8).gameObject.GetComponent<Polygon>().hasInitialized)
-        {
-            StaticPolygons.transform.GetChild(8).gameObject.GetComponent<Polygon>().Replace_Points(new Vector3(0, 40, 140), new Vector3(0, 60, 140), new Vector3(10, 60, 140));
-        }
-
-        UserPolygons.transform.GetChild(0).gameObject.GetComponent<Polygon>().Replace_Points(A1,A2,A3);
-        UserPolygons.transform.GetChild(1).gameObject.GetComponent<Polygon>().Replace_Points(B1,B2,B3);
-        UserPolygons.transform.GetChild(2).gameObject.GetComponent<Polygon>().Replace_Points(C1,C2,C3);
-        UserPolygons.transform.GetChild(3).gameObject.GetComponent<Polygon>().Replace_Points(D1,D2,D3);
-        UserPolygons.transform.GetChild(4).gameObject.GetComponent<Polygon>().Replace_Points(E1,E2,E3);
-        UserPolygons.transform.GetChild(5).gameObject.GetComponent<Polygon>().Replace_Points(F1,F2,F3);
-        UserPolygons.transform.GetChild(6).gameObject.GetComponent<Polygon>().Replace_Points(G1,G2,G3);
-        UserPolygons.transform.GetChild(7).gameObject.GetComponent<Polygon>().Replace_Points(H1,H2,H3);
-        UserPolygons.transform.GetChild(8).gameObject.GetComponent<Polygon>().Replace_Points(I1,I2,I3);
-
-    }
-
-    void AddPolygon()
-    {
-        GameObject poly =
-            Instantiate(Resources.Load("PolygonGameResources/Prefabs/StaticPolygon"), Vector3.zero, Quaternion.identity) as GameObject;
-        poly.transform.SetParent(StaticPolygons.transform);
-        poly.transform.name = "ShadowPoly " + _shadowPolygonList.Count;
-        _shadowPolygonList.Add(poly);
+        GameObject newPolygon = new GameObject();
+        newPolygon.tag = "Polygon";
+        newPolygon.transform.SetParent(ShadowPolygonHolder.transform, false);
+        newPolygon.name = "Shadow Polygon " + ShadowPolygonHolder.transform.childCount;
+        newPolygon.AddComponent<Polygon>();
+        newPolygon.GetComponent<Polygon>().InsertedPoints.Add(PointA);
+        newPolygon.GetComponent<Polygon>().InsertedPoints.Add(PointB);
+        newPolygon.GetComponent<Polygon>().InsertedPoints.Add(PointC);
     }
 
     void AddControllablePolygon()
     {
-        GameObject poly =
-    Instantiate(Resources.Load("PolygonGameResources/Prefabs/UserPolygon"), Vector3.zero, Quaternion.identity) as GameObject;
-        poly.transform.SetParent(UserPolygons.transform);
-        poly.transform.name = "UserPoly " + _userPolygonList.Count;
-        _userPolygonList.Add(poly);
-    }
-
-    public void ApplyTranslationToCurrentPolygon()
-    {
-        Vector3 translationValues =
-            GameObject.Find("TranslationMenu").GetComponent<TranslationMenuController>().GiveTranslationValues();
-        _currentlySelectedPolygon.GetComponent<Polygon>().ApplyTranslation(translationValues.x,translationValues.y);
-        GameObject.Find("OperationButtonsHolder").GetComponent<OperationsMenuController>().Reset();
-    }
-
-    public void ApplyRotationToCurrentPolygon()
-    {
-        double angle = GameObject.Find("RotationMenu").GetComponent<RotationMenuController>().GiveRotationAngle();
-        _currentlySelectedPolygon.GetComponent<Polygon>().ApplyRotation(angle,false);
-        GameObject.Find("OperationButtonsHolder").GetComponent<OperationsMenuController>().Reset();
-    }
-
-    public void ApplyScalingToCurrentPolygon()
-    {
-        float scale = GameObject.Find("ScalingMenu").GetComponent<ScalingMenuController>().GiveScale();
-        _currentlySelectedPolygon.GetComponent<Polygon>().ApplyScaling(scale);
-        GameObject.Find("OperationButtonsHolder").GetComponent<OperationsMenuController>().Reset();
-    }
-
-    private bool ShadowGame()
-    {
-        bool allPointsCovered = true;
-        foreach (GameObject staticPolygon in _shadowPolygonList)
+        GameObject newPolygon = new GameObject();
+        newPolygon.tag = "Polygon";
+        newPolygon.transform.SetParent(UserPolygonHolder.transform, false);
+        string newPolygonName = "User Polygon " + UserPolygonHolder.transform.childCount;
+        newPolygon.name = newPolygonName;
+        newPolygon.AddComponent<Polygon>();
+        newPolygon.GetComponent<Polygon>().Interactable = true;
+        if (UserPolygonHolder.transform.childCount == 1)
         {
-            foreach (Vector2 shadowPoint in staticPolygon.GetComponent<Polygon>().InsertedPoints)
-            {
-                bool foundMatch = false;
-                foreach (Vector2 userPolygon in _currentlySelectedPolygon.GetComponent<Polygon>().InsertedPoints)
-                {
-                    if (shadowPoint == userPolygon)
-                    {
-                        foundMatch = true;
-                    }
-                }
-                if (!foundMatch)
-                    allPointsCovered = false;
-            }
+            newPolygon.GetComponent<Polygon>().IsSelected = true;
+            CurrentlySelectedPolygon = newPolygon.GetComponent<Polygon>();
         }
-        if (allPointsCovered)
-            return true;
+    }
+
+    void AddControllablePolygon(Vector2 PointA, Vector2 PointB, Vector2 PointC)
+    {
+        GameObject newPolygon = new GameObject();
+        newPolygon.tag = "Polygon";
+        newPolygon.transform.SetParent(UserPolygonHolder.transform, false);
+        newPolygon.name = "User Polygon " + UserPolygonHolder.transform.childCount;
+        newPolygon.AddComponent<Polygon>();
+        newPolygon.GetComponent<Polygon>().InsertedPoints.Add(PointA);
+        newPolygon.GetComponent<Polygon>().InsertedPoints.Add(PointB);
+        newPolygon.GetComponent<Polygon>().InsertedPoints.Add(PointC);
+        newPolygon.GetComponent<Polygon>().Interactable = true;
+        if (UserPolygonHolder.transform.childCount == 1)
+        {
+            newPolygon.GetComponent<Polygon>().IsSelected = true;
+            CurrentlySelectedPolygon = newPolygon.GetComponent<Polygon>();
+        }
+    }
+
+
+    void CloneShadowToInteractablePolygon(Polygon p)
+    {
+        if (!p.Interactable)
+        {
+            AddControllablePolygon(p.InsertedPoints[0], p.InsertedPoints[1], p.InsertedPoints[2]);
+        }
+    }
+
+    void GenerateUserPolygonTransformations(Polygon p)
+    {
+        Vector2 mainPointPosition = p.InsertedPoints[0];
+        Vector2 nullifyingVector = Vector2.zero;
+        if (mainPointPosition.x > 0)
+        {
+            nullifyingVector.x = -mainPointPosition.x;
+        }
         else
         {
-            return false;
+            nullifyingVector.x = +mainPointPosition.x;
         }
+        if (mainPointPosition.y > 0)
+        {
+            nullifyingVector.y = -mainPointPosition.y;
+        }
+        else
+        {
+            nullifyingVector.y = +mainPointPosition.y;
+        }
+        p.ApplyTranslation(nullifyingVector.x, nullifyingVector.y);
+    }
+
+    void DrawRabbit()
+    {
+        AddShadowPolygon(new Vector2(0, -10), new Vector2(0, 20), new Vector2(30, -10));
+        AddShadowPolygon(new Vector2(0, 0), new Vector2(-10, -10), new Vector2(0, -20));
+        AddShadowPolygon(new Vector2(0, -10), new Vector2(30, -10), new Vector2(30, -40));
+
+        AddShadowPolygon(new Vector2(10, -20), new Vector2(0, -30), new Vector2(10, -40));
+        AddShadowPolygon(new Vector2(10, -20), new Vector2(10, -40), new Vector2(30, -40));
+        AddShadowPolygon(new Vector2(0, 20), new Vector2(-20, 20), new Vector2(-20, 40));
+
+        AddShadowPolygon(new Vector2(0, 20), new Vector2(-20, 40), new Vector2(0, 40));
+        AddShadowPolygon(new Vector2(0, 40), new Vector2(-10, 40), new Vector2(0, 60));
+        AddShadowPolygon(new Vector2(0, 40), new Vector2(0, 60), new Vector2(10, 60));
+    }
+
+    void DrawCat()
+    {
+        AddShadowPolygon(new Vector2(-10, 50), new Vector2(-10, 30), new Vector2(0, 40));
+        AddShadowPolygon(new Vector2(0, 40), new Vector2(10, 30), new Vector2(10, 50));
+        AddShadowPolygon(new Vector2(0, 20), new Vector2(-10, 30), new Vector2(0, 40));
+
+        AddShadowPolygon(new Vector2(0, 20), new Vector2(10, 30), new Vector2(0, 40));
+        AddShadowPolygon(new Vector2(0, 0), new Vector2(-10, 10), new Vector2(0, 20));
+        AddShadowPolygon(new Vector2(0, -20), new Vector2(20, 0), new Vector2(0, 20));
+
+        AddShadowPolygon(new Vector2(-10, -30), new Vector2(20, 0), new Vector2(20, -30));
+        AddShadowPolygon(new Vector2(20, -30), new Vector2(30, -10), new Vector2(30, -30));
+        AddShadowPolygon(new Vector2(30, -10), new Vector2(30, -30), new Vector2(40, -10));
     }
 }

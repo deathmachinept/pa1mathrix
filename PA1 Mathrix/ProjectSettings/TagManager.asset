@@ -22,6 +22,8 @@ TagManager:
   - OptionD
   - ListaQuizQuestions
   - Identidade
+  - MaterialRadioButton
+  - Polygon
   layers:
   - Default
   - TransparentFX
