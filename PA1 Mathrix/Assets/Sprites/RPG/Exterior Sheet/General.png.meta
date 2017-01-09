@@ -1,13 +1,13 @@
 fileFormatVersion: 2
 guid: b91b61137ed9e254f92ea6b1a96b6420
-timeCreated: 1483825792
+timeCreated: 1483956547
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: General_0
-    21300002: General_1
-    21300004: General_2
-    21300006: General_3
+    21300000: GrasslandCross_0_0
+    21300002: GrasslandCross_0_1
+    21300004: Plaza_Cross_0_0
+    21300006: Plaza_Cross_0_1
     21300008: General_4
     21300010: General_5
     21300012: General_6
@@ -18,22 +18,22 @@ TextureImporter:
     21300022: General_11
     21300024: General_12
     21300026: General_13
-    21300028: General_14
-    21300030: General_15
-    21300032: Asfalto_1
-    21300034: Asfalto_2
-    21300036: PlazaCross_1
-    21300038: PlazaCross_2
+    21300028: Asfalt_EdgedCornedCross_0
+    21300030: Asfalt_EdgedCornedCross_1
+    21300032: AsfaltoRoundCross_1
+    21300034: AsfaltoRoundCross_2
+    21300036: PlazaDarkCross_1
+    21300038: PlazaDarkCross_2
     21300040: General_20
     21300042: General_21
-    21300044: General_22
-    21300046: General_23
+    21300044: InteriorCross1_0_0
+    21300046: InteriorCross1_0_1
     21300048: General_24
     21300050: General_25
-    21300052: General_26
-    21300054: General_27
-    21300056: General_28
-    21300058: General_29
+    21300052: GrasslandCross_1_0
+    21300054: GrasslandCross_1_1
+    21300056: Plaza_Cross_1_0
+    21300058: Plaza_Cross_1_1
     21300060: General_30
     21300062: General_31
     21300064: General_32
@@ -44,16 +44,16 @@ TextureImporter:
     21300074: General_37
     21300076: General_38
     21300078: General_39
-    21300080: General_40
-    21300082: General_41
-    21300084: Asfalto_3
-    21300086: Asfalto_4
-    21300088: PlazaCross_3
-    21300090: PlazaCross_4
+    21300080: Asfalt_EdgedCornedCross_2
+    21300082: Asfalt_EdgedCornedCross_3
+    21300084: AsfaltoRoundCross_3
+    21300086: AsfaltoRoundCross_4
+    21300088: PlazaDarkCross_3
+    21300090: PlazaDarkCross_4
     21300092: General_46
     21300094: General_47
-    21300096: General_48
-    21300098: General_49
+    21300096: InteriorCross1_1_0
+    21300098: InteriorCross1_1_1
     21300100: General_50
     21300102: General_51
     21300104: General_52
@@ -63,12 +63,12 @@ TextureImporter:
     21300112: General_56
     21300114: General_57
     21300116: General_58
-    21300118: General_59
-    21300120: General_60
-    21300122: General_61
-    21300124: General_62
-    21300126: General_63
-    21300128: General_64
+    21300118: Grassland_0_0
+    21300120: Grassland_0_1
+    21300122: Grassland_0_2
+    21300124: Plaza_0_0
+    21300126: Plaza_0_1
+    21300128: Plaza_0_2
     21300130: General_65
     21300132: General_66
     21300134: General_67
@@ -84,21 +84,21 @@ TextureImporter:
     21300154: General_77
     21300156: General_78
     21300158: General_79
-    21300160: General_80
-    21300162: General_81
-    21300164: General_82
-    21300166: General_83
-    21300168: General_84
-    21300170: General_85
-    21300172: General_86
-    21300174: General_87
-    21300176: General_88
+    21300160: Asfalt_EdgedCorned_0
+    21300162: Asfalt_EdgedCorned_0_1
+    21300164: Asfalt_EdgedCorned_0_2
+    21300166: Asfalt_RoundCorned_0_0
+    21300168: Asfalt_RoundCorned_0_1
+    21300170: Asfalt_RoundCorned_0_2
+    21300172: PlazaDark_0_0
+    21300174: PlazaDark_0_1
+    21300176: PlazaDark_0_2
     21300178: General_89
     21300180: General_90
     21300182: General_91
-    21300184: General_92
-    21300186: General_93
-    21300188: General_94
+    21300184: Interior1_0_0
+    21300186: Interior1_0_1
+    21300188: Interior1_0_2
     21300190: General_95
     21300192: General_96
     21300194: General_97
@@ -108,12 +108,12 @@ TextureImporter:
     21300202: General_101
     21300204: General_102
     21300206: General_103
-    21300208: General_104
-    21300210: General_105
-    21300212: General_106
-    21300214: General_107
-    21300216: General_108
-    21300218: General_109
+    21300208: Grassland_1_0
+    21300210: Grassland_1_1
+    21300212: Grassland_1_2
+    21300214: Plaza_1_0
+    21300216: Plaza_1_1
+    21300218: Plaza_1_2
     21300220: General_110
     21300222: General_111
     21300224: General_112
@@ -129,36 +129,36 @@ TextureImporter:
     21300244: General_122
     21300246: General_123
     21300248: General_124
-    21300250: General_125
-    21300252: General_126
-    21300254: General_127
-    21300256: General_128
-    21300258: General_129
-    21300260: General_130
-    21300262: General_131
-    21300264: General_132
-    21300266: General_133
+    21300250: Asfalt_EdgedCorned_1_0
+    21300252: Asfalt_EdgedCorned_1_1
+    21300254: Asfalt_EdgedCorned_1_2
+    21300256: Asfalt_RoundCorned_1_0
+    21300258: Asfalt_RoundCorned_1_1
+    21300260: Asfalt_RoundCorned_1_2
+    21300262: PlazaDark_1_0
+    21300264: PlazaDark_1_1
+    21300266: PlazaDark_1_2
     21300268: General_134
     21300270: General_135
     21300272: General_136
-    21300274: General_137
-    21300276: General_138
-    21300278: General_139
+    21300274: Interior1_1_0
+    21300276: Interior1_1_1
+    21300278: Interior1_1_2
     21300280: General_140
     21300282: General_141
     21300284: General_142
-    21300286: General_143
-    21300288: General_144
+    21300286: Lamp1_0
+    21300288: Lamp2_0
     21300290: General_145
     21300292: General_146
     21300294: General_147
     21300296: General_148
-    21300298: General_149
-    21300300: General_150
-    21300302: General_151
-    21300304: General_152
-    21300306: General_153
-    21300308: General_154
+    21300298: Grassland_2_0
+    21300300: Grassland_2_1
+    21300302: Grassland_2_2
+    21300304: Plaza_2_0
+    21300306: Plaza_2_1
+    21300308: Plaza_2_2
     21300310: General_155
     21300312: General_156
     21300314: General_157
@@ -174,26 +174,26 @@ TextureImporter:
     21300334: General_167
     21300336: General_168
     21300338: General_169
-    21300340: General_170
-    21300342: General_171
-    21300344: General_172
-    21300346: General_173
-    21300348: General_174
-    21300350: General_175
-    21300352: General_176
-    21300354: General_177
-    21300356: General_178
+    21300340: Asfalt_EdgedCorned_2_0
+    21300342: Asfalt_EdgedCorned_2_1
+    21300344: Asfalt_EdgedCorned_2_2
+    21300346: Asfalt_RoundCorned_2_0
+    21300348: Asfalt_RoundCorned_2_1
+    21300350: Asfalt_RoundCorned_2_2
+    21300352: PlazaDark_2_0
+    21300354: PlazaDark_2_1
+    21300356: PlazaDark_2_2
     21300358: General_179
     21300360: General_180
     21300362: General_181
-    21300364: General_182
-    21300366: General_183
-    21300368: General_184
+    21300364: Interior1_2_0
+    21300366: Interior1_2_1
+    21300368: Interior1_2_2
     21300370: General_185
     21300372: General_186
     21300374: General_187
-    21300376: General_188
-    21300378: General_189
+    21300376: Lamp1_1
+    21300378: Lamp2_1
     21300380: General_190
     21300382: General_191
     21300384: General_192
@@ -235,7 +235,7 @@ TextureImporter:
     21300456: General_228
     21300458: General_229
     21300460: General_230
-    21300462: General_231
+    21300462: Bench_East_1
     21300464: BenchDown_1
     21300466: BenchDown_2
     21300468: General_234
@@ -281,7 +281,7 @@ TextureImporter:
     21300548: General_274
     21300550: General_275
     21300552: General_276
-    21300554: General_277
+    21300554: Bench_East_2
     21300556: BenchDown_3
     21300558: BenchDown_4
     21300560: General_280
@@ -406,7 +406,7 @@ TextureImporter:
     21300798: General_399
     21300800: General_400
     21300802: General_401
-    21300804: General_402
+    21300804: Lamp3_0
     21300806: General_403
     21300808: General_404
     21300810: General_405
@@ -448,7 +448,7 @@ TextureImporter:
     21300882: General_441
     21300884: General_442
     21300886: General_443
-    21300888: General_444
+    21300888: Lamp3_1
     21300890: General_445
     21300892: General_446
     21300894: General_447
@@ -490,7 +490,7 @@ TextureImporter:
     21300966: General_483
     21300968: General_484
     21300970: General_485
-    21300972: General_486
+    21300972: Lamp3_2
     21300974: General_487
     21300976: General_488
     21300978: General_489
@@ -1274,7 +1274,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: General_0
+      name: GrasslandCross_0_0
       rect:
         serializedVersion: 2
         x: 240
@@ -1287,7 +1287,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_1
+      name: GrasslandCross_0_1
       rect:
         serializedVersion: 2
         x: 256
@@ -1300,7 +1300,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_2
+      name: Plaza_Cross_0_0
       rect:
         serializedVersion: 2
         x: 288
@@ -1313,7 +1313,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_3
+      name: Plaza_Cross_0_1
       rect:
         serializedVersion: 2
         x: 304
@@ -1456,7 +1456,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_14
+      name: Asfalt_EdgedCornedCross_0
       rect:
         serializedVersion: 2
         x: 576
@@ -1469,7 +1469,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_15
+      name: Asfalt_EdgedCornedCross_1
       rect:
         serializedVersion: 2
         x: 592
@@ -1482,7 +1482,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Asfalto_1
+      name: AsfaltoRoundCross_1
       rect:
         serializedVersion: 2
         x: 624
@@ -1495,7 +1495,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Asfalto_2
+      name: AsfaltoRoundCross_2
       rect:
         serializedVersion: 2
         x: 640
@@ -1508,7 +1508,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlazaCross_1
+      name: PlazaDarkCross_1
       rect:
         serializedVersion: 2
         x: 672
@@ -1521,7 +1521,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlazaCross_2
+      name: PlazaDarkCross_2
       rect:
         serializedVersion: 2
         x: 688
@@ -1560,7 +1560,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_22
+      name: InteriorCross1_0_0
       rect:
         serializedVersion: 2
         x: 768
@@ -1573,7 +1573,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_23
+      name: InteriorCross1_0_1
       rect:
         serializedVersion: 2
         x: 784
@@ -1612,7 +1612,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_26
+      name: GrasslandCross_1_0
       rect:
         serializedVersion: 2
         x: 240
@@ -1625,7 +1625,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_27
+      name: GrasslandCross_1_1
       rect:
         serializedVersion: 2
         x: 256
@@ -1638,7 +1638,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_28
+      name: Plaza_Cross_1_0
       rect:
         serializedVersion: 2
         x: 288
@@ -1651,7 +1651,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_29
+      name: Plaza_Cross_1_1
       rect:
         serializedVersion: 2
         x: 304
@@ -1794,7 +1794,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_40
+      name: Asfalt_EdgedCornedCross_2
       rect:
         serializedVersion: 2
         x: 576
@@ -1807,7 +1807,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_41
+      name: Asfalt_EdgedCornedCross_3
       rect:
         serializedVersion: 2
         x: 592
@@ -1820,7 +1820,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Asfalto_3
+      name: AsfaltoRoundCross_3
       rect:
         serializedVersion: 2
         x: 624
@@ -1833,7 +1833,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Asfalto_4
+      name: AsfaltoRoundCross_4
       rect:
         serializedVersion: 2
         x: 640
@@ -1846,7 +1846,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlazaCross_3
+      name: PlazaDarkCross_3
       rect:
         serializedVersion: 2
         x: 672
@@ -1859,7 +1859,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PlazaCross_4
+      name: PlazaDarkCross_4
       rect:
         serializedVersion: 2
         x: 688
@@ -1898,7 +1898,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_48
+      name: InteriorCross1_1_0
       rect:
         serializedVersion: 2
         x: 768
@@ -1911,7 +1911,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_49
+      name: InteriorCross1_1_1
       rect:
         serializedVersion: 2
         x: 784
@@ -2041,7 +2041,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_59
+      name: Grassland_0_0
       rect:
         serializedVersion: 2
         x: 224
@@ -2054,7 +2054,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_60
+      name: Grassland_0_1
       rect:
         serializedVersion: 2
         x: 240
@@ -2067,7 +2067,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_61
+      name: Grassland_0_2
       rect:
         serializedVersion: 2
         x: 256
@@ -2080,7 +2080,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_62
+      name: Plaza_0_0
       rect:
         serializedVersion: 2
         x: 272
@@ -2093,7 +2093,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_63
+      name: Plaza_0_1
       rect:
         serializedVersion: 2
         x: 288
@@ -2106,7 +2106,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_64
+      name: Plaza_0_2
       rect:
         serializedVersion: 2
         x: 304
@@ -2314,7 +2314,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_80
+      name: Asfalt_EdgedCorned_0
       rect:
         serializedVersion: 2
         x: 560
@@ -2327,7 +2327,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_81
+      name: Asfalt_EdgedCorned_0_1
       rect:
         serializedVersion: 2
         x: 576
@@ -2340,7 +2340,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_82
+      name: Asfalt_EdgedCorned_0_2
       rect:
         serializedVersion: 2
         x: 592
@@ -2353,7 +2353,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_83
+      name: Asfalt_RoundCorned_0_0
       rect:
         serializedVersion: 2
         x: 608
@@ -2366,7 +2366,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_84
+      name: Asfalt_RoundCorned_0_1
       rect:
         serializedVersion: 2
         x: 624
@@ -2379,7 +2379,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_85
+      name: Asfalt_RoundCorned_0_2
       rect:
         serializedVersion: 2
         x: 640
@@ -2392,7 +2392,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_86
+      name: PlazaDark_0_0
       rect:
         serializedVersion: 2
         x: 656
@@ -2405,7 +2405,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_87
+      name: PlazaDark_0_1
       rect:
         serializedVersion: 2
         x: 672
@@ -2418,7 +2418,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_88
+      name: PlazaDark_0_2
       rect:
         serializedVersion: 2
         x: 688
@@ -2470,7 +2470,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_92
+      name: Interior1_0_0
       rect:
         serializedVersion: 2
         x: 752
@@ -2483,7 +2483,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_93
+      name: Interior1_0_1
       rect:
         serializedVersion: 2
         x: 768
@@ -2496,7 +2496,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_94
+      name: Interior1_0_2
       rect:
         serializedVersion: 2
         x: 784
@@ -2626,7 +2626,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_104
+      name: Grassland_1_0
       rect:
         serializedVersion: 2
         x: 224
@@ -2639,7 +2639,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_105
+      name: Grassland_1_1
       rect:
         serializedVersion: 2
         x: 240
@@ -2652,7 +2652,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_106
+      name: Grassland_1_2
       rect:
         serializedVersion: 2
         x: 256
@@ -2665,7 +2665,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_107
+      name: Plaza_1_0
       rect:
         serializedVersion: 2
         x: 272
@@ -2678,7 +2678,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_108
+      name: Plaza_1_1
       rect:
         serializedVersion: 2
         x: 288
@@ -2691,7 +2691,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_109
+      name: Plaza_1_2
       rect:
         serializedVersion: 2
         x: 304
@@ -2899,7 +2899,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_125
+      name: Asfalt_EdgedCorned_1_0
       rect:
         serializedVersion: 2
         x: 560
@@ -2912,7 +2912,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_126
+      name: Asfalt_EdgedCorned_1_1
       rect:
         serializedVersion: 2
         x: 576
@@ -2925,7 +2925,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_127
+      name: Asfalt_EdgedCorned_1_2
       rect:
         serializedVersion: 2
         x: 592
@@ -2938,7 +2938,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_128
+      name: Asfalt_RoundCorned_1_0
       rect:
         serializedVersion: 2
         x: 608
@@ -2951,7 +2951,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_129
+      name: Asfalt_RoundCorned_1_1
       rect:
         serializedVersion: 2
         x: 624
@@ -2964,7 +2964,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_130
+      name: Asfalt_RoundCorned_1_2
       rect:
         serializedVersion: 2
         x: 640
@@ -2977,7 +2977,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_131
+      name: PlazaDark_1_0
       rect:
         serializedVersion: 2
         x: 656
@@ -2990,7 +2990,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_132
+      name: PlazaDark_1_1
       rect:
         serializedVersion: 2
         x: 672
@@ -3003,7 +3003,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_133
+      name: PlazaDark_1_2
       rect:
         serializedVersion: 2
         x: 688
@@ -3055,7 +3055,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_137
+      name: Interior1_1_0
       rect:
         serializedVersion: 2
         x: 752
@@ -3068,7 +3068,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_138
+      name: Interior1_1_1
       rect:
         serializedVersion: 2
         x: 768
@@ -3081,7 +3081,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_139
+      name: Interior1_1_2
       rect:
         serializedVersion: 2
         x: 784
@@ -3133,7 +3133,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_143
+      name: Lamp1_0
       rect:
         serializedVersion: 2
         x: 48
@@ -3146,7 +3146,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_144
+      name: Lamp2_0
       rect:
         serializedVersion: 2
         x: 64
@@ -3211,7 +3211,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_149
+      name: Grassland_2_0
       rect:
         serializedVersion: 2
         x: 224
@@ -3224,7 +3224,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_150
+      name: Grassland_2_1
       rect:
         serializedVersion: 2
         x: 240
@@ -3237,7 +3237,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_151
+      name: Grassland_2_2
       rect:
         serializedVersion: 2
         x: 256
@@ -3250,7 +3250,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_152
+      name: Plaza_2_0
       rect:
         serializedVersion: 2
         x: 272
@@ -3263,7 +3263,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_153
+      name: Plaza_2_1
       rect:
         serializedVersion: 2
         x: 288
@@ -3276,7 +3276,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_154
+      name: Plaza_2_2
       rect:
         serializedVersion: 2
         x: 304
@@ -3484,7 +3484,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_170
+      name: Asfalt_EdgedCorned_2_0
       rect:
         serializedVersion: 2
         x: 560
@@ -3497,7 +3497,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_171
+      name: Asfalt_EdgedCorned_2_1
       rect:
         serializedVersion: 2
         x: 576
@@ -3510,7 +3510,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_172
+      name: Asfalt_EdgedCorned_2_2
       rect:
         serializedVersion: 2
         x: 592
@@ -3523,7 +3523,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_173
+      name: Asfalt_RoundCorned_2_0
       rect:
         serializedVersion: 2
         x: 608
@@ -3536,7 +3536,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_174
+      name: Asfalt_RoundCorned_2_1
       rect:
         serializedVersion: 2
         x: 624
@@ -3549,7 +3549,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_175
+      name: Asfalt_RoundCorned_2_2
       rect:
         serializedVersion: 2
         x: 640
@@ -3562,7 +3562,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_176
+      name: PlazaDark_2_0
       rect:
         serializedVersion: 2
         x: 656
@@ -3575,7 +3575,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_177
+      name: PlazaDark_2_1
       rect:
         serializedVersion: 2
         x: 672
@@ -3588,7 +3588,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_178
+      name: PlazaDark_2_2
       rect:
         serializedVersion: 2
         x: 688
@@ -3640,7 +3640,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_182
+      name: Interior1_2_0
       rect:
         serializedVersion: 2
         x: 752
@@ -3653,7 +3653,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_183
+      name: Interior1_2_1
       rect:
         serializedVersion: 2
         x: 768
@@ -3666,7 +3666,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_184
+      name: Interior1_2_2
       rect:
         serializedVersion: 2
         x: 784
@@ -3718,7 +3718,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_188
+      name: Lamp1_1
       rect:
         serializedVersion: 2
         x: 48
@@ -3731,7 +3731,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_189
+      name: Lamp2_1
       rect:
         serializedVersion: 2
         x: 64
@@ -4277,7 +4277,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_231
+      name: Bench_East_1
       rect:
         serializedVersion: 2
         x: 0
@@ -4875,7 +4875,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_277
+      name: Bench_East_2
       rect:
         serializedVersion: 2
         x: 0
@@ -6500,7 +6500,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_402
+      name: Lamp3_0
       rect:
         serializedVersion: 2
         x: 0
@@ -7046,7 +7046,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_444
+      name: Lamp3_1
       rect:
         serializedVersion: 2
         x: 0
@@ -7592,7 +7592,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_486
+      name: Lamp3_2
       rect:
         serializedVersion: 2
         x: 0

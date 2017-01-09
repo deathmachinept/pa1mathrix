@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ac84bc0db0bd9f34b870df945aeff3ad
-timeCreated: 1483816088
+timeCreated: 1483964682
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -64,14 +64,14 @@ TextureImporter:
     21300114: indoor_57
     21300116: indoor_58
     21300118: indoor_59
-    21300120: indoor_60
+    21300120: SmallWindow_0
     21300122: indoor_61
     21300124: indoor_62
     21300126: indoor_63
     21300128: indoor_64
     21300130: indoor_65
     21300132: indoor_66
-    21300134: indoor_67
+    21300134: Window0_0
     21300136: indoor_68
     21300138: indoor_69
     21300140: indoor_70
@@ -80,14 +80,14 @@ TextureImporter:
     21300146: indoor_73
     21300148: indoor_74
     21300150: indoor_75
-    21300152: indoor_76
+    21300152: SmallWindow_1
     21300154: indoor_77
     21300156: indoor_78
     21300158: indoor_79
     21300160: indoor_80
     21300162: indoor_81
     21300164: indoor_82
-    21300166: indoor_83
+    21300166: Window0_1
     21300168: indoor_84
     21300170: indoor_85
     21300172: indoor_86
@@ -144,8 +144,8 @@ TextureImporter:
     21300274: indoor_137
     21300276: indoor_138
     21300278: indoor_139
-    21300280: indoor_140
-    21300282: indoor_141
+    21300280: Sink0
+    21300282: Sink1
     21300284: indoor_142
     21300286: indoor_143
     21300288: indoor_144
@@ -160,8 +160,8 @@ TextureImporter:
     21300306: indoor_153
     21300308: indoor_154
     21300310: indoor_155
-    21300312: indoor_156
-    21300314: indoor_157
+    21300312: Sink2
+    21300314: Sink3
     21300316: indoor_158
     21300318: indoor_159
     21300320: indoor_160
@@ -177,7 +177,7 @@ TextureImporter:
     21300340: indoor_170
     21300342: indoor_171
     21300344: indoor_172
-    21300346: indoor_173
+    21300346: Fridge
     21300348: indoor_174
     21300350: indoor_175
     21300352: indoor_176
@@ -191,13 +191,13 @@ TextureImporter:
     21300368: indoor_184
     21300370: indoor_185
     21300372: indoor_186
-    21300374: indoor_187
+    21300374: Fridge_1
     21300376: indoor_188
     21300378: indoor_189
     21300380: indoor_190
     21300382: indoor_191
     21300384: indoor_192
-    21300386: indoor_193
+    21300386: Wall0
     21300388: indoor_194
     21300390: indoor_195
     21300392: indoor_196
@@ -207,13 +207,13 @@ TextureImporter:
     21300400: indoor_200
     21300402: indoor_201
     21300404: indoor_202
-    21300406: indoor_203
+    21300406: Fridge_2
     21300408: indoor_204
     21300410: indoor_205
     21300412: indoor_206
     21300414: indoor_207
     21300416: indoor_208
-    21300418: indoor_209
+    21300418: Wall1
     21300420: indoor_210
     21300422: indoor_211
     21300424: indoor_212
@@ -224,8 +224,8 @@ TextureImporter:
     21300434: indoor_217
     21300436: BigSofaLeftVertical_0
     21300438: BigSofaRightVertical_0
-    21300440: indoor_220
-    21300442: indoor_221
+    21300440: MedicalCabinet0_0_0
+    21300442: MedicalCabinet0_0_1
     21300444: safeBox_0
     21300446: indoor_223
     21300448: indoor_224
@@ -240,8 +240,8 @@ TextureImporter:
     21300466: indoor_233
     21300468: BigSofaLeftVertical_1
     21300470: BigSofaRightVertical_1
-    21300472: indoor_236
-    21300474: indoor_237
+    21300472: MedicalCabinet0_1_0
+    21300474: MedicalCabinet0_1_1
     21300476: safeBox_1
     21300478: indoor_239
     21300480: Rug_3
@@ -254,8 +254,8 @@ TextureImporter:
     21300494: indoor_247
     21300496: BigSofaLeftVertical_2
     21300498: BigSofaRightVertical_2
-    21300500: indoor_250
-    21300502: indoor_251
+    21300500: MedicalCabinet0_2_0
+    21300502: MedicalCabinet0_2_1
     21300504: safeBox_2
     21300506: indoor_253
     21300508: indoor_254
@@ -266,8 +266,8 @@ TextureImporter:
     21300518: indoor_259
     21300520: indoor_260
     21300522: indoor_261
-    21300524: indoor_262
-    21300526: indoor_263
+    21300524: computer1_0
+    21300526: Computer0
     21300528: indoor_264
     21300530: indoor_265
     21300532: indoor_266
@@ -279,11 +279,11 @@ TextureImporter:
     21300544: indoor_272
     21300546: indoor_273
     21300548: indoor_274
-    21300550: indoor_275
-    21300552: indoor_276
-    21300554: indoor_277
-    21300556: indoor_278
-    21300558: indoor_279
+    21300550: computer1_1_0
+    21300552: computer1_1_1
+    21300554: Computer0_1_0
+    21300556: Computer0_1_1
+    21300558: Computer0_1_2
     21300560: indoor_280
     21300562: indoor_281
     21300564: indoor_282
@@ -295,11 +295,11 @@ TextureImporter:
     21300576: indoor_288
     21300578: indoor_289
     21300580: indoor_290
-    21300582: indoor_291
-    21300584: indoor_292
-    21300586: indoor_293
-    21300588: indoor_294
-    21300590: indoor_295
+    21300582: computer1_2_0
+    21300584: computer1_2_1
+    21300586: Computer0_2_0
+    21300588: Computer0_2_1
+    21300590: Computer0_2_2
     21300592: indoor_296
     21300594: indoor_297
     21300596: indoor_298
@@ -319,8 +319,8 @@ TextureImporter:
     21300624: indoor_312
     21300626: indoor_313
     21300628: indoor_314
-    21300630: indoor_315
-    21300632: indoor_316
+    21300630: LedTV0_0_0
+    21300632: LedTV0_0_1
     21300634: indoor_317
     21300636: indoor_318
     21300638: indoor_319
@@ -335,8 +335,8 @@ TextureImporter:
     21300656: indoor_328
     21300658: indoor_329
     21300660: indoor_330
-    21300662: indoor_331
-    21300664: indoor_332
+    21300662: LedTV0_1_0
+    21300664: LedTV0_1_1
     21300666: indoor_333
     21300668: indoor_334
     21300670: indoor_335
@@ -351,7 +351,7 @@ TextureImporter:
     21300688: indoor_344
     21300690: indoor_345
     21300692: indoor_346
-    21300694: indoor_347
+    21300694: DecorativeVase0
     21300696: indoor_348
     21300698: indoor_349
     21300700: indoor_350
@@ -364,7 +364,7 @@ TextureImporter:
     21300714: indoor_357
     21300716: indoor_358
     21300718: indoor_359
-    21300720: indoor_360
+    21300720: DecorativeVase1
     21300722: indoor_361
     21300724: indoor_362
     21300726: indoor_363
@@ -373,7 +373,7 @@ TextureImporter:
     21300732: indoor_366
     21300734: indoor_367
     21300736: indoor_368
-    21300738: indoor_369
+    21300738: DecorativeVase2
     21300740: indoor_370
     21300742: indoor_371
     21300744: indoor_372
@@ -388,15 +388,15 @@ TextureImporter:
     21300762: indoor_381
     21300764: indoor_382
     21300766: indoor_383
-    21300768: indoor_384
-    21300770: indoor_385
+    21300768: Balcon0_0
+    21300770: Balcon0_1
     21300772: indoor_386
     21300774: indoor_387
     21300776: indoor_388
     21300778: indoor_389
-    21300780: indoor_390
-    21300782: indoor_391
-    21300784: indoor_392
+    21300780: Bed_0_0
+    21300782: Bed_0_1
+    21300784: Bed_0_2
     21300786: indoor_393
     21300788: indoor_394
     21300790: indoor_395
@@ -404,15 +404,15 @@ TextureImporter:
     21300794: indoor_397
     21300796: indoor_398
     21300798: indoor_399
-    21300800: indoor_400
-    21300802: indoor_401
+    21300800: Balcon0_3
+    21300802: Balcon0_4
     21300804: indoor_402
     21300806: indoor_403
     21300808: indoor_404
     21300810: indoor_405
-    21300812: indoor_406
-    21300814: indoor_407
-    21300816: indoor_408
+    21300812: Bed_1_0
+    21300814: Bed_1_1
+    21300816: Bed_1_2
     21300818: indoor_409
     21300820: indoor_410
     21300822: indoor_411
@@ -423,9 +423,9 @@ TextureImporter:
     21300832: indoor_416
     21300834: indoor_417
     21300836: indoor_418
-    21300838: indoor_419
-    21300840: indoor_420
-    21300842: indoor_421
+    21300838: Bed_2_0
+    21300840: Bed_2_1
+    21300842: Bed_2_2
     21300844: indoor_422
     21300846: indoor_423
     21300848: indoor_424
@@ -443,7 +443,7 @@ TextureImporter:
     21300872: indoor_436
     21300874: indoor_437
     21300876: indoor_438
-    21300878: indoor_439
+    21300878: ChairFaceSouth
     21300880: indoor_440
     21300882: indoor_441
     21300884: indoor_442
@@ -473,8 +473,8 @@ TextureImporter:
     21300932: indoor_466
     21300934: indoor_467
     21300936: indoor_468
-    21300938: indoor_469
-    21300940: indoor_470
+    21300938: ChairFaceRight0
+    21300940: ChairFaceLeft0
     21300942: indoor_471
     21300944: indoor_472
     21300946: indoor_473
@@ -1341,7 +1341,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_60
+      name: SmallWindow_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1432,7 +1432,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_67
+      name: Window0_0
       rect:
         serializedVersion: 2
         x: 112
@@ -1549,7 +1549,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_76
+      name: SmallWindow_1
       rect:
         serializedVersion: 2
         x: 0
@@ -1640,7 +1640,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_83
+      name: Window0_1
       rect:
         serializedVersion: 2
         x: 112
@@ -2381,7 +2381,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_140
+      name: Sink0
       rect:
         serializedVersion: 2
         x: 32
@@ -2394,7 +2394,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_141
+      name: Sink1
       rect:
         serializedVersion: 2
         x: 48
@@ -2589,7 +2589,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_156
+      name: Sink2
       rect:
         serializedVersion: 2
         x: 32
@@ -2602,7 +2602,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_157
+      name: Sink3
       rect:
         serializedVersion: 2
         x: 48
@@ -2810,7 +2810,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_173
+      name: Fridge
       rect:
         serializedVersion: 2
         x: 48
@@ -2992,7 +2992,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_187
+      name: Fridge_1
       rect:
         serializedVersion: 2
         x: 48
@@ -3070,7 +3070,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_193
+      name: Wall0
       rect:
         serializedVersion: 2
         x: 144
@@ -3200,7 +3200,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_203
+      name: Fridge_2
       rect:
         serializedVersion: 2
         x: 48
@@ -3278,7 +3278,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_209
+      name: Wall1
       rect:
         serializedVersion: 2
         x: 144
@@ -3421,7 +3421,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_220
+      name: MedicalCabinet0_0_0
       rect:
         serializedVersion: 2
         x: 64
@@ -3434,7 +3434,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_221
+      name: MedicalCabinet0_0_1
       rect:
         serializedVersion: 2
         x: 80
@@ -3629,7 +3629,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_236
+      name: MedicalCabinet0_1_0
       rect:
         serializedVersion: 2
         x: 64
@@ -3642,7 +3642,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_237
+      name: MedicalCabinet0_1_1
       rect:
         serializedVersion: 2
         x: 80
@@ -3798,7 +3798,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_250
+      name: MedicalCabinet0_2_0
       rect:
         serializedVersion: 2
         x: 64
@@ -3811,7 +3811,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_251
+      name: MedicalCabinet0_2_1
       rect:
         serializedVersion: 2
         x: 80
@@ -3941,7 +3941,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_262
+      name: computer1_0
       rect:
         serializedVersion: 2
         x: 16
@@ -3954,7 +3954,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_263
+      name: Computer0
       rect:
         serializedVersion: 2
         x: 48
@@ -4110,7 +4110,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_275
+      name: computer1_1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -4123,7 +4123,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_276
+      name: computer1_1_1
       rect:
         serializedVersion: 2
         x: 16
@@ -4136,7 +4136,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_277
+      name: Computer0_1_0
       rect:
         serializedVersion: 2
         x: 32
@@ -4149,7 +4149,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_278
+      name: Computer0_1_1
       rect:
         serializedVersion: 2
         x: 48
@@ -4162,7 +4162,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_279
+      name: Computer0_1_2
       rect:
         serializedVersion: 2
         x: 64
@@ -4318,7 +4318,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_291
+      name: computer1_2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -4331,7 +4331,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_292
+      name: computer1_2_1
       rect:
         serializedVersion: 2
         x: 16
@@ -4344,7 +4344,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_293
+      name: Computer0_2_0
       rect:
         serializedVersion: 2
         x: 32
@@ -4357,7 +4357,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_294
+      name: Computer0_2_1
       rect:
         serializedVersion: 2
         x: 48
@@ -4370,7 +4370,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_295
+      name: Computer0_2_2
       rect:
         serializedVersion: 2
         x: 64
@@ -4630,7 +4630,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_315
+      name: LedTV0_0_0
       rect:
         serializedVersion: 2
         x: 128
@@ -4643,7 +4643,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_316
+      name: LedTV0_0_1
       rect:
         serializedVersion: 2
         x: 144
@@ -4838,7 +4838,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_331
+      name: LedTV0_1_0
       rect:
         serializedVersion: 2
         x: 128
@@ -4851,7 +4851,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_332
+      name: LedTV0_1_1
       rect:
         serializedVersion: 2
         x: 144
@@ -5046,7 +5046,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_347
+      name: DecorativeVase0
       rect:
         serializedVersion: 2
         x: 176
@@ -5215,7 +5215,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_360
+      name: DecorativeVase1
       rect:
         serializedVersion: 2
         x: 176
@@ -5332,7 +5332,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_369
+      name: DecorativeVase2
       rect:
         serializedVersion: 2
         x: 176
@@ -5527,7 +5527,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_384
+      name: Balcon0_0
       rect:
         serializedVersion: 2
         x: 160
@@ -5540,7 +5540,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_385
+      name: Balcon0_1
       rect:
         serializedVersion: 2
         x: 176
@@ -5605,7 +5605,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_390
+      name: Bed_0_0
       rect:
         serializedVersion: 2
         x: 0
@@ -5618,7 +5618,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_391
+      name: Bed_0_1
       rect:
         serializedVersion: 2
         x: 16
@@ -5631,7 +5631,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_392
+      name: Bed_0_2
       rect:
         serializedVersion: 2
         x: 32
@@ -5735,7 +5735,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_400
+      name: Balcon0_3
       rect:
         serializedVersion: 2
         x: 160
@@ -5748,7 +5748,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_401
+      name: Balcon0_4
       rect:
         serializedVersion: 2
         x: 176
@@ -5813,7 +5813,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_406
+      name: Bed_1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -5826,7 +5826,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_407
+      name: Bed_1_1
       rect:
         serializedVersion: 2
         x: 16
@@ -5839,7 +5839,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_408
+      name: Bed_1_2
       rect:
         serializedVersion: 2
         x: 32
@@ -5982,11 +5982,11 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_419
+      name: Bed_2_0
       rect:
         serializedVersion: 2
-        x: 6
-        y: 63
+        x: 0
+        y: 96
         width: 16
         height: 16
       alignment: 0
@@ -5995,7 +5995,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_420
+      name: Bed_2_1
       rect:
         serializedVersion: 2
         x: 16
@@ -6008,7 +6008,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_421
+      name: Bed_2_2
       rect:
         serializedVersion: 2
         x: 32
@@ -6242,7 +6242,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_439
+      name: ChairFaceSouth
       rect:
         serializedVersion: 2
         x: 64
@@ -6632,7 +6632,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_469
+      name: ChairFaceRight0
       rect:
         serializedVersion: 2
         x: 80
@@ -6645,7 +6645,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: indoor_470
+      name: ChairFaceLeft0
       rect:
         serializedVersion: 2
         x: 96
