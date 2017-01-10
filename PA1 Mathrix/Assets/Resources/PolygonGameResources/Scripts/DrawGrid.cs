@@ -28,7 +28,7 @@ public class DrawGrid : MonoBehaviour
             {
                 if (PointIsWithinScreen(new Vector3(x * 10, y * 10, 140)))
                 {
-                    GameObject point = GameObject.CreatePrimitive(PrimitiveType.Quad);
+                    GameObject point = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                     point.transform.position = new Vector3(x*10, y*10, 140);
                     if (x == 0 || y == 0)
                     {
