@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: b91b61137ed9e254f92ea6b1a96b6420
-timeCreated: 1483956547
+timeCreated: 1484064652
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -344,11 +344,11 @@ TextureImporter:
     21300674: General_337
     21300676: General_338
     21300678: General_339
-    21300680: General_340
+    21300680: Arch_0_1
     21300682: General_341
-    21300684: General_342
-    21300686: General_343
-    21300688: General_344
+    21300684: Arch_0_2
+    21300686: Arch_0_3
+    21300688: Arch_0_4
     21300690: General_345
     21300692: General_346
     21300694: General_347
@@ -381,12 +381,12 @@ TextureImporter:
     21300748: General_374
     21300750: General_375
     21300752: General_376
-    21300754: General_377
-    21300756: General_378
-    21300758: General_379
-    21300760: General_380
-    21300762: General_381
-    21300764: General_382
+    21300754: Arch_1_0
+    21300756: Arch_1_1
+    21300758: Arch_1_2
+    21300760: Arch_1_3
+    21300762: Arch_1_4
+    21300764: Arch_1_5
     21300766: General_383
     21300768: General_384
     21300770: General_385
@@ -424,12 +424,12 @@ TextureImporter:
     21300834: General_417
     21300836: General_418
     21300838: General_419
-    21300840: General_420
-    21300842: General_421
-    21300844: General_422
-    21300846: General_423
-    21300848: General_424
-    21300850: General_425
+    21300840: Arch_2_0
+    21300842: Arch_2_1
+    21300844: Arch_2_2
+    21300846: Arch_2_3
+    21300848: Arch_2_4
+    21300850: Arch_2_5
     21300852: General_426
     21300854: General_427
     21300856: General_428
@@ -466,12 +466,12 @@ TextureImporter:
     21300918: General_459
     21300920: General_460
     21300922: General_461
-    21300924: General_462
-    21300926: General_463
-    21300928: General_464
-    21300930: General_465
-    21300932: General_466
-    21300934: General_467
+    21300924: Arch_3_0
+    21300926: Arch_3_1
+    21300928: Arch_3_2
+    21300930: Arch_3_3
+    21300932: Arch_3_4
+    21300934: Arch_3_5
     21300936: General_468
     21300938: General_469
     21300940: General_470
@@ -508,10 +508,10 @@ TextureImporter:
     21301002: General_501
     21301004: General_502
     21301006: General_503
-    21301008: General_504
-    21301010: General_505
-    21301012: General_506
-    21301014: General_507
+    21301008: Arch_4_0
+    21301010: Arch_4_1
+    21301012: Arch_4_2
+    21301014: Arch_4_3
     21301016: General_508
     21301018: General_509
     21301020: General_510
@@ -534,10 +534,10 @@ TextureImporter:
     21301054: General_527
     21301056: General_528
     21301058: General_529
-    21301060: General_530
-    21301062: General_531
-    21301064: General_532
-    21301066: General_533
+    21301060: Arch_5_0
+    21301062: Arch_5_1
+    21301064: Arch_5_2
+    21301066: Arch_5_3
     21301068: General_534
     21301070: General_535
     21301072: General_536
@@ -561,10 +561,10 @@ TextureImporter:
     21301108: General_554
     21301110: General_555
     21301112: General_556
-    21301114: General_557
-    21301116: General_558
-    21301118: General_559
-    21301120: General_560
+    21301114: Arch_6_0
+    21301116: Arch_6_1
+    21301118: Arch_6_2
+    21301120: Arch_6_3
     21301122: General_561
     21301124: General_562
     21301126: General_563
@@ -587,10 +587,10 @@ TextureImporter:
     21301160: General_580
     21301162: General_581
     21301164: General_582
-    21301166: General_583
-    21301168: General_584
-    21301170: General_585
-    21301172: General_586
+    21301166: Arch_7_0
+    21301168: Arch_7_1
+    21301170: Arch_7_2
+    21301172: Arch_7_3
     21301174: General_587
     21301176: General_588
     21301178: General_589
@@ -5694,7 +5694,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_340
+      name: Arch_0_1
       rect:
         serializedVersion: 2
         x: 304
@@ -5720,7 +5720,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_342
+      name: Arch_0_2
       rect:
         serializedVersion: 2
         x: 336
@@ -5733,7 +5733,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_343
+      name: Arch_0_3
       rect:
         serializedVersion: 2
         x: 352
@@ -5746,7 +5746,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_344
+      name: Arch_0_4
       rect:
         serializedVersion: 2
         x: 368
@@ -6175,7 +6175,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_377
+      name: Arch_1_0
       rect:
         serializedVersion: 2
         x: 288
@@ -6188,7 +6188,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_378
+      name: Arch_1_1
       rect:
         serializedVersion: 2
         x: 304
@@ -6201,7 +6201,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_379
+      name: Arch_1_2
       rect:
         serializedVersion: 2
         x: 320
@@ -6214,7 +6214,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_380
+      name: Arch_1_3
       rect:
         serializedVersion: 2
         x: 336
@@ -6227,7 +6227,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_381
+      name: Arch_1_4
       rect:
         serializedVersion: 2
         x: 352
@@ -6240,7 +6240,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_382
+      name: Arch_1_5
       rect:
         serializedVersion: 2
         x: 368
@@ -6734,7 +6734,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_420
+      name: Arch_2_0
       rect:
         serializedVersion: 2
         x: 288
@@ -6747,7 +6747,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_421
+      name: Arch_2_1
       rect:
         serializedVersion: 2
         x: 304
@@ -6760,7 +6760,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_422
+      name: Arch_2_2
       rect:
         serializedVersion: 2
         x: 320
@@ -6773,7 +6773,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_423
+      name: Arch_2_3
       rect:
         serializedVersion: 2
         x: 336
@@ -6786,7 +6786,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_424
+      name: Arch_2_4
       rect:
         serializedVersion: 2
         x: 352
@@ -6799,7 +6799,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_425
+      name: Arch_2_5
       rect:
         serializedVersion: 2
         x: 368
@@ -7280,7 +7280,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_462
+      name: Arch_3_0
       rect:
         serializedVersion: 2
         x: 288
@@ -7293,7 +7293,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_463
+      name: Arch_3_1
       rect:
         serializedVersion: 2
         x: 304
@@ -7306,7 +7306,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_464
+      name: Arch_3_2
       rect:
         serializedVersion: 2
         x: 320
@@ -7319,7 +7319,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_465
+      name: Arch_3_3
       rect:
         serializedVersion: 2
         x: 336
@@ -7332,7 +7332,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_466
+      name: Arch_3_4
       rect:
         serializedVersion: 2
         x: 352
@@ -7345,7 +7345,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_467
+      name: Arch_3_5
       rect:
         serializedVersion: 2
         x: 368
@@ -7826,7 +7826,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_504
+      name: Arch_4_0
       rect:
         serializedVersion: 2
         x: 288
@@ -7839,7 +7839,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_505
+      name: Arch_4_1
       rect:
         serializedVersion: 2
         x: 304
@@ -7852,7 +7852,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_506
+      name: Arch_4_2
       rect:
         serializedVersion: 2
         x: 320
@@ -7865,7 +7865,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_507
+      name: Arch_4_3
       rect:
         serializedVersion: 2
         x: 336
@@ -8164,7 +8164,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_530
+      name: Arch_5_0
       rect:
         serializedVersion: 2
         x: 288
@@ -8177,7 +8177,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_531
+      name: Arch_5_1
       rect:
         serializedVersion: 2
         x: 304
@@ -8190,7 +8190,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_532
+      name: Arch_5_2
       rect:
         serializedVersion: 2
         x: 320
@@ -8203,7 +8203,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_533
+      name: Arch_5_3
       rect:
         serializedVersion: 2
         x: 336
@@ -8515,7 +8515,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_557
+      name: Arch_6_0
       rect:
         serializedVersion: 2
         x: 288
@@ -8528,7 +8528,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_558
+      name: Arch_6_1
       rect:
         serializedVersion: 2
         x: 304
@@ -8541,7 +8541,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_559
+      name: Arch_6_2
       rect:
         serializedVersion: 2
         x: 320
@@ -8554,7 +8554,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_560
+      name: Arch_6_3
       rect:
         serializedVersion: 2
         x: 336
@@ -8853,7 +8853,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_583
+      name: Arch_7_0
       rect:
         serializedVersion: 2
         x: 288
@@ -8866,7 +8866,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_584
+      name: Arch_7_1
       rect:
         serializedVersion: 2
         x: 304
@@ -8879,7 +8879,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_585
+      name: Arch_7_2
       rect:
         serializedVersion: 2
         x: 320
@@ -8892,7 +8892,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_586
+      name: Arch_7_3
       rect:
         serializedVersion: 2
         x: 336
