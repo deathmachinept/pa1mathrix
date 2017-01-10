@@ -107,7 +107,9 @@
     <Compile Include="Assets\MaterialUI\Scripts\ToggleTextChanger.cs" />
     <Compile Include="Assets\Resources\MainMenuResources\Scripts\MainMenuController.cs" />
     <Compile Include="Assets\Resources\PolygonGameResources\Scripts\DrawGrid.cs" />
+    <Compile Include="Assets\Resources\PolygonGameResources\Scripts\MatrixDisplayBackgroundManager.cs" />
     <Compile Include="Assets\Resources\PolygonGameResources\Scripts\MatrixDisplayController.cs" />
+    <Compile Include="Assets\Resources\PolygonGameResources\Scripts\NewMatrixDisplayController.cs" />
     <Compile Include="Assets\Resources\PolygonGameResources\Scripts\OperationsMenuController.cs" />
     <Compile Include="Assets\Resources\PolygonGameResources\Scripts\Polygon.cs" />
     <Compile Include="Assets\Resources\PolygonGameResources\Scripts\PolygonHandler.cs" />
@@ -117,6 +119,13 @@
     <Compile Include="Assets\Resources\PolygonGameResources\Scripts\TranslationMenuController.cs" />
     <Compile Include="Assets\Resources\PolygonGameResources\Scripts\Triangulator.cs" />
     <Compile Include="Assets\Resources\PolygonGameResources\Scripts\UIController.cs" />
+    <Compile Include="Assets\Resources\RpgResources\Scripts\Chat.cs" />
+    <Compile Include="Assets\Resources\RpgResources\Scripts\ChatController.cs" />
+    <Compile Include="Assets\Resources\RpgResources\Scripts\GameController.cs" />
+    <Compile Include="Assets\Resources\RpgResources\Scripts\MyNetworkManager.cs" />
+    <Compile Include="Assets\Resources\RpgResources\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Resources\RpgResources\Scripts\ReturnScript.cs" />
+    <Compile Include="Assets\Resources\RpgResources\Scripts\UNETChat.cs" />
     <Compile Include="Assets\Resources\ScenarioPrototypeResources\Scripts\MapDraw.cs" />
     <Compile Include="Assets\Resources\ScenarioPrototypeResources\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Quiz\BtnInterface.cs" />

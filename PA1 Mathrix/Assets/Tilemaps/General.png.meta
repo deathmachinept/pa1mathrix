@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: b91b61137ed9e254f92ea6b1a96b6420
-timeCreated: 1484064652
+timeCreated: 1484081244
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -344,8 +344,8 @@ TextureImporter:
     21300674: General_337
     21300676: General_338
     21300678: General_339
-    21300680: Arch_0_1
-    21300682: General_341
+    21300680: Arch_0_0
+    21300682: Arch_0_1
     21300684: Arch_0_2
     21300686: Arch_0_3
     21300688: Arch_0_4
@@ -5694,7 +5694,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Arch_0_1
+      name: Arch_0_0
       rect:
         serializedVersion: 2
         x: 304
@@ -5707,7 +5707,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: General_341
+      name: Arch_0_1
       rect:
         serializedVersion: 2
         x: 320
