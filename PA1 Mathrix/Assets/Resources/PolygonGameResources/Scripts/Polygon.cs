@@ -149,7 +149,7 @@ public class Polygon : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(r, out hit))
             {
-                if (hit.collider.transform.parent.transform.name == "GridDotsHolder")
+                if (hit.collider.transform.parent.transform.name == "GridDotsHolder" && GameObject.Find("PolygonHandlerHolder").GetComponent<PolygonHandler>().IsPointInputEnabled)
                 {
                     _input = new Vector3(hit.collider.transform.position.x, hit.collider.transform.position.y,
                         hit.collider.transform.position.z);

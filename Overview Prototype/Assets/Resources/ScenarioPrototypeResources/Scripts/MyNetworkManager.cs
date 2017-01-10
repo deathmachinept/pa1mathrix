@@ -12,12 +12,21 @@ public class MyNetworkManager : NetworkManager
     public int Port;
     public string CurrentSceneName = "TestBuild";
 
-    public void Start()
+    void Awake()
     {
         MainSceneObjects = GameObject.Find("MainSceneObjectsHolder");
         players = transform.FindChild("Players").gameObject;
+    }
+
+    public void Start()
+    {
         Address = "localhost";
         Port = 7777;
+    }
+
+    public void ChangeAddressFromInput(Text address)
+    {
+        Address = address.text;
     }
 
     public void Update()
@@ -51,8 +60,8 @@ public class MyNetworkManager : NetworkManager
     {
         if (PlayerPrefs.GetString("Player Name") != "")
         {
-            singleton.networkPort = Port;
-            singleton.StartHost();
+            networkPort = Port;
+            StartHost();
             HideNetworkingHUD();
         }
     }
@@ -70,17 +79,17 @@ public class MyNetworkManager : NetworkManager
     {
         if (PlayerPrefs.GetString("Player Name") != "")
         {
-            singleton.networkAddress = Address;
-            singleton.networkPort = Port;
-            singleton.StartClient();
+            networkAddress = Address;
+            networkPort = Port;
+            StartClient();
             HideNetworkingHUD();
         }
     }
 
     public void Pressed_Host_Button()
     {
-        singleton.networkPort = Port;
-        singleton.StartServer();
+        networkPort = Port;
+        StartServer();
         HideNetworkingHUD();
         PlayerPrefs.SetString("Player Name","Server");
         PlayerPrefs.Save();

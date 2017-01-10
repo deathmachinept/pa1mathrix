@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.491}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -241,9 +241,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 194391638}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7676232b5637a7746ad00eb2f2f7dd92, type: 3}
+  m_Script: {fileID: 11500000, guid: 5ab33a1b069d4a04aa23b69fe0e0d81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOver: 0
 --- !u!1 &289055528
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,7 +803,7 @@ Prefab:
     - target: {fileID: 224000011854041154, guid: c7be0320f1740c3489fcb19313a48039,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 114000011427767618, guid: c7be0320f1740c3489fcb19313a48039,
         type: 2}
@@ -928,6 +929,10 @@ Prefab:
     - target: {fileID: 114000012685932304, guid: c7be0320f1740c3489fcb19313a48039,
         type: 2}
       propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012392522738, guid: c7be0320f1740c3489fcb19313a48039, type: 2}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:

@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class MovimentoJogador : MonoBehaviour {
+public class MovimentoJogador : NetworkBehaviour {
 
 	// Use this for initialization
     enum Direction
@@ -14,6 +14,9 @@ public class MovimentoJogador : MonoBehaviour {
         South,
         West
     }
+
+    [SyncVar]
+    public string PLAYERNAME;
 
     private Direction currentDir;
     private Vector2 input;
@@ -41,7 +44,13 @@ public class MovimentoJogador : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        ProcessMovement();
+    }
 
+    void ProcessMovement()
+    {
+        if(!isLocalPlayer)
+            return;
         if (!isMoving && isAllowedToMove)
         {
             input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -93,7 +102,6 @@ public class MovimentoJogador : MonoBehaviour {
                 StartCoroutine(Move(transform));
             }
         }
-
     }
 
     public IEnumerator Move(Transform entity)

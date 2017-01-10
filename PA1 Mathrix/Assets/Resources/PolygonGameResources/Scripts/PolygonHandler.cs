@@ -15,6 +15,7 @@ public class PolygonHandler : MonoBehaviour
     public int SelectedFigure;
     public float time;
     public int PreviouslySelectedFigure;
+    public bool IsPointInputEnabled;
 
     void Awake()
     {
@@ -25,13 +26,14 @@ public class PolygonHandler : MonoBehaviour
         UserPolygonHolder.transform.SetParent(transform);
         UserPolygonHolder.transform.position=new Vector3(UserPolygonHolder.transform.position.x, UserPolygonHolder.transform.position.y, UserPolygonHolder.transform.position .z- 1);
 
-        SelectedFigure = Random.Range(0, 3);
-        PreviouslySelectedFigure = SelectedFigure;
         Timer=GameObject.Find("Timer");
     }
 
     void Start()
     {
+        IsPointInputEnabled = false;
+        SelectedFigure = Random.Range(0, 3);
+        PreviouslySelectedFigure = SelectedFigure;
         StartShadowGame();
         time = 100;
     }
@@ -188,9 +190,13 @@ public class PolygonHandler : MonoBehaviour
                     {
                         Debug.Log("Que é interagível");
                         if (CurrentlySelectedPolygon != null)
+                        {
                             CurrentlySelectedPolygon.IsSelected = false;
+                            CurrentlySelectedPolygon.SelectedMaterial= Resources.Load("PolygonGameResources/Materials/UserPolygonMaterial") as Material;
+                        }
                         CurrentlySelectedPolygon = hit.transform.GetComponent<Polygon>();
                         hit.transform.GetComponent<Polygon>().IsSelected = true;
+                        CurrentlySelectedPolygon.SelectedMaterial = Resources.Load("PolygonGameResources/Materials/SelectedUserPolygon") as Material;
                     }
                 }
             }
