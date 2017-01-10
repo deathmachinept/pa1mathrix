@@ -301,11 +301,18 @@ public class Polygon : MonoBehaviour
         _msh.RecalculateNormals();
         _msh.RecalculateBounds();
 
-        //if (GetComponent<MeshCollider>() == null)
-        //{
-        //    gameObject.AddComponent<MeshCollider>();
-        //}
-        _filter.mesh = _msh;
+        if (GetComponent<MeshCollider>() == null)
+        {
+            gameObject.AddComponent<MeshCollider>();
+        }
+        else
+        {
+            gameObject.GetComponent<MeshCollider>().sharedMesh = _msh;
+        }
+        if (_filter != null)
+        {
+            _filter.mesh = _msh;
+        }
     }
 
     public void Replace_Points(Vector2 point1, Vector2 point2, Vector2 point3)
