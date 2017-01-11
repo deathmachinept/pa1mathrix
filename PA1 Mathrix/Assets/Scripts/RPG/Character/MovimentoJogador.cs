@@ -27,6 +27,8 @@ public class MovimentoJogador : NetworkBehaviour
     private Vector3 endPos;
     private float t;
 
+    public GameObject PolygonTerminalCell;
+
     public InputField chatInput;
 
     public Sprite NorthSprite;
@@ -40,6 +42,7 @@ public class MovimentoJogador : NetworkBehaviour
 
     void Awake()
     {
+
         chatInput = GameObject.Find("ChatCanvas")
             .transform.FindChild("Scroll View")
             .FindChild("InputField")
@@ -48,14 +51,15 @@ public class MovimentoJogador : NetworkBehaviour
 
     void Start()
     {
+        PolygonTerminalCell = GameObject.Find("MapObjects").transform.FindChild("Medical Unit").FindChild("InteriorFloor").FindChild("RightRoomFloor").FindChild("Interior1_0_1 (3)").gameObject;
         DontDestroyOnLoad(this.gameObject);
         isAllowedToMove = true;
     }
 
     void Update()
     {
-        //if (GameObject.Find("NetworkManagerHolder").GetComponent<MyNetworkManager>().PolygonTerminalCell != null)
-        //    CheckIfIsInFrontOfPolygonTerminal();
+        if (GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().PolygonTerminalCell != null)
+            CheckIfIsInFrontOfPolygonTerminal();
         transform.SetParent(GameObject.Find("Players").transform);
         isAllowedToMove = !chatInput.isFocused;
         ProcessMovement();
@@ -121,22 +125,21 @@ public class MovimentoJogador : NetworkBehaviour
 
     public void CheckIfIsInFrontOfPolygonTerminal()
     {
-        GameObject cell = GameObject.Find("NetworkManagerHolder").GetComponent<MyNetworkManager>().PolygonTerminalCell;
+        GameObject cell = PolygonTerminalCell;
         if (transform.position.x > cell.transform.position.x - (cell.GetComponent<SpriteRenderer>().bounds.size.x / 2) &&
             transform.position.x < cell.transform.position.x + (cell.GetComponent<SpriteRenderer>().bounds.size.x / 2) &&
             transform.position.y > cell.transform.position.y - (cell.GetComponent<SpriteRenderer>().bounds.size.y / 2) &&
             transform.position.y < cell.transform.position.y + (cell.GetComponent<SpriteRenderer>().bounds.size.y / 2))
         {
-            Debug.Log("É o local player que está a foder tudo");
             if (isLocalPlayer)
             {
                 SceneManager.LoadSceneAsync("Desenho Polígono", LoadSceneMode.Additive);
                 GameObject.Find("MainSceneObjectsHolder").SetActive(false);
                 GameObject.Find("Players").SetActive(false);
-                GameObject.Find("NetworkManagerHolder").GetComponent<MyNetworkManager>().CurrentSceneName =
+                GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().CurrentSceneName =
                     "Desenho Polígono";
                 transform.position = Vector3.zero;
-                GameObject.Find("NetworkManagerHolder").GetComponent<MyNetworkManager>().players.SetActive(false);
+                GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().players.SetActive(false);
                 GameObject.Find("ChatCanvas").SetActive(false);
             }
         }
@@ -151,10 +154,10 @@ public class MovimentoJogador : NetworkBehaviour
             SceneManager.LoadSceneAsync("Desenho Polígono", LoadSceneMode.Additive);
             GameObject.Find("MainSceneObjectsHolder").SetActive(false);
             GameObject.Find("Players").SetActive(false);
-            GameObject.Find("NetworkManagerHolder").GetComponent<MyNetworkManager>().CurrentSceneName =
+            GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().CurrentSceneName =
                 "Desenho Polígono";
             transform.position = Vector3.zero;
-            GameObject.Find("NetworkManagerHolder").GetComponent<MyNetworkManager>().players.SetActive(false);
+            GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().players.SetActive(false);
             GameObject.Find("ChatCanvas").SetActive(false);
         }
     }

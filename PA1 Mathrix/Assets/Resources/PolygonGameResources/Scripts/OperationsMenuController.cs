@@ -51,10 +51,10 @@ public class OperationsMenuController : MonoBehaviour
     {
         TMenu.SetActive(false);
         RMenu.SetActive(false);
-        SMenu.SetActive(false);
+        //SMenu.SetActive(false);
         Translation.SetActive(true);
         Rotation.SetActive(true);
-        Scaling.SetActive(true);
+        //Scaling.SetActive(true);
     }
 
     public void HideAllButtons()

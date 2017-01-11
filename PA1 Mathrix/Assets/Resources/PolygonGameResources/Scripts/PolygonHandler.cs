@@ -10,6 +10,11 @@ public class PolygonHandler : MonoBehaviour
     public GameObject UserPolygonHolder;
     public GameObject Timer;
 
+    public GameObject TranslationValueA;
+    public GameObject TranslationValueB;
+    public GameObject RotationValue;
+
+
     public Polygon CurrentlySelectedPolygon;
 
     public int SelectedFigure;
@@ -19,20 +24,29 @@ public class PolygonHandler : MonoBehaviour
 
     void Awake()
     {
+        TranslationValueA =
+            GameObject.Find("TranslationValuesHolder").transform.FindChild("Input").FindChild("ValueA").gameObject;
+        TranslationValueB =
+            GameObject.Find("TranslationValuesHolder").transform.FindChild("Input").FindChild("ValueB").gameObject;
+        RotationValue = GameObject.Find("Angle");
+
+        GameObject.Find("TranslationMenu").SetActive(false);
+        GameObject.Find("RotationMenu").SetActive(false);
+
         ShadowPolygonHolder = new GameObject("Shadow Polygon Holder");
         ShadowPolygonHolder.transform.SetParent(transform);
 
         UserPolygonHolder = new GameObject("User Polygon Holder");
         UserPolygonHolder.transform.SetParent(transform);
         UserPolygonHolder.transform.position=new Vector3(UserPolygonHolder.transform.position.x, UserPolygonHolder.transform.position.y, UserPolygonHolder.transform.position .z- 1);
-
+        
         Timer=GameObject.Find("Timer");
     }
 
     void Start()
     {
         IsPointInputEnabled = false;
-        SelectedFigure = Random.Range(0, 3);
+        SelectedFigure = Random.Range(0, 5);
         PreviouslySelectedFigure = SelectedFigure;
         StartShadowGame();
         time = 100;
@@ -46,11 +60,13 @@ public class PolygonHandler : MonoBehaviour
             Timer.GetComponent<Text>().text = ((int) time).ToString();
             SelectionChecking();
             if (ShadowFigureCheck())
-                Debug.Log("YOU'RE WINNER");
+            {
+                GameObject.Find("Network Manager").GetComponent<ReturnScript>().ReturnToMainScene();
+            }
         }
         else
         {
-            Debug.Log("LOOOOSER");
+            GameObject.Find("Network Manager").GetComponent<ReturnScript>().ReturnToMainScene();
         }
     }
 
@@ -66,8 +82,6 @@ public class PolygonHandler : MonoBehaviour
             Destroy(UserPolygonHolder.transform.GetChild(0));
         }
 
-        SelectedFigure = 2;
-
         switch (SelectedFigure)
         {
             case 0:
@@ -78,6 +92,12 @@ public class PolygonHandler : MonoBehaviour
                 break;
             case 2:
                 DrawServant();
+                break;
+            case 3:
+                DrawSwan();
+                break;
+            case 4:
+                DrawHorse();
                 break;
         }
         foreach (Transform t in ShadowPolygonHolder.transform)
@@ -92,7 +112,8 @@ public class PolygonHandler : MonoBehaviour
 
     bool ShadowFigureCheck()
     {
-        return AllControllableHaveCorrespondence() && AllShadowsHaveCorrespondence();
+        //return (AllControllableHaveCorrespondence() && AllShadowsHaveCorrespondence())||AllPointsHaveMatch();
+        return AllControllableHaveCorrespondence();
     }
 
     bool AllShadowsHaveCorrespondence()
@@ -153,17 +174,20 @@ public class PolygonHandler : MonoBehaviour
         return true;
     }
 
-    bool PointMatchChecking(Polygon shadow)
+    bool AllPointsHaveMatch()
     {
-        foreach (Vector2 shadowPoint in shadow.InsertedPoints)
+        foreach (Transform t in UserPolygonHolder.transform)
         {
-            bool foundMatch = false;
-            foreach (Transform t in UserPolygonHolder.transform)
+            bool foundMatch=false;
+            foreach (Vector2 point in t.GetComponent<Polygon>().InsertedPoints)
             {
-                foreach (Vector2 point in t.GetComponent<Polygon>().InsertedPoints)
+                foreach (Transform st in ShadowPolygonHolder.transform)
                 {
-                    if (point == shadowPoint)
-                        foundMatch = true;
+                    foreach (Vector2 spoint in st.GetComponent<Polygon>().InsertedPoints)
+                    {
+                        if (point == spoint)
+                            foundMatch=true;
+                    }
                 }
             }
             if (!foundMatch)
@@ -182,13 +206,10 @@ public class PolygonHandler : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(r, out hit))
             {
-                Debug.Log("Bateu nalgo");
                 if (hit.transform.tag == "Polygon")
                 {
-                    Debug.Log("Mais Especificamente um polygon");
                     if (hit.transform.GetComponent<Polygon>().Interactable)
                     {
-                        Debug.Log("Que é interagível");
                         if (CurrentlySelectedPolygon != null)
                         {
                             CurrentlySelectedPolygon.IsSelected = false;
@@ -203,6 +224,23 @@ public class PolygonHandler : MonoBehaviour
         }
     }
 
+    public void TranslateCurrentPolyFromMatrixPoints()
+    {
+        if (CurrentlySelectedPolygon != null)
+        {
+            CurrentlySelectedPolygon.GetComponent<Polygon>().ApplyTranslation(int.Parse(TranslationValueA.GetComponent<Text>().text), int.Parse(TranslationValueB.GetComponent<Text>().text));
+            GameObject.Find("OperationButtonsHolder").GetComponent<OperationsMenuController>().Reset();
+        }
+    }
+
+    public void RotateCurrentPolyFromAngleValu()
+    {
+        if (CurrentlySelectedPolygon != null)
+        {
+            CurrentlySelectedPolygon.GetComponent<Polygon>().ApplyRotation(int.Parse(RotationValue.GetComponent<Text>().text),false);
+            GameObject.Find("OperationButtonsHolder").GetComponent<OperationsMenuController>().Reset();
+        }
+    }
 
     void AddShadowPolygon()
     {
@@ -371,16 +409,46 @@ public class PolygonHandler : MonoBehaviour
         AddShadowPolygon(new Vector2(-20, -40), new Vector2(-10, -30), new Vector2(-10, -40));
     }
 
+    void DrawSwan()
+    {
+        AddShadowPolygon(new Vector2(-10, 30), new Vector2(0, 30), new Vector2(0, 40));
+        AddShadowPolygon(new Vector2(0, 40), new Vector2(0, 20), new Vector2(10, 30));
+        AddShadowPolygon(new Vector2(0, 20), new Vector2(10, 10), new Vector2(10, 30));
+
+        AddShadowPolygon(new Vector2(0, 0), new Vector2(0, 20), new Vector2(10, 10));
+        AddShadowPolygon(new Vector2(0, 0), new Vector2(-10, 10), new Vector2(0, 20));
+        AddShadowPolygon(new Vector2(0, 0), new Vector2(-10, -10), new Vector2(-10, 10));
+
+        AddShadowPolygon(new Vector2(0, 0), new Vector2(-10, -10), new Vector2(0, -20));
+        AddShadowPolygon(new Vector2(0, 0), new Vector2(0, -20), new Vector2(20, -20));
+        AddShadowPolygon(new Vector2(0, 0), new Vector2(20, -20), new Vector2(40, 0));
+    }
+
+    void DrawHorse()
+    {
+        AddShadowPolygon(new Vector2(-20, 30), new Vector2(-10, 40), new Vector2(0, 30));
+        AddShadowPolygon(new Vector2(-10, 30), new Vector2(-10, 20), new Vector2(0, 20));
+        AddShadowPolygon(new Vector2(-10, 30), new Vector2(0, 20), new Vector2(0, 30));
+
+        AddShadowPolygon(new Vector2(-30, 10), new Vector2(-20, 20), new Vector2(-10, 10));
+        AddShadowPolygon(new Vector2(-20, 20), new Vector2(0, 0), new Vector2(0, 20));
+        AddShadowPolygon(new Vector2(0, 20), new Vector2(0, -20), new Vector2(20, 0));
+
+        AddShadowPolygon(new Vector2(-10, -20), new Vector2(0, -20), new Vector2(0, -10));
+        AddShadowPolygon(new Vector2(20, 0), new Vector2(20, -10), new Vector2(30, -10));
+        AddShadowPolygon(new Vector2(20, -10), new Vector2(30, -20), new Vector2(30, -10));
+    }
+
     void Draw_____()
     {
-        AddShadowPolygon(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0));
-        AddShadowPolygon(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0));
         AddShadowPolygon(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0));
         AddShadowPolygon(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0));
         AddShadowPolygon(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0));
 
         AddShadowPolygon(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0));
         AddShadowPolygon(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0));
+        AddShadowPolygon(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0));
+
         AddShadowPolygon(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0));
         AddShadowPolygon(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0));
         AddShadowPolygon(new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0));
