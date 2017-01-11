@@ -531,6 +531,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 806539820}
+--- !u!114 &968844853 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000011139535398, guid: c7be0320f1740c3489fcb19313a48039,
+    type: 2}
+  m_PrefabInternal: {fileID: 1250011775}
+  m_Script: {fileID: 11500000, guid: f32d15a557f030941b3793ec14d3ad92, type: 3}
 --- !u!224 &1089529166 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224000011099894466, guid: c7be0320f1740c3489fcb19313a48039,
@@ -952,6 +958,48 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013485353614, guid: c7be0320f1740c3489fcb19313a48039,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 968844853}
+    - target: {fileID: 114000013485353614, guid: c7be0320f1740c3489fcb19313a48039,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TranslateCurrentPolyFromMatrixPoints
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011851204706, guid: c7be0320f1740c3489fcb19313a48039,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 968844853}
+    - target: {fileID: 114000011851204706, guid: c7be0320f1740c3489fcb19313a48039,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RotateCurrentPolyFromAngleValu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012839099580, guid: c7be0320f1740c3489fcb19313a48039, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011210953916, guid: c7be0320f1740c3489fcb19313a48039, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000010728140034, guid: c7be0320f1740c3489fcb19313a48039, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012471654820, guid: c7be0320f1740c3489fcb19313a48039,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000011213144846, guid: c7be0320f1740c3489fcb19313a48039,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114000010670665916, guid: c7be0320f1740c3489fcb19313a48039, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c7be0320f1740c3489fcb19313a48039, type: 2}
@@ -1188,6 +1236,7 @@ GameObject:
   - 222: {fileID: 1906933246}
   - 114: {fileID: 1906933245}
   - 114: {fileID: 1906933244}
+  - 114: {fileID: 1906933247}
   m_Layer: 5
   m_Name: ExitButton
   m_TagString: Untagged
@@ -1252,7 +1301,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1906933245}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1906933247}
+        m_MethodName: ReturnToMainScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1906933245
@@ -1288,6 +1348,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1906933242}
+--- !u!114 &1906933247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1906933242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78ec77dbd0b755847bb382ff48b66a3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1914330055
 GameObject:
   m_ObjectHideFlags: 0

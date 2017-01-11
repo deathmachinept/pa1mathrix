@@ -25,6 +25,7 @@ TagManager:
   - MaterialRadioButton
   - Polygon
   - BackgroundMusic
+  - PolygonTerminal
   layers:
   - Default
   - TransparentFX
