@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ac84bc0db0bd9f34b870df945aeff3ad
-timeCreated: 1484102352
+timeCreated: 1484025084
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -92,16 +92,16 @@ TextureImporter:
     21300170: indoor_85
     21300172: indoor_86
     21300174: indoor_87
-    21300176: WallCement0_0
-    21300178: WallCement0_1
+    21300176: indoor_88
+    21300178: indoor_89
     21300180: indoor_90
     21300182: indoor_91
     21300184: indoor_92
     21300186: indoor_93
     21300188: indoor_94
     21300190: indoor_95
-    21300192: WallCement1_1
-    21300194: WallCement1_1
+    21300192: indoor_96
+    21300194: indoor_97
     21300196: indoor_98
     21300198: indoor_99
     21300200: indoor_100
@@ -114,8 +114,8 @@ TextureImporter:
     21300214: indoor_107
     21300216: indoor_108
     21300218: indoor_109
-    21300220: WallCement2_0
-    21300222: WallCement2_1
+    21300220: indoor_110
+    21300222: indoor_111
     21300224: indoor_112
     21300226: indoor_113
     21300228: indoor_114
@@ -507,7 +507,6 @@ TextureImporter:
     21301000: indoor_500
     21301002: indoor_501
     21301004: indoor_502
-    21301006: WallCement1_0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -1706,7 +1705,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: WallCement0_0
+      name: indoor_88
       rect:
         serializedVersion: 2
         x: 0
@@ -1719,7 +1718,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: WallCement0_1
+      name: indoor_89
       rect:
         serializedVersion: 2
         x: 16
@@ -1810,7 +1809,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: WallCement1_0
+      name: indoor_96
       rect:
         serializedVersion: 2
         x: 0
@@ -1823,7 +1822,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: WallCement1_1
+      name: indoor_97
       rect:
         serializedVersion: 2
         x: 16
@@ -1992,7 +1991,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: WallCement2_0
+      name: indoor_110
       rect:
         serializedVersion: 2
         x: 0
@@ -2005,7 +2004,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: WallCement2_1
+      name: indoor_111
       rect:
         serializedVersion: 2
         x: 16
