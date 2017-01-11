@@ -38,9 +38,9 @@ public class UNETChat : Chat
 
 	    foreach (Transform t in GameObject.Find("Players").transform)
 	    {
-	        if (t.GetComponent<PlayerController>().isLocalPlayer)
+	        if (t.GetComponent<MovimentoJogador>().isLocalPlayer)
 	        {
-	            PlayerName = t.GetComponent<PlayerController>().PLAYERNAME;
+	            PlayerName = t.GetComponent<MovimentoJogador>().PLAYERNAME;
 	        }
 	    }
 

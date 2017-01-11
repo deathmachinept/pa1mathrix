@@ -2,11 +2,13 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MovimentoJogador : NetworkBehaviour {
+public class MovimentoJogador : NetworkBehaviour
+{
 
-	// Use this for initialization
+    // Use this for initialization
     enum Direction
     {
         North,
@@ -35,22 +37,27 @@ public class MovimentoJogador : NetworkBehaviour {
     public bool isAllowedToMove = true;
 
 
-    // Use this for initialization
     void Start()
     {
         isAllowedToMove = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        isAllowedToMove =
+            !GameObject.Find("ChatCanvas")
+                .transform.FindChild("Scroll View")
+                .FindChild("InputField")
+                .GetComponent<InputField>()
+                .isFocused;
         ProcessMovement();
     }
 
     void ProcessMovement()
     {
-        if(!isLocalPlayer)
+        if (!isLocalPlayer)
             return;
+        GameObject.Find("Camera").GetComponent<Camera>().transform.position = transform.position;
         if (!isMoving && isAllowedToMove)
         {
             input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -100,6 +107,22 @@ public class MovimentoJogador : NetworkBehaviour {
                 }
 
                 StartCoroutine(Move(transform));
+            }
+        }
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.gameObject.name == "computer1_1_0")
+        {
+            if (isLocalPlayer)
+            {
+                SceneManager.LoadSceneAsync("SimplificacaoMatrizes", LoadSceneMode.Additive);
+                GameObject.Find("MainSceneObjectsHolder").SetActive(false);
+                GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().CurrentSceneName =
+                    "SimplificacaoMatrizes";
+                transform.position = Vector3.zero;
+                GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().players.SetActive(false);
             }
         }
     }
