@@ -8,13 +8,18 @@ public class MyNetworkManager : NetworkManager
 {
     public GameObject MainSceneObjects;
     public GameObject players;
+    public GameObject Chat;
     public string Address;
     public int Port;
-    public string CurrentSceneName = "TestBuild";
+    public string CurrentSceneName = "Rpg";
+    public GameObject PolygonTerminalCell;
+
 
     void Awake()
     {
+        Chat=GameObject.Find("ChatCanvas");
         MainSceneObjects = GameObject.Find("MainSceneObjectsHolder");
+        DontDestroyOnLoad(GameObject.Find("ChatCanvas"));
         players = transform.FindChild("Players").gameObject;
     }
 
@@ -68,10 +73,10 @@ public class MyNetworkManager : NetworkManager
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
-        var player = (GameObject) GameObject.Instantiate(singleton.playerPrefab, Vector3.zero, Quaternion.identity);
-        player.transform.SetParent(players.transform);
+        var player = (GameObject) GameObject.Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
         player.GetComponent<MovimentoJogador>().PLAYERNAME = PlayerPrefs.GetString("Player Name");
         player.tag = "Player";
+        player.transform.SetParent(players.transform);
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
     }
 
@@ -95,14 +100,15 @@ public class MyNetworkManager : NetworkManager
         PlayerPrefs.Save();
     }
 
+    public void HideNetworkingHUD()
+    {
+        MainSceneObjects.transform.FindChild("NetworkCanvas").gameObject.SetActive(false);
+    }
+
     public void InsertedName()
     {
         PlayerPrefs.SetString("Player Name", GameObject.Find("NameInput").GetComponent<InputField>().text);
         PlayerPrefs.Save();
     }
 
-    public void HideNetworkingHUD()
-    {
-        MainSceneObjects.transform.FindChild("NetworkCanvas").gameObject.SetActive(false);
-    }
 }
