@@ -65,17 +65,17 @@ public class DragSprite : MonoBehaviour {
      IEnumerator CoolDown()
      {
         // Wait 3 seconds...
-         Debug.Log("Entrei");
+         //Debug.Log("Entrei");
          yield return new WaitForSeconds(2);
          canClick = true;
-         Debug.Log("Chegei");
+         //Debug.Log("Chegei");
 
      }
 
 
     void OnMouseDown()
     {
-        Debug.Log("Down!");
+       // Debug.Log("Down!");
         if (count == 0)
         {
             saveOldPosition();
@@ -92,7 +92,7 @@ public class DragSprite : MonoBehaviour {
 
     void OnMouseDrag()
     {
-        Debug.Log("Drag!");
+        //Debug.Log("Drag!");
 
         mPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
         Vector3 objPosition = Camera.main.ScreenToWorldPoint(mPos) + offset;
@@ -107,7 +107,7 @@ public class DragSprite : MonoBehaviour {
 
     List<GameObject> retornarListaGameObjects(List<GameObject> ListaRetornar)
     {
-        Debug.Log("Contar Elementos Lista!!_" + ListaRetornar.Count);
+        //Debug.Log("Contar Elementos Lista!!_" + ListaRetornar.Count);
 
         return new List<GameObject>(ListaRetornar);
     }
@@ -625,7 +625,7 @@ public class DragSprite : MonoBehaviour {
             //ScoreSprite = findTest.GetComponent<Spawn>().score;
             if (mouseDrag)
             {
-                Debug.Log("Mouse Drag" + mouseDrag);
+                //Debug.Log("Mouse Drag" + mouseDrag);
                 int posicaoOrigem = novoCollider.transform.GetSiblingIndex(), posicaoPretendida = 0;
                 GameObject tempInicio = new GameObject();
                 GameObject tempFinal = new GameObject();
@@ -638,7 +638,7 @@ public class DragSprite : MonoBehaviour {
                     {
                         if (novoCollider.bounds.Intersects(box.bounds))
                         {
-                            Debug.Log("Intersect_" + novoCollider.name + " box_" + box.name);
+                            //Debug.Log("Intersect_" + novoCollider.name + " box_" + box.name);
                             if (box.tag == "Matriz")
                             {
                                 if (findTest.transform.GetChild(posicaoOrigem + 1).tag == "Inversas")
@@ -662,11 +662,11 @@ public class DragSprite : MonoBehaviour {
                                         mouseClick = false;
                                         OldMatrizEquacao = retornarListaGameObjects(NovaMatrizEquacao);
                                         findTest.GetComponent<Spawn>().updateScore(10);
-                                        Debug.Log("Old Matriz " + OldMatrizEquacao.Count);
+                                        //Debug.Log("Old Matriz " + OldMatrizEquacao.Count);
                                         countJogadas++;
                                         ReEscreverEquacao(NovaMatrizEquacao, countJogadas);
                                         executouAccao = true;
-                                        Debug.Log("CONTAR JOGADAS " + countJogadas);
+                                        //Debug.Log("CONTAR JOGADAS " + countJogadas);
 
                                     }
                                 }
@@ -696,17 +696,17 @@ public class DragSprite : MonoBehaviour {
 
                                         executouAccao = true;
 
-                                        Debug.Log("Old Matriz " + OldMatrizEquacao.Count);
+                                        //Debug.Log("Old Matriz " + OldMatrizEquacao.Count);
                                     }
                                 }
-                                Debug.Log("Index Box " + box.transform.GetSiblingIndex());
-                                Debug.Log("novoCollider Index " + novoCollider.transform.GetSiblingIndex());
-                                Debug.Log("Matriz Index " + novoCollider.transform.GetSiblingIndex());
+                                //Debug.Log("Index Box " + box.transform.GetSiblingIndex());
+                                //Debug.Log("novoCollider Index " + novoCollider.transform.GetSiblingIndex());
+                                //Debug.Log("Matriz Index " + novoCollider.transform.GetSiblingIndex());
 
-                                Debug.Log("CONTAR JOGADAS " + countJogadas);
+                                //Debug.Log("CONTAR JOGADAS " + countJogadas);
 
                             }
-                            Debug.Log("CONTAR JOGADAS " + countJogadas);
+                            //Debug.Log("CONTAR JOGADAS " + countJogadas);
 
                             mouseDrag = false;
                             mouseClick = false;
@@ -725,7 +725,7 @@ public class DragSprite : MonoBehaviour {
             }
             else
             {
-                Debug.Log("1 ");
+                //Debug.Log("1 ");
                 foreach (Transform child in findTest.transform)
                 {
 
@@ -755,10 +755,40 @@ public class DragSprite : MonoBehaviour {
                             int TempArrayPos;
 
                             // O que está antes da inversa
-                            string tempCheckPar = findTest.transform.GetChild(arrayPos - 1).tag;
-                            string tempCheckCheckPar = findTest.transform.GetChild(arrayPos - 2).tag; // para ver se tem matriz a seguir a uma matriz
+                            string tempCheckPar, nomeMatrizAnterior;
+                            string tempCheckCheckPar, nomeMatrizDoublePast, tempCheckInfront, nametempCheckInfront;
+                            if (arrayPos - 1 > 0)
+                            {
+                                tempCheckPar = findTest.transform.GetChild(arrayPos - 1).tag;
+                                nomeMatrizAnterior = DaNomeMembroEquacao(findTest.transform.GetChild(arrayPos - 1).name);
+                            }
+                            else
+                            {
+                                nomeMatrizAnterior = " ";
+                                tempCheckPar = "X";
+                            }
 
-
+                            if (arrayPos - 2 > 0)
+                            {
+                                tempCheckCheckPar = findTest.transform.GetChild(arrayPos - 2).tag;
+                                nomeMatrizDoublePast = DaNomeMembroEquacao(findTest.transform.GetChild(arrayPos - 2).name);
+                            } // para ver se tem matriz a seguir a uma matriz
+                            else
+                            {
+                                tempCheckCheckPar = "X";
+                                nomeMatrizDoublePast = " ";
+                            }
+                            if (arrayPos + 1 > 0)
+                            {
+                                tempCheckInfront = findTest.transform.GetChild(arrayPos + 1).tag;
+                                nametempCheckInfront =
+                                    DaNomeMembroEquacao(findTest.transform.GetChild(arrayPos - 1).name);
+                            }
+                            else
+                            {
+                                tempCheckInfront = "X";
+                                nametempCheckInfront = " ";
+                            }
                             int OldPositionParEsquerdoSubEquacaoFinal = 0; //recebe valor sempre que é percorrido parte das Subequações
                             int OldPositionParEsquerdoSubEquacaoInicial = arrayPos;
 
@@ -778,7 +808,7 @@ public class DragSprite : MonoBehaviour {
                                 {
                                     parSubParenteses = true;
                                 }
-                                Debug.Log("3 ");
+                                //Debug.Log("3 ");
 
                                 //Debug.Log("TESTES!! Novo Metodo");
 
@@ -796,7 +826,7 @@ public class DragSprite : MonoBehaviour {
                                     GameObject objecto = (GameObject)Instantiate(findTest.transform.GetChild(i).gameObject, findTest.transform.GetChild(i).localPosition, Quaternion.identity);
                                     objecto.name = objecto.name.Substring(0, objecto.name.Length - 7);
                                     objecto.name = objecto.name + " Ju";
-                                    Debug.Log(objecto.name + objecto.tag);
+                                    //Debug.Log(objecto.name + objecto.tag);
 
 
                                     if (i >= 0)
@@ -863,13 +893,13 @@ public class DragSprite : MonoBehaviour {
                                     {
                                         //se tiver inversa ou transposta pode ser de uma equacao ou de um subequacao
                                         #region Tem inversa ou transposta logo a seguir de parDireito e inversa ^-1)^-1
-                                        Debug.Log("4 ");
+                                        //Debug.Log("4 ");
 
                                         //Debug.Log("ENTRO AQUI");
 
                                         if (podeDecrementar)
                                         {
-                                            Debug.Log("5 ");
+                                            //Debug.Log("5 ");
 
                                             GameObject tempObjectoCheckForParentesesDir =
                                                 findTest.transform.GetChild(i - 1).gameObject;
@@ -880,7 +910,7 @@ public class DragSprite : MonoBehaviour {
                                             // tem que guardar uma SubEquacao ENCONTROU SUBEQUACAO
                                             {
                                                 ListaNormal.Clear();
-                                                Debug.Log("6 ");
+                                                //Debug.Log("6 ");
                                                 executouAccao = true;
                                                 ListaNormal = resolverInversaSubEquacao(i, contarLista, findTest, inversaOuTransposta);
                                                 temSubEquacao = true;
@@ -953,12 +983,13 @@ public class DragSprite : MonoBehaviour {
 
                             }
                             #endregion
-                            else if (tempCheckPar == "Inversas" && inversaOuTransposta )
+                            else if (tempCheckPar == "Inversas" && inversaOuTransposta || tempCheckInfront == tempCheckPar)
                             {
+                                //
                                     removeDuplaInversa = true;
 
                             }
-                            else if (tempCheckPar == "Transposta" && inversaOuTransposta == false)
+                            else if (tempCheckPar == "Transposta" && inversaOuTransposta == false || tempCheckInfront == tempCheckPar)
                             {
                                 removeDuplaInversa = true;
 
@@ -1106,7 +1137,7 @@ public class DragSprite : MonoBehaviour {
 
 
                             }
-                            Debug.Log("CONTAR JOGADAS " + countJogadas);
+                            //Debug.Log("CONTAR JOGADAS " + countJogadas);
 
                             transform.position = oldPosition;
                             mouseClick = false;
@@ -1122,7 +1153,7 @@ public class DragSprite : MonoBehaviour {
 
             transform.position = oldPosition;
             mouseClick = false;
-            Debug.Log("Jogadas: "+countJogadas);
+            //Debug.Log("Jogadas: "+countJogadas);
         }
     }
 
@@ -1130,7 +1161,7 @@ public class DragSprite : MonoBehaviour {
 
     void OnMouseUp()
     {
-        Debug.Log("Up!");
+        //Debug.Log("Up!");
         mouseClick = true;
     }
 

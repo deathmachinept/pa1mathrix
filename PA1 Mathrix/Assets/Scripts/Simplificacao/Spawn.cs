@@ -38,7 +38,7 @@ public class Spawn : MonoBehaviour
         timerForNextTip = 7f;
         listaTips = new List<string>();
         ListaEquacoes = new List<ArrayMembros>();
-        ListaEquacoes.Add(GameObject.Find("saberEquacao2").GetComponent<ArrayMembros>());
+        ListaEquacoes.Add(GameObject.Find("saberEquacao4").GetComponent<ArrayMembros>());
 
         Vector3 currentPosition = new Vector3(-30f, 0f, 0f);
 	    int contar;

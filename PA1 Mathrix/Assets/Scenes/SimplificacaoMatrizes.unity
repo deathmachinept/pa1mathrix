@@ -254,6 +254,34 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 112726165}
+--- !u!1 &123713939
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 123713940}
+  m_Layer: 0
+  m_Name: Resolucao3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &123713940
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 123713939}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.5510017, y: -45.614777, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
 --- !u!1 &315406473
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,8 +653,9 @@ MonoBehaviour:
   - {fileID: 1113260702}
   - {fileID: 315406473}
   - {fileID: 772700622}
-  - {fileID: 14010052}
-  - {fileID: 772700622}
+  - {fileID: 533119762}
+  - {fileID: 1113260702}
+  - {fileID: 1658031858}
   - {fileID: 315406473}
 --- !u!4 &933238890
 Transform:
@@ -1142,6 +1171,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 14
+--- !u!1 &1467172848
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1467172850}
+  - 114: {fileID: 1467172849}
+  m_Layer: 0
+  m_Name: saberEquacao3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1467172849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1467172848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31610559b4229604cbb36e48c24c15b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MembroEquacao:
+  - {fileID: 1006743538}
+  - {fileID: 315406473}
+  - {fileID: 315406473}
+  - {fileID: 1113260702}
+  - {fileID: 1658031858}
+  - {fileID: 533119762}
+  - {fileID: 1113260702}
+  - {fileID: 772700622}
+  - {fileID: 315406473}
+  - {fileID: 533119762}
+--- !u!4 &1467172850
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1467172848}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -38.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
 --- !u!1 &1615615004
 GameObject:
   m_ObjectHideFlags: 0
@@ -1372,3 +1452,50 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1660959888}
+--- !u!1 &2044182228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2044182230}
+  - 114: {fileID: 2044182229}
+  m_Layer: 0
+  m_Name: saberEquacao4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2044182229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2044182228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31610559b4229604cbb36e48c24c15b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MembroEquacao:
+  - {fileID: 533119762}
+  - {fileID: 315406473}
+  - {fileID: 533119762}
+  - {fileID: 533119762}
+  - {fileID: 533119762}
+  - {fileID: 315406473}
+--- !u!4 &2044182230
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2044182228}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -38.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
