@@ -36,9 +36,9 @@ public class MovimentoJogador : NetworkBehaviour
     public float walkSpeed = 3f;
     public bool isAllowedToMove = true;
 
-
     void Start()
     {
+        DontDestroyOnLoad(this.gameObject);
         isAllowedToMove = true;
     }
 
@@ -117,10 +117,11 @@ public class MovimentoJogador : NetworkBehaviour
         {
             if (isLocalPlayer)
             {
-                SceneManager.LoadSceneAsync("SimplificacaoMatrizes", LoadSceneMode.Additive);
+                SceneManager.LoadSceneAsync("Desenho Polígono", LoadSceneMode.Additive);
                 GameObject.Find("MainSceneObjectsHolder").SetActive(false);
+                GameObject.Find("Players").SetActive(false);
                 GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().CurrentSceneName =
-                    "SimplificacaoMatrizes";
+                    "Desenho Polígono";
                 transform.position = Vector3.zero;
                 GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().players.SetActive(false);
             }
