@@ -1,11 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
-<<<<<<< HEAD
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PA1 Mathrix.CSharp", "PA1 Mathrix.CSharp.csproj", "{78779ACC-CA32-FF87-98A7-35A9E0EF6D38}"
-=======
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PA1 Mathrix", "PA1 Mathrix.csproj", "{D7122E9F-5DD2-4389-59EE-40674B55ADF6}"
->>>>>>> 95ad985f75b7cb6a109f6f447c2e7e43a3508132
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PA1 Mathrix.Editor", "PA1 Mathrix.Editor.csproj", "{15BDA597-B23A-D842-814F-50B66EE4DF6A}"
 EndProject
