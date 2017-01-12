@@ -13,6 +13,7 @@ public class PlayVideo : MonoBehaviour
     AudioSource audio;
     float timeLeft = 1.0f;
     private bool once = false;
+    private bool isLoading = false;
 
     void Start()
     {
@@ -34,10 +35,12 @@ public class PlayVideo : MonoBehaviour
                 audio.Play();
              once = true;
          }
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return)) && movie.isPlaying)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return)) && movie.isPlaying && isLoading == false)
          {
              movie.Stop();
+
              SceneManager.LoadSceneAsync("Rpg");
+             isLoading = true;
          }
 
         if (movie.isPlaying == false && once == true)

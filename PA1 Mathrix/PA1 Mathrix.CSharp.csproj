@@ -141,8 +141,9 @@
     <Compile Include="Assets\Scripts\RPG\Music\MusicManagement.cs" />
     <Compile Include="Assets\Scripts\Simplificacao\ArrayMembros.cs" />
     <Compile Include="Assets\Scripts\Simplificacao\DragSprite.cs" />
+    <Compile Include="Assets\Scripts\Simplificacao\DragSpriteOld.cs" />
     <Compile Include="Assets\Scripts\Simplificacao\Spawn.cs" />
-    <Compile Include="Assets\Scripts\TileWindow.cs" />
+    <Compile Include="Assets\Scripts\Simplificacao\SpawnOld.cs" />
     <Compile Include="Assets\Video\PlayVideo.cs" />
     <Compile Include="Assets\getPossibleSolution.cs" />
   </ItemGroup>
