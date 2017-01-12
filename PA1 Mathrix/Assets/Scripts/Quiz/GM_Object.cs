@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using MaterialUI;
 
 
 public class GM_Object : MonoBehaviour {
@@ -13,12 +14,12 @@ public class GM_Object : MonoBehaviour {
     public Question currentQuestion;
     private int userAnswer;
     public bool acertou = false, updatedA = false, updatedB = false, updatedC = false, updatedD = false;
-
+    private GameObject findObjQuestion;
     [SerializeField]
     private Text factText;
 
     [SerializeField]
-    private float timeBetweenQuestion = 1f;
+    private float timeBetweenQuestion = 2f;
 
     void Start()
     {
@@ -53,8 +54,53 @@ public class GM_Object : MonoBehaviour {
         }
         if (currentQuestion.answer == userAnswer)
         {
-            StartCoroutine(TransitionToNextQuestion());
             acertou = true;
+            if (userAnswer == 1)
+            {
+
+                GameObject Original = GameObject.Find("Canvas").transform.FindChild("OptionB").FindChild("ButtonLayer").gameObject;
+                GameObject optionC = (GameObject)Instantiate(Original).gameObject;
+
+                optionC.GetComponentInChildren<Image>().color = Color.green;
+
+            }
+            if (userAnswer == 2)
+            {
+                GameObject Original = GameObject.Find("Canvas").transform.FindChild("OptionB").FindChild("ButtonLayer").gameObject;
+                GameObject optionC = (GameObject)Instantiate(Original).gameObject;
+
+                optionC.GetComponentInChildren<Image>().color = Color.green;
+
+                //GameObject.Find("Canvas").transform.FindChild("OptionB").FindChild("ButtonLayer").GetComponent<Image>().color = Color.Green;
+
+            }
+            if (this.userAnswer == 3)
+            {
+                GameObject Original = GameObject.Find("Canvas").transform.FindChild("OptionB").FindChild("ButtonLayer").gameObject;
+                GameObject optionC = (GameObject) Instantiate(Original).gameObject;
+
+                optionC.GetComponentInChildren<Image>().color = Color.green;
+
+        //        GameObject tempMembro = (GameObject)Instantiate(MatrizPrint[i], currentPosition, Quaternion.identity);
+
+        //        Image Test = GameObject.Find("Canvas")
+        //.transform.FindChild("OptionB")
+        //.FindChild("ButtonLayer")
+        //.GetComponent<Image>();
+        //        Test.color = new Color(110, 23, 0);
+
+               // GameObject.Find("Canvas").transform.FindChild("OptionC").FindChild("ButtonLayer").GetComponent<Image>().color = Color.green;
+
+            }
+            if (this.userAnswer == 4)
+            {
+                GameObject Original = GameObject.Find("Canvas").transform.FindChild("OptionB").FindChild("ButtonLayer").gameObject;
+                GameObject optionC = (GameObject)Instantiate(Original).gameObject;
+
+                optionC.GetComponentInChildren<Image>().color = Color.green;
+            }
+            StartCoroutine(TransitionToNextQuestion());
+
             Debug.Log(true);
         }
 
