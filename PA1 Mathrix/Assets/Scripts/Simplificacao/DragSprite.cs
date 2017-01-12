@@ -641,9 +641,13 @@ public class DragSprite : MonoBehaviour {
                             //Debug.Log("Intersect_" + novoCollider.name + " box_" + box.name);
                             if (box.tag == "Matriz")
                             {
+                                Debug.Log("Aqui " + box.tag + " " + findTest.transform.GetChild(posicaoOrigem + 1).tag);
                                 if (findTest.transform.GetChild(posicaoOrigem + 1).tag == "Inversas")
                                 {
-                                    if (findTest.transform.GetChild(posicaoOrigem + 2).name == box.name)
+                                   string nomeOrigem = DaNomeMembroEquacao(findTest.transform.GetChild(posicaoOrigem + 2).name);
+                                   string nomeDestino = box.name;
+
+                                   if (nomeOrigem == nomeDestino)
                                     {
                                         for (int i = 0; i < findTest.transform.childCount; )
                                         {
@@ -756,7 +760,7 @@ public class DragSprite : MonoBehaviour {
 
                             // O que está antes da inversa
                             string tempCheckPar, nomeMatrizAnterior;
-                            string tempCheckCheckPar, nomeMatrizDoublePast, tempCheckInfront, nametempCheckInfront;
+                            string tempCheckCheckPar, nomeMatrizDoublePast, tempCheckInfront, nometempCheckInfront;
                             if (arrayPos - 1 > 0)
                             {
                                 tempCheckPar = findTest.transform.GetChild(arrayPos - 1).tag;
@@ -781,13 +785,13 @@ public class DragSprite : MonoBehaviour {
                             if (arrayPos + 1 > 0)
                             {
                                 tempCheckInfront = findTest.transform.GetChild(arrayPos + 1).tag;
-                                nametempCheckInfront =
+                                nometempCheckInfront =
                                     DaNomeMembroEquacao(findTest.transform.GetChild(arrayPos - 1).name);
                             }
                             else
                             {
                                 tempCheckInfront = "X";
-                                nametempCheckInfront = " ";
+                                nometempCheckInfront = " ";
                             }
                             int OldPositionParEsquerdoSubEquacaoFinal = 0; //recebe valor sempre que é percorrido parte das Subequações
                             int OldPositionParEsquerdoSubEquacaoInicial = arrayPos;
@@ -983,7 +987,7 @@ public class DragSprite : MonoBehaviour {
 
                             }
                             #endregion
-                            else if (tempCheckPar == "Inversas" && inversaOuTransposta || tempCheckInfront == tempCheckPar)
+                            else if (tempCheckPar == "Inversas" && inversaOuTransposta )//|| nome == tempCheckPar)
                             {
                                 //
                                     removeDuplaInversa = true;

@@ -28725,10 +28725,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: f58ed9943b7ef514cbc1f385d4e2d22c, type: 3}
-  - {fileID: 8300000, guid: 1712df847820cab4a9bd6f1743383399, type: 3}
   - {fileID: 8300000, guid: ec0e12f2ca5e2604ab0d8e50f6a2d5d2, type: 3}
-  - {fileID: 8300000, guid: d4f76e08cf11186459a0a7c49b6e8814, type: 3}
+  - {fileID: 8300000, guid: 1712df847820cab4a9bd6f1743383399, type: 3}
+  - {fileID: 8300000, guid: f58ed9943b7ef514cbc1f385d4e2d22c, type: 3}
   - {fileID: 8300000, guid: 558e8726e8f416b438169a1c8af40e45, type: 3}
   - {fileID: 8300000, guid: 08e8e7dbf0799374db5f14779a4eca39, type: 3}
   menu: 0
@@ -50309,8 +50308,7 @@ MonoBehaviour:
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 1000010149708550, guid: fb2265cac5f93514ca2dd84df407ee1b,
-    type: 2}
+  m_PlayerPrefab: {fileID: 0}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 0
   m_OfflineScene: 

@@ -2792,12 +2792,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listaQuestoes:
-  - fact: "Quest\xE3o 1 Resposta \xE9 solu\xE7ao A"
-    solutionA: Matriz
-    solutionB: Inversa
-    solutionC: Ortogonal
-    solutionD: Identidade
-    answer: 1
+  - fact: "Qual destas regras n\xE3o se aplicam as propriedades das matrizes?"
+    solutionA: (A')' = A
+    solutionB: B(A*C) = B*C*B*A
+    solutionC: (AB)' = B' A'
+    solutionD: B(A+C) = B*A*B*C
+    answer: 2
   - fact: "Quest\xE3o 1 Resposta \xE9 solu\xE7ao B"
     solutionA: Matriz1
     solutionB: Identidade1
@@ -2829,6 +2829,11 @@ MonoBehaviour:
     solutionC: 
     solutionD: 
     answer: 4
+  acertou: 0
+  updatedA: 0
+  updatedB: 0
+  updatedC: 0
+  updatedD: 0
   factText: {fileID: 39636846}
   timeBetweenQuestion: 1
 --- !u!4 &1890086710
