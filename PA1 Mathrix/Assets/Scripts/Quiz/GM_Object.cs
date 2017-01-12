@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using MaterialUI;
 
 
 public class GM_Object : MonoBehaviour {
@@ -13,12 +14,12 @@ public class GM_Object : MonoBehaviour {
     public Question currentQuestion;
     private int userAnswer;
     public bool acertou = false, updatedA = false, updatedB = false, updatedC = false, updatedD = false;
-
+    private GameObject findObjQuestion;
     [SerializeField]
     private Text factText;
 
     [SerializeField]
-    private float timeBetweenQuestion = 1f;
+    private float timeBetweenQuestion = 3f;
 
     void Start()
     {
@@ -54,7 +55,39 @@ public class GM_Object : MonoBehaviour {
         if (currentQuestion.answer == userAnswer)
         {
             StartCoroutine(TransitionToNextQuestion());
+
             acertou = true;
+            if (userAnswer == 1)
+            {
+                GameObject.FindGameObjectWithTag("OptionA")
+                    .transform.FindChild("Button Layer")
+                    .GetComponent<Image>()
+                    .color = Color.white;
+            }
+            if (userAnswer == 2)
+            {
+                GameObject.FindGameObjectWithTag("OptionB")
+                    .transform.FindChild("Button Layer")
+                    .GetComponent<Image>()
+                    .color = Color.black;
+
+            }
+            if (this.userAnswer == 3)
+            {
+                GameObject.FindGameObjectWithTag("OptionC")
+                    .transform.FindChild("Button Layer")
+                    .GetComponent<Image>()
+                    .color = Color.magenta;
+
+            }
+            if (this.userAnswer == 4)
+            {
+                GameObject.FindGameObjectWithTag("OptionD")
+                    .transform.FindChild("Button Layer")
+                    .GetComponent<Image>()
+                    .color = Color.black;
+            }
+
             Debug.Log(true);
         }
 

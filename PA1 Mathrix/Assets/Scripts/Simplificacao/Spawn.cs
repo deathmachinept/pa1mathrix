@@ -21,7 +21,7 @@ public class Spawn : MonoBehaviour
 
     private GameObject DuplicateSprite;
 
-    private Vector3 scale = new Vector3(20f,20f,20f);
+    private Vector3 scale = new Vector3(1f,1f,1f);
     public Text scoreText;
     private List<String> listaTips;
     private float timerForNextTip;
@@ -38,7 +38,7 @@ public class Spawn : MonoBehaviour
         timerForNextTip = 7f;
         listaTips = new List<string>();
         ListaEquacoes = new List<ArrayMembros>();
-        ListaEquacoes.Add(GameObject.Find("saberEquacao4").GetComponent<ArrayMembros>());
+        ListaEquacoes.Add(GameObject.Find("saberEquacao1").GetComponent<ArrayMembros>());
 
         Vector3 currentPosition = new Vector3(-30f, 0f, 0f);
 	    int contar;
