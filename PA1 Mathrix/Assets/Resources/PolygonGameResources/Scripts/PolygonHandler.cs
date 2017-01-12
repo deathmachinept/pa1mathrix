@@ -54,6 +54,7 @@ public class PolygonHandler : MonoBehaviour
 
     void Update()
     {
+        PulsateSelectedPolygon();
         if (time > 0)
         {
             time -= Time.deltaTime;
@@ -68,6 +69,12 @@ public class PolygonHandler : MonoBehaviour
         {
             GameObject.Find("Network Manager").GetComponent<ReturnScript>().ReturnToMainScene();
         }
+    }
+
+    private void PulsateSelectedPolygon()
+    {
+        CurrentlySelectedPolygon.gameObject.GetComponent<MeshRenderer>().material.color=new Color(CurrentlySelectedPolygon.gameObject.GetComponent<MeshRenderer>().material.color.r, CurrentlySelectedPolygon.gameObject.GetComponent<MeshRenderer>().material.color.g, CurrentlySelectedPolygon.gameObject.GetComponent<MeshRenderer>().material.color.b,Mathf.PingPong(Time.time,1));
+        CurrentlySelectedPolygon.UpdatePolygon();
     }
 
     void StartShadowGame()
@@ -214,6 +221,8 @@ public class PolygonHandler : MonoBehaviour
                         {
                             CurrentlySelectedPolygon.IsSelected = false;
                             CurrentlySelectedPolygon.SelectedMaterial= Resources.Load("PolygonGameResources/Materials/UserPolygonMaterial") as Material;
+                            StartCoroutine(Smooth.Fade(CurrentlySelectedPolygon.GetComponent<MeshRenderer>().material, 1,2));
+                            CurrentlySelectedPolygon.GetComponent<Polygon>().UpdatePolygon();
                         }
                         CurrentlySelectedPolygon = hit.transform.GetComponent<Polygon>();
                         hit.transform.GetComponent<Polygon>().IsSelected = true;
