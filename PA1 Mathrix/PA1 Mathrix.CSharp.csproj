@@ -111,11 +111,13 @@
     <Compile Include="Assets\Resources\PolygonGameResources\Scripts\MatrixDisplayController.cs" />
     <Compile Include="Assets\Resources\PolygonGameResources\Scripts\NewMatrixDisplayController.cs" />
     <Compile Include="Assets\Resources\PolygonGameResources\Scripts\OperationsMenuController.cs" />
+    <Compile Include="Assets\Resources\PolygonGameResources\Scripts\OverlayController.cs" />
     <Compile Include="Assets\Resources\PolygonGameResources\Scripts\Polygon.cs" />
     <Compile Include="Assets\Resources\PolygonGameResources\Scripts\PolygonHandler.cs" />
     <Compile Include="Assets\Resources\PolygonGameResources\Scripts\RotationMenuController.cs" />
     <Compile Include="Assets\Resources\PolygonGameResources\Scripts\ScalingMenuController.cs" />
     <Compile Include="Assets\Resources\PolygonGameResources\Scripts\ShadowPolygon.cs" />
+    <Compile Include="Assets\Resources\PolygonGameResources\Scripts\Smooth.cs" />
     <Compile Include="Assets\Resources\PolygonGameResources\Scripts\TranslationMenuController.cs" />
     <Compile Include="Assets\Resources\PolygonGameResources\Scripts\Triangulator.cs" />
     <Compile Include="Assets\Resources\PolygonGameResources\Scripts\UIController.cs" />

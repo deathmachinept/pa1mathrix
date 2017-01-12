@@ -42,7 +42,6 @@ public class MovimentoJogador : NetworkBehaviour
 
     void Awake()
     {
-
         chatInput = GameObject.Find("ChatCanvas")
             .transform.FindChild("Scroll View")
             .FindChild("InputField")
@@ -51,7 +50,6 @@ public class MovimentoJogador : NetworkBehaviour
 
     void Start()
     {
-        PolygonTerminalCell = GameObject.Find("MapObjects").transform.FindChild("Medical Unit").FindChild("InteriorFloor").FindChild("RightRoomFloor").FindChild("Interior1_0_1 (3)").gameObject;
         DontDestroyOnLoad(this.gameObject);
         isAllowedToMove = true;
     }
