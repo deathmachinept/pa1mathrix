@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using UnityEditor;
 using UnityEngine.EventSystems;
 
 public class MatrixDisplayBackgroundManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
