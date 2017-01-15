@@ -729,7 +729,7 @@ public class DragSprite : MonoBehaviour {
             }
             else
             {
-                //Debug.Log("1 ");
+                Debug.Log("1 ");
                 foreach (Transform child in findTest.transform)
                 {
 

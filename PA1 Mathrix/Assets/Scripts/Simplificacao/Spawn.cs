@@ -56,10 +56,10 @@ public class Spawn : MonoBehaviour
 
             if (i > 0)
             {
-                if (ListaEquacoes[0].MembroEquacao[i].name == "Transposta" ||
-      ListaEquacoes[0].MembroEquacao[i].name == "Inversa")
+                if (ListaEquacoes[0].MembroEquacao[i].tag == "Transposta" ||
+      ListaEquacoes[0].MembroEquacao[i].tag == "Inversas")
                 {
-                    currentPosition.y = 0.5f;
+                    currentPosition.y = 4f;
 
                     if (lastInvTrans)
                     {
@@ -77,38 +77,43 @@ public class Spawn : MonoBehaviour
                     }
                     else
                     {
-                        currentPosition += new Vector3(4f, 0f, 0f);
+                        currentPosition += new Vector3(8f, 0f, 0f);
 
                     }
                     lastInvTrans = true;
 
                 }
-                else if (ListaEquacoes[0].MembroEquacao[i].name == "ParDireito")
+                else if (ListaEquacoes[0].MembroEquacao[i].tag == "ParentesesDireito")
                 {
                     if (lastInvTrans)
                     {
-                        currentPosition += new Vector3(4f, 0f, 0f);
+                        currentPosition.y = 0f;
+
+                        currentPosition += new Vector3(8f, 0f, 0f);
                         lastInvTrans = false;
                         lastParDir = true;
                     }
                     else
                     {
-                        currentPosition += new Vector3(2f, 0f, 0f);
+                        currentPosition += new Vector3(8f, 0f, 0f);
                         lastParDir = true;
                     }
 
                 }
-                else if (ListaEquacoes[0].MembroEquacao[i].name == "ParEsquerdo")
+                else if (ListaEquacoes[0].MembroEquacao[i].tag == "ParentesesEsquerdo")
                 {
                     if (lastInvTrans)
+
                     {
-                        currentPosition += new Vector3(5f, 0f, 0f);
+                        currentPosition.y = 0f;
+
+                        currentPosition += new Vector3(8f, 0f, 0f);
                         lastInvTrans = false;
                         lastParEsq = true;
                     }
                     else
                     {
-                        currentPosition += new Vector3(4f, 0f, 0f);
+                        currentPosition += new Vector3(8f, 0f, 0f);
                         lastParEsq = true;
                     }
                     //Debug.Log("ParEsquerdo " + currentPosition);
@@ -116,9 +121,10 @@ public class Spawn : MonoBehaviour
                 } 
                 else
                 {
+                    currentPosition.y = 0f;
                     if (lastParEsq)
                     {
-                        currentPosition += new Vector3(4f, 0f, 0f);
+                        currentPosition += new Vector3(8f, 0f, 0f);
                         lastParEsq = false;
                     }
                     else if (lastInvTrans)
@@ -126,7 +132,7 @@ public class Spawn : MonoBehaviour
                         currentPosition += new Vector3(5f, 0f, 0f);
                         lastInvTrans = false;
                     }
-                    else { currentPosition += new Vector3(7f, 0f, 0f); }
+                    else { currentPosition += new Vector3(12f, 0f, 0f); }
 
                 }
             }

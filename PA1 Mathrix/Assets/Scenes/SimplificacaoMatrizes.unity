@@ -101,9 +101,10 @@ GameObject:
   - 212: {fileID: 82991067}
   - 95: {fileID: 82991066}
   - 114: {fileID: 82991069}
+  - 61: {fileID: 82991070}
   m_Layer: 0
   m_Name: Inversa1
-  m_TagString: Untagged
+  m_TagString: Inversas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -179,10 +180,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 82991065}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9123d4884c68e841a8464ac1a3999d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f2b1b8a97f45e74f9ced5bb00c8ee9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreSprite: 0
+--- !u!61 &82991070
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 82991065}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 4.38, y: 5.22}
 --- !u!1 &112726165
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,7 +340,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 424188372}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9123d4884c68e841a8464ac1a3999d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f2b1b8a97f45e74f9ced5bb00c8ee9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreSprite: 0
@@ -406,7 +421,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 6.23, y: 10.67}
+  m_Size: {x: 9.71, y: 9.9}
 --- !u!114 &688155047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,7 +430,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 688155045}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9123d4884c68e841a8464ac1a3999d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f2b1b8a97f45e74f9ced5bb00c8ee9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreSprite: 0
@@ -505,7 +520,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 751717339}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9123d4884c68e841a8464ac1a3999d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f2b1b8a97f45e74f9ced5bb00c8ee9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreSprite: 0
@@ -566,7 +581,7 @@ GameObject:
   - 212: {fileID: 874837626}
   m_Layer: 0
   m_Name: ParentesesEsquerdo
-  m_TagString: Untagged
+  m_TagString: ParentesesEsquerdo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -600,7 +615,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ef9dfab8eb55a9440981666b81497cce, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1bcd32fefaca5d24a86b0683190101ad, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -677,7 +692,7 @@ GameObject:
   - 212: {fileID: 940956082}
   m_Layer: 0
   m_Name: ParetensesDir-01
-  m_TagString: Untagged
+  m_TagString: ParentesesDireito
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -711,7 +726,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4e4dda5d84116204e871bcc81b435ffc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 13e159fe8504eb54db944ae72f0a8ba1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -876,7 +891,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 957511685}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9123d4884c68e841a8464ac1a3999d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f2b1b8a97f45e74f9ced5bb00c8ee9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreSprite: 0
@@ -905,7 +920,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 973133730}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9123d4884c68e841a8464ac1a3999d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f2b1b8a97f45e74f9ced5bb00c8ee9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreSprite: 0

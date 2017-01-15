@@ -21,8 +21,9 @@ public class MovimentoJogador : NetworkBehaviour
     public string PLAYERNAME;
 
     private Direction currentDir;
+    private Direction oldDirection;
     private Vector2 input;
-    private bool isMoving = false;
+    private bool isMoving = false, collided = false, startedTheGame = true;
     private Vector3 startPos;
     private Vector3 endPos;
     private float t;
@@ -70,6 +71,8 @@ public class MovimentoJogador : NetworkBehaviour
         GameObject.Find("Camera").GetComponent<Camera>().transform.position = transform.position;
         if (!isMoving && isAllowedToMove)
         {
+            oldDirection = currentDir;
+            //Debug.Log("input X" + input.y + " Input Y " + input.y);
             input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
             if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
             {
@@ -79,6 +82,7 @@ public class MovimentoJogador : NetworkBehaviour
             {
                 input.x = 0;
             }
+            //Debug.Log("input X" + input.y + " Input Y " + input.y);
 
             if (input != Vector2.zero)
             {
@@ -116,6 +120,8 @@ public class MovimentoJogador : NetworkBehaviour
                         break;
                 }
 
+                //start corountine
+
                 StartCoroutine(Move(transform));
             }
         }
@@ -143,12 +149,22 @@ public class MovimentoJogador : NetworkBehaviour
         }
     }
 
+    public void OnTriggerEnter2D()
+    {
+
+            collided = true;
+           // endPos = startPos;
+
+    }
+
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if(isServer)
             return;
         if (collision.collider.gameObject.tag == "PolygonTerminal")
         {
+            Debug.Log("MiniJogo");
+
             SceneManager.LoadSceneAsync("Desenho Polígono", LoadSceneMode.Additive);
             GameObject.Find("MainSceneObjectsHolder").SetActive(false);
             GameObject.Find("Players").SetActive(false);
@@ -158,6 +174,14 @@ public class MovimentoJogador : NetworkBehaviour
             GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().players.SetActive(false);
             GameObject.Find("ChatCanvas").SetActive(false);
         }
+
+    }
+
+    public void OnCollisionExit2D(Collision2D collision)
+    {
+        collided = false;
+        isAllowedToMove = true;
+        Debug.Log("Existe!!");
     }
 
     public IEnumerator Move(Transform entity)
@@ -166,13 +190,43 @@ public class MovimentoJogador : NetworkBehaviour
         startPos = entity.position;
         t = 0;
 
-        endPos = new Vector3(startPos.x + System.Math.Sign(input.x), startPos.y + System.Math.Sign(input.y), startPos.z);
-
-        while (t < 1f)
+        //Debug.Log("Old direction : " + oldDirection + " currentDir " + currentDir);
+        if (isAllowedToMove)
         {
-            t += Time.deltaTime * walkSpeed;
-            entity.position = Vector3.Lerp(startPos, endPos, t);
-            yield return null;
+            endPos = new Vector3(startPos.x + System.Math.Sign(input.x), startPos.y + System.Math.Sign(input.y),
+                startPos.z);
+            isAllowedToMove = true;
+            //Debug.Log("is allowed to move");
+
+        }
+        else
+        {
+
+            Debug.Log("is not allowed to move");
+
+        }
+
+        //if same direction and last 
+
+        if (!collided)
+        {
+
+            while (t < 1f)
+            {
+                t += Time.deltaTime * walkSpeed;
+                entity.position = Vector3.Lerp(startPos, endPos, t);
+                //Debug.Log("entity.position");
+                yield return null;
+            }
+
+        }
+        else
+        {
+            if (currentDir != oldDirection)
+            {
+                collided = false;
+            }
+            //entity.position = entity.position;
         }
 
         isMoving = false;
