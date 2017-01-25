@@ -10,6 +10,7 @@ public class triggerSimplificacao : MonoBehaviour {
     private bool loadCameraOnce = false;
     public GameObject[] camerasOnScene;
     private AsyncOperation op;
+    public bool IsMinigameDone = true;
 
 	// Use this for initialization
     public void OnTriggerEnter2D()

@@ -45,7 +45,7 @@ public class UNETChat : Chat
 	    }
 
 		//getting the value of the input
-		myMessage.value = PlayerName+"-"+input.text;
+		myMessage.value = PlayerName+" - "+input.text;
 
         //sending to server
         NetworkManager.singleton.client.Send (chatMessageID, myMessage);

@@ -62,12 +62,12 @@ public class PolygonHandler : MonoBehaviour
             SelectionChecking();
             if (ShadowFigureCheck())
             {
-                GameObject.Find("Network Manager").GetComponent<ReturnScript>().ReturnToMainScene();
+                GameObject.Find("Network Manager").GetComponent<ReturnScript>().ReturnToMainScene("Polygon Game", true);
             }
         }
         else
         {
-            GameObject.Find("Network Manager").GetComponent<ReturnScript>().ReturnToMainScene();
+            GameObject.Find("Network Manager").GetComponent<ReturnScript>().ReturnToMainScene("Polygon Game",false);
         }
     }
 
@@ -120,7 +120,7 @@ public class PolygonHandler : MonoBehaviour
     bool ShadowFigureCheck()
     {
         //return (AllControllableHaveCorrespondence() && AllShadowsHaveCorrespondence())||AllPointsHaveMatch();
-        return AllControllableHaveCorrespondence();
+        return AllPointsHaveMatch();
     }
 
     bool AllShadowsHaveCorrespondence()
