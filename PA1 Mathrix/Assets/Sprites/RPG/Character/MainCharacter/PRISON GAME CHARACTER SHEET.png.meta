@@ -1,0 +1,694 @@
+fileFormatVersion: 2
+guid: a053265ee1916ab4b97541628c2603bb
+timeCreated: 1485134749
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: PRISON GAME CHARACTER SHEET_0
+    21300002: PRISON GAME CHARACTER SHEET_1
+    21300004: PRISON GAME CHARACTER SHEET_2
+    21300006: PRISON GAME CHARACTER SHEET_3
+    21300008: PRISON GAME CHARACTER SHEET_4
+    21300010: PRISON GAME CHARACTER SHEET_5
+    21300012: PRISON GAME CHARACTER SHEET_6
+    21300014: PRISON GAME CHARACTER SHEET_7
+    21300016: PRISON GAME CHARACTER SHEET_8
+    21300018: PRISON GAME CHARACTER SHEET_9
+    21300020: PRISON GAME CHARACTER SHEET_10
+    21300022: PRISON GAME CHARACTER SHEET_11
+    21300024: PRISON GAME CHARACTER SHEET_12
+    21300026: PRISON GAME CHARACTER SHEET_13
+    21300028: PRISON GAME CHARACTER SHEET_14
+    21300030: mainPlayerSouth1
+    21300032: mainPlayerSouth2
+    21300034: mainPlayerSouth3
+    21300036: mainPlayerSouth4
+    21300038: mainPlayerSouth5
+    21300040: mainPlayerSouth6
+    21300042: mainPlayerSouth7
+    21300044: mainPlayerIdle
+    21300046: PRISON GAME CHARACTER SHEET_23
+    21300048: PRISON GAME CHARACTER SHEET_24
+    21300050: PRISON GAME CHARACTER SHEET_25
+    21300052: PRISON GAME CHARACTER SHEET_26
+    21300054: PRISON GAME CHARACTER SHEET_27
+    21300056: PRISON GAME CHARACTER SHEET_28
+    21300058: PRISON GAME CHARACTER SHEET_29
+    21300060: PRISON GAME CHARACTER SHEET_30
+    21300062: PRISON GAME CHARACTER SHEET_31
+    21300064: PRISON GAME CHARACTER SHEET_32
+    21300066: PRISON GAME CHARACTER SHEET_33
+    21300068: PRISON GAME CHARACTER SHEET_34
+    21300070: PRISON GAME CHARACTER SHEET_35
+    21300072: PRISON GAME CHARACTER SHEET_36
+    21300074: PRISON GAME CHARACTER SHEET_37
+    21300076: PRISON GAME CHARACTER SHEET_38
+    21300078: PRISON GAME CHARACTER SHEET_39
+    21300080: PRISON GAME CHARACTER SHEET_40
+    21300082: PRISON GAME CHARACTER SHEET_41
+    21300084: PRISON GAME CHARACTER SHEET_42
+    21300086: PRISON GAME CHARACTER SHEET_43
+    21300088: PRISON GAME CHARACTER SHEET_44
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 32
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  buildTargetSettings:
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -3
+    compressionQuality: 50
+    allowsAlphaSplitting: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 153
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_1
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 149
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_2
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 146
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_3
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 146
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_4
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 146
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_5
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 146
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_6
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 146
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_7
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 146
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_8
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 153
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_9
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 146
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_10
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 146
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_11
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 146
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_12
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 146
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_13
+      rect:
+        serializedVersion: 2
+        x: 511
+        y: 146
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_14
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 146
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mainPlayerSouth1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 81
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mainPlayerSouth2
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 81
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mainPlayerSouth3
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 81
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mainPlayerSouth4
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 81
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mainPlayerSouth5
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 81
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mainPlayerSouth6
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 81
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mainPlayerSouth7
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 81
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mainPlayerIdle
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 81
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_23
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 81
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_24
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 82
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_25
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 82
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_26
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 82
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_27
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 82
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_28
+      rect:
+        serializedVersion: 2
+        x: 511
+        y: 82
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_29
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 82
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_30
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 10
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_31
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 7
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_32
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 12
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_33
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 7
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_34
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 10
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_35
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 11
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_36
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 0
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_37
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 18
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_38
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 18
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_39
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 18
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_40
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 18
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_41
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 18
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_42
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 18
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_43
+      rect:
+        serializedVersion: 2
+        x: 511
+        y: 18
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PRISON GAME CHARACTER SHEET_44
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 18
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -20,14 +20,18 @@ public class MovimentoJogador : NetworkBehaviour
     [SyncVar]
     public string PLAYERNAME;
 
+    private Animator anim;
+    private string layerTemporario, tagColliderTemporario;
     private Direction currentDir;
     private Direction oldDirection;
     private Vector2 input;
-    private bool isMoving = false, collided = false, startedTheGame = true;
+    public bool isMoving = false, collided = false, startedTheGame = true;
     private Vector3 startPos;
     private Vector3 endPos;
     private float t;
-
+    public bool automatic;
+    public Vector2 inputAuto;
+    public bool OneMovement;
     public GameObject PolygonTerminalCell;
 
     public InputField chatInput;
@@ -37,9 +41,11 @@ public class MovimentoJogador : NetworkBehaviour
     public Sprite SouthSprite;
     public Sprite WestSprite;
 
-
+    public bool orderToStop = false;
     public float walkSpeed = 3f;
-    public bool isAllowedToMove = true;
+    public bool isAllowedToMove;
+
+    public bool estaDentroDoComboio = false;
 
     void Awake()
     {
@@ -52,7 +58,10 @@ public class MovimentoJogador : NetworkBehaviour
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
-        isAllowedToMove = true;
+        anim = this.GetComponent<Animator>();
+        automatic = false;
+        inputAuto = Vector2.zero;
+        OneMovement = true;
     }
 
     void Update()
@@ -61,20 +70,32 @@ public class MovimentoJogador : NetworkBehaviour
             CheckIfIsInFrontOfPolygonTerminal();
         transform.SetParent(GameObject.Find("Players").transform);
         isAllowedToMove = !chatInput.isFocused;
-        ProcessMovement();
+        
+        if (!automatic)
+        {
+            ProcessMovement();
+        }
+        else if (automatic && OneMovement)
+        {
+            automaticMovement();
+            OneMovement = false;
+        }
+        
     }
 
     void ProcessMovement()
     {
+
+
         if (!isLocalPlayer)
             return;
         GameObject.Find("Camera").GetComponent<Camera>().transform.position = transform.position;
         if (!isMoving && isAllowedToMove)
         {
             oldDirection = currentDir;
-            //Debug.Log("input X" + input.y + " Input Y " + input.y);
             input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-            if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
+
+            if (Mathf.Abs(input.x) > Mathf.Abs(input.y)) //escolhe a direção se for um em X nao move no Y
             {
                 input.y = 0;
             }
@@ -82,10 +103,16 @@ public class MovimentoJogador : NetworkBehaviour
             {
                 input.x = 0;
             }
-            //Debug.Log("input X" + input.y + " Input Y " + input.y);
+
+            anim.SetFloat("Xvalue", input.x);
+            anim.SetFloat("Yvalue", input.y);
 
             if (input != Vector2.zero)
             {
+                //anim.SetTrigger("Moving");
+                anim.SetBool("Stop",false);
+                anim.SetBool("OnceStop", false);
+
                 if (input.x < 0)
                 {
                     currentDir = Direction.West;
@@ -103,28 +130,28 @@ public class MovimentoJogador : NetworkBehaviour
                     currentDir = Direction.North;
                 }
 
-                switch (currentDir)
-                {
-                    case Direction.North:
-                        gameObject.GetComponent<SpriteRenderer>().sprite = NorthSprite;
-                        break;
-                    case Direction.East:
-                        gameObject.GetComponent<SpriteRenderer>().sprite = EastSprite;
-                        break;
-                    case Direction.South:
-                        gameObject.GetComponent<SpriteRenderer>().sprite = SouthSprite;
-                        break;
-                    case Direction.West:
-                        gameObject.GetComponent<SpriteRenderer>().sprite = WestSprite;
-
-                        break;
-                }
-
-                //start corountine
-
                 StartCoroutine(Move(transform));
             }
+            else
+            {
+                if (!anim.GetBool("Stop")) //false
+                {
+                    anim.SetBool("Stop", true);
+                    //anim.SetBool("OnceStop",true);
+                }
+
+            }
         }
+    }
+
+    public void automaticMovement()
+    {
+        anim.SetBool("Stop", false);
+        anim.SetFloat("Xvalue", inputAuto.x);
+        anim.SetFloat("Yvalue", inputAuto.y);
+
+        StartCoroutine(MoveAuto(transform));
+
     }
 
     public void CheckIfIsInFrontOfPolygonTerminal()
@@ -149,18 +176,45 @@ public class MovimentoJogador : NetworkBehaviour
         }
     }
 
-    public void OnTriggerEnter2D()
+    public void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("Teste 1");
 
-            collided = true;
+        //layerTemporario = other.transform.GetComponent<SpriteRenderer>().sortingLayerName;
+        //tagColliderTemporario = other.transform.GetComponent<SpriteRenderer>().tag;
+
+        //if (tagColliderTemporario == "Train")
+        //{
+        //    other.transform.GetComponent<Animator>().set
+        //}
+
+        if (other.transform.GetComponent<SpriteRenderer>() != null)
+        {
+            if (other.transform.GetComponent<SpriteRenderer>().sortingLayerName != "Floor")
+                collided = true;
+        }
+
            // endPos = startPos;
+        //Debug.Log("OntriggerEnter2D " + other.transform.GetComponent<SpriteRenderer>().sortingLayerName);
 
     }
+
+
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if(isServer)
             return;
+
+        Debug.Log("Teste 2");
+
+        if (collision.transform.GetComponent<SpriteRenderer>().sortingLayerName != "Floor")
+        {
+            collided = true;
+
+            Debug.Log("Teste 3");
+        }
+
         if (collision.collider.gameObject.tag == "PolygonTerminal")
         {
             Debug.Log("MiniJogo");
@@ -180,6 +234,7 @@ public class MovimentoJogador : NetworkBehaviour
     public void OnCollisionExit2D(Collision2D collision)
     {
         collided = false;
+        if(!orderToStop)
         isAllowedToMove = true;
         Debug.Log("Existe!!");
     }
@@ -190,35 +245,27 @@ public class MovimentoJogador : NetworkBehaviour
         startPos = entity.position;
         t = 0;
 
-        //Debug.Log("Old direction : " + oldDirection + " currentDir " + currentDir);
         if (isAllowedToMove)
         {
             endPos = new Vector3(startPos.x + System.Math.Sign(input.x), startPos.y + System.Math.Sign(input.y),
                 startPos.z);
+            if (!orderToStop)
             isAllowedToMove = true;
-            //Debug.Log("is allowed to move");
 
         }
         else
         {
-
             Debug.Log("is not allowed to move");
-
         }
-
-        //if same direction and last 
 
         if (!collided)
         {
-
             while (t < 1f)
             {
                 t += Time.deltaTime * walkSpeed;
                 entity.position = Vector3.Lerp(startPos, endPos, t);
-                //Debug.Log("entity.position");
                 yield return null;
             }
-
         }
         else
         {
@@ -226,10 +273,62 @@ public class MovimentoJogador : NetworkBehaviour
             {
                 collided = false;
             }
-            //entity.position = entity.position;
         }
 
         isMoving = false;
+        yield return 0;
+    }
+
+
+    public IEnumerator MoveAuto(Transform entity)
+    {
+        isMoving = true;
+        startPos = entity.position;
+        t = 0;
+
+        //Debug.Log("Old direction : " + oldDirection + " currentDir " + currentDir);
+        if (isAllowedToMove)
+        {
+            //endPos = new Vector3(startPos.x + System.Math.Sign(inputAuto.x), startPos.y + System.Math.Sign(inputAuto.y),
+            //    startPos.z);
+
+            endPos = new Vector3(startPos.x + inputAuto.x, startPos.y + inputAuto.y,startPos.z);
+
+            if (!orderToStop)
+                isAllowedToMove = true;
+        }
+        else
+        {
+            Debug.Log("is not allowed to move");
+        }
+
+        if (!collided)
+        {
+            while (t < 1f)
+            {
+                t += 0.007f* walkSpeed;
+                entity.position = Vector3.Lerp(startPos, endPos, t);
+                if (entity.position == endPos)
+                {
+                    inputAuto = Vector2.zero;
+ 
+                    estaDentroDoComboio = true;
+                    Debug.Log("Aqui!");
+                    GameObject.FindGameObjectWithTag("Train").GetComponent<MoveTrain>().checkPlayerInTrain();
+                }
+                yield return null;
+            }
+        }
+        else
+        {
+            if (currentDir != oldDirection)
+            {
+                collided = false;
+            }
+        }
+
+        isMoving = false;
+
         yield return 0;
     }
 

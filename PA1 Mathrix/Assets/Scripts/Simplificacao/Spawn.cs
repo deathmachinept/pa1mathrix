@@ -21,7 +21,7 @@ public class Spawn : MonoBehaviour
 
     private GameObject DuplicateSprite;
 
-    private Vector3 scale = new Vector3(1f,1f,1f);
+    private Vector3 scale = new Vector3(0.5f, 0.5f, 0.5f);
     public Text scoreText;
     private List<String> listaTips;
     private float timerForNextTip;

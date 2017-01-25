@@ -26,6 +26,11 @@ TagManager:
   - Polygon
   - BackgroundMusic
   - PolygonTerminal
+  - Train
+  - TrainDoorsLeft
+  - TrainDoorsRight
+  - ManagerPlayers
+  - ChatCanvas
   layers:
   - Default
   - TransparentFX
@@ -68,4 +73,16 @@ TagManager:
     locked: 0
   - name: ActiveObjects
     uniqueID: 3978184593
+    locked: 0
+  - name: Walls
+    uniqueID: 40991731
+    locked: 0
+  - name: Objects
+    uniqueID: 108945479
+    locked: 0
+  - name: Roof
+    uniqueID: 3072238119
+    locked: 0
+  - name: Minigames
+    uniqueID: 2046187743
     locked: 0

@@ -25,6 +25,7 @@ GameObject:
   - 114: {fileID: 114000012248654626}
   - 61: {fileID: 61000010675186484}
   - 50: {fileID: 50000012298843358}
+  - 95: {fileID: 95000013682405740}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -112,6 +113,23 @@ BoxCollider2D:
   m_Offset: {x: -0.11, y: -0.11}
   serializedVersion: 2
   m_Size: {x: 0.8, y: 0.9}
+--- !u!95 &95000013682405740
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010149708550}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a6d54f0dfffbaf14f83dcc18e7f95610, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114000010142124020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -161,14 +179,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PLAYERNAME: 
+  isMoving: 0
+  collided: 0
+  startedTheGame: 1
+  automatic: 0
+  inputAuto: {x: 0, y: 0}
+  OneMovement: 0
   PolygonTerminalCell: {fileID: 0}
   chatInput: {fileID: 0}
-  NorthSprite: {fileID: 21300000, guid: 7a9f2480bfdfff04788acbc4f75f42e5, type: 3}
-  EastSprite: {fileID: 21300018, guid: 7a9f2480bfdfff04788acbc4f75f42e5, type: 3}
-  SouthSprite: {fileID: 21300006, guid: 7a9f2480bfdfff04788acbc4f75f42e5, type: 3}
-  WestSprite: {fileID: 21300012, guid: 7a9f2480bfdfff04788acbc4f75f42e5, type: 3}
+  NorthSprite: {fileID: 21300000, guid: fe77bf995b8dc4946aae021581400c61, type: 3}
+  EastSprite: {fileID: 21300000, guid: fe77bf995b8dc4946aae021581400c61, type: 3}
+  SouthSprite: {fileID: 21300000, guid: fe77bf995b8dc4946aae021581400c61, type: 3}
+  WestSprite: {fileID: 21300000, guid: fe77bf995b8dc4946aae021581400c61, type: 3}
+  orderToStop: 0
   walkSpeed: 3
   isAllowedToMove: 1
+  estaDentroDoComboio: 0
 --- !u!114 &114000011846304220
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -281,9 +307,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 2
-  m_Sprite: {fileID: 21300006, guid: 7a9f2480bfdfff04788acbc4f75f42e5, type: 3}
+  m_SortingLayerID: -316782703
+  m_SortingOrder: 3
+  m_Sprite: {fileID: 21300056, guid: a2324ec6cb9867649befa2a2792210d6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

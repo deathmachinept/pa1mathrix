@@ -63,6 +63,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Agent.cs" />
+    <Compile Include="Assets\DoorLeftOpenAnimScript.cs" />
+    <Compile Include="Assets\DoorRightOpenAnimScript.cs" />
     <Compile Include="Assets\MaterialUI\Examples\Scripts\04 - RadioButton\Example04.cs" />
     <Compile Include="Assets\MaterialUI\Examples\Scripts\05 - Sliders\Example05.cs" />
     <Compile Include="Assets\MaterialUI\Scripts\Anim.cs" />
@@ -105,6 +108,9 @@
     <Compile Include="Assets\MaterialUI\Scripts\Toaster.cs" />
     <Compile Include="Assets\MaterialUI\Scripts\ToggleConfig.cs" />
     <Compile Include="Assets\MaterialUI\Scripts\ToggleTextChanger.cs" />
+    <Compile Include="Assets\MoveTrain.cs" />
+    <Compile Include="Assets\RangeFloat.cs" />
+    <Compile Include="Assets\RangeInt.cs" />
     <Compile Include="Assets\Resources\MainMenuResources\Scripts\MainMenuController.cs" />
     <Compile Include="Assets\Resources\PolygonGameResources\Scripts\DrawGrid.cs" />
     <Compile Include="Assets\Resources\PolygonGameResources\Scripts\MatrixDisplayBackgroundManager.cs" />
@@ -138,11 +144,13 @@
     <Compile Include="Assets\Scripts\Quiz\SingletonAdjust.cs" />
     <Compile Include="Assets\Scripts\RPG\Character\CharacterMovement.cs" />
     <Compile Include="Assets\Scripts\RPG\Character\MovimentoJogador.cs" />
+    <Compile Include="Assets\Scripts\RPG\HackingTerminals\PoligonHackTerminal.cs" />
     <Compile Include="Assets\Scripts\RPG\Music\MusicManagement.cs" />
     <Compile Include="Assets\Scripts\Simplificacao\ArrayMembros.cs" />
     <Compile Include="Assets\Scripts\Simplificacao\DragSprite.cs" />
     <Compile Include="Assets\Scripts\Simplificacao\Spawn.cs" />
     <Compile Include="Assets\Video\PlayVideo.cs" />
+    <Compile Include="Assets\callTrain.cs" />
     <Compile Include="Assets\getPossibleSolution.cs" />
     <Compile Include="Assets\triggerSimplificacao.cs" />
   </ItemGroup>
