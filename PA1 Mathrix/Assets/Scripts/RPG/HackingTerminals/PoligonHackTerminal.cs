@@ -1,32 +1,40 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class PoligonHackTerminal : MonoBehaviour {
+public class PoligonHackTerminal : MonoBehaviour
+{
 
-	// Use this for initialization
-    private bool podeCarregar = false;
+    // Use this for initialization
+    public NetworkIdentity interactingPlayerIdentity;
+    public bool IsMinigameDone=false;
+    public bool podeCarregar = false;
     private bool carregou = false;
     private bool loadCameraOnce = false;
     public GameObject[] camerasOnScene;
     private AsyncOperation op;
 
     // Use this for initialization
-    public void OnTriggerEnter2D()
+
+    public void OnTriggerEnter2D(Collider2D collider)
     {
+        Debug.Log("Colision");
+        interactingPlayerIdentity = collider.gameObject.GetComponent<NetworkIdentity>();
         podeCarregar = true;
     }
 
+
+
     public void OnTriggerExit2D()
     {
+        interactingPlayerIdentity = null;
         podeCarregar = false;
     }
 
     void Update()
     {
-
-
         if (podeCarregar && !carregou)
         {
             if (Input.GetKeyDown(KeyCode.F))
@@ -34,16 +42,17 @@ public class PoligonHackTerminal : MonoBehaviour {
 
                 //Camera.main.enabled = false;
                 //camerasOnScene[0].tag = "Untagged";
-
-                op = SceneManager.LoadSceneAsync("Desenho Polígono", LoadSceneMode.Additive);
-                GameObject.Find("MainSceneObjectsHolder").SetActive(false);
-                GameObject.Find("Players").SetActive(false);
-                GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().CurrentSceneName =
-                    "Desenho Polígono";
-                transform.position = Vector3.zero;
-                GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().players.SetActive(false);
-                GameObject.FindGameObjectWithTag("ChatCanvas").SetActive(false);
-
+                if (interactingPlayerIdentity.isLocalPlayer)
+                {
+                    SceneManager.LoadSceneAsync("Desenho Polígono", LoadSceneMode.Additive);
+                    GameObject.Find("MainSceneObjectsHolder").SetActive(false);
+                    GameObject.Find("Players").SetActive(false);
+                    GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().CurrentSceneName =
+                        "Desenho Polígono";
+                    transform.position = Vector3.zero;
+                    GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().players.SetActive(false);
+                    GameObject.Find("ChatCanvas").SetActive(false);
+                }
 
                 //loadCameraOnce = true;
                 //carregou = true;
