@@ -85,8 +85,6 @@ public class MovimentoJogador : NetworkBehaviour
 
     void ProcessMovement()
     {
-
-
         if (!isLocalPlayer)
             return;
         GameObject.Find("Camera").GetComponent<Camera>().transform.position = transform.position;

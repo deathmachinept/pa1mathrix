@@ -57,8 +57,6 @@ public class MoveTrain : MonoBehaviour {
 
         if (podeCarregar && !carregouOnce)
 	    {
-
-
 	        if (Input.GetKeyDown(KeyCode.F))
 	        {
                 Debug.Log("Pos " + playerTriggered.transform.localPosition + " " + playerTriggered.GetComponent<MovimentoJogador>().isAllowedToMove);

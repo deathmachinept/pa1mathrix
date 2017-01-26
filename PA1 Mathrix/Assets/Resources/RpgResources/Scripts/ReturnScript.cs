@@ -30,6 +30,11 @@ public class ReturnScript : MonoBehaviour
                     .GetComponent<callTrain>()
                     .Terminal1.GetComponent<PoligonHackTerminal>()
                     .IsMinigameDone = true;
+                GameObject.Find("MainSceneObjectsHolder")
+                    .transform.FindChild("TrainCallHolder")
+                    .GetComponent<callTrain>()
+                    .Terminal1.GetComponent<PoligonHackTerminal>()
+                    .podeCarregar=false;
             }
         }
     }

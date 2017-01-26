@@ -15658,7 +15658,7 @@ Prefab:
     - target: {fileID: 224000012286451818, guid: 7f821c08ae4df6e4889a8bf1cbdb9691,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 224000010736609008, guid: 7f821c08ae4df6e4889a8bf1cbdb9691,
         type: 2}
@@ -38031,7 +38031,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 907126735}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -27.7, y: 9.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -49646,7 +49646,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1208483044}
   - 212: {fileID: 1208483046}
-  - 61: {fileID: 1208483045}
   m_Layer: 0
   m_Name: FloorSouth
   m_TagString: Untagged
@@ -49667,20 +49666,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1324181454}
   m_RootOrder: 3
---- !u!61 &1208483045
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1208483043}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 3.27, y: -0.27}
-  serializedVersion: 2
-  m_Size: {x: 0.84, y: 0.96}
 --- !u!212 &1208483046
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -63695,6 +63680,7 @@ GameObject:
   - 114: {fileID: 1533840699}
   - 61: {fileID: 1533840698}
   - 114: {fileID: 1533840700}
+  - 114: {fileID: 1533840701}
   m_Layer: 0
   m_Name: HackObect
   m_TagString: Untagged
@@ -63764,6 +63750,38 @@ MonoBehaviour:
   camerasOnScene:
   - {fileID: 907126735}
   - {fileID: 0}
+--- !u!114 &1533840701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1533840696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!1 &1535837302
 GameObject:
   m_ObjectHideFlags: 0
