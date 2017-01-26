@@ -1,15 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using JetBrains.Annotations;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class PoligonHackTerminal : MonoBehaviour
+public class PoligonHackTerminal : NetworkBehaviour
 {
 
     // Use this for initialization
     public NetworkIdentity interactingPlayerIdentity;
+
+    [SyncVar]
     public bool IsMinigameDone=false;
+
     public bool podeCarregar = false;
     private bool carregou = false;
     private bool loadCameraOnce = false;
@@ -35,11 +39,14 @@ public class PoligonHackTerminal : MonoBehaviour
 
     void Update()
     {
-        if (podeCarregar && !carregou)
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            IsMinigameDone = true;
+        }
+        if (podeCarregar && !carregou && !IsMinigameDone)
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-
                 //Camera.main.enabled = false;
                 //camerasOnScene[0].tag = "Untagged";
                 if (interactingPlayerIdentity.isLocalPlayer)
@@ -80,5 +87,11 @@ public class PoligonHackTerminal : MonoBehaviour
                 //loadCameraOnce = false;
             }
         }
+    }
+
+    [Command]
+    void CmdSwitchIsMinigameDone()
+    {
+        IsMinigameDone = true;
     }
 }

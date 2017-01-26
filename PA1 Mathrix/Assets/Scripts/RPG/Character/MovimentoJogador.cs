@@ -95,8 +95,6 @@ public class MovimentoJogador : NetworkBehaviour
 
     void ProcessMovement()
     {
-
-
         if (!isLocalPlayer)
         {
             currentPosition = transform.position;
