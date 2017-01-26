@@ -49,6 +49,8 @@ public class MovimentoJogador : NetworkBehaviour
 
     public Vector3 NotLocalPlayerPositionLastPosition;
     public Vector3 currentPosition;
+    public Vector3 inputEspecial;
+    public float timer;
 
 
     void Awake()
@@ -65,11 +67,13 @@ public class MovimentoJogador : NetworkBehaviour
         anim = this.GetComponent<Animator>();
         automatic = false;
         inputAuto = Vector2.zero;
+        inputEspecial = Vector3.zero;
         OneMovement = true;
+        timer = 0.1f;
         if (!isLocalPlayer)
         {
-            NotLocalPlayerPositionLastPosition = this.transform.position;
-
+            NotLocalPlayerPositionLastPosition = transform.position;
+            currentPosition = transform.position;
         }
 
     }
@@ -97,35 +101,50 @@ public class MovimentoJogador : NetworkBehaviour
     {
         if (!isLocalPlayer)
         {
+
             currentPosition = transform.position;
-            if (currentPosition != NotLocalPlayerPositionLastPosition)
-            {
-
-                Vector3 inputEspecial = currentPosition - NotLocalPlayerPositionLastPosition;
-                Debug.Log("Especial Devia estar parado "+ inputEspecial + inputEspecial);
-
-                anim.SetFloat("Xvalue", input.x);
-                anim.SetFloat("Yvalue", input.y);
-                //anim.SetFloat("Xvalue", gameObject.GetComponent<NetworkTransform>().transform.position.x);
-
-
-                //NotLocalPlayerPositionLastPosition = NotLocalPlayerPositionLastPosition - gameObject.GetComponent<NetworkTransform>().
-            }
-            else
-            {
-                Debug.Log("Especial Devia estar parado");
-                if (anim.GetFloat("Xvalue") != 0f)
+            timer -= Time.deltaTime;
+            if (timer < 0) { 
+                if (currentPosition != NotLocalPlayerPositionLastPosition) // sempre que o local position é diferente calcula o input
                 {
-                    anim.SetFloat("Xvalue", 0f);
+                    anim.SetBool("Stop", false);
+
+                    inputEspecial = currentPosition - NotLocalPlayerPositionLastPosition;
+                    NotLocalPlayerPositionLastPosition = currentPosition;
+                    anim.SetFloat("Xvalue", inputEspecial.x);
+                    anim.SetFloat("Yvalue", inputEspecial.y);
+                }
+                else
+                {
+                    if (!anim.GetBool("Stop")) //false
+                    {
+                        anim.SetBool("Stop", true);
+                        inputEspecial = Vector3.zero;
+
+                        Debug.Log("Entrie uma vez!");
+                        NotLocalPlayerPositionLastPosition = currentPosition;
+                        anim.SetFloat("Xvalue", 0f);
+                        anim.SetFloat("Yvalue", 0f);
+                    }
 
                 }
-                else if (anim.GetFloat("Yvalue") != 0f)
-                {
-                    anim.SetFloat("Yvalue", 0f);
-
-                }
-
+                timer = 0.1f;
             }
+
+            //if (inputEspecial != Vector3.zero)
+            //{
+            //    anim.SetBool("Stop", false);
+            //    anim.SetBool("OnceStop", false);
+
+
+            //    Debug.Log("Especial Devia estar a andar " + inputEspecial + inputEspecial + anim.GetFloat("Xvalue") + anim.GetFloat("Yvalue"));
+
+            //    //anim.SetFloat("Xvalue", gameObject.GetComponent<NetworkTransform>().transform.position.x);
+
+            //    NotLocalPlayerPositionLastPosition = currentPosition;
+            //    //NotLocalPlayerPositionLastPosition = NotLocalPlayerPositionLastPosition - gameObject.GetComponent<NetworkTransform>().
+            //}
+
 
         }
         else
