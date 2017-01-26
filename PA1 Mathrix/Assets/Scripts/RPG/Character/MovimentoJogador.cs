@@ -47,6 +47,10 @@ public class MovimentoJogador : NetworkBehaviour
 
     public bool estaDentroDoComboio = false;
 
+    public Vector3 NotLocalPlayerPositionLastPosition;
+    public Vector3 currentPosition;
+
+
     void Awake()
     {
         chatInput = GameObject.Find("ChatCanvas")
@@ -62,6 +66,12 @@ public class MovimentoJogador : NetworkBehaviour
         automatic = false;
         inputAuto = Vector2.zero;
         OneMovement = true;
+        if (!isLocalPlayer)
+        {
+            NotLocalPlayerPositionLastPosition = this.transform.position;
+
+        }
+
     }
 
     void Update()
@@ -88,56 +98,91 @@ public class MovimentoJogador : NetworkBehaviour
 
 
         if (!isLocalPlayer)
-            return;
-        GameObject.Find("Camera").GetComponent<Camera>().transform.position = transform.position;
-        if (!isMoving && isAllowedToMove)
         {
-            oldDirection = currentDir;
-            input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-
-            if (Mathf.Abs(input.x) > Mathf.Abs(input.y)) //escolhe a direção se for um em X nao move no Y
+            currentPosition = transform.position;
+            if (currentPosition != NotLocalPlayerPositionLastPosition)
             {
-                input.y = 0;
+
+                Vector3 inputEspecial = currentPosition - NotLocalPlayerPositionLastPosition;
+                Debug.Log("Especial Devia estar parado "+ inputEspecial + inputEspecial);
+
+                anim.SetFloat("Xvalue", input.x);
+                anim.SetFloat("Yvalue", input.y);
+                //anim.SetFloat("Xvalue", gameObject.GetComponent<NetworkTransform>().transform.position.x);
+
+
+                //NotLocalPlayerPositionLastPosition = NotLocalPlayerPositionLastPosition - gameObject.GetComponent<NetworkTransform>().
             }
             else
             {
-                input.x = 0;
+                Debug.Log("Especial Devia estar parado");
+                if (anim.GetFloat("Xvalue") != 0f)
+                {
+                    anim.SetFloat("Xvalue", 0f);
+
+                }
+                else if (anim.GetFloat("Yvalue") != 0f)
+                {
+                    anim.SetFloat("Yvalue", 0f);
+
+                }
+
             }
 
-            anim.SetFloat("Xvalue", input.x);
-            anim.SetFloat("Yvalue", input.y);
-
-            if (input != Vector2.zero)
+        }
+        else
+        {
+            GameObject.Find("Camera").GetComponent<Camera>().transform.position = transform.position;
+            if (!isMoving && isAllowedToMove)
             {
-                //anim.SetTrigger("Moving");
-                anim.SetBool("Stop",false);
-                anim.SetBool("OnceStop", false);
+                oldDirection = currentDir;
+                input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-                if (input.x < 0)
+                if (Mathf.Abs(input.x) > Mathf.Abs(input.y)) //escolhe a direção se for um em X nao move no Y
                 {
-                    currentDir = Direction.West;
+                    input.y = 0;
                 }
-                if (input.x > 0)
+                else
                 {
-                    currentDir = Direction.East;
-                }
-                if (input.y < 0)
-                {
-                    currentDir = Direction.South;
-                }
-                if (input.y > 0)
-                {
-                    currentDir = Direction.North;
+                    input.x = 0;
                 }
 
-                StartCoroutine(Move(transform));
-            }
-            else
-            {
-                if (!anim.GetBool("Stop")) //false
+                anim.SetFloat("Xvalue", input.x);
+                anim.SetFloat("Yvalue", input.y);
+
+                if (input != Vector2.zero)
                 {
-                    anim.SetBool("Stop", true);
-                    //anim.SetBool("OnceStop",true);
+                    //anim.SetTrigger("Moving");
+                    anim.SetBool("Stop", false);
+                    anim.SetBool("OnceStop", false);
+
+                    if (input.x < 0)
+                    {
+                        currentDir = Direction.West;
+                    }
+                    if (input.x > 0)
+                    {
+                        currentDir = Direction.East;
+                    }
+                    if (input.y < 0)
+                    {
+                        currentDir = Direction.South;
+                    }
+                    if (input.y > 0)
+                    {
+                        currentDir = Direction.North;
+                    }
+
+                    StartCoroutine(Move(transform));
+                }
+                else
+                {
+                    if (!anim.GetBool("Stop")) //false
+                    {
+                        anim.SetBool("Stop", true);
+                        //anim.SetBool("OnceStop",true);
+                    }
+
                 }
 
             }

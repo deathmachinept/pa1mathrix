@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
+# Visual Studio 2013
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PA1 Mathrix.CSharp", "PA1 Mathrix.CSharp.csproj", "{78779ACC-CA32-FF87-98A7-35A9E0EF6D38}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PA1 Mathrix.CSharp.Editor", "PA1 Mathrix.CSharp.Editor.csproj", "{71458EBE-E8C0-D0BA-C49F-A3E26CA47640}"
