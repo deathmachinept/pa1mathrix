@@ -11,16 +11,27 @@ public class PoligonHackTerminal : NetworkBehaviour
     // Use this for initialization
     public NetworkIdentity interactingPlayerIdentity;
 
-    [SyncVar]
-    public bool IsMinigameDone=false;
+    [SyncVar(hook = "MinigameWasDone")]
+    public bool IsMinigameDone;
 
     public bool podeCarregar = false;
     private bool carregou = false;
     private bool loadCameraOnce = false;
     public GameObject[] camerasOnScene;
     private AsyncOperation op;
+    
+    public void TriggerTrain(bool input)
+    {
+        IsMinigameDone = input;
+    }
 
-    // Use this for initialization
+    public void Start()
+    {
+        if (isServer)
+        {
+            IsMinigameDone = false;
+        }
+    }
 
     public void OnTriggerEnter2D(Collider2D collider)
     {
@@ -29,7 +40,16 @@ public class PoligonHackTerminal : NetworkBehaviour
         podeCarregar = true;
     }
 
+    [ClientRpc]
+    public void RpcSwitch(bool value)
+    {
+        IsMinigameDone = value;
+    }
 
+    void MinigameWasDone(bool value)
+    {
+        IsMinigameDone = value;
+    }
 
     public void OnTriggerExit2D()
     {
@@ -39,9 +59,9 @@ public class PoligonHackTerminal : NetworkBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (isServer)
         {
-            IsMinigameDone = true;
+            Debug.Log("Is Minigame Done? "+IsMinigameDone);
         }
         if (podeCarregar && !carregou && !IsMinigameDone)
         {
@@ -87,11 +107,5 @@ public class PoligonHackTerminal : NetworkBehaviour
                 //loadCameraOnce = false;
             }
         }
-    }
-
-    [Command]
-    void CmdSwitchIsMinigameDone()
-    {
-        IsMinigameDone = true;
     }
 }

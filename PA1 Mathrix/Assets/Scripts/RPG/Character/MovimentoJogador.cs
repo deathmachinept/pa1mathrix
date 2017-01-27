@@ -74,8 +74,24 @@ public class MovimentoJogador : NetworkBehaviour
 
     }
 
+    [Command]
+    public void CmdGiveStatusOfPolygonTerminalHack()
+    {
+        NetworkIdentity terminalNetID = GameObject.Find("HackObect").GetComponent<NetworkIdentity>();
+        terminalNetID.AssignClientAuthority(terminalNetID.connectionToClient);
+        terminalNetID.GetComponent<PoligonHackTerminal>().RpcSwitch(true);
+        terminalNetID.RemoveClientAuthority(terminalNetID.connectionToClient);
+    }
+
     void Update()
     {
+        if (isClient)
+        {
+            if (Input.GetKeyDown(KeyCode.P) && GameObject.Find("HackObect").GetComponent<PoligonHackTerminal>().interactingPlayerIdentity==gameObject.GetComponent<NetworkIdentity>())
+            {
+                CmdGiveStatusOfPolygonTerminalHack();
+            }
+        }
         if (GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().PolygonTerminalCell != null)
             CheckIfIsInFrontOfPolygonTerminal();
         transform.SetParent(GameObject.Find("Players").transform);
@@ -90,7 +106,6 @@ public class MovimentoJogador : NetworkBehaviour
             automaticMovement();
             OneMovement = false;
         }
-        
     }
 
     void ProcessMovement()

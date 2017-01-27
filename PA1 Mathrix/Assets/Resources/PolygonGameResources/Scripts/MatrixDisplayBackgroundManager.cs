@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 public class MatrixDisplayBackgroundManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public bool isOver = false;
-
     public void FixedUpdate()
     {
         if (isOver)
