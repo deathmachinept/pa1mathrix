@@ -12,7 +12,7 @@ public class UNETChat : Chat
 		{
 			NetworkServer.RegisterHandler(chatMessageID, ServerReceiveMessage);
 		}
-        
+
         NetworkManager.singleton.client.RegisterHandler(chatMessageID, ReceiveMessage);
 	}
 
