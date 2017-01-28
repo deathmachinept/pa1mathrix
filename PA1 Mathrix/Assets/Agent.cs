@@ -1,8 +1,27 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
+using Random = UnityEngine.Random;
 
 
 public class Agent : MonoBehaviour {
+
+
+    private int layout_type; // Layout type
+    int room_type; // Room type
+    public int room_max; // Max room size
+    public int room_min; // Min room size
+    public int room_num; // Number of rooms
+    public int room_base;
+    public int room_radix;
+    bool room_blocked = false; // If room is blocked
+    int redo = 1000; // Recursion limit
+    ArrayList rooms; // Room arraylist
+    int corridor_num;
+    int corridor_weight;
+    int turning_weight;
+
+
 
 
     public enum Direction
@@ -47,6 +66,7 @@ public class Agent : MonoBehaviour {
 
     void Start()
     {
+
         Random.InitState(31);
         chosenStartPos = false;
         RoomMap = new int[mapWidth,mapHeight];
@@ -58,6 +78,12 @@ public class Agent : MonoBehaviour {
         //range.Weight = 60f; range1.Weight = 40f; range2.Weight = 20f;
 
     }
+
+
+
+
+
+   
 
 
     //1-Determine the number of rooms to be created based on the room layout selected, and updates various user-configured variables in updateParam()
