@@ -1,0 +1,1366 @@
+fileFormatVersion: 2
+guid: 6c2596c01752cf642a7c78c3290cb2b3
+timeCreated: 1485725438
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: character_sprites3_0
+    21300002: character_sprites3_1
+    21300004: Guard_East_Attack0
+    21300006: Guard_East_Attack1
+    21300008: character_sprites3_7
+    21300010: character_sprites3_8
+    21300012: character_sprites3_9
+    21300014: character_sprites3_10
+    21300016: character_sprites3_11
+    21300018: character_sprites3_12
+    21300020: character_sprites3_13
+    21300022: character_sprites3_14
+    21300024: Guard_West_Attack0
+    21300026: Guard_West_Attack1
+    21300028: character_sprites3_19
+    21300030: character_sprites3_20
+    21300032: character_sprites3_21
+    21300034: character_sprites3_22
+    21300036: character_sprites3_23
+    21300038: character_sprites3_24
+    21300040: character_sprites3_25
+    21300042: character_sprites3_26
+    21300044: Guard_South_Attack0
+    21300046: Guard_South_Attack1
+    21300048: character_sprites3_31
+    21300050: character_sprites3_32
+    21300052: character_sprites3_33
+    21300054: character_sprites3_34
+    21300056: character_sprites3_35
+    21300058: character_sprites3_36
+    21300060: character_sprites3_37
+    21300062: Guard_North_Attack0
+    21300064: Guard_North_Attack1
+    21300066: character_sprites3_43
+    21300068: character_sprites3_44
+    21300070: character_sprites3_45
+    21300072: character_sprites3_46
+    21300074: character_sprites3_47
+    21300076: character_sprites3_48
+    21300078: Guard_East0
+    21300080: Guard_East1
+    21300082: Guard_East2
+    21300084: Guard_East3
+    21300086: Guard_East4
+    21300088: Guard_East5
+    21300090: Guard_East6
+    21300092: character_sprites3_56
+    21300094: character_sprites3_57
+    21300096: character_sprites3_58
+    21300098: character_sprites3_59
+    21300100: character_sprites3_60
+    21300102: character_sprites3_61
+    21300104: Guard_West0
+    21300106: Guard_West1
+    21300108: Guard_West2
+    21300110: Guard_West3
+    21300112: Guard_West4
+    21300114: Guard_West5
+    21300116: Guard_West6
+    21300118: character_sprites3_69
+    21300120: character_sprites3_70
+    21300122: character_sprites3_71
+    21300124: character_sprites3_72
+    21300126: character_sprites3_73
+    21300128: character_sprites3_74
+    21300130: Guard_South0
+    21300132: Guard_South1
+    21300134: Guard_South3
+    21300136: Guard_South4
+    21300138: Guard_South5
+    21300140: Guard_South6
+    21300142: Guard_South7
+    21300144: character_sprites3_82
+    21300146: character_sprites3_83
+    21300148: character_sprites3_84
+    21300150: character_sprites3_85
+    21300152: character_sprites3_86
+    21300154: character_sprites3_87
+    21300156: Guard_North0
+    21300158: Guard_North1
+    21300160: Guard_North2
+    21300162: Guard_North3
+    21300164: Guard_North4
+    21300166: Guard_North5
+    21300168: Guard_North6
+    21300170: character_sprites3_95
+    21300172: Guard_Idle0
+    21300174: Guard_Idle1
+    21300176: Guard_Idle2
+    21300178: Guard_Idle3
+    21300180: Guard_Idle4
+    21300182: Guard_Idle5
+    21300184: Guard_Idle6
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 32
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  buildTargetSettings:
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -3
+    compressionQuality: 50
+    allowsAlphaSplitting: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: character_sprites3_0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 562
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_1
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 562
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_East_Attack0
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 562
+        width: 80
+        height: 64
+      alignment: 9
+      pivot: {x: 0.17138596, y: 0.5421305}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_East_Attack1
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 562
+        width: 80
+        height: 64
+      alignment: 9
+      pivot: {x: 0.17981187, y: 0.5315981}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_7
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 492
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_8
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 492
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_9
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 492
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_10
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 492
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_11
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 492
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_12
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 492
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_13
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 492
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_14
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 492
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_West_Attack0
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 492
+        width: 80
+        height: 64
+      alignment: 9
+      pivot: {x: 0.8454674, y: 0.52106476}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_West_Attack1
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 492
+        width: 80
+        height: 64
+      alignment: 9
+      pivot: {x: 0.8538929, y: 0.5105324}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_19
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 422
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_20
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 422
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_21
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 422
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_22
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 422
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_23
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 422
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_24
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 422
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_25
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 422
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_26
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 422
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_South_Attack0
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 422
+        width: 80
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_South_Attack1
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 422
+        width: 80
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_31
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 352
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_32
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 352
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_33
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 352
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_34
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 352
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_35
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 352
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_36
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 352
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_37
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 352
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_North_Attack0
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 352
+        width: 80
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_North_Attack1
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 352
+        width: 80
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_43
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 282
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_44
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 282
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_45
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 282
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_46
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 282
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_47
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 282
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_48
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 282
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_East0
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 282
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_East1
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 282
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_East2
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 282
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_East3
+      rect:
+        serializedVersion: 2
+        x: 386
+        y: 282
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_East4
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 282
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_East5
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 282
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_East6
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 282
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_56
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 212
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_57
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 212
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_58
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 212
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_59
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 212
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_60
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 212
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_61
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 212
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_West0
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 212
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_West1
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 212
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_West2
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 212
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_West3
+      rect:
+        serializedVersion: 2
+        x: 386
+        y: 212
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_West4
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 212
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_West5
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 212
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_West6
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 212
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_69
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 142
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_70
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 142
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_71
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 142
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_72
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 142
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_73
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 142
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_74
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 142
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_South0
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 142
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_South1
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 142
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_South3
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 142
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_South4
+      rect:
+        serializedVersion: 2
+        x: 386
+        y: 142
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_South5
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 142
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_South6
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 142
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_South7
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 142
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_82
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 72
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_83
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 72
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_84
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 72
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_85
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 72
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_86
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 72
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_87
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 72
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_North0
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 72
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_North1
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 72
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_North2
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 72
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_North3
+      rect:
+        serializedVersion: 2
+        x: 386
+        y: 72
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_North4
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 72
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_North5
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 72
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_North6
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 72
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: character_sprites3_95
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 2
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_Idle0
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 2
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_Idle1
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 2
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_Idle2
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 2
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_Idle3
+      rect:
+        serializedVersion: 2
+        x: 386
+        y: 2
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_Idle4
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 2
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_Idle5
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 2
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Guard_Idle6
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 2
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

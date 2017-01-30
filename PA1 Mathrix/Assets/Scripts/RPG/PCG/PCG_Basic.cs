@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+
 
 public class PCG_Basic : PCG{
 
@@ -16,18 +18,34 @@ public class PCG_Basic : PCG{
     int corridor_num;
     int corridor_weight;
     int turning_weight;
+    private System.Random R;
 
     // *A Star
     BinaryHeap open_list;
     BinaryHeap closed_list;
 
+
+
     public void updateParam(int g_width, int g_height, int r_type, int r_min, int r_max, int c_num, int c_weight, int t_weight)
     {
+        R = new System.Random(); 
         base.updateParam(g_width, g_height);
-        updateParam(g_width, g_height);
+
+        if (g_height == 0)
+            g_height = 1;
+        if (r_type == 0)
+            r_type = 1;
+        if (r_min == 0)
+            r_min = 1;
+        if (r_max == 0)
+            r_max = 1;
+        if (c_num == 0)
+            c_num = 1;
+        if (c_weight == 0)
+            c_weight = 1;
+
 
         room_type = r_type; // Room type
-
         room_min = r_min; // Default 9
         room_max = r_max; // Default 16
         room_base = (int)((room_min + 1) * 0.5);
@@ -35,16 +53,28 @@ public class PCG_Basic : PCG{
 
 
 
+
         switch (room_type)
+
         {
-            case 0: room_num = (pcgrid_width * pcgrid_height) / (int)(Random.Range(room_min, room_max) * room_max) + 1;
+                
+            case 0: room_num = (pcgrid_width * pcgrid_height) / (int)(R.Next(room_min, room_max) * room_max) + 1;
                 break; // Scattered
-            case 1: room_num = (pcgrid_width * pcgrid_height) / (int)(Random.Range(room_min, room_max) * room_max * 2) + 1;
+            case 1: room_num = (pcgrid_width * pcgrid_height) / (R.Next(room_min, room_max) * room_max * 2) + 1;
                 break; // Sparse
-            case 2: room_num = (pcgrid_width * pcgrid_height) / (int)(Random.Range(room_min, room_max) * room_min * 0.5) + 1;
+            case 2: room_num = (pcgrid_width * pcgrid_height) / (int)(R.Next(room_min, room_max) * room_min * 0.5) + 1;
                 break; // Dense
-            default: room_num = (pcgrid_width * pcgrid_height) / (int)(Random.Range(room_min, room_max) * room_max) + 1;
+            default: room_num = (pcgrid_width * pcgrid_height) / (R.Next(room_min, room_max) * room_max) + 1;
                 break; // Scattered
+
+            //case 0: room_num = (pcgrid_width * pcgrid_height) / (int)(Random.Range(room_min, room_max) * room_max) + 1;
+            //    break; // Scattered
+            //case 1: room_num = (pcgrid_width * pcgrid_height) / (int)(Random.Range(room_min, room_max) * room_max * 2) + 1;
+            //    break; // Sparse
+            //case 2: room_num = (pcgrid_width * pcgrid_height) / (int)(Random.Range(room_min, room_max) * room_min * 0.5) + 1;
+            //    break; // Dense
+            //default: room_num = (pcgrid_width * pcgrid_height) / (int)(Random.Range(room_min, room_max) * room_max) + 1;
+            //    break; // Scattered
         }
 
         corridor_num = c_num;
@@ -67,7 +97,7 @@ public class PCG_Basic : PCG{
         for (int n = 0; n < room_num; n++)
         {
             room_blocked = false; // Unblock
-            Room rm = new Room(pcgrid_width, pcgrid_height, room_base, room_radix, corridor_num); // Create new room
+            Room rm = new Room(pcgrid_width, pcgrid_height, room_base, room_radix, corridor_num,R); // Create new room
             room_blocked = blockRoom(rm); // Check if room is blocked
 
             if (room_blocked)
@@ -214,11 +244,20 @@ public class PCG_Basic : PCG{
         }
     }
 
-    private int shuffleDir(int dir, int prob)
+    private float NextFloat(System.Random random, float min, float max)
     {
 
+        return min + ((max - min) * (float)(random.NextDouble()));
+    }
+    
+    private int shuffleDir(int dir, int prob)
+    {
+        double zero = 0, cem = 100;
+
+
+
         // Randomly choose direction based on probability
-        if (((int)Random.Range(0f, 100)) > (100 - prob))
+        if ((NextFloat(R,0,100)) > (100 - prob))
         {
             return dir; // Stay same direction
         }
@@ -226,18 +265,32 @@ public class PCG_Basic : PCG{
         { // Change direction
             switch (dir)
             {
-                case 0: if ((int)(Random.Range(0f, 100)) < 50) return 1; // East
-                    if ((int)(Random.Range(0f, 100)) >= 50) return 3; // West
+
+                case 0: if ((int)(NextFloat(R, 0, 100)) < 50) return 1; // East
+                    if ((int)(NextFloat(R,0,100)) >= 50) return 3; // West
                     break;
-                case 1: if ((int)(Random.Range(0f, 100)) < 50) return 0; // North
-                    if ((int)(Random.Range(0f, 100)) >= 50) return 2; // South
+                case 1: if ((int)(NextFloat(R,0,100)) < 50) return 0; // North
+                    if ((int)(NextFloat(R,0,100)) >= 50) return 2; // South
                     break;
-                case 2: if ((int)(Random.Range(0f, 100)) < 50) return 1; // East
-                    if ((int)(Random.Range(0f, 100)) >= 50) return 3; // West
+                case 2: if ((int)(NextFloat(R, 0, 100)) < 50) return 1; // East
+                    if ((int)(NextFloat(R,0,100)) >= 50) return 3; // West
                     break;
-                case 3: if ((int)(Random.Range(0f, 100)) < 50) return 0; // North
-                    if ((int)(Random.Range(0f, 100)) >= 50) return 2; // South
+                case 3: if ((int)(NextFloat(R, 0, 100)) < 50) return 0; // North
+                    if ((int)(NextFloat(R,0,100)) >= 50) return 2; // South
                     break;
+
+                //case 0: if ((int)(Random.Range(0f, 100)) < 50) return 1; // East
+                //    if ((int)(Random.Range(0f, 100)) >= 50) return 3; // West
+                //    break;
+                //case 1: if ((int)(Random.Range(0f, 100)) < 50) return 0; // North
+                //    if ((int)(Random.Range(0f, 100)) >= 50) return 2; // South
+                //    break;
+                //case 2: if ((int)(Random.Range(0f, 100)) < 50) return 1; // East
+                //    if ((int)(Random.Range(0f, 100)) >= 50) return 3; // West
+                //    break;
+                //case 3: if ((int)(Random.Range(0f, 100)) < 50) return 0; // North
+                //    if ((int)(Random.Range(0f, 100)) >= 50) return 2; // South
+                //    break;
             }
         }
         return dir;

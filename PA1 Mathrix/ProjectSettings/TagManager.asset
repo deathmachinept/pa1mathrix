@@ -31,6 +31,7 @@ TagManager:
   - TrainDoorsRight
   - ManagerPlayers
   - ChatCanvas
+  - MapTiling
   layers:
   - Default
   - TransparentFX
