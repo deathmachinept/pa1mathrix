@@ -12,6 +12,7 @@ public class EnemySpawner : NetworkBehaviour
         int SpawnPointIndex = Random.Range(1, GlobalVariables.singleton.GuardPoints.Count);
         var enemy = (GameObject)Instantiate(EnemyPrefab, GlobalVariables.singleton.GuardPoints[SpawnPointIndex],Quaternion.identity);
         enemy.transform.parent = GameObject.Find("Enemies").transform;
+        DontDestroyOnLoad(enemy);
         NetworkServer.Spawn(enemy);
     }
 }

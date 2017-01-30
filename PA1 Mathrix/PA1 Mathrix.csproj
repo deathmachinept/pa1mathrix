@@ -130,7 +130,6 @@
     <Compile Include="Assets\Resources\RpgResources\Scripts\Chat.cs" />
     <Compile Include="Assets\Resources\RpgResources\Scripts\ChatController.cs" />
     <Compile Include="Assets\Resources\RpgResources\Scripts\GameController.cs" />
-    <Compile Include="Assets\Resources\RpgResources\Scripts\Guard\CustomCollider.cs" />
     <Compile Include="Assets\Resources\RpgResources\Scripts\Guard\EnemyController.cs" />
     <Compile Include="Assets\Resources\RpgResources\Scripts\Guard\EnemyHFSM.cs" />
     <Compile Include="Assets\Resources\RpgResources\Scripts\Guard\EnemySpawner.cs" />
@@ -151,6 +150,13 @@
     <Compile Include="Assets\Scripts\RPG\Character\MovimentoJogador.cs" />
     <Compile Include="Assets\Scripts\RPG\HackingTerminals\PoligonHackTerminal.cs" />
     <Compile Include="Assets\Scripts\RPG\Music\MusicManagement.cs" />
+    <Compile Include="Assets\Scripts\RPG\PCG\BinaryHeap.cs" />
+    <Compile Include="Assets\Scripts\RPG\PCG\MapGenerator.cs" />
+    <Compile Include="Assets\Scripts\RPG\PCG\MapRender.cs" />
+    <Compile Include="Assets\Scripts\RPG\PCG\Node.cs" />
+    <Compile Include="Assets\Scripts\RPG\PCG\PCG.cs" />
+    <Compile Include="Assets\Scripts\RPG\PCG\PCG_Basic.cs" />
+    <Compile Include="Assets\Scripts\RPG\PCG\Room.cs" />
     <Compile Include="Assets\Scripts\Simplificacao\ArrayMembros.cs" />
     <Compile Include="Assets\Scripts\Simplificacao\DragSprite.cs" />
     <Compile Include="Assets\Scripts\Simplificacao\Spawn.cs" />
