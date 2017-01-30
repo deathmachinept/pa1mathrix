@@ -52,6 +52,7 @@ public class MovimentoJogador : NetworkBehaviour
     public Vector3 inputEspecial;
     public float timer;
 
+    public int Health = 100;
 
     void Awake()
     {
