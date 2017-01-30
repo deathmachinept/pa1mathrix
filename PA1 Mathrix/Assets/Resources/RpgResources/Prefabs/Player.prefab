@@ -25,7 +25,7 @@ GameObject:
   - 114: {fileID: 114000012248654626}
   - 61: {fileID: 61000010675186484}
   - 95: {fileID: 95000013682405740}
-  - 50: {fileID: 50000011066456992}
+  - 50: {fileID: 50000013657900192}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -82,7 +82,7 @@ Transform:
   - {fileID: 224000012611151054}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!50 &50000011066456992
+--- !u!50 &50000013657900192
 Rigidbody2D:
   serializedVersion: 2
   m_ObjectHideFlags: 1
@@ -93,12 +93,12 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!61 &61000010675186484
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -195,6 +195,10 @@ MonoBehaviour:
   walkSpeed: 5
   isAllowedToMove: 0
   estaDentroDoComboio: 0
+  NotLocalPlayerPositionLastPosition: {x: 0, y: 0, z: 0}
+  currentPosition: {x: 0, y: 0, z: 0}
+  inputEspecial: {x: 0, y: 0, z: 0}
+  timer: 0
 --- !u!114 &114000011846304220
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -272,14 +276,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 1
-  m_SendInterval: 0.1
+  m_SendInterval: 0.0625
   m_SyncRotationAxis: 7
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
   m_MovementTheshold: 0.001
-  m_SnapThreshold: 5
+  m_SnapThreshold: 0
   m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
+  m_InterpolateMovement: 0.1
 --- !u!212 &212000013853388078
 SpriteRenderer:
   m_ObjectHideFlags: 1
