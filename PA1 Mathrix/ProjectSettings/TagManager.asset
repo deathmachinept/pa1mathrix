@@ -83,7 +83,7 @@ TagManager:
   - name: Roof
     uniqueID: 3072238119
     locked: 0
-  - name: Players
+  - name: Characters
     uniqueID: 87880377
     locked: 0
   - name: Minigames

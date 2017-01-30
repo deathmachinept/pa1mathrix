@@ -50,6 +50,7 @@ public class MovimentoJogador : NetworkBehaviour
     public Vector3 NotLocalPlayerPositionLastPosition;
     public Vector3 currentPosition;
 
+    public int Health = 100;
 
     void Awake()
     {
