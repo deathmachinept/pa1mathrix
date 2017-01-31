@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using Debug = UnityEngine.Debug;
 
 
 public class PCG_Basic : PCG{
@@ -18,15 +21,16 @@ public class PCG_Basic : PCG{
     int corridor_num;
     int corridor_weight;
     int turning_weight;
+    private int roomMax;
     private System.Random R;
-
+    private int count = 0;
     // *A Star
     BinaryHeap open_list;
     BinaryHeap closed_list;
 
 
 
-    public void updateParam(int g_width, int g_height, int r_type, int r_min, int r_max, int c_num, int c_weight, int t_weight)
+    public void updateParam(int g_width, int g_height, int r_type, int r_min, int r_max, int c_num, int c_weight, int t_weight, int room_total)
     {
         R = new System.Random(); 
         base.updateParam(g_width, g_height);
@@ -43,7 +47,7 @@ public class PCG_Basic : PCG{
             c_num = 1;
         if (c_weight == 0)
             c_weight = 1;
-
+        roomMax = room_total;
 
         room_type = r_type; // Room type
         room_min = r_min; // Default 9
@@ -84,6 +88,8 @@ public class PCG_Basic : PCG{
 
     public void generatePCGBasic(byte[,] g)
     {
+
+
         base.generatePCG(g); // Init grid 
 
         initRooms(); // Initialize rooms
@@ -93,8 +99,9 @@ public class PCG_Basic : PCG{
 
     public void initRooms()
     {
+
         rooms = new ArrayList(); // New room arraylist
-        for (int n = 0; n < room_num; n++)
+        for (int n = 0; n < roomMax; n++)
         {
             room_blocked = false; // Unblock
             Room rm = new Room(pcgrid_width, pcgrid_height, room_base, room_radix, corridor_num,R); // Create new room
@@ -107,7 +114,7 @@ public class PCG_Basic : PCG{
                 if (redo == 0)
                 {
                     room_num--;
-                    redo = 1000; // Recursion limit
+                    redo = 2000; // Recursion limit
                 }
             }
             else
@@ -144,6 +151,7 @@ public class PCG_Basic : PCG{
 
     private bool blockRoom(Room rm)
     {
+
         // If outside of grid bounded metodo do pai PCG ve se X,Y <0 e se esta fora dos limites do tamanho do mapa
         if (!bounded(rm.wall_x1, rm.wall_y1) || !bounded(rm.wall_x2, rm.wall_y1) ||
             !bounded(rm.wall_x1, rm.wall_y2) || !bounded(rm.wall_x2, rm.wall_y2))
@@ -158,12 +166,20 @@ public class PCG_Basic : PCG{
                 // Check upper and lower bound
                 if (bounded(i, rm.wall_y1 - 1) && !blocked(i, rm.wall_y1 - 1, 0)) return true;
                 if (bounded(i, rm.wall_y2 + 1) && !blocked(i, rm.wall_y2 + 1, 0)) return true;
+                if (bounded(i, rm.wall_y1 - 2) && !blocked(i, rm.wall_y1 - 2, 0)) return true;
+                if (bounded(i, rm.wall_y2 + 2) && !blocked(i, rm.wall_y2 + 2, 0)) return true;
+                if (bounded(i, rm.wall_y1 - 3) && !blocked(i, rm.wall_y1 - 3, 0)) return true;
+                if (bounded(i, rm.wall_y2 + 3) && !blocked(i, rm.wall_y2 + 3, 0)) return true;
             }
             for (int j = rm.wall_y1 - 1; j < rm.wall_y2 + 1; j++)
             {
                 // Check left and right bound
                 if (bounded(rm.wall_x1 - 1, j) && !blocked(rm.wall_x1 - 1, j, 0)) return true;
                 if (bounded(rm.wall_x2 + 1, j) && !blocked(rm.wall_x2 + 1, j, 0)) return true;
+                if (bounded(rm.wall_x1 - 2, j) && !blocked(rm.wall_x1 - 2, j, 0)) return true;
+                if (bounded(rm.wall_x2 + 2, j) && !blocked(rm.wall_x2 + 2, j, 0)) return true;
+                if (bounded(rm.wall_x1 - 3, j) && !blocked(rm.wall_x1 - 3, j, 0)) return true;
+                if (bounded(rm.wall_x2 + 3, j) && !blocked(rm.wall_x2 + 3, j, 0)) return true;
             }
         }
         return false;
@@ -171,6 +187,8 @@ public class PCG_Basic : PCG{
 
     private void initCorridors()
     {
+        Debug.Log("test");
+
         if (room_type != 3)
         {
             for (int i = 0; i < rooms.Count; i++)
@@ -187,6 +205,7 @@ public class PCG_Basic : PCG{
                 // Random tunneling
                 for (int j = 1; j < rm1.opening_num; j++)
                 {
+                    Debug.Log("Random TUNNEL0!");
                     tunnelRandom(rm1.opening[j, 0], rm1.opening[j, 1], rm1.opening[j, 2], 3);
                 }
             }
@@ -207,6 +226,9 @@ public class PCG_Basic : PCG{
                 Room rm3 = (Room)rooms[i];
                 for (int j = 1; j < rm3.opening_num; j++)
                 {
+                    Debug.Log("DIR " + rm3.opening[j, 2]);
+                    Debug.Log("Random TUNNEL1!");
+
                     tunnelRandom(rm3.opening[j, 0], rm3.opening[j, 1], rm3.opening[j, 2], 3);
                 }
             }
@@ -215,20 +237,37 @@ public class PCG_Basic : PCG{
     private void tunnelRandom(int x, int y, int dir, int iteration)
     {
         if (iteration == 0) return; // End of recursion iteration
+        Debug.Log("test xx");
 
         // Choose a random direction and check to see if that cell is occupied, if not, head in that direction
         switch (dir)
         {
-            case 0: if (!blockCorridor(x, y - 1, 0)) tunnel(x, y - 1, dir); // North
+
+            case 0:
+                Debug.Log("DIR " + dir);
+                MonoBehaviour.print(dir);
+                if (!blockCorridor(x, y - 1, 0)) tunnel(x, y - 1, dir); // North
                 else tunnelRandom(x, y, shuffleDir(dir, 0), iteration - 1); // Try again
                 break;
-            case 1: if (!blockCorridor(x + 1, y, 1)) tunnel(x + 1, y, dir); // East
+            case 1:
+                Debug.Log("DIR " + dir);
+                MonoBehaviour.print(dir);
+
+                if (!blockCorridor(x + 1, y, 1)) tunnel(x + 1, y, dir); // East
                 else tunnelRandom(x, y, shuffleDir(dir, 0), iteration - 1); // Try again
                 break;
-            case 2: if (!blockCorridor(x, y + 1, 0)) tunnel(x, y + 1, dir); // South
+            case 2:
+                Debug.Log("DIR " + dir);
+                MonoBehaviour.print(dir);
+
+                if (!blockCorridor(x, y + 1, 0)) tunnel(x, y + 1, dir); // South
                 else tunnelRandom(x, y, shuffleDir(dir, 0), iteration - 1); // Try again
                 break;
-            case 3: if (!blockCorridor(x - 1, y, 1)) tunnel(x - 1, y, dir); // West
+            case 3:
+                Debug.Log("DIR " + dir);
+                MonoBehaviour.print(dir);
+
+                if (!blockCorridor(x - 1, y, 1)) tunnel(x - 1, y, dir); // West
                 else tunnelRandom(x, y, shuffleDir(dir, 0), iteration - 1); // Try again
                 break;
         }
@@ -240,6 +279,71 @@ public class PCG_Basic : PCG{
         else
         {
             pcgrid[x, y] = 4; // Set cell to corridor
+            Debug.Log("DIR "+ dir);
+            switch (dir)
+            { // 1east  3west 0 north 2 south
+                case  0:
+                    if (pcgrid[x + 2, y] == 0 && bounded(x, y))
+                    {
+                        Debug.Log("test");
+                        pcgrid[x + 2, y] = 4;
+                    }
+                    else if (pcgrid[x - 2, y] == 0 && bounded(x, y))
+                    {
+                        Debug.Log("test");
+
+                        pcgrid[x - 2, y] = 4;
+
+                    }
+                    break;
+                case 1: // east
+                    if (pcgrid[x, y + 2] == 0 && bounded(x, y))
+                    {
+                        Debug.Log("test");
+
+                         pcgrid[x, y + 2] = 4;
+                    }
+                    else if (pcgrid[x, y - 2] == 0 && bounded(x, y))
+                    {
+                        Debug.Log("test");
+
+                        pcgrid[x, y - 2] = 4;
+
+                    }
+
+                    break;
+                case 2: // south\
+                    if (pcgrid[x + 2, y] == 0 && bounded(x, y))
+                    {
+                        Debug.Log("test");
+
+                        pcgrid[x + 2, y] = 4;
+                    }
+                    else if (pcgrid[x - 2, y] == 0 && bounded(x, y))
+                    {
+                        Debug.Log("test");
+
+                        pcgrid[x - 2, y] = 4;
+
+                    }
+                    break;
+                case 3:
+                    if (pcgrid[x, y +2] == 0 && bounded(x, y))
+                    {
+                        Debug.Log("test");
+
+                        pcgrid[x, y + 2] = 4;
+                    }
+                    else if (pcgrid[x, y - 2] == 0 && bounded(x, y))
+                    {
+                        Debug.Log("test");
+
+                        pcgrid[x, y - 2] = 4;
+
+                    }
+
+                    break;
+            }
             tunnelRandom(x, y, shuffleDir(dir, 85), 3); // Randomly choose next cell to go to
         }
     }
@@ -252,8 +356,6 @@ public class PCG_Basic : PCG{
     
     private int shuffleDir(int dir, int prob)
     {
-        double zero = 0, cem = 100;
-
 
 
         // Randomly choose direction based on probability
@@ -279,18 +381,7 @@ public class PCG_Basic : PCG{
                     if ((int)(NextFloat(R,0,100)) >= 50) return 2; // South
                     break;
 
-                //case 0: if ((int)(Random.Range(0f, 100)) < 50) return 1; // East
-                //    if ((int)(Random.Range(0f, 100)) >= 50) return 3; // West
-                //    break;
-                //case 1: if ((int)(Random.Range(0f, 100)) < 50) return 0; // North
-                //    if ((int)(Random.Range(0f, 100)) >= 50) return 2; // South
-                //    break;
-                //case 2: if ((int)(Random.Range(0f, 100)) < 50) return 1; // East
-                //    if ((int)(Random.Range(0f, 100)) >= 50) return 3; // West
-                //    break;
-                //case 3: if ((int)(Random.Range(0f, 100)) < 50) return 0; // North
-                //    if ((int)(Random.Range(0f, 100)) >= 50) return 2; // South
-                //    break;
+
             }
         }
         return dir;
@@ -298,6 +389,7 @@ public class PCG_Basic : PCG{
 
     bool blockCorridor(int x, int y, int orientation)
     {
+        Debug.Log("Block COrridor!");
         if (!bounded(x, y)) return true; // If outside of grid
 
         // Check if current cell is available as corridor based on previous corridor cell location
@@ -332,32 +424,31 @@ public class PCG_Basic : PCG{
         return false;
     }
 
-
-
+    List<int> listaDir = new List<int>();
+    // x1 y1 porta de um quarto x2 y2 porta para o segundo quarto
     private void basicAStar(byte[,] pcgrid, int x1, int y1, int x2, int y2, int corr_wt, int trn_wt)
     {
         int grid_w = pcgrid.GetLength(0);
         int grid_h = pcgrid.GetLength(1);
 
+        Debug.Log("Corredores");
 
         byte[, ,] grid = new byte[grid_w, grid_h, 3];
 
-        //         byte[][][] grid = new byte[grid_w][grid_h];
-
-        //byte[][][] grid = new byte[grid_w][grid_h][3];
-        // grid[grid_w][][];
 
         for (int j = 0; j < grid_h; j++)
         {
             for (int i = 0; i < grid_w; i++)
             {
+                // inicializacao das listas 
                 grid[i, j, 0] = pcgrid[i, j]; // Cell content
                 grid[i, j, 1] = 0; // Open list
                 grid[i, j, 2] = 0; // Closed list
             }
         }
 
-        open_list = new BinaryHeap();
+
+        open_list = new BinaryHeap(); // array list
         closed_list = new BinaryHeap();
 
         // Push starting node into open list
@@ -376,19 +467,115 @@ public class PCG_Basic : PCG{
             {
                 while (current.getX != x1 || current.getY != y1)
                 {
-                    if (grid[current.getX, current.getY, 0] == 3) grid[current.getX, current.getY, 0] = 3;
-                    else grid[current.getX, current.getY, 0] = 4;
+                    if (grid[current.getX, current.getY, 0] == 3){
+                        grid[current.getX, current.getY, 0] = 3;
+                    }
+                    else {
+                        grid[current.getX, current.getY, 0] = 4;
+
+                        listaDir.Add(current.getDir);
+                        switch (current.getDir)
+                        { // 1east  3west 0 north 2 south
+                            case 0:
+                                if (!isBlocked(grid, current.getX + 1, current.getY) &&
+                                    grid[current.getX + 1, current.getY, 0] == 0)
+                                {
+                                    if (!isBlocked(grid, current.getX + 1, current.getY) &&
+                                        grid[current.getX + 1, current.getY, 0] == 0)
+                                    {
+                                        
+                                    }
+                                }
+                                else if (!isBlocked(grid, current.getX - 1, current.getY) &&
+                                         grid[current.getX + 1, current.getY, 0] == 0)
+                                {
+                                    
+                                }
+                                if (grid[current.getX + 1, current.getY, 0] == 0 && bounded(current.getX, current.getY))
+                                {
+                                    Debug.Log("test");
+                                    grid[current.getX + 1, current.getY, 0] = 5;
+                                }
+                                else if (grid[current.getX - 1, current.getY, 0] == 0 && bounded(current.getX, current.getY))
+                                {
+                                    Debug.Log("test");
+
+                                    grid[current.getX - 1, current.getY, 0] = 5;
+
+                                }
+                                break;
+                            case 1: // east
+                                if (grid[current.getX, current.getY + 1, 0] == 0 && bounded(current.getX, current.getY))
+                                {
+                                    Debug.Log("test");
+
+                                    grid[current.getX, current.getY + 1, 0] = 5;
+                                }
+                                else if (grid[current.getX, current.getY - 2, 0] == 0 && bounded(current.getX, current.getY))
+                                {
+                                    Debug.Log("test");
+
+                                    grid[current.getX, current.getY - 1, 0] = 5;
+
+                                }
+
+                                break;
+                            case 2: // south\
+                                if (grid[current.getX + 1, current.getY, 0] == 0 && bounded(current.getX, current.getY))
+                                {
+                                    Debug.Log("test");
+
+                                    grid[current.getX + 1, current.getY, 0] = 5;
+                                }
+                                else if (grid[current.getX - 2, current.getY, 0] == 0 && bounded(current.getX, current.getY))
+                                {
+                                    Debug.Log("test");
+
+                                    grid[current.getX - 1, current.getY, 0] = 5;
+
+                                }
+                                break;
+                            case 3:
+                                if (grid[current.getX, current.getY + 1, 0] == 0 && bounded(current.getX, current.getY))
+                                {
+                                    Debug.Log("test");
+
+                                    grid[current.getX, current.getY + 1, 0] = 5;
+                                }
+                                else if (grid[current.getX, current.getY - 2, 0] == 0 && bounded(current.getX, current.getY))
+                                {
+                                    Debug.Log("test");
+
+                                    grid[current.getX, current.getY - 1, 0] = 5;
+
+                                }
+
+                                break;
+                        }
+                       // grid[current.getX, current.getY, 0] = 4;
+
+                    }// Adds corredor
                     current = (Node)current.parent;
                 }
                 break;
             }
 
             // Process neighbors
+            Debug.Log("Presumo direcao a ser escolhida1 " + current.getDir + " " + current.getX + " " + current.getY);
+
             neighbor(grid, current, current.getX, current.getY - 1, x2, y2, 0, corr_wt, trn_wt);
+            Debug.Log("Presumo direcao a ser escolhida2 tem que ter y -1 " + current.getDir + " " + current.getX + " " + current.getY);
+
             neighbor(grid, current, current.getX + 1, current.getY, x2, y2, 1, corr_wt, trn_wt);
+            Debug.Log("Presumo direcao a ser escolhida3 tem que ter x+1 " + current.getDir + " " + current.getX + " " + current.getY);
+
             neighbor(grid, current, current.getX, current.getY + 1, x2, y2, 2, corr_wt, trn_wt);
+            Debug.Log("Presumo direcao a ser escolhida4 tem que ter y +1 " + current.getDir + " " + current.getX + " " + current.getY);
+
             neighbor(grid, current, current.getX - 1, current.getY, x2, y2, 3, corr_wt, trn_wt);
 
+            Debug.Log("Presumo direcao a ser escolhida5 tem que ter x -1" + current.getDir + " " + current.getX + " " + current.getY);
+            count++;
             closed_list.insert(current); // Add to closed list
             grid[current.getX, current.getY, 2] = 1;
         }
@@ -405,13 +592,56 @@ public class PCG_Basic : PCG{
 
     private void neighbor(byte[, ,] grid, Node current, int x, int y, int x2, int y2, int dir, int corr_wt, int trn_wt)
     {
+        bool NaoTemEspacoEntreParede = false;
+
+        int sum = 0;
+        Debug.Log("count " + count);
+        //if (count > 2) { 
+        //    switch (dir)
+        //    {
+        //        case 0:
+        //            sum = y + 1;
+        //            Debug.Log("Dir 0 Coordenadas " + x + " y " + sum);
+
+        //            NaoTemEspacoEntreParede = !AStarBlocked(grid, x, sum ); // se true nao pode entrar
+
+        //            break;
+        //        case 1:
+        //            sum = x - 1;
+        //            Debug.Log("Dir 1 Coordenadas " + sum + " y " + y);
+
+        //            NaoTemEspacoEntreParede = !AStarBlocked(grid, sum, y); // se true nao pode entrar
+
+        //            break;
+        //        case 2:
+        //            sum = y - 1;
+        //            Debug.Log(" Dir 2 Coordenadas " + x + " y " + sum);
+
+        //            NaoTemEspacoEntreParede = !AStarBlocked(grid, x, sum); // se true nao pode entrar
+
+        //            break;
+        //        case 3:
+        //            sum = x + 1;
+        //            Debug.Log("Dir 3 Coordenadas " + sum + " y " + y);
+
+        //            NaoTemEspacoEntreParede = !AStarBlocked(grid, sum, y); // se true nao pode entrar
+
+        //            break;
+        //        case -1:
+        //            NaoTemEspacoEntreParede = false;
+        //            break;
+        //    }
+        //}
+
+        Debug.Log("NaoTemEspacoEntreParede " + NaoTemEspacoEntreParede);
+
         // If not blocked or not in closed list
-        if (!AStarBlocked(grid, x, y) && grid[x, y, 2] != 1)
+        if ((!AStarBlocked(grid, x, y) && !NaoTemEspacoEntreParede) && grid[x, y, 2] != 1)
         {
             if (grid[x, y, 1] != 1)
             { // If not in open list
                 int g_score = current.getH + 10; // Calculate g score
-                if (grid[x, y, 0] == 4) g_score = g_score - corr_wt; // Added weight for joining corridors
+                if (grid[x, y, 0] == 4 || grid[x, y, 0] == 5) g_score = g_score - corr_wt; // Added weight for joining corridors
                 if (dir == current.getDir) g_score = g_score - trn_wt; // Added weight for keep straight
                 int h_score = heuristic(x, y, x2, y2, 0); // Calculate h score
                 Node child = new Node(x, y, g_score, h_score, dir);
@@ -432,7 +662,7 @@ public class PCG_Basic : PCG{
                 if (current.getG + 10 < temp.getG || (grid[x, y, 0] == 4 && current.getG + (10 - corr_wt) < temp.getG) || (temp.getDir == current.getDir && current.getG + (10 - trn_wt) < temp.getG))
                 {
                     temp.getG = current.getG + 10; // Set new g score
-                    if (grid[x, y, 0] == 4) temp.getG = temp.getG - corr_wt; // Added weight for joining corridors
+                    if (grid[x, y, 0] == 4 || grid[x, y, 0] == 5) temp.getG = temp.getG - corr_wt; // Added weight for joining corridors
                     if (temp.getDir == current.getDir) temp.getG = temp.getG - trn_wt; // Added weight for keep straight
                     temp.getF = temp.getG + temp.getH; // Calculate new f score
                     temp.parent = current; // Assign new parent
@@ -460,11 +690,46 @@ public class PCG_Basic : PCG{
         return h_score;
     }
 
+    private bool isBlocked(byte[, ,] grid, int x, int y)
+    {
+        if (x < 0 || x >= grid.GetLength(0) || y < 0 || y >= grid.GetLength(1)) return true; // Check if cell is inside grid se estiver esta bloqueada
+        if (grid[x, y, 0] == 2) return true; // Check if cell is occupied by wall?
+        if (grid[x, y, 0] == 1) return true; // Check if cell is occupied by wall?
+        if (grid[x, y, 0] == 3) return true; // Check if cell is occupied by wall?
+        return false;
+    }
+
+    private bool isCorridor(byte[, ,] grid, int x, int y)
+    {
+
+        if (grid[x, y, 0] == 4) return true; // Check if cell is occupied by wall?
+        if (grid[x, y, 0] == 5) return true; // Check if cell is occupied by wall?
+
+        return false;
+    }
+
     private bool AStarBlocked(byte[, ,] grid, int x, int y)
     {
-        if (x < 0 || x >= grid.GetLength(0) || y < 0 || y >= grid.GetLength(1)) return true; // Check if cell is inside grid
-        if (grid[x, y, 0] == 1) return true; // Check if cell is occupied by room
-        if (grid[x, y, 0] == 2) return true; // Check if cell is occupied by corridor
+        if (x < 0 || x >= grid.GetLength(0) || y < 0 || y >= grid.GetLength(1))
+        {
+            Debug.Log("Fora dos limites!");
+                    return true; // Check if cell is inside grid se estiver esta bloqueada
+
+        }
+
+
+        if (grid[x, y, 0] == 1){
+            Debug.Log("Chao!");
+
+            return true; // Check if cell is occupied by floor
+        }
+        if (grid[x, y, 0] == 2)// Check if cell is occupied by wall?
+        {
+            Debug.Log("Wall!");
+
+            return true; 
+        } 
+        //if (grid[x, y, 0] == 5) return true; // Check if cell is occupied by corridor
         return false;
     }
 }
