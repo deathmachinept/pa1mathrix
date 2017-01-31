@@ -16,7 +16,7 @@ public class PCG_Basic : PCG{
     private int room_base;
     private int room_radix;
     private bool room_blocked = false; // If room is blocked
-    int redo = 1000; // Recursion limit
+    int redo = 2500; // Recursion limit
     ArrayList rooms; // Room arraylist
     int corridor_num;
     int corridor_weight;
@@ -53,7 +53,7 @@ public class PCG_Basic : PCG{
         room_min = r_min; // Default 9
         room_max = r_max; // Default 16
         room_base = (int)((room_min + 1) * 0.5);
-        room_radix = (int)((room_max - room_min) * 0.5 + 1);
+        room_radix = (int)((room_max - room_min) * 0.5 + 2);
 
 
 
@@ -114,7 +114,7 @@ public class PCG_Basic : PCG{
                 if (redo == 0)
                 {
                     room_num--;
-                    redo = 2000; // Recursion limit
+                    redo = 2500; // Recursion limit
                 }
             }
             else
@@ -143,6 +143,8 @@ public class PCG_Basic : PCG{
                 // Place openings
                 for (int k = 0; k < rm.opening_num; k++)
                 {
+                    //1
+
                     if (pcgrid[rm.opening[k, 0], rm.opening[k, 1]] != 1) pcgrid[rm.opening[k, 0], rm.opening[k, 1]] = 3;
                 }
             }
@@ -187,7 +189,7 @@ public class PCG_Basic : PCG{
 
     private void initCorridors()
     {
-        Debug.Log("test");
+       // Debug.Log("test");
 
         if (room_type != 3)
         {
@@ -245,27 +247,27 @@ public class PCG_Basic : PCG{
 
             case 0:
                 Debug.Log("DIR " + dir);
-                MonoBehaviour.print(dir);
+                //MonoBehaviour.print(dir);
                 if (!blockCorridor(x, y - 1, 0)) tunnel(x, y - 1, dir); // North
                 else tunnelRandom(x, y, shuffleDir(dir, 0), iteration - 1); // Try again
                 break;
             case 1:
                 Debug.Log("DIR " + dir);
-                MonoBehaviour.print(dir);
+                //MonoBehaviour.print(dir);
 
                 if (!blockCorridor(x + 1, y, 1)) tunnel(x + 1, y, dir); // East
                 else tunnelRandom(x, y, shuffleDir(dir, 0), iteration - 1); // Try again
                 break;
             case 2:
                 Debug.Log("DIR " + dir);
-                MonoBehaviour.print(dir);
+                //MonoBehaviour.print(dir);
 
                 if (!blockCorridor(x, y + 1, 0)) tunnel(x, y + 1, dir); // South
                 else tunnelRandom(x, y, shuffleDir(dir, 0), iteration - 1); // Try again
                 break;
             case 3:
                 Debug.Log("DIR " + dir);
-                MonoBehaviour.print(dir);
+                //MonoBehaviour.print(dir);
 
                 if (!blockCorridor(x - 1, y, 1)) tunnel(x - 1, y, dir); // West
                 else tunnelRandom(x, y, shuffleDir(dir, 0), iteration - 1); // Try again
@@ -431,7 +433,7 @@ public class PCG_Basic : PCG{
         int grid_w = pcgrid.GetLength(0);
         int grid_h = pcgrid.GetLength(1);
 
-        Debug.Log("Corredores");
+        //Debug.Log("Corredores");
 
         byte[, ,] grid = new byte[grid_w, grid_h, 3];
 
@@ -474,85 +476,87 @@ public class PCG_Basic : PCG{
                         grid[current.getX, current.getY, 0] = 4;
 
                         listaDir.Add(current.getDir);
-                        switch (current.getDir)
-                        { // 1east  3west 0 north 2 south
-                            case 0:
-                                if (!isBlocked(grid, current.getX + 1, current.getY) &&
-                                    grid[current.getX + 1, current.getY, 0] == 0)
-                                {
-                                    if (!isBlocked(grid, current.getX + 1, current.getY) &&
-                                        grid[current.getX + 1, current.getY, 0] == 0)
-                                    {
-                                        
-                                    }
-                                }
-                                else if (!isBlocked(grid, current.getX - 1, current.getY) &&
-                                         grid[current.getX + 1, current.getY, 0] == 0)
-                                {
-                                    
-                                }
-                                if (grid[current.getX + 1, current.getY, 0] == 0 && bounded(current.getX, current.getY))
-                                {
-                                    Debug.Log("test");
-                                    grid[current.getX + 1, current.getY, 0] = 5;
-                                }
-                                else if (grid[current.getX - 1, current.getY, 0] == 0 && bounded(current.getX, current.getY))
-                                {
-                                    Debug.Log("test");
+                        //switch (current.getDir)
+                        //{ // 1east  3west 0 north 2 south
+                        //    case 0:
 
-                                    grid[current.getX - 1, current.getY, 0] = 5;
 
-                                }
-                                break;
-                            case 1: // east
-                                if (grid[current.getX, current.getY + 1, 0] == 0 && bounded(current.getX, current.getY))
-                                {
-                                    Debug.Log("test");
+                        //        if (!isBlocked(grid, current.getX + 1, current.getY) &&
+                        //            grid[current.getX + 1, current.getY, 0] == 0)
+                        //        {
+                        //            if (!isBlocked(grid, current.getX + 1, current.getY) &&
+                        //                grid[current.getX + 1, current.getY, 0] == 0)
+                        //            {
 
-                                    grid[current.getX, current.getY + 1, 0] = 5;
-                                }
-                                else if (grid[current.getX, current.getY - 2, 0] == 0 && bounded(current.getX, current.getY))
-                                {
-                                    Debug.Log("test");
+                        //            }
+                        //        }
+                        //        else if (!isBlocked(grid, current.getX - 1, current.getY) &&
+                        //                 grid[current.getX + 1, current.getY, 0] == 0)
+                        //        {
 
-                                    grid[current.getX, current.getY - 1, 0] = 5;
+                        //        }
+                        //        if (grid[current.getX + 1, current.getY, 0] == 0 && bounded(current.getX, current.getY))
+                        //        {
+                        //            //Debug.Log("test");
+                        //            grid[current.getX + 1, current.getY, 0] = 5;
+                        //        }
+                        //        else if (grid[current.getX - 1, current.getY, 0] == 0 && bounded(current.getX, current.getY))
+                        //        {
+                        //            //Debug.Log("test");
 
-                                }
+                        //            grid[current.getX - 1, current.getY, 0] = 5;
 
-                                break;
-                            case 2: // south\
-                                if (grid[current.getX + 1, current.getY, 0] == 0 && bounded(current.getX, current.getY))
-                                {
-                                    Debug.Log("test");
+                        //        }
+                        //        break;
+                        //    case 1: // east
+                        //        if (grid[current.getX, current.getY + 1, 0] == 0 && bounded(current.getX, current.getY))
+                        //        {
+                        //            //Debug.Log("test");
 
-                                    grid[current.getX + 1, current.getY, 0] = 5;
-                                }
-                                else if (grid[current.getX - 2, current.getY, 0] == 0 && bounded(current.getX, current.getY))
-                                {
-                                    Debug.Log("test");
+                        //            grid[current.getX, current.getY + 1, 0] = 5;
+                        //        }
+                        //        else if (grid[current.getX, current.getY - 2, 0] == 0 && bounded(current.getX, current.getY))
+                        //        {
+                        //            //Debug.Log("test");
 
-                                    grid[current.getX - 1, current.getY, 0] = 5;
+                        //            grid[current.getX, current.getY - 1, 0] = 5;
 
-                                }
-                                break;
-                            case 3:
-                                if (grid[current.getX, current.getY + 1, 0] == 0 && bounded(current.getX, current.getY))
-                                {
-                                    Debug.Log("test");
+                        //        }
 
-                                    grid[current.getX, current.getY + 1, 0] = 5;
-                                }
-                                else if (grid[current.getX, current.getY - 2, 0] == 0 && bounded(current.getX, current.getY))
-                                {
-                                    Debug.Log("test");
+                        //        break;
+                        //    case 2: // south\
+                        //        if (grid[current.getX + 1, current.getY, 0] == 0 && bounded(current.getX, current.getY))
+                        //        {
+                        //            //Debug.Log("test");
 
-                                    grid[current.getX, current.getY - 1, 0] = 5;
+                        //            grid[current.getX + 1, current.getY, 0] = 5;
+                        //        }
+                        //        else if (grid[current.getX - 2, current.getY, 0] == 0 && bounded(current.getX, current.getY))
+                        //        {
+                        //            //Debug.Log("test");
 
-                                }
+                        //            grid[current.getX - 1, current.getY, 0] = 5;
 
-                                break;
-                        }
-                       // grid[current.getX, current.getY, 0] = 4;
+                        //        }
+                        //        break;
+                        //    case 3:
+                        //        if (grid[current.getX, current.getY + 1, 0] == 0 && bounded(current.getX, current.getY))
+                        //        {
+                        //            //Debug.Log("test");
+
+                        //            grid[current.getX, current.getY + 1, 0] = 5;
+                        //        }
+                        //        else if (grid[current.getX, current.getY - 2, 0] == 0 && bounded(current.getX, current.getY))
+                        //        {
+                        //            //Debug.Log("test");
+
+                        //            grid[current.getX, current.getY - 1, 0] = 5;
+
+                        //        }
+
+                        //        break;
+                        //}
+                        // grid[current.getX, current.getY, 0] = 4;
 
                     }// Adds corredor
                     current = (Node)current.parent;
@@ -561,21 +565,20 @@ public class PCG_Basic : PCG{
             }
 
             // Process neighbors
-            Debug.Log("Presumo direcao a ser escolhida1 " + current.getDir + " " + current.getX + " " + current.getY);
+            //Debug.Log("Presumo direcao a ser escolhida1 " + current.getDir + " " + current.getX + " " + current.getY);
 
-            neighbor(grid, current, current.getX, current.getY - 1, x2, y2, 0, corr_wt, trn_wt);
-            Debug.Log("Presumo direcao a ser escolhida2 tem que ter y -1 " + current.getDir + " " + current.getX + " " + current.getY);
+            neighbor(grid, current, current.getX, current.getY - 1, x2, y2, 0, corr_wt, trn_wt, current.getDir);
+            //Debug.Log("Presumo direcao a ser escolhida2 tem que ter y -1 " + current.getDir + " " + current.getX + " " + current.getY);
 
-            neighbor(grid, current, current.getX + 1, current.getY, x2, y2, 1, corr_wt, trn_wt);
-            Debug.Log("Presumo direcao a ser escolhida3 tem que ter x+1 " + current.getDir + " " + current.getX + " " + current.getY);
+            neighbor(grid, current, current.getX + 1, current.getY, x2, y2, 1, corr_wt, trn_wt, current.getDir);
+            //Debug.Log("Presumo direcao a ser escolhida3 tem que ter x+1 " + current.getDir + " " + current.getX + " " + current.getY);
 
-            neighbor(grid, current, current.getX, current.getY + 1, x2, y2, 2, corr_wt, trn_wt);
-            Debug.Log("Presumo direcao a ser escolhida4 tem que ter y +1 " + current.getDir + " " + current.getX + " " + current.getY);
+            neighbor(grid, current, current.getX, current.getY + 1, x2, y2, 2, corr_wt, trn_wt, current.getDir);
+            //Debug.Log("Presumo direcao a ser escolhida4 tem que ter y +1 " + current.getDir + " " + current.getX + " " + current.getY);
 
-            neighbor(grid, current, current.getX - 1, current.getY, x2, y2, 3, corr_wt, trn_wt);
+            neighbor(grid, current, current.getX - 1, current.getY, x2, y2, 3, corr_wt, trn_wt, current.getDir);
 
-            Debug.Log("Presumo direcao a ser escolhida5 tem que ter x -1" + current.getDir + " " + current.getX + " " + current.getY);
-            count++;
+            //Debug.Log("Presumo direcao a ser escolhida5 tem que ter x -1" + current.getDir + " " + current.getX + " " + current.getY);
             closed_list.insert(current); // Add to closed list
             grid[current.getX, current.getY, 2] = 1;
         }
@@ -590,53 +593,16 @@ public class PCG_Basic : PCG{
         }
     }
 
-    private void neighbor(byte[, ,] grid, Node current, int x, int y, int x2, int y2, int dir, int corr_wt, int trn_wt)
+    private void neighbor(byte[, ,] grid, Node current, int x, int y, int x2, int y2, int dir, int corr_wt, int trn_wt, int currentDirection)
     {
         bool NaoTemEspacoEntreParede = false;
 
         int sum = 0;
-        Debug.Log("count " + count);
-        //if (count > 2) { 
-        //    switch (dir)
-        //    {
-        //        case 0:
-        //            sum = y + 1;
-        //            Debug.Log("Dir 0 Coordenadas " + x + " y " + sum);
 
-        //            NaoTemEspacoEntreParede = !AStarBlocked(grid, x, sum ); // se true nao pode entrar
-
-        //            break;
-        //        case 1:
-        //            sum = x - 1;
-        //            Debug.Log("Dir 1 Coordenadas " + sum + " y " + y);
-
-        //            NaoTemEspacoEntreParede = !AStarBlocked(grid, sum, y); // se true nao pode entrar
-
-        //            break;
-        //        case 2:
-        //            sum = y - 1;
-        //            Debug.Log(" Dir 2 Coordenadas " + x + " y " + sum);
-
-        //            NaoTemEspacoEntreParede = !AStarBlocked(grid, x, sum); // se true nao pode entrar
-
-        //            break;
-        //        case 3:
-        //            sum = x + 1;
-        //            Debug.Log("Dir 3 Coordenadas " + sum + " y " + y);
-
-        //            NaoTemEspacoEntreParede = !AStarBlocked(grid, sum, y); // se true nao pode entrar
-
-        //            break;
-        //        case -1:
-        //            NaoTemEspacoEntreParede = false;
-        //            break;
-        //    }
-        //}
-
-        Debug.Log("NaoTemEspacoEntreParede " + NaoTemEspacoEntreParede);
+       // Debug.Log("NaoTemEspacoEntreParede " + NaoTemEspacoEntreParede);
 
         // If not blocked or not in closed list
-        if ((!AStarBlocked(grid, x, y) && !NaoTemEspacoEntreParede) && grid[x, y, 2] != 1)
+        if ((!AStarBlocked(grid, x, y, dir, currentDirection) && !NaoTemEspacoEntreParede) && grid[x, y, 2] != 1)
         {
             if (grid[x, y, 1] != 1)
             { // If not in open list
@@ -696,6 +662,8 @@ public class PCG_Basic : PCG{
         if (grid[x, y, 0] == 2) return true; // Check if cell is occupied by wall?
         if (grid[x, y, 0] == 1) return true; // Check if cell is occupied by wall?
         if (grid[x, y, 0] == 3) return true; // Check if cell is occupied by wall?
+        if (grid[x, y, 0] == 4) return true; // Check if cell is occupied by wall?
+
         return false;
     }
 
@@ -708,28 +676,170 @@ public class PCG_Basic : PCG{
         return false;
     }
 
-    private bool AStarBlocked(byte[, ,] grid, int x, int y)
+    private bool AStarBlocked(byte[, ,] grid, int x, int y, int trueDir, int currentDir)
     {
+        if (grid[x, y, 0] == 3)
+        {
+            return false;
+        }
+
         if (x < 0 || x >= grid.GetLength(0) || y < 0 || y >= grid.GetLength(1))
         {
-            Debug.Log("Fora dos limites!");
+           // Debug.Log("Fora dos limites!");
                     return true; // Check if cell is inside grid se estiver esta bloqueada
 
         }
 
 
-        if (grid[x, y, 0] == 1){
-            Debug.Log("Chao!");
+        //neighbor(grid, current, current.getX, current.getY - 1, x2, y2, 0, corr_wt, trn_wt, 2);
+        ////Debug.Log("Presumo direcao a ser escolhida2 tem que ter y -1 " + current.getDir + " " + current.getX + " " + current.getY);
 
-            return true; // Check if cell is occupied by floor
-        }
-        if (grid[x, y, 0] == 2)// Check if cell is occupied by wall?
+        //neighbor(grid, current, current.getX + 1, current.getY, x2, y2, 1, corr_wt, trn_wt, 3);
+        ////Debug.Log("Presumo direcao a ser escolhida3 tem que ter x+1 " + current.getDir + " " + current.getX + " " + current.getY);
+
+        //neighbor(grid, current, current.getX, current.getY + 1, x2, y2, 2, corr_wt, trn_wt, 0);
+        ////Debug.Log("Presumo direcao a ser escolhida4 tem que ter y +1 " + current.getDir + " " + current.getX + " " + current.getY);
+
+        //neighbor(grid, current, current.getX - 1, current.getY, x2, y2, 3, corr_wt, trn_wt, 1);
+        if (grid[x, y, 0] == 1)
         {
-            Debug.Log("Wall!");
+            return true;
+        }
+        if (grid[x, y, 0] == 2)
+        {
+            return true;
+        }
 
-            return true; 
-        } 
-        //if (grid[x, y, 0] == 5) return true; // Check if cell is occupied by corridor
+        //switch (trueDir) //direcao futura ve se permite andar uma celula
+        //    {
+        //        case 0:
+
+        //            if (grid[x, y - 1, 0] != 0) // se nao for 3 ou 4 e diferent de 0 entao nao pode
+        //                return true;
+        //            break;
+        //        case 1:
+      
+        //            if (grid[x + 1, y, 0] != 0) // se nao for 3 ou 4 e diferent de 0 entao nao pode
+        //                return true;
+        //            break;
+        //        case 2:
+     
+        //            if (grid[x, y + 1, 0] != 0) // se nao for 3 ou 4 e diferent de 0 entao nao pode
+        //                return true;
+        //            break;
+        //        case 3:
+
+        //            if (grid[x - 1, y, 0] != 0) // se nao for 3 ou 4 e diferent de 0 entao nao pode
+        //                return true;
+        //            break;
+        //    }
+
+        switch (trueDir) // impede os futuros caminhos a uma celula q faca contact com parede
+        {
+            case 0: //y-1
+                if (grid[x - 1, y, 0] == 3 || grid[x + 1, y, 0] ==3 || grid[x, y - 1, 0] == 3)
+                {
+                    return false;
+                }else
+                {
+                    if (grid[x - 1, y, 0] != 0)
+                    {
+                        if (grid[x - 1, y, 0] != 4)
+                            return true;
+                    }
+                    if (grid[x + 1, y, 0] != 0)
+                    {
+                        if (grid[x + 1, y, 0] != 4)
+                            return true;
+                    }
+                    if (grid[x, y - 1, 0] != 0)
+                    {
+                        if (grid[x, y - 1, 0] != 4)
+                            return true;
+                    }
+                }
+
+                break;
+            case 1: // x+1
+
+                if (grid[x + 1, y, 0] == 3 || grid[x, y - 1, 0] == 3 || grid[x, y + 1, 0] == 3)
+                {
+                    return false;
+                }
+                else
+                {
+                    if (grid[x + 1, y, 0] != 0)
+                    {
+                        if (grid[x + 1, y, 0] != 4)
+                            return true;
+                    }
+                    if (grid[x, y - 1, 0] != 0)
+                    {
+                        if (grid[x, y - 1, 0] != 4)
+                            return true;
+                    }
+                    if (grid[x, y + 1, 0] != 0)
+                    {
+                        if (grid[x, y + 1, 0] != 4)
+                            return true;
+                    }
+                }
+
+
+                break;
+            case 2://Y + 1
+                if (grid[x + 1, y, 0] == 3 || grid[x - 1, y, 0] == 3 || grid[x, y + 1, 0] == 3)
+                {
+                    return false;
+                }
+                else
+                {
+                    if (grid[x + 1, y, 0] != 0)
+                    {
+                        if (grid[x + 1, y, 0] != 4)
+                            return true;
+                    }
+                    if (grid[x - 1, y, 0] != 0)
+                    {
+                        if (grid[x - 1, y, 0] != 4)
+                            return true;
+                    }
+                    if (grid[x, y + 1, 0] != 0)
+                    {
+                        if (grid[x, y + 1, 0] != 4)
+                            return true;
+                    }
+                }
+                break;
+            case 3://X - 1
+                if (grid[x - 1, y, 0] == 3 || grid[x, y - 1, 0] == 3 || grid[x, y + 1, 0] == 3)
+                {
+                    return false;
+                }
+                else
+                {
+                    if (grid[x - 1, y, 0] != 0)
+                    {
+                        if (grid[x - 1, y, 0] != 4)
+                            return true;
+                    }
+                    if (grid[x, y - 1, 0] != 0)
+                    {
+                        if (grid[x, y - 1, 0] != 4)
+                            return true;
+                    }
+                    if (grid[x, y + 1, 0] != 0)
+                    {
+                        if (grid[x, y + 1, 0] != 4)
+                            return true;
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+
+
         return false;
-    }
+        }
 }
