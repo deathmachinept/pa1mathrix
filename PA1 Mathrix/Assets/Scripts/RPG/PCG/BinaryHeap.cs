@@ -64,6 +64,7 @@ public class BinaryHeap {
             int parent = (pos - 1) / 2;
             Node n = (Node)h[pos];
             Node np = (Node)h[parent];
+
             if (n.getF >= np.getF) break;
             Node tmp = (Node)h[pos];
             h[pos] = (Node)h[parent];

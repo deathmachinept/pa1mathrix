@@ -35,7 +35,14 @@ public class PCG  {
     public bool blocked(int x, int y, int type)
     {
         // Check if cell is occupied
+        if (type == 4)
+        {
+            if ((bounded(x, y) && pcgrid[x, y] == type) || (bounded(x, y) && pcgrid[x, y] == 5)) return true;
+
+        }
+        else {
         if (bounded(x, y) && pcgrid[x,y] == type) return true;
+        }
         return false;
     }
 
