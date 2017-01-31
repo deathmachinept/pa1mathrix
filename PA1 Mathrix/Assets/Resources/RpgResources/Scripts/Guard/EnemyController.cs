@@ -8,7 +8,6 @@ using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour {
     public int Health;
-    public float SightRange;
     public NetworkIdentity PlayerToAttack;
     public float AttackRange;
     public int AttackStrength;
@@ -25,17 +24,33 @@ public class EnemyController : MonoBehaviour {
     {
         Players = GameObject.Find("Players");
         textbox = transform.FindChild("Canvas").FindChild("Text").GetComponent<Text>();
+
         gameObject.AddComponent<GuardFSM_Action_GuardPoint>();
         GetComponent<GuardFSM_Action_GuardPoint>().enemy=this;
         GetComponent<GuardFSM_Action_GuardPoint>().CoroutineIsRunning= false;
         GetComponent<GuardFSM_Action_GuardPoint>().Seconds = 5;
+
+        gameObject.AddComponent<GuardFSM_Action_MoveToAPoint>();
+        GetComponent<GuardFSM_Action_MoveToAPoint>().enemy = this;
+        GetComponent<GuardFSM_Action_MoveToAPoint>().TimeToTake = 3;
+        GetComponent<GuardFSM_Action_MoveToAPoint>().isMoving = false;
     }
 
     public void Update()
     {
+        if (PlayerToAttack != null)
+        {
+            GetComponent<GuardFSM_Action_MoveToAPoint>().Destination = PlayerToAttack.transform.position;
+        }
+        else
+        {
+            GetComponent<GuardFSM_Action_MoveToAPoint>().Destination =
+                GlobalVariables.singleton.GuardPoints[CurrentGuardPointIndex];
+        }
         if (Input.GetKeyDown(KeyCode.P))
         {
-            GetComponent<GuardFSM_Action_GuardPoint>().DoAction();
+            //GetComponent<GuardFSM_Action_GuardPoint>().DoAction();
+            GetComponent<GuardFSM_Action_MoveToAPoint>().DoAction();
         }
     }
 
@@ -51,30 +66,3 @@ public class EnemyController : MonoBehaviour {
         return null;
     }
 }
-//CLASSE DA ACÇÃO COM COROTINA
-//public class GuardFSM_Action_GuardPoint : MonoBehaviour, IAction
-//{
-//    public EnemyController enemy;
-//    public int Seconds;
-//    public bool CoroutineIsRunning;
-//    public GuardFSM_Action_GuardPoint(EnemyController Character_That_Waits, int Seconds_To_Wait)
-//    {
-//        enemy = Character_That_Waits;
-//        Seconds = Seconds_To_Wait;
-//        CoroutineIsRunning = false;
-//    }
-//    public void DoAction()
-//    {
-//        CoroutineIsRunning = true;
-//        StartCoroutine(WaitCoroutine(enemy, Seconds));
-//    }
-
-//    public IEnumerator WaitCoroutine(EnemyController Enemy, int secondsToWait)
-//    {
-//        Debug.Log("Entra na corotina");
-//        Enemy.HasGuardedPoint = false;
-//        yield return new WaitForSecondsRealtime(secondsToWait);
-//        Enemy.HasGuardedPoint = true;
-//        CoroutineIsRunning = false;
-//    }
-//}

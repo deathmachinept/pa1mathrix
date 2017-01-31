@@ -154,11 +154,7 @@ public class SM
         {
             if (t.CanPerformTransition())
             {
-                //if(CurrentState.EntryAction!=null)
-                //    actions.Add(CurrentState.ExitAction);
                 CurrentState = t.targetState;
-                //if (CurrentState.ExitAction != null)
-                //    actions.Add(CurrentState.ExitAction);
                 return actions;
             }
         }
@@ -424,8 +420,7 @@ public class GuardFSM_Transition_NoPlayersDetected : Transition
         PlayersHolder = Players;
         Actions = new List<IAction>();
         ConditionsList = new List<ICondition>();
-        //SERÁ NECESSÁRIO ACTUALIZAR O HOLDER DOS JOGADORES AQUI DISPONIBILIZADA OU ELA ACTUALIZA-SE SOZINHA?
-        ConditionsList.Add(new GuardFSM_Condition_AreThereNoPlayersInRange(Enemy,PlayersHolder));
+        ConditionsList.Add(new GuardFSM_Condition_AreThereNoPlayersInRange(Enemy.gameObject,PlayersHolder));
         targetState = null;
     }
 }
@@ -442,7 +437,7 @@ public class GuardFSM_Transition_PlayerInAttackRange : Transition
         Actions = new List<IAction>();
         ConditionsList = new List<ICondition>();
         //SERÁ NECESSÁRIO ACTUALIZAR O HOLDER DOS JOGADORES AQUI DISPONIBILIZADA OU ELA ACTUALIZA-SE SOZINHA?
-        ConditionsList.Add(new GuardFSM_Condition_IsAPlayerInsideARange(PlayersHolder,Enemy,Enemy.SightRange));
+        ConditionsList.Add(new GuardFSM_Condition_IsAPlayerVisible(PlayersHolder,Enemy.gameObject));
         targetState = null;
     }
 }
@@ -511,12 +506,29 @@ public class GuardFSM_Condition_IsAPlayerInsideARange : ICondition
         return false;
     }
 }
+public class GuardFSM_Condition_IsAPlayerVisible:ICondition
+{
+    public GameObject PlayersHolder;
+    public GameObject Enemy;
+    public float Range;
+
+    public GuardFSM_Condition_IsAPlayerVisible(GameObject players, GameObject enemy)
+    {
+        PlayersHolder = players;
+        Enemy = enemy;
+    }
+
+    public bool test()
+    {
+        return false;//VER ISTO
+    }
+}//VER
 public class GuardFSM_Condition_AreThereNoPlayersInRange : ICondition
 {
     public GameObject PlayersHolder;
-    public EnemyController Enemy;
+    public GameObject Enemy;
 
-    public GuardFSM_Condition_AreThereNoPlayersInRange(EnemyController enemy,GameObject Players)
+    public GuardFSM_Condition_AreThereNoPlayersInRange(GameObject enemy,GameObject Players)
     {
         Enemy = enemy;
         PlayersHolder = Players;
@@ -524,14 +536,7 @@ public class GuardFSM_Condition_AreThereNoPlayersInRange : ICondition
 
     public bool test()
     {
-        foreach (Transform t in PlayersHolder.transform)
-        {
-            if (Vector2.Distance(Enemy.transform.position, t.position) < Enemy.SightRange)
-            {
-                return true;
-            }
-        }
-        return false;
+        return Enemy.GetComponent<EnemyController>().PlayerToAttack=null;//VER ISTO
     }
 }
 public class GuardFSM_Condition_IsPlayerDead : ICondition
@@ -563,10 +568,12 @@ public class GuardFSM_Condition_HasTheWaitingTimePassed : ICondition
     }
 }
 //Actions (Adicionar aqui o despoletar das animações)
-public class GuardFSM_Action_MoveToAPoint : IAction
+public class GuardFSM_Action_MoveToAPoint : MonoBehaviour, IAction
 {
     public EnemyController enemy;
     public Vector2 Destination;
+    public float TimeToTake;
+    public bool isMoving;
 
     public GuardFSM_Action_MoveToAPoint(EnemyController Enemy,Vector2 Destination)
     {
@@ -576,8 +583,24 @@ public class GuardFSM_Action_MoveToAPoint : IAction
     public void DoAction()
     {
         enemy.HasGuardedPoint=false;
-        //Substituir por Função do Lerp
+        if (!isMoving)
+        {
+            StartCoroutine(Move());
+        }
+    }
+
+    public IEnumerator Move()
+    {
+        float elapsedTime = 0;
+        while (elapsedTime<TimeToTake)
+        {
+            isMoving = true;
+            enemy.transform.position = Vector2.Lerp(enemy.transform.position, Destination, elapsedTime/TimeToTake);
+            elapsedTime += Time.deltaTime;
+        }
         enemy.transform.position = Destination;
+        isMoving = false;
+        yield return null;
     }
 }
 public class GuardFSM_Action_AttackAPlayer : IAction

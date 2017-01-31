@@ -133,6 +133,8 @@
     <Compile Include="Assets\Resources\RpgResources\Scripts\Guard\EnemyController.cs" />
     <Compile Include="Assets\Resources\RpgResources\Scripts\Guard\EnemyHFSM.cs" />
     <Compile Include="Assets\Resources\RpgResources\Scripts\Guard\EnemySpawner.cs" />
+    <Compile Include="Assets\Resources\RpgResources\Scripts\Guard\FOV.cs" />
+    <Compile Include="Assets\Resources\RpgResources\Scripts\Guard\FOVEditor.cs" />
     <Compile Include="Assets\Resources\RpgResources\Scripts\Guard\GlobalVariables.cs" />
     <Compile Include="Assets\Resources\RpgResources\Scripts\MyNetworkManager.cs" />
     <Compile Include="Assets\Resources\RpgResources\Scripts\PlayerController.cs" />

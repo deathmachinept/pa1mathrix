@@ -15,6 +15,7 @@ public class GlobalVariables : MonoBehaviour {
             Destroy(gameObject);
         }
         singleton = this;
+
         GuardPoints.Add(new Vector2(-13,-24));
         GuardPoints.Add(new Vector2(-3, -25));
         GuardPoints.Add(new Vector2(1, -25));
@@ -23,6 +24,7 @@ public class GlobalVariables : MonoBehaviour {
         GuardPoints.Add(new Vector2(-5, 2));
         GuardPoints.Add(new Vector2(-18, -3));
         GuardPoints.Add(new Vector2(-30, -6));
+
         foreach (Transform t in transform)
         {
             GuardPoints.Add(t.position);

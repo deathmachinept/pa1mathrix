@@ -26,7 +26,7 @@ GameObject:
   - 61: {fileID: 61000010675186484}
   - 95: {fileID: 95000013682405740}
   - 50: {fileID: 50000013657900192}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -199,6 +199,7 @@ MonoBehaviour:
   currentPosition: {x: 0, y: 0, z: 0}
   inputEspecial: {x: 0, y: 0, z: 0}
   timer: 0
+  Health: 100
 --- !u!114 &114000011846304220
 MonoBehaviour:
   m_ObjectHideFlags: 1
