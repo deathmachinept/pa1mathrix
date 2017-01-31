@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using MaterialUI;
+
 
 public class BinaryHeap {
 
@@ -62,7 +62,6 @@ public class BinaryHeap {
         while (pos > 0)
         {
             int parent = (pos - 1) / 2;
-            Debug.Log("Parent " + parent);
             Node n = (Node)h[pos];
             Node np = (Node)h[parent];
 
