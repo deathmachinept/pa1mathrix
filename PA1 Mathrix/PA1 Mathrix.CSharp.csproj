@@ -152,7 +152,6 @@
     <Compile Include="Assets\Scripts\RPG\Music\MusicManagement.cs" />
     <Compile Include="Assets\Scripts\RPG\PCG\BinaryHeap.cs" />
     <Compile Include="Assets\Scripts\RPG\PCG\MapGenerator.cs" />
-    <Compile Include="Assets\Scripts\RPG\PCG\MapRender.cs" />
     <Compile Include="Assets\Scripts\RPG\PCG\Node.cs" />
     <Compile Include="Assets\Scripts\RPG\PCG\PCG.cs" />
     <Compile Include="Assets\Scripts\RPG\PCG\PCG_Basic.cs" />

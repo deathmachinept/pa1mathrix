@@ -16,7 +16,7 @@ public class PCG_Basic : PCG{
     private int room_base;
     private int room_radix;
     private bool room_blocked = false; // If room is blocked
-    int redo = 2500; // Recursion limit
+    int redo = 3500; // Recursion limit
     ArrayList rooms; // Room arraylist
     int corridor_num;
     int corridor_weight;
@@ -27,12 +27,14 @@ public class PCG_Basic : PCG{
     // *A Star
     BinaryHeap open_list;
     BinaryHeap closed_list;
+    private bool buildMetro;
 
 
 
     public void updateParam(int g_width, int g_height, int r_type, int r_min, int r_max, int c_num, int c_weight, int t_weight, int room_total)
     {
-        R = new System.Random(); 
+        R = new System.Random();
+        buildMetro = false;
         base.updateParam(g_width, g_height);
 
         if (g_height == 0)
@@ -96,6 +98,42 @@ public class PCG_Basic : PCG{
         initCorridors(); // Initialize corridors
     }
 
+    public void insertMetro()
+    {
+        int posY = pcgrid_height - 12;
+        int posX = (pcgrid_width / 2);
+        Vector2 coordenadaDeQuarto = new Vector2(posX, posY);
+
+        Room Metro = new Room(pcgrid_width, pcgrid_height, 0, 0, 1, R, true, 12, 15, coordenadaDeQuarto);
+        rooms.Add(Metro);
+
+        for (int j = Metro.room_y1; j <= Metro.room_y2; j++)
+        {
+            for (int i = Metro.room_x1; i <= Metro.room_x2; i++)
+            {
+                pcgrid[i, j] = 1;
+                //Debug.Log("Contando cells" + i) ;
+            }
+        }
+        // Create room walls
+        for (int i = Metro.wall_x1; i <= Metro.wall_x2; i++)
+        {
+            if (pcgrid[i, Metro.wall_y1] != 1) pcgrid[i, Metro.wall_y1] = 2;
+            if (pcgrid[i, Metro.wall_y2] != 1) pcgrid[i, Metro.wall_y2] = 2;
+        }
+        for (int j = Metro.wall_y1; j <= Metro.wall_y2; j++)
+        {
+            if (pcgrid[Metro.wall_x1, j] != 1) pcgrid[Metro.wall_x1, j] = 2;
+            if (pcgrid[Metro.wall_x2, j] != 1) pcgrid[Metro.wall_x2, j] = 2;
+        }
+        // Place openings
+        for (int k = 0; k < Metro.opening_num; k++)
+        {
+            //1
+
+            if (pcgrid[Metro.opening[k, 0], Metro.opening[k, 1]] != 1) pcgrid[Metro.opening[k, 0], Metro.opening[k, 1]] = 3;
+        }
+    }
 
     public void initRooms()
     {
@@ -104,7 +142,14 @@ public class PCG_Basic : PCG{
         for (int n = 0; n < roomMax; n++)
         {
             room_blocked = false; // Unblock
-            Room rm = new Room(pcgrid_width, pcgrid_height, room_base, room_radix, corridor_num,R); // Create new room
+            if (!buildMetro)
+            {
+                insertMetro();
+                buildMetro = true;
+            }
+            else { 
+            Room rm = new Room(pcgrid_width, pcgrid_height, room_base, room_radix, corridor_num, R, false, 0, 0,
+                Vector2.zero); // Create new room
             room_blocked = blockRoom(rm); // Check if room is blocked
 
             if (room_blocked)
@@ -114,7 +159,7 @@ public class PCG_Basic : PCG{
                 if (redo == 0)
                 {
                     room_num--;
-                    redo = 2500; // Recursion limit
+                    redo = 3500; // Recursion limit
                 }
             }
             else
@@ -149,6 +194,7 @@ public class PCG_Basic : PCG{
                 }
             }
         }
+        } // metro else
     }
 
     private bool blockRoom(Room rm)
@@ -556,7 +602,7 @@ public class PCG_Basic : PCG{
 
                         //        break;
                         //}
-                        // grid[current.getX, current.getY, 0] = 4;
+                        //grid[current.getX, current.getY, 0] = 4;
 
                     }// Adds corredor
                     current = (Node)current.parent;
@@ -678,10 +724,18 @@ public class PCG_Basic : PCG{
 
     private bool AStarBlocked(byte[, ,] grid, int x, int y, int trueDir, int currentDir)
     {
-        if (grid[x, y, 0] == 3)
-        {
-            return false;
-        }
+        bool Xm1 = false, Xp1 = false, Ym1 = false, Yp1 = false;
+
+        if (x + 1 >= pcgrid_width)
+            Xp1 = true;
+        if (x - 1 < 0)
+            Xm1 = true;
+        if (y + 1 >= pcgrid_height)
+            Yp1 = true;
+        if (y - 1 < 0)
+            Ym1 = true;
+
+
 
         if (x < 0 || x >= grid.GetLength(0) || y < 0 || y >= grid.GetLength(1))
         {
@@ -690,17 +744,12 @@ public class PCG_Basic : PCG{
 
         }
 
+        if (grid[x, y, 0] == 3)
+        {
+            return false;
+        }
 
-        //neighbor(grid, current, current.getX, current.getY - 1, x2, y2, 0, corr_wt, trn_wt, 2);
-        ////Debug.Log("Presumo direcao a ser escolhida2 tem que ter y -1 " + current.getDir + " " + current.getX + " " + current.getY);
 
-        //neighbor(grid, current, current.getX + 1, current.getY, x2, y2, 1, corr_wt, trn_wt, 3);
-        ////Debug.Log("Presumo direcao a ser escolhida3 tem que ter x+1 " + current.getDir + " " + current.getX + " " + current.getY);
-
-        //neighbor(grid, current, current.getX, current.getY + 1, x2, y2, 2, corr_wt, trn_wt, 0);
-        ////Debug.Log("Presumo direcao a ser escolhida4 tem que ter y +1 " + current.getDir + " " + current.getX + " " + current.getY);
-
-        //neighbor(grid, current, current.getX - 1, current.getY, x2, y2, 3, corr_wt, trn_wt, 1);
         if (grid[x, y, 0] == 1)
         {
             return true;
@@ -710,130 +759,296 @@ public class PCG_Basic : PCG{
             return true;
         }
 
-        //switch (trueDir) //direcao futura ve se permite andar uma celula
-        //    {
-        //        case 0:
 
-        //            if (grid[x, y - 1, 0] != 0) // se nao for 3 ou 4 e diferent de 0 entao nao pode
-        //                return true;
-        //            break;
-        //        case 1:
-      
-        //            if (grid[x + 1, y, 0] != 0) // se nao for 3 ou 4 e diferent de 0 entao nao pode
-        //                return true;
-        //            break;
-        //        case 2:
-     
-        //            if (grid[x, y + 1, 0] != 0) // se nao for 3 ou 4 e diferent de 0 entao nao pode
-        //                return true;
-        //            break;
-        //        case 3:
-
-        //            if (grid[x - 1, y, 0] != 0) // se nao for 3 ou 4 e diferent de 0 entao nao pode
-        //                return true;
-        //            break;
-        //    }
 
         switch (trueDir) // impede os futuros caminhos a uma celula q faca contact com parede
         {
             case 0: //y-1
-                if (grid[x - 1, y, 0] == 3 || grid[x + 1, y, 0] ==3 || grid[x, y - 1, 0] == 3)
-                {
-                    return false;
-                }else
-                {
+
+                    //if (!Xp1 && !Yp1) { 
+                    //    if (grid[x + 1, y+1, 0] != 0)
+                    //    {
+                    //        if (grid[x + 1, y+1, 0] != 4)
+                    //            return true;
+                    //    }
+                    //}
+                    //if (!Xm1 && !Xp1)
+                    //{
+                    //    if (grid[x - 1, y + 1, 0] != 0)
+                    //    {
+                    //        if (grid[x - 1, y + 1, 0] != 4)
+                    //            return true;
+                    //    }
+                    //}
+
+                    if (!Xm1)
+                    {
+                        if (grid[x - 1, y, 0] == 3)
+                            return false;
+
+                        if (!Ym1)
+                        {
+                            if (grid[x - 1, y - 1, 0] != 0)
+                            {
+                                if (grid[x - 1, y - 1, 0] != 4)
+                                    return true;
+                            }
+
+                        }
+                    }
+
+
+                    if (!Xp1)
+                    {
+                        if (grid[x + 1, y, 0] == 3)
+                            return false;
+                        if ( !Ym1)
+                        {
+                            if (grid[x, y-1, 0] == 3)
+                                return false;
+                            if (grid[x + 1, y - 1, 0] != 0)
+                            {
+                                //vou ter q ver se é porta
+                                if (grid[x + 1, y - 1, 0] != 4)
+                                    return true;
+                            }
+                        }
+                    }
+
+                    ///
+                    /// 
+                    if(!Xm1)
                     if (grid[x - 1, y, 0] != 0)
                     {
                         if (grid[x - 1, y, 0] != 4)
                             return true;
                     }
+
+                    if (!Xp1)
                     if (grid[x + 1, y, 0] != 0)
                     {
                         if (grid[x + 1, y, 0] != 4)
                             return true;
                     }
+                    if (!Ym1)
                     if (grid[x, y - 1, 0] != 0)
                     {
                         if (grid[x, y - 1, 0] != 4)
                             return true;
                     }
-                }
 
                 break;
             case 1: // x+1
 
-                if (grid[x + 1, y, 0] == 3 || grid[x, y - 1, 0] == 3 || grid[x, y + 1, 0] == 3)
-                {
-                    return false;
-                }
-                else
-                {
+                    if (!Xp1)
+                    {
+                        if (grid[x + 1, y, 0] == 3)
+                            return false;
+                        if (!Yp1) {
+                            if (grid[x, y + 1, 0] == 3)
+                                return false;
+                            if (grid[x + 1, y + 1, 0] != 0)
+                            {
+                                if (grid[x + 1, y + 1, 0] != 4)
+                                    return true;
+                            }
+                        }
+                    }
+
+
+                        if (!Ym1)
+                        {
+                            if (grid[x, y - 1, 0] == 3)
+                                return false;
+                            if (!Xp1)
+                            {
+                                if (grid[x + 1, y - 1, 0] != 0)
+                                {
+                                    if (grid[x + 1, y - 1, 0] != 4)
+                                        return true;
+                                }
+                            }
+                        }
+
+                        //if (!Ym1)
+                        //{
+                        //    if (grid[x, y - 1, 0] == 3)
+                        //    {
+                        //        return false;
+                        //    }
+                        //    if(!Xm1){
+                        //        if (grid[x - 1, y - 1, 0] != 0)
+                        //        {
+                        //            if (grid[x - 1, y - 1, 0] != 4)
+                        //                return true;
+                        //        }
+                        //    }
+                        ////}
+
+                        //    if (!Xp1)
+                        //    {
+
+                        //        if (!Xm1) { 
+                        //            if (grid[x - 1, y + 1, 0] != 0)
+                        //            {
+                        //                if (grid[x - 1, y + 1, 0] != 4)
+                        //                    return true;
+                        //            }
+                        //        }
+                        //    }
+                    //
+                if(!Xp1)
                     if (grid[x + 1, y, 0] != 0)
                     {
                         if (grid[x + 1, y, 0] != 4)
                             return true;
                     }
+                if (!Ym1)
                     if (grid[x, y - 1, 0] != 0)
                     {
                         if (grid[x, y - 1, 0] != 4)
                             return true;
                     }
+                if (!Yp1)
                     if (grid[x, y + 1, 0] != 0)
                     {
                         if (grid[x, y + 1, 0] != 4)
                             return true;
                     }
-                }
-
 
                 break;
+
             case 2://Y + 1
-                if (grid[x + 1, y, 0] == 3 || grid[x - 1, y, 0] == 3 || grid[x, y + 1, 0] == 3)
-                {
-                    return false;
-                }
-                else
-                {
+                    if (!Xp1) {
+                        if (grid[x + 1, y, 0] == 3)
+                        {
+                            return false;
+                        }
+                        if (!Yp1) {
+                            if (grid[x, y + 1, 0] == 3)
+                            {
+                                return false;
+                            }
+                            if (grid[x + 1, y + 1, 0] != 0)
+                            {
+                                if (grid[x + 1, y + 1, 0] != 4)
+                                    return true;
+                            }
+                        }
+                    }
+                    //if (grid[x + 1, y - 1, 0] != 0)
+                    //{
+                    //    if (grid[x + 1, y - 1, 0] != 4)
+                    //        return true;
+                    //}
+                    if (!Xm1)
+                    {
+                        if (grid[x - 1, y, 0] == 3)
+                            return false;
+                        if(!Yp1)
+                        if (grid[x - 1, y + 1, 0] != 0)
+                        {
+                            if (grid[x - 1, y + 1, 0] != 4)
+                                return true;
+                        }
+                    }
+
+                    //if (grid[x - 1, y - 1, 0] != 0)
+                    //{
+                    //    if (grid[x - 1, y - 1, 0] != 4)
+                    //        return true;
+                    //}
+
+                    //
+                if(!Xp1)
                     if (grid[x + 1, y, 0] != 0)
                     {
                         if (grid[x + 1, y, 0] != 4)
                             return true;
                     }
+                if (!Xm1)
                     if (grid[x - 1, y, 0] != 0)
                     {
                         if (grid[x - 1, y, 0] != 4)
                             return true;
                     }
+                if(!Yp1)
                     if (grid[x, y + 1, 0] != 0)
                     {
                         if (grid[x, y + 1, 0] != 4)
                             return true;
                     }
-                }
                 break;
             case 3://X - 1
-                if (grid[x - 1, y, 0] == 3 || grid[x, y - 1, 0] == 3 || grid[x, y + 1, 0] == 3)
-                {
-                    return false;
-                }
-                else
-                {
-                    if (grid[x - 1, y, 0] != 0)
+
+                    //if (grid[x + 1, y + 1, 0] != 0)
+                    //{
+                    //    if (grid[x + 1, y + 1, 0] != 4)
+                    //        return true;
+                    //}
+
+                    //if (grid[x + 1, y - 1, 0] != 0)
+                    //{
+                    //    if (grid[x + 1, y - 1, 0] != 4)
+                    //        return true;
+                    //}
+
+                    if (!Xm1)
                     {
-                        if (grid[x - 1, y, 0] != 4)
-                            return true;
+
+                        if (grid[x - 1, y, 0] == 3)
+                            return false;
+                        //ve primeiro se pode ir 2 casas para a frente
+                        if (grid[x - 1, y, 0] != 0)
+                        {
+                            if (grid[x - 1, y, 0] != 4)
+                                return true;
+                        }
+
+                        if (!Yp1)
+                        {
+                            // se pode ir para Y positivo 
+                            if (grid[x, y + 1, 0] == 3)
+                                return false;
+
+                            if (grid[x - 1, y + 1, 0] != 0)
+                            {
+                                if (grid[x - 1, y + 1, 0] != 4)
+                                    return true;
+                            }
+                        }
                     }
+
+                    if (!Ym1)
+                    {
+                        if (grid[x, y - 1, 0] == 3)
+                        {
+                            return false;
+                        }
+                        if (!Xm1) { 
+                            if (grid[x - 1, y - 1, 0] != 0)
+                            {
+                                if (grid[x - 1, y - 1, 0] != 4)
+                                    return true;
+                            }
+                        }
+                    }
+
+
+                    //
+                
+                    if(!Ym1)
                     if (grid[x, y - 1, 0] != 0)
                     {
                         if (grid[x, y - 1, 0] != 4)
                             return true;
                     }
+                    if (!Yp1)
                     if (grid[x, y + 1, 0] != 0)
                     {
                         if (grid[x, y + 1, 0] != 4)
                             return true;
                     }
-                }
                 break;
             default:
                 break;
@@ -843,3 +1058,26 @@ public class PCG_Basic : PCG{
         return false;
         }
 }
+//switch (trueDir) //direcao futura ve se permite andar uma celula
+//    {
+//        case 0:
+
+//            if (grid[x, y - 1, 0] != 0) // se nao for 3 ou 4 e diferent de 0 entao nao pode
+//                return true;
+//            break;
+//        case 1:
+
+//            if (grid[x + 1, y, 0] != 0) // se nao for 3 ou 4 e diferent de 0 entao nao pode
+//                return true;
+//            break;
+//        case 2:
+
+//            if (grid[x, y + 1, 0] != 0) // se nao for 3 ou 4 e diferent de 0 entao nao pode
+//                return true;
+//            break;
+//        case 3:
+
+//            if (grid[x - 1, y, 0] != 0) // se nao for 3 ou 4 e diferent de 0 entao nao pode
+//                return true;
+//            break;
+//    }

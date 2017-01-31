@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
-using Random = UnityEngine.Random;
 
 
 public class MapGenerator : MonoBehaviour
@@ -8,7 +8,7 @@ public class MapGenerator : MonoBehaviour
   private PCG_Basic pcgb;
   private PCG pcg;
 
-  private Random RandomGen;
+  private System.Random RandomGen;
   public int InitialWorldSeed;
 
   private GameObject TilesHolder;
@@ -37,6 +37,7 @@ public class MapGenerator : MonoBehaviour
 
     void Start()
     {
+        RandomGen = new System.Random();
         TilesHolder = new GameObject(); 
         TilesHolder.transform.position = Vector3.zero;
         TilesHolder.name = "Tiles Holder";
@@ -74,7 +75,7 @@ public class MapGenerator : MonoBehaviour
                   //break;
         //}
       }
-  
+
 
   void renderGrid()
   {
@@ -86,6 +87,7 @@ public class MapGenerator : MonoBehaviour
               renderGridCell(i, j);
           }
       }
+ 
   } 
 
   void renderGridCell(int x, int y)
