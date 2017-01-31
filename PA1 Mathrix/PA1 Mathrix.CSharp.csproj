@@ -130,7 +130,6 @@
     <Compile Include="Assets\Resources\RpgResources\Scripts\Chat.cs" />
     <Compile Include="Assets\Resources\RpgResources\Scripts\ChatController.cs" />
     <Compile Include="Assets\Resources\RpgResources\Scripts\GameController.cs" />
-    <Compile Include="Assets\Resources\RpgResources\Scripts\Guard\CustomCollider.cs" />
     <Compile Include="Assets\Resources\RpgResources\Scripts\Guard\EnemyController.cs" />
     <Compile Include="Assets\Resources\RpgResources\Scripts\Guard\EnemyHFSM.cs" />
     <Compile Include="Assets\Resources\RpgResources\Scripts\Guard\EnemySpawner.cs" />

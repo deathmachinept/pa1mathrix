@@ -252,32 +252,32 @@ public class GuardFSM : SM
     public GuardFSM(EnemyController thisEnemy, GameObject Players)
     {
         enemy = thisEnemy;
-        PlayersHolder = Players;
-        Name = "Guard_FSM";
-        States=new List<State>();
-        //InitialState = States[0];
-        //CurrentState = InitialState;
+        PlayersHolder = enemy.Players;
+        this.Name = "Máquina de Estados de Teste";
+        this.States = new List<State>();
+        States.Add(new GuardFSM_State_Guard(enemy,this));
+        States.Add(new GuardFSM_State_Move(enemy, this));
+        States.Add(new GuardFSM_State_Pursuit(enemy, this));
+        States.Add(new GuardFSM_State_Attack(enemy, this));
+        States[0].transitions[0].targetState = States[2];
+        States[0].transitions[1].targetState = States[1];
+
+        States[1].transitions[0].targetState = States[1];
+        States[1].transitions[1].targetState = States[2];
+
+        States[2].transitions[0].targetState = States[1];
+        States[2].transitions[1].targetState = States[3];
+
+        States[3].transitions[0].targetState = States[1];
+        for (int i = 0; i < States.Count; i++)
+        {
+            States[i].Actions=new List<IAction>();
+        }
+        this.InitialState = States[0];
+        this.CurrentState = null;
     }
 }
 //States
-public class GuardFSM_State_Dead : State
-{
-    public SM parentMachine;
-    public EnemyController enemy;
-    public MovimentoJogador player;
-
-    public GuardFSM_State_Dead(EnemyController thisEnemy, SM parent)
-    {
-        parentMachine = parent;
-        enemy = thisEnemy;
-        player = enemy.PlayerToAttack.gameObject.GetComponent<MovimentoJogador>();
-        Name = "DEAD STATE";
-        Actions = new List<IAction>();
-        EntryAction = null;
-        ExitAction = null;
-        transitions = new List<Transition>();
-    }
-}
 public class GuardFSM_State_Guard : State
 {
     public SM parentMachine;
@@ -291,9 +291,12 @@ public class GuardFSM_State_Guard : State
         player = enemy.PlayerToAttack.gameObject.GetComponent<MovimentoJogador>();
         Name = "GUARD STATE";
         Actions = new List<IAction>();
+        //Desencadear acção de espera(Provavelmente no construtor da FSM)
         EntryAction = null;
         ExitAction = null;
         transitions = new List<Transition>();
+        transitions.Add(new GuardFSM_Transition_PlayerWasDetected(parentMachine, enemy, enemy.Players));
+        transitions.Add(new GuardFSM_Transition_TimeToRelocate(parentMachine,enemy,enemy.Players));
     }
 }
 public class GuardFSM_State_Move : State
@@ -309,9 +312,12 @@ public class GuardFSM_State_Move : State
         player = enemy.PlayerToAttack.gameObject.GetComponent<MovimentoJogador>();
         Name = "PURSUIT STATE";
         Actions = new List<IAction>();
+        //Acção de ir de um ponto para o outro
         EntryAction = null;
         ExitAction = null;
         transitions = new List<Transition>();
+        transitions.Add(new GuardFSM_Transition_ArrivedAtPost(parentMachine,enemy,enemy.Players));
+        transitions.Add(new GuardFSM_Transition_PlayerWasDetected(parentMachine,enemy,enemy.Players));
     }
 }
 public class GuardFSM_State_Pursuit : State
@@ -327,10 +333,12 @@ public class GuardFSM_State_Pursuit : State
         player = enemy.PlayerToAttack.gameObject.GetComponent<MovimentoJogador>();
         Name = "PURSUIT STATE";
         Actions = new List<IAction>();
-
+        //Acção de ir em direcção do jogador
         EntryAction = null;
         ExitAction = null;
         transitions = new List<Transition>();
+        transitions.Add(new GuardFSM_Transition_NoPlayersDetected(parentMachine,enemy,enemy.Players));
+        transitions.Add(new GuardFSM_Transition_PlayerInAttackRange(parentMachine,enemy,enemy.Players));
     }
 }
 public class GuardFSM_State_Attack : State
@@ -609,9 +617,12 @@ public class GuardFSM_Action_GuardPoint : MonoBehaviour, IAction
     public bool Arriving = true;
     public void DoAction()
     {
-        Arriving = false;
-        CoroutineIsRunning = true;
-        StartCoroutine(WaitCoroutine(enemy,Seconds));
+        if (Arriving)
+        {
+            Arriving = false;
+            CoroutineIsRunning = true;
+            StartCoroutine(WaitCoroutine(enemy, Seconds));
+        }
     }
 
     public IEnumerator WaitCoroutine(EnemyController Enemy, int secondsToWait)
