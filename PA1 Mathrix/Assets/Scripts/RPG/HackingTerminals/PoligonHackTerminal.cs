@@ -59,10 +59,6 @@ public class PoligonHackTerminal : NetworkBehaviour
 
     void Update()
     {
-        if (isServer)
-        {
-            Debug.Log("Is Minigame Done? "+IsMinigameDone);
-        }
         if (podeCarregar && !carregou && !IsMinigameDone)
         {
             if (Input.GetKeyDown(KeyCode.F))
