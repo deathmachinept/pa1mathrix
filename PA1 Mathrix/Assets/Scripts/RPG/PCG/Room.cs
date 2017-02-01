@@ -25,19 +25,20 @@ public class Room
     private System.Random RandomG;
     public int InitialWorldSeed;
 
-    private bool isMetro;
+    private int typeAutobuild;
     //int based = int((room_min + 1)*0.5); room_min = tamanho min do quarto eg. (9+1) *0.5 = 5 
     //int radix = int((room_max - room_min)*0.5 + 1); (18 - 9) * 0.5f +1 = 5.5f
 
-    public Room(int w, int h, int based, int radix, int c_num, System.Random seed, bool preBuild, int width, int height, Vector2 coordenada )
+    public Room(int w, int h, int based, int radix, int c_num, System.Random seed, int preBuild, int width, int height, Vector2 coordenada )
     {
         RandomG = seed;
-        isMetro = preBuild;
+        typeAutobuild = preBuild;
         //Random.InitState(InitialWorldSeed);
         int[,] novo = new int[2,2];
         pcgrid_width = w;
         pcgrid_height = h;
-        if (!preBuild)
+
+        if (typeAutobuild == 0)
         {
             room_width = (int)(NextFloat(RandomG, 0, radix) + based);
             room_height = (int)(NextFloat(RandomG, 0, radix) + based);
@@ -55,7 +56,7 @@ public class Room
         else
         {
             room_width = width;
-            room_height = 24;
+            room_height = height;
             room_x = (int) coordenada.x;
             room_y = (int) coordenada.y;
             room_x1 = (int) coordenada.x - width;
@@ -65,14 +66,19 @@ public class Room
 
             wall_x1 = room_x1 - 1;
             wall_x2 = room_x2 + 1;
-            wall_y1_TopText = room_y1 - 1;
-            wall_y1 = room_y1 - 2;
-            wall_y1 = room_y1 - 3;
+            wall_y1 = room_y1 - 1;
+            wall_y2 = room_y2 + 1;
 
-            wall_y2 = room_y2 + 1; // mais um passo
+            //wall_x1 = room_x1 - 1;
+            //wall_x2 = room_x2 + 1;
+            //wall_y1_TopText = room_y1 - 1;
+            //wall_y1 = room_y1 - 2;
+            //wall_y1 = room_y1 - 3;
 
-            wall_y2 = room_y2 + 2;
-            wall_y2_TopText = room_y2 +3; // mais um passo
+            //wall_y2 = room_y2 + 1; // mais um passo
+
+            //wall_y2 = room_y2 + 2;
+            //wall_y2_TopText = room_y2 +3; // mais um passo
 
             Debug.Log("Aqui!");
         }
@@ -105,7 +111,7 @@ public class Room
         while (count != 0)
         {
 
-            if (isMetro)
+            if (typeAutobuild != 0)
             {
                 opening[count - 1, 2] = 0;
             }
@@ -116,7 +122,19 @@ public class Room
             switch (opening[count - 1,2])
             {
                 case 0: // South wall
-                    int x1 = (int)NextFloat(RandomG, wall_x1, wall_x2);
+                    int x1;
+                    if (typeAutobuild ==2) // metro
+                    {
+                        x1 = (int)((wall_x2 - wall_x1) / 2) + wall_x1;
+
+                    }
+                    else if (typeAutobuild == 1) //cela
+                    {
+                        x1 = wall_x1 + 2;
+                    }
+                    else{
+                         x1 = (int)NextFloat(RandomG, wall_x1, wall_x2);
+                    }
                     if (x1 != wall_x1 && x1 != wall_x2 && wall_y1 >= 1)
                     {
                         opening[count - 1,0] = x1;
@@ -125,7 +143,7 @@ public class Room
                         count--;
                     }
                     break;
-                case 1: // East wall
+                case 1: // west wall
                     int y2 = (int)NextFloat(RandomG, wall_y1, wall_y2);
                     if (y2 != wall_y1 && y2 != wall_y2 && wall_x2 < pcgrid_width - 1)
                     {
@@ -146,13 +164,16 @@ public class Room
                         count--;
                     }
                     break;
-                case 3: // West wall
-                    int y1 = (int)NextFloat(RandomG, wall_y1, wall_y2);
+                case 3: // east wall
+                    int y1 = (int)((wall_y2 - wall_y1) / 2) + wall_y1;
+
+
+                    //int y1 = (int)NextFloat(RandomG, wall_y1, wall_y2);
                     if (y1 != wall_y1 && y1 != wall_y2 && wall_x1 >= 1)
                     {
-                        opening[count - 1,0] = wall_x1;
-                        opening[count - 1,1] = y1;
-                        opening[count - 1,2] = 3;
+                        opening[count - 1,0] = wall_x1; // coordenada
+                        opening[count - 1,1] = y1; //posicao da porta
+                        opening[count - 1,2] = 3; // dir
                         count--;
                     }
                     break;

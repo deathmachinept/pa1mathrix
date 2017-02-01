@@ -31,6 +31,8 @@ public class PCG_Basic : PCG{
 
 
 
+
+
     public void updateParam(int g_width, int g_height, int r_type, int r_min, int r_max, int c_num, int c_weight, int t_weight, int room_total)
     {
         R = new System.Random();
@@ -88,23 +90,72 @@ public class PCG_Basic : PCG{
         turning_weight = t_weight;
     }
 
-    public void generatePCGBasic(byte[,] g)
+    public void generatePCGBasic(byte[,] g, byte[,] objectsDir)
     {
 
 
-        base.generatePCG(g); // Init grid 
-
+        base.generatePCG(g, objectsDir); // Init grid 
         initRooms(); // Initialize rooms
         initCorridors(); // Initialize corridors
     }
 
+    public void insertCell()
+    {
+        int posY = 10; // apenas alguma celulas abaixo do limite top
+        int posX = (pcgrid_width / 4);
+        Vector2 coordenadaDeQuarto = new Vector2(posX, posY);
+
+        Room Cela = new Room(pcgrid_width, pcgrid_height, 0, 0, 1, R, 2, 4, 5, coordenadaDeQuarto);
+        rooms.Add(Cela);
+
+        for (int j = Cela.room_y1; j <= Cela.room_y2; j++)
+        {
+            for (int i = Cela.room_x1; i <= Cela.room_x2; i++)
+            {
+                pcgrid[i, j] = 1;
+                //Debug.Log("Contando cells" + i) ;
+            }
+        }
+
+        for (int i = Cela.wall_x1; i <= Cela.wall_x2; i++)
+        {
+            if (pcgrid[i, Cela.wall_y1] != 1) //wall de baixo
+            {
+                pcgrid[i, Cela.wall_y1] = 2;
+                guardarDir[i, Cela.wall_y1] = 4;
+            }
+            if (pcgrid[i, Cela.wall_y2] != 1)
+            {
+                pcgrid[i, Cela.wall_y2] = 2;
+                guardarDir[i, Cela.wall_y2] = 6;
+
+            }
+        }
+
+        for (int j = Cela.wall_y1; j <= Cela.wall_y2; j++)
+        {
+            if (pcgrid[Cela.wall_x1, j] != 1) //side walls west
+            {
+                pcgrid[Cela.wall_x1, j] = 2;
+                guardarDir[Cela.wall_x1, j] = 7;
+            }
+            if (pcgrid[Cela.wall_x2, j] != 1)
+            {
+                pcgrid[Cela.wall_x2, j] = 2;
+                guardarDir[Cela.wall_x2, j] = 5;
+            }
+        }
+
+
+    }
+
     public void insertMetro()
     {
-        int posY = pcgrid_height - 12;
+        int posY = pcgrid_height - 14;
         int posX = (pcgrid_width / 2);
         Vector2 coordenadaDeQuarto = new Vector2(posX, posY);
 
-        Room Metro = new Room(pcgrid_width, pcgrid_height, 0, 0, 1, R, true, 12, 15, coordenadaDeQuarto);
+        Room Metro = new Room(pcgrid_width, pcgrid_height, 0, 0, 1, R, 1, 30,14, coordenadaDeQuarto);
         rooms.Add(Metro);
 
         for (int j = Metro.room_y1; j <= Metro.room_y2; j++)
@@ -115,23 +166,49 @@ public class PCG_Basic : PCG{
                 //Debug.Log("Contando cells" + i) ;
             }
         }
-        // Create room walls
+
         for (int i = Metro.wall_x1; i <= Metro.wall_x2; i++)
         {
-            if (pcgrid[i, Metro.wall_y1] != 1) pcgrid[i, Metro.wall_y1] = 2;
-            if (pcgrid[i, Metro.wall_y2] != 1) pcgrid[i, Metro.wall_y2] = 2;
+            if (pcgrid[i, Metro.wall_y1] != 1) //wall de baixo
+            {
+                pcgrid[i, Metro.wall_y1] = 2;
+                guardarDir[i, Metro.wall_y1] = 4;
+            }
+            if (pcgrid[i, Metro.wall_y2] != 1)
+            {
+                pcgrid[i, Metro.wall_y2] = 2;
+                guardarDir[i, Metro.wall_y2] = 6;
+
+            }
         }
+
         for (int j = Metro.wall_y1; j <= Metro.wall_y2; j++)
         {
-            if (pcgrid[Metro.wall_x1, j] != 1) pcgrid[Metro.wall_x1, j] = 2;
-            if (pcgrid[Metro.wall_x2, j] != 1) pcgrid[Metro.wall_x2, j] = 2;
+            if (pcgrid[Metro.wall_x1, j] != 1) //side walls west
+            {
+                pcgrid[Metro.wall_x1, j] = 2;
+                guardarDir[Metro.wall_x1, j] = 7;
+            }
+            if (pcgrid[Metro.wall_x2, j] != 1)
+            {
+                pcgrid[Metro.wall_x2, j] = 2;
+                guardarDir[Metro.wall_x2, j] = 5;
+            }
         }
+
+
         // Place openings
         for (int k = 0; k < Metro.opening_num; k++)
         {
             //1
 
-            if (pcgrid[Metro.opening[k, 0], Metro.opening[k, 1]] != 1) pcgrid[Metro.opening[k, 0], Metro.opening[k, 1]] = 3;
+            if (pcgrid[Metro.opening[k, 0], Metro.opening[k, 1]] != 1)
+
+            {
+                pcgrid[Metro.opening[k, 0], Metro.opening[k, 1]] = 3;
+                guardarDir[Metro.opening[k, 0], Metro.opening[k, 1]] = (byte)Metro.opening[k, 2];
+
+            }
         }
     }
 
@@ -145,10 +222,11 @@ public class PCG_Basic : PCG{
             if (!buildMetro)
             {
                 insertMetro();
+                insertCell();
                 buildMetro = true;
             }
             else { 
-            Room rm = new Room(pcgrid_width, pcgrid_height, room_base, room_radix, corridor_num, R, false, 0, 0,
+            Room rm = new Room(pcgrid_width, pcgrid_height, room_base, room_radix, corridor_num, R, 0, 0, 0,
                 Vector2.zero); // Create new room
             room_blocked = blockRoom(rm); // Check if room is blocked
 
@@ -177,21 +255,46 @@ public class PCG_Basic : PCG{
                 // Create room walls
                 for (int i = rm.wall_x1; i <= rm.wall_x2; i++)
                 {
-                    if (pcgrid[i, rm.wall_y1] != 1) pcgrid[i, rm.wall_y1] = 2;
-                    if (pcgrid[i, rm.wall_y2] != 1) pcgrid[i, rm.wall_y2] = 2;
-                }
+                    if (pcgrid[i, rm.wall_y1] != 1) //wall de baixo
+                        {
+                            pcgrid[i, rm.wall_y1] = 2;
+                            guardarDir[i, rm.wall_y1] = 4;
+
+                        }
+                        if (pcgrid[i, rm.wall_y2] != 1) {
+                            pcgrid[i, rm.wall_y2] = 2;
+                            guardarDir[i, rm.wall_y2] = 6;
+
+                        }
+                    }
                 for (int j = rm.wall_y1; j <= rm.wall_y2; j++)
                 {
-                    if (pcgrid[rm.wall_x1, j] != 1) pcgrid[rm.wall_x1, j] = 2;
-                    if (pcgrid[rm.wall_x2, j] != 1) pcgrid[rm.wall_x2, j] = 2;
-                }
+                    if (pcgrid[rm.wall_x1, j] != 1) {
+                            pcgrid[rm.wall_x1, j] = 2;
+                            guardarDir[rm.wall_x1, j] = 7;
+                        }
+                        if (pcgrid[rm.wall_x2, j] != 1)
+                        {
+                            pcgrid[rm.wall_x2, j] = 2;
+                            guardarDir[rm.wall_x2, j] = 5;
+                        }
+                    }
+
+                guardarDir[rm.wall_x1, rm.wall_y2] = 9;
+                guardarDir[rm.wall_x2, rm.wall_y2] = 10;
+
+
                 // Place openings
                 for (int k = 0; k < rm.opening_num; k++)
                 {
                     //1
 
-                    if (pcgrid[rm.opening[k, 0], rm.opening[k, 1]] != 1) pcgrid[rm.opening[k, 0], rm.opening[k, 1]] = 3;
-                }
+                    if (pcgrid[rm.opening[k, 0], rm.opening[k, 1]] != 1)
+                        {
+                            pcgrid[rm.opening[k, 0], rm.opening[k, 1]] = 3; // coordenadaX , coordenada porta 
+                            guardarDir[rm.opening[k, 0], rm.opening[k, 1]] = (byte)rm.opening[k, 2];
+                        }
+                    }
             }
         }
         } // metro else
@@ -211,7 +314,7 @@ public class PCG_Basic : PCG{
         {
             for (int i = rm.wall_x1 - 1; i < rm.wall_x2 + 1; i++)
             {
-                // Check upper and lower bound
+                // Check upper and lower bound  espaco de 3 espacos entre salas
                 if (bounded(i, rm.wall_y1 - 1) && !blocked(i, rm.wall_y1 - 1, 0)) return true;
                 if (bounded(i, rm.wall_y2 + 1) && !blocked(i, rm.wall_y2 + 1, 0)) return true;
                 if (bounded(i, rm.wall_y1 - 2) && !blocked(i, rm.wall_y1 - 2, 0)) return true;
@@ -221,7 +324,7 @@ public class PCG_Basic : PCG{
             }
             for (int j = rm.wall_y1 - 1; j < rm.wall_y2 + 1; j++)
             {
-                // Check left and right bound
+                // Check left and right deixa espaco de 3 espacos entre salas
                 if (bounded(rm.wall_x1 - 1, j) && !blocked(rm.wall_x1 - 1, j, 0)) return true;
                 if (bounded(rm.wall_x2 + 1, j) && !blocked(rm.wall_x2 + 1, j, 0)) return true;
                 if (bounded(rm.wall_x1 - 2, j) && !blocked(rm.wall_x1 - 2, j, 0)) return true;
@@ -237,15 +340,17 @@ public class PCG_Basic : PCG{
     {
        // Debug.Log("test");
 
-        if (room_type != 3)
+        if (room_type != 3) // 0-2
         {
             for (int i = 0; i < rooms.Count; i++)
             {
                 // Go through each room and connect its first opening to the first opening of the next room
                 Room rm1 = (Room)rooms[i];
                 Room rm2;
-                if (i == rooms.Count - 1) rm2 = (Room)rooms[0];
-                else rm2 = (Room)rooms[i + 1]; // If not last room
+                if (i == rooms.Count - 1)
+                    rm2 = (Room)rooms[0];
+                else
+                    rm2 = (Room)rooms[i + 1]; // If not last room
 
                 // Connect rooms
                 basicAStar(pcgrid, rm1.opening[0, 0], rm1.opening[0, 1], rm2.opening[0, 0], rm2.opening[0, 1], corridor_weight, turning_weight);
@@ -327,71 +432,71 @@ public class PCG_Basic : PCG{
         else
         {
             pcgrid[x, y] = 4; // Set cell to corridor
-            Debug.Log("DIR "+ dir);
-            switch (dir)
-            { // 1east  3west 0 north 2 south
-                case  0:
-                    if (pcgrid[x + 2, y] == 0 && bounded(x, y))
-                    {
-                        Debug.Log("test");
-                        pcgrid[x + 2, y] = 4;
-                    }
-                    else if (pcgrid[x - 2, y] == 0 && bounded(x, y))
-                    {
-                        Debug.Log("test");
 
-                        pcgrid[x - 2, y] = 4;
+            //switch (dir)
+            //{ // 1east  3west 0 north 2 south
+            //    case  0:
+            //        if (pcgrid[x + 2, y] == 0 && bounded(x, y))
+            //        {
+            //            Debug.Log("test");
+            //            pcgrid[x + 2, y] = 4;
+            //        }
+            //        else if (pcgrid[x - 2, y] == 0 && bounded(x, y))
+            //        {
+            //            Debug.Log("test");
 
-                    }
-                    break;
-                case 1: // east
-                    if (pcgrid[x, y + 2] == 0 && bounded(x, y))
-                    {
-                        Debug.Log("test");
+            //            pcgrid[x - 2, y] = 4;
 
-                         pcgrid[x, y + 2] = 4;
-                    }
-                    else if (pcgrid[x, y - 2] == 0 && bounded(x, y))
-                    {
-                        Debug.Log("test");
+            //        }
+            //        break;
+            //    case 1: // east
+            //        if (pcgrid[x, y + 2] == 0 && bounded(x, y))
+            //        {
+            //            Debug.Log("test");
 
-                        pcgrid[x, y - 2] = 4;
+            //             pcgrid[x, y + 2] = 4;
+            //        }
+            //        else if (pcgrid[x, y - 2] == 0 && bounded(x, y))
+            //        {
+            //            Debug.Log("test");
 
-                    }
+            //            pcgrid[x, y - 2] = 4;
 
-                    break;
-                case 2: // south\
-                    if (pcgrid[x + 2, y] == 0 && bounded(x, y))
-                    {
-                        Debug.Log("test");
+            //        }
 
-                        pcgrid[x + 2, y] = 4;
-                    }
-                    else if (pcgrid[x - 2, y] == 0 && bounded(x, y))
-                    {
-                        Debug.Log("test");
+            //        break;
+            //    case 2: // south\
+            //        if (pcgrid[x + 2, y] == 0 && bounded(x, y))
+            //        {
+            //            Debug.Log("test");
 
-                        pcgrid[x - 2, y] = 4;
+            //            pcgrid[x + 2, y] = 4;
+            //        }
+            //        else if (pcgrid[x - 2, y] == 0 && bounded(x, y))
+            //        {
+            //            Debug.Log("test");
 
-                    }
-                    break;
-                case 3:
-                    if (pcgrid[x, y +2] == 0 && bounded(x, y))
-                    {
-                        Debug.Log("test");
+            //            pcgrid[x - 2, y] = 4;
 
-                        pcgrid[x, y + 2] = 4;
-                    }
-                    else if (pcgrid[x, y - 2] == 0 && bounded(x, y))
-                    {
-                        Debug.Log("test");
+            //        }
+            //        break;
+            //    case 3:
+            //        if (pcgrid[x, y +2] == 0 && bounded(x, y))
+            //        {
+            //            Debug.Log("test");
 
-                        pcgrid[x, y - 2] = 4;
+            //            pcgrid[x, y + 2] = 4;
+            //        }
+            //        else if (pcgrid[x, y - 2] == 0 && bounded(x, y))
+            //        {
+            //            Debug.Log("test");
 
-                    }
+            //            pcgrid[x, y - 2] = 4;
 
-                    break;
-            }
+            //        }
+
+            //        break;
+            //}
             tunnelRandom(x, y, shuffleDir(dir, 85), 3); // Randomly choose next cell to go to
         }
     }
@@ -499,12 +604,12 @@ public class PCG_Basic : PCG{
         open_list = new BinaryHeap(); // array list
         closed_list = new BinaryHeap();
 
-        // Push starting node into open list
+        // Push node incial na open list
         Node start = new Node(x1, y1, 0, 0, -1);
         Node end = new Node(0, 0, 0, 0, -1);
         open_list.insert(start);
 
-        // While open list is not empty
+        // Enquanto open list not empty
         while (open_list.getSize() > 0)
         {
             Node current = (Node)open_list.remove(0); // Remove from open list
@@ -610,17 +715,13 @@ public class PCG_Basic : PCG{
                 break;
             }
 
-            // Process neighbors
-            //Debug.Log("Presumo direcao a ser escolhida1 " + current.getDir + " " + current.getX + " " + current.getY);
+            // Analisa as quartro direcoes futuras para  movimento
 
             neighbor(grid, current, current.getX, current.getY - 1, x2, y2, 0, corr_wt, trn_wt, current.getDir);
-            //Debug.Log("Presumo direcao a ser escolhida2 tem que ter y -1 " + current.getDir + " " + current.getX + " " + current.getY);
 
             neighbor(grid, current, current.getX + 1, current.getY, x2, y2, 1, corr_wt, trn_wt, current.getDir);
-            //Debug.Log("Presumo direcao a ser escolhida3 tem que ter x+1 " + current.getDir + " " + current.getX + " " + current.getY);
 
             neighbor(grid, current, current.getX, current.getY + 1, x2, y2, 2, corr_wt, trn_wt, current.getDir);
-            //Debug.Log("Presumo direcao a ser escolhida4 tem que ter y +1 " + current.getDir + " " + current.getX + " " + current.getY);
 
             neighbor(grid, current, current.getX - 1, current.getY, x2, y2, 3, corr_wt, trn_wt, current.getDir);
 
@@ -643,7 +744,6 @@ public class PCG_Basic : PCG{
     {
         bool NaoTemEspacoEntreParede = false;
 
-        int sum = 0;
 
        // Debug.Log("NaoTemEspacoEntreParede " + NaoTemEspacoEntreParede);
 
@@ -896,7 +996,7 @@ public class PCG_Basic : PCG{
                         //            }
                         //        }
                         //    }
-                    //
+                    //Distancia de uma celula na esquina
                 if(!Xp1)
                     if (grid[x + 1, y, 0] != 0)
                     {

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 0271ea401d36931448fe801c8a0292da
-timeCreated: 1485815757
+timeCreated: 1485958636
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -47,10 +47,10 @@ TextureImporter:
     21300080: map_40
     21300082: map_41
     21300084: map_42
-    21300086: map_43
-    21300088: map_44
+    21300086: MetroTile2
+    21300088: MetroTile1
     21300090: Door2Close
-    21300092: map_46
+    21300092: MetroTile
     21300094: map_47
     21300096: map_48
     21300098: map_49
@@ -102,6 +102,10 @@ TextureImporter:
     21300190: map_95
     21300192: map_96
     21300194: map_97
+    21300196: MetroTileLeft
+    21300198: MetroTileRight
+    21300200: MetroTileUp
+    21300202: MetroTileDown
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -715,26 +719,26 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: map_43
+      name: MetroTile2
       rect:
         serializedVersion: 2
-        x: 1009
-        y: 682
+        x: 1071
+        y: 811
         width: 32
-        height: 96
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: map_44
+      name: MetroTile1
       rect:
         serializedVersion: 2
-        x: 1040
-        y: 682
+        x: 1071
+        y: 744
         width: 32
-        height: 96
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -747,20 +751,20 @@ TextureImporter:
         x: 1019
         y: 540
         width: 32
-        height: 96
+        height: 72
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: map_46
+      name: MetroTile
       rect:
         serializedVersion: 2
-        x: 1168
-        y: 667
+        x: 1115
+        y: 744
         width: 32
-        height: 96
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1046,9 +1050,9 @@ TextureImporter:
         x: 939
         y: 540
         width: 32
-        height: 96
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        height: 72
+      alignment: 9
+      pivot: {x: 0.5147648, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -1241,9 +1245,9 @@ TextureImporter:
         x: 939
         y: 438
         width: 32
-        height: 96
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        height: 72
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -1278,9 +1282,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1019
-        y: 438
+        y: 460
         width: 32
-        height: 96
+        height: 72
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1424,6 +1428,58 @@ TextureImporter:
         y: 514
         width: 31
         height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MetroTileLeft
+      rect:
+        serializedVersion: 2
+        x: 1258
+        y: 772
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MetroTileRight
+      rect:
+        serializedVersion: 2
+        x: 1258
+        y: 738
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MetroTileUp
+      rect:
+        serializedVersion: 2
+        x: 1258
+        y: 704
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MetroTileDown
+      rect:
+        serializedVersion: 2
+        x: 1258
+        y: 670
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
