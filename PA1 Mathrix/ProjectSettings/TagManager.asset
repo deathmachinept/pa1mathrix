@@ -32,6 +32,9 @@ TagManager:
   - ManagerPlayers
   - ChatCanvas
   - MapTiling
+  - CorridorPanel0
+  - CorridorDoor
+  - CorridorTile
   layers:
   - Default
   - TransparentFX

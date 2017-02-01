@@ -65,14 +65,19 @@ public class Room
 
             wall_x1 = room_x1 - 1;
             wall_x2 = room_x2 + 1;
-            wall_y1_TopText = room_y1 - 1;
-            wall_y1 = room_y1 - 2;
-            wall_y1 = room_y1 - 3;
+            wall_y1 = room_y1 - 1;
+            wall_y2 = room_y2 + 1;
 
-            wall_y2 = room_y2 + 1; // mais um passo
+            //wall_x1 = room_x1 - 1;
+            //wall_x2 = room_x2 + 1;
+            //wall_y1_TopText = room_y1 - 1;
+            //wall_y1 = room_y1 - 2;
+            //wall_y1 = room_y1 - 3;
 
-            wall_y2 = room_y2 + 2;
-            wall_y2_TopText = room_y2 +3; // mais um passo
+            //wall_y2 = room_y2 + 1; // mais um passo
+
+            //wall_y2 = room_y2 + 2;
+            //wall_y2_TopText = room_y2 +3; // mais um passo
 
             Debug.Log("Aqui!");
         }
@@ -116,7 +121,15 @@ public class Room
             switch (opening[count - 1,2])
             {
                 case 0: // South wall
-                    int x1 = (int)NextFloat(RandomG, wall_x1, wall_x2);
+                    int x1;
+                    if (isMetro)
+                    {
+                        x1 = (int)((wall_x2 - wall_x1) / 2) + wall_x1;
+
+                    }
+                    else{
+                         x1 = (int)NextFloat(RandomG, wall_x1, wall_x2);
+                    }
                     if (x1 != wall_x1 && x1 != wall_x2 && wall_y1 >= 1)
                     {
                         opening[count - 1,0] = x1;
@@ -125,7 +138,7 @@ public class Room
                         count--;
                     }
                     break;
-                case 1: // East wall
+                case 1: // west wall
                     int y2 = (int)NextFloat(RandomG, wall_y1, wall_y2);
                     if (y2 != wall_y1 && y2 != wall_y2 && wall_x2 < pcgrid_width - 1)
                     {
@@ -146,13 +159,16 @@ public class Room
                         count--;
                     }
                     break;
-                case 3: // West wall
-                    int y1 = (int)NextFloat(RandomG, wall_y1, wall_y2);
+                case 3: // east wall
+                    int y1 = (int)((wall_y2 - wall_y1) / 2) + wall_y1;
+
+
+                    //int y1 = (int)NextFloat(RandomG, wall_y1, wall_y2);
                     if (y1 != wall_y1 && y1 != wall_y2 && wall_x1 >= 1)
                     {
-                        opening[count - 1,0] = wall_x1;
-                        opening[count - 1,1] = y1;
-                        opening[count - 1,2] = 3;
+                        opening[count - 1,0] = wall_x1; // coordenada
+                        opening[count - 1,1] = y1; //posicao da porta
+                        opening[count - 1,2] = 3; // dir
                         count--;
                     }
                     break;

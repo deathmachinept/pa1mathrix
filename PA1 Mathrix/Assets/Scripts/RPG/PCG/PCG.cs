@@ -6,6 +6,7 @@ public class PCG  {
 
     
     public byte[,] pcgrid; // Grid array
+    public byte[,] guardarDir; // Grid array
     public int pcgrid_width; // Grid width
     public int pcgrid_height; // Grid height
 
@@ -20,9 +21,10 @@ public class PCG  {
         pcgrid_height = g_height; // Get grid width
     }
 
-    public void generatePCG(byte[,] g)
+    public void generatePCG(byte[,] g, byte[,] gdir)
     {
         pcgrid = g; // Copy grid
+        guardarDir = gdir;
     }
 
     public bool bounded(int x, int y)

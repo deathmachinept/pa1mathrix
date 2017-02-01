@@ -31,6 +31,8 @@ public class PCG_Basic : PCG{
 
 
 
+
+
     public void updateParam(int g_width, int g_height, int r_type, int r_min, int r_max, int c_num, int c_weight, int t_weight, int room_total)
     {
         R = new System.Random();
@@ -88,12 +90,11 @@ public class PCG_Basic : PCG{
         turning_weight = t_weight;
     }
 
-    public void generatePCGBasic(byte[,] g)
+    public void generatePCGBasic(byte[,] g, byte[,] objectsDir)
     {
 
 
-        base.generatePCG(g); // Init grid 
-
+        base.generatePCG(g, objectsDir); // Init grid 
         initRooms(); // Initialize rooms
         initCorridors(); // Initialize corridors
     }
@@ -115,23 +116,49 @@ public class PCG_Basic : PCG{
                 //Debug.Log("Contando cells" + i) ;
             }
         }
-        // Create room walls
+
         for (int i = Metro.wall_x1; i <= Metro.wall_x2; i++)
         {
-            if (pcgrid[i, Metro.wall_y1] != 1) pcgrid[i, Metro.wall_y1] = 2;
-            if (pcgrid[i, Metro.wall_y2] != 1) pcgrid[i, Metro.wall_y2] = 2;
+            if (pcgrid[i, Metro.wall_y1] != 1) //wall de cima
+            {
+                pcgrid[i, Metro.wall_y1] = 2;
+                guardarDir[i, Metro.wall_y1] = 6;
+            }
+            if (pcgrid[i, Metro.wall_y2] != 1)
+            {
+                pcgrid[i, Metro.wall_y2] = 2;
+                guardarDir[i, Metro.wall_y1] = 3;
+
+            }
         }
+
         for (int j = Metro.wall_y1; j <= Metro.wall_y2; j++)
         {
-            if (pcgrid[Metro.wall_x1, j] != 1) pcgrid[Metro.wall_x1, j] = 2;
-            if (pcgrid[Metro.wall_x2, j] != 1) pcgrid[Metro.wall_x2, j] = 2;
+            if (pcgrid[Metro.wall_x1, j] != 1)
+            {
+                pcgrid[Metro.wall_x1, j] = 2;
+                guardarDir[Metro.wall_x1, j] = 7;
+            }
+            if (pcgrid[Metro.wall_x2, j] != 1)
+            {
+                pcgrid[Metro.wall_x2, j] = 2;
+                guardarDir[Metro.wall_x2, j] = 5;
+            }
         }
+
+
         // Place openings
         for (int k = 0; k < Metro.opening_num; k++)
         {
             //1
 
-            if (pcgrid[Metro.opening[k, 0], Metro.opening[k, 1]] != 1) pcgrid[Metro.opening[k, 0], Metro.opening[k, 1]] = 3;
+            if (pcgrid[Metro.opening[k, 0], Metro.opening[k, 1]] != 1)
+
+            {
+                pcgrid[Metro.opening[k, 0], Metro.opening[k, 1]] = 3;
+                guardarDir[Metro.opening[k, 0], Metro.opening[k, 1]] = (byte)Metro.opening[k, 2];
+
+            }
         }
     }
 
@@ -177,21 +204,40 @@ public class PCG_Basic : PCG{
                 // Create room walls
                 for (int i = rm.wall_x1; i <= rm.wall_x2; i++)
                 {
-                    if (pcgrid[i, rm.wall_y1] != 1) pcgrid[i, rm.wall_y1] = 2;
-                    if (pcgrid[i, rm.wall_y2] != 1) pcgrid[i, rm.wall_y2] = 2;
-                }
+                    if (pcgrid[i, rm.wall_y1] != 1) //wall de cima
+                        {
+                            pcgrid[i, rm.wall_y1] = 2;
+                            guardarDir[i, rm.wall_y1] = 6;
+                        }
+                        if (pcgrid[i, rm.wall_y2] != 1) {
+                            pcgrid[i, rm.wall_y2] = 2;
+                            guardarDir[i, rm.wall_y1] = 3;
+
+                        }
+                    }
                 for (int j = rm.wall_y1; j <= rm.wall_y2; j++)
                 {
-                    if (pcgrid[rm.wall_x1, j] != 1) pcgrid[rm.wall_x1, j] = 2;
-                    if (pcgrid[rm.wall_x2, j] != 1) pcgrid[rm.wall_x2, j] = 2;
-                }
+                    if (pcgrid[rm.wall_x1, j] != 1) {
+                            pcgrid[rm.wall_x1, j] = 2;
+                            guardarDir[rm.wall_x1, j] = 7;
+                        }
+                        if (pcgrid[rm.wall_x2, j] != 1)
+                        {
+                            pcgrid[rm.wall_x2, j] = 2;
+                            guardarDir[rm.wall_x2, j] = 5;
+                        }
+                    }
                 // Place openings
                 for (int k = 0; k < rm.opening_num; k++)
                 {
                     //1
 
-                    if (pcgrid[rm.opening[k, 0], rm.opening[k, 1]] != 1) pcgrid[rm.opening[k, 0], rm.opening[k, 1]] = 3;
-                }
+                    if (pcgrid[rm.opening[k, 0], rm.opening[k, 1]] != 1)
+                        {
+                            pcgrid[rm.opening[k, 0], rm.opening[k, 1]] = 3; // coordenadaX , coordenada porta 
+                            guardarDir[rm.opening[k, 0], rm.opening[k, 1]] = (byte)rm.opening[k, 2];
+                        }
+                    }
             }
         }
         } // metro else
