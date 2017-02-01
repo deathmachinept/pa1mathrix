@@ -5,7 +5,6 @@ using System;
 using System.Linq;
 using System.Xml.Serialization;
 using JetBrains.Annotations;
-using UnityEditor;
 using UnityEngine.Networking;
 
 //Componentes Principais das Máquina de Estados
@@ -243,13 +242,11 @@ public class HSM : HSMState
 public class GuardFSM : SM
 {
     public EnemyController enemy;
-    public GameObject PlayersHolder;
 
-    public GuardFSM(EnemyController thisEnemy, GameObject Players)
+    public GuardFSM(EnemyController thisEnemy)
     {
         enemy = thisEnemy;
-        PlayersHolder = enemy.Players;
-        this.Name = "Máquina de Estados de Teste";
+        this.Name = "Máquina de Estados do Guarda";
         this.States = new List<State>();
         States.Add(new GuardFSM_State_Guard(enemy,this));
         States.Add(new GuardFSM_State_Move(enemy, this));
@@ -257,18 +254,11 @@ public class GuardFSM : SM
         States.Add(new GuardFSM_State_Attack(enemy, this));
         States[0].transitions[0].targetState = States[2];
         States[0].transitions[1].targetState = States[1];
-
-        States[1].transitions[0].targetState = States[1];
+        States[1].transitions[0].targetState = States[0];
         States[1].transitions[1].targetState = States[2];
-
         States[2].transitions[0].targetState = States[1];
         States[2].transitions[1].targetState = States[3];
-
         States[3].transitions[0].targetState = States[1];
-        for (int i = 0; i < States.Count; i++)
-        {
-            States[i].Actions=new List<IAction>();
-        }
         this.InitialState = States[0];
         this.CurrentState = null;
     }
@@ -278,96 +268,87 @@ public class GuardFSM_State_Guard : State
 {
     public SM parentMachine;
     public EnemyController enemy;
-    public MovimentoJogador player;
 
     public GuardFSM_State_Guard(EnemyController thisEnemy, SM parent)
     {
         parentMachine = parent;
         enemy = thisEnemy;
-        player = enemy.PlayerToAttack.gameObject.GetComponent<MovimentoJogador>();
         Name = "GUARD STATE";
         Actions = new List<IAction>();
-        //Desencadear acção de espera(Provavelmente no construtor da FSM)
+        Actions.Add(new GuardFSM_Action_PointGuard(enemy));
         EntryAction = null;
         ExitAction = null;
         transitions = new List<Transition>();
-        transitions.Add(new GuardFSM_Transition_PlayerWasDetected(parentMachine, enemy, enemy.Players));
-        transitions.Add(new GuardFSM_Transition_TimeToRelocate(parentMachine,enemy,enemy.Players));
+        transitions.Add(new GuardFSM_Transition_PlayerWasDetected(parentMachine, enemy));
+        transitions.Add(new GuardFSM_Transition_TimeToRelocate(parentMachine,enemy));
     }
 }
 public class GuardFSM_State_Move : State
 {
     public SM parentMachine;
     public EnemyController enemy;
-    public MovimentoJogador player;
 
     public GuardFSM_State_Move(EnemyController thisEnemy, SM parent)
     {
         parentMachine = parent;
         enemy = thisEnemy;
-        player = enemy.PlayerToAttack.gameObject.GetComponent<MovimentoJogador>();
         Name = "PURSUIT STATE";
         Actions = new List<IAction>();
-        //Acção de ir de um ponto para o outro
+        Actions.Add(new GuardFSM_Action_Move(enemy, GlobalVariables.singleton.GuardPoints[enemy.ClosestGuardPointIndex]));
         EntryAction = null;
         ExitAction = null;
         transitions = new List<Transition>();
         transitions.Add(new GuardFSM_Transition_ArrivedAtPost(parentMachine,enemy,enemy.Players));
-        transitions.Add(new GuardFSM_Transition_PlayerWasDetected(parentMachine,enemy,enemy.Players));
+        transitions.Add(new GuardFSM_Transition_PlayerWasDetected(parentMachine,enemy));
     }
 }
 public class GuardFSM_State_Pursuit : State
 {
     public SM parentMachine;
     public EnemyController enemy;
-    public MovimentoJogador player;
 
     public GuardFSM_State_Pursuit(EnemyController thisEnemy, SM parent)
     {
         parentMachine = parent;
         enemy = thisEnemy;
-        player = enemy.PlayerToAttack.gameObject.GetComponent<MovimentoJogador>();
         Name = "PURSUIT STATE";
         Actions = new List<IAction>();
-        //Acção de ir em direcção do jogador
+        Actions.Add(new GuardFSM_Action_PursuePlayer(enemy));
         EntryAction = null;
         ExitAction = null;
         transitions = new List<Transition>();
-        transitions.Add(new GuardFSM_Transition_NoPlayersDetected(parentMachine,enemy,enemy.Players));
-        transitions.Add(new GuardFSM_Transition_PlayerInAttackRange(parentMachine,enemy,enemy.Players));
+        transitions.Add(new GuardFSM_Transition_NoPlayersDetected(parentMachine,enemy));
+        transitions.Add(new GuardFSM_Transition_PlayerInAttackRange(parentMachine,enemy));
     }
 }
 public class GuardFSM_State_Attack : State
 {
     public SM parentMachine;
     public EnemyController enemy;
-    public MovimentoJogador player;
 
     public GuardFSM_State_Attack(EnemyController thisEnemy, SM parent)
     {
         parentMachine = parent;
         enemy = thisEnemy;
-        player = enemy.PlayerToAttack.gameObject.GetComponent<MovimentoJogador>();
         Name = "ATTACK STATE";
         Actions = new List<IAction>();
-        Actions.Add(new GuardFSM_Action_AttackAPlayer(enemy,enemy.GetPlayerToAttackFromPlayerList().GetComponent<MovimentoJogador>()));
+        Actions.Add(new GuardFSM_Action_AttackAPlayer(enemy));
         EntryAction = null;
         ExitAction = null;
         transitions = new List<Transition>();
         transitions.Add(new GuardFSM_Transition_PlayerWasKilled(parentMachine,enemy,enemy.Players));
+        transitions.Add(new GuardFSM_Transition_PlayerIsOutOfAttackRange(parentMachine,enemy));
     }
 }
 //Transitions
 public class GuardFSM_Transition_TimeToRelocate : Transition
 {
     public EnemyController Enemy;
-    public GameObject PlayersHolder;
 
-    public GuardFSM_Transition_TimeToRelocate(SM parent, EnemyController enemy, GameObject Players)
+    public GuardFSM_Transition_TimeToRelocate(SM parent, EnemyController enemy)
     {
         parentMachine = parent;
         Enemy = enemy;
-        PlayersHolder = Players;
         Actions = new List<IAction>();
         ConditionsList = new List<ICondition>();
         ConditionsList.Add(new GuardFSM_Condition_HasTheWaitingTimePassed(Enemy));
@@ -386,7 +367,6 @@ public class GuardFSM_Transition_ArrivedAtPost : Transition
         PlayersHolder = Players;
         Actions = new List<IAction>();
         ConditionsList = new List<ICondition>();
-        //SERÁ NECESSÁRIO ACTUALIZAR O HOLDER DOS JOGADORES AQUI DISPONIBILIZADA OU ELA ACTUALIZA-SE SOZINHA?
         ConditionsList.Add(new GuardFSM_Condition_HaveIArrivedAtPost(Enemy));
         targetState = null;
     }
@@ -394,50 +374,56 @@ public class GuardFSM_Transition_ArrivedAtPost : Transition
 public class GuardFSM_Transition_PlayerWasDetected : Transition
 {
     public EnemyController Enemy;
-    public GameObject PlayersHolder;
 
-    public GuardFSM_Transition_PlayerWasDetected(SM parent, EnemyController enemy, GameObject Players)
+    public GuardFSM_Transition_PlayerWasDetected(SM parent, EnemyController enemy)
     {
         parentMachine = parent;
         Enemy = enemy;
-        PlayersHolder = Players;
         Actions = new List<IAction>();
         ConditionsList = new List<ICondition>();
-        //SERÁ NECESSÁRIO ACTUALIZAR O HOLDER DOS JOGADORES AQUI DISPONIBILIZADA OU ELA ACTUALIZA-SE SOZINHA?
-        ConditionsList.Add(new GuardFSM_Condition_IsAPlayerInsideARange(PlayersHolder, Enemy, Enemy.AttackRange));
+        ConditionsList.Add(new GuardFSM_Condition_IsAPlayerVisible(Enemy));
         targetState = null;
     }
 }
 public class GuardFSM_Transition_NoPlayersDetected : Transition
 {
     public EnemyController Enemy;
-    public GameObject PlayersHolder;
 
-    public GuardFSM_Transition_NoPlayersDetected(SM parent, EnemyController enemy, GameObject Players)
+    public GuardFSM_Transition_NoPlayersDetected(SM parent, EnemyController enemy)
     {
         parentMachine = parent;
         Enemy = enemy;
-        PlayersHolder = Players;
         Actions = new List<IAction>();
         ConditionsList = new List<ICondition>();
-        ConditionsList.Add(new GuardFSM_Condition_AreThereNoPlayersInRange(Enemy.gameObject,PlayersHolder));
+        ConditionsList.Add(new GuardFSM_Condition_AreThereNoPlayersInRange(Enemy.gameObject));
         targetState = null;
     }
 }
 public class GuardFSM_Transition_PlayerInAttackRange : Transition
 {
     public EnemyController Enemy;
-    public GameObject PlayersHolder;
 
-    public GuardFSM_Transition_PlayerInAttackRange(SM parent, EnemyController enemy, GameObject Players)
+    public GuardFSM_Transition_PlayerInAttackRange(SM parent, EnemyController enemy)
     {
         parentMachine = parent;
         Enemy = enemy;
-        PlayersHolder = Players;
         Actions = new List<IAction>();
         ConditionsList = new List<ICondition>();
-        //SERÁ NECESSÁRIO ACTUALIZAR O HOLDER DOS JOGADORES AQUI DISPONIBILIZADA OU ELA ACTUALIZA-SE SOZINHA?
-        ConditionsList.Add(new GuardFSM_Condition_IsAPlayerVisible(PlayersHolder,Enemy.gameObject));
+        ConditionsList.Add(new GuardFSM_Condition_IsAPlayerInsideARange(Enemy,Enemy.AttackRange));
+        targetState = null;
+    }
+}
+public class GuardFSM_Transition_PlayerIsOutOfAttackRange:Transition
+{
+    public EnemyController Enemy;
+
+    public GuardFSM_Transition_PlayerIsOutOfAttackRange(SM parent, EnemyController enemy)
+    {
+        parentMachine = parent;
+        Enemy = enemy;
+        Actions = new List<IAction>();
+        ConditionsList = new List<ICondition>();
+        ConditionsList.Add(new GuardFSM_Condition_IsAPlayerInsideARange(Enemy, Enemy.AttackRange));
         targetState = null;
     }
 }
@@ -479,27 +465,25 @@ public class GuardFSM_Condition_HaveIArrivedAtPost : ICondition
     {
         return !Enemy.HasGuardedPoint;
     }
-} //VER ISTO
+}
 public class GuardFSM_Condition_IsAPlayerInsideARange : ICondition
 {
-    public GameObject PlayersHolder;
     public EnemyController Enemy;
     public float Range;
 
-    public GuardFSM_Condition_IsAPlayerInsideARange(GameObject players,EnemyController enemy,float rangeToTest)
+    public GuardFSM_Condition_IsAPlayerInsideARange(EnemyController enemy,float rangeToTest)
     {
-        PlayersHolder = players;
         Enemy = enemy;
         Range = rangeToTest;
     }
 
     public bool test()
     {
-        foreach (Transform playerTransform in PlayersHolder.transform)
+        if (Enemy.PlayerToAttack != null)
         {
-            if (Vector2.Distance(Enemy.transform.position, playerTransform.transform.position) < Range)
+            if (Vector2.Distance(Enemy.transform.position, Enemy.PlayerToAttack.transform.position) < Range)
             {
-                Enemy.PlayerToAttack = playerTransform.GetComponent<NetworkIdentity>();
+                Enemy.PlayerToAttack = Enemy.PlayerToAttack.transform.GetComponent<NetworkIdentity>();
                 return true;
             }
         }
@@ -508,35 +492,31 @@ public class GuardFSM_Condition_IsAPlayerInsideARange : ICondition
 }
 public class GuardFSM_Condition_IsAPlayerVisible:ICondition
 {
-    public GameObject PlayersHolder;
-    public GameObject Enemy;
+    public EnemyController Enemy;
     public float Range;
 
-    public GuardFSM_Condition_IsAPlayerVisible(GameObject players, GameObject enemy)
+    public GuardFSM_Condition_IsAPlayerVisible(EnemyController enemy)
     {
-        PlayersHolder = players;
         Enemy = enemy;
     }
 
     public bool test()
     {
-        return false;//VER ISTO
+        return Enemy.PlayerToAttack == null;
     }
-}//VER
+}
 public class GuardFSM_Condition_AreThereNoPlayersInRange : ICondition
 {
-    public GameObject PlayersHolder;
     public GameObject Enemy;
 
-    public GuardFSM_Condition_AreThereNoPlayersInRange(GameObject enemy,GameObject Players)
+    public GuardFSM_Condition_AreThereNoPlayersInRange(GameObject enemy)
     {
         Enemy = enemy;
-        PlayersHolder = Players;
     }
 
     public bool test()
     {
-        return Enemy.GetComponent<EnemyController>().PlayerToAttack=null;//VER ISTO
+        return Enemy.GetComponent<EnemyController>().PlayerToAttack==null;
     }
 }
 public class GuardFSM_Condition_IsPlayerDead : ICondition
@@ -602,21 +582,56 @@ public class GuardFSM_Action_MoveToAPoint : MonoBehaviour, IAction
         isMoving = false;
         yield return null;
     }
-}
-public class GuardFSM_Action_AttackAPlayer : IAction
+}//Não usar directamente
+public class GuardFSM_Action_Move : IAction
 {
     public EnemyController enemy;
-    public MovimentoJogador player;
+    public Vector2 Destination;
 
-    public GuardFSM_Action_AttackAPlayer(EnemyController character,MovimentoJogador Player)
+    public GuardFSM_Action_Move(EnemyController character, Vector2 destination)
     {
         enemy = character;
-        player = Player;
+        Destination = destination;
     }
 
     public void DoAction()
     {
-        player.Health -= enemy.AttackStrength;
+        enemy.GetComponent<GuardFSM_Action_MoveToAPoint>().Destination = Destination;
+        enemy.GetComponent<GuardFSM_Action_MoveToAPoint>().DoAction();
+    }
+}
+public class GuardFSM_Action_PursuePlayer : IAction
+{
+    public EnemyController enemy;
+
+    public GuardFSM_Action_PursuePlayer(EnemyController character)
+    {
+        enemy = character;
+    }
+
+    public void DoAction()
+    {
+        if (enemy.GetComponent<EnemyController>().PlayerToAttack != null)
+        {
+            enemy.GetComponent<GuardFSM_Action_MoveToAPoint>().Destination =
+                enemy.GetComponent<EnemyController>().PlayerToAttack.transform.position;
+            enemy.GetComponent<GuardFSM_Action_MoveToAPoint>().DoAction();
+        }
+    }
+}
+public class GuardFSM_Action_AttackAPlayer : IAction
+{
+    public EnemyController enemy;
+
+    public GuardFSM_Action_AttackAPlayer(EnemyController character)
+    {
+        enemy = character;
+    }
+
+    public void DoAction()
+    {
+        if(enemy.PlayerToAttack!=null)
+            enemy.PlayerToAttack.GetComponent<MovimentoJogador>().Health -= enemy.AttackStrength;
     }
 }
 public class GuardFSM_Action_ForgetPlayer : IAction
@@ -656,6 +671,19 @@ public class GuardFSM_Action_GuardPoint : MonoBehaviour, IAction
         CoroutineIsRunning = false;
         Arriving = true;
     }
-} //NÃO USAR CONSTRUTOR. FAZER ADDCOMPONENT E DEFINIR VARIÁVEIS NO AWAKE
+} //USAR A GUARDFSM_ACTION_POINTGUARD EM VEZ DESTA
+public class GuardFSM_Action_PointGuard : IAction
+{
+    public EnemyController enemy;
+
+    public GuardFSM_Action_PointGuard(EnemyController Enemy)
+    {
+        enemy = Enemy;
+    }
+    public void DoAction()
+    {
+        enemy.GetComponent<GuardFSM_Action_GuardPoint>().DoAction();
+    }
+}
 //Classe Principal deste script (NÃO APAGAR)
 public class EnemyHFSM : MonoBehaviour {}

@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class EnemyController : MonoBehaviour {
+public class EnemyController : NetworkBehaviour {
     public int Health;
     public NetworkIdentity PlayerToAttack;
     public float AttackRange;
@@ -20,6 +20,8 @@ public class EnemyController : MonoBehaviour {
 
     public GameObject Players;
     public Text textbox;
+    public GuardFSM sm;
+
     public void Awake()
     {
         Players = GameObject.Find("Players");
@@ -36,6 +38,11 @@ public class EnemyController : MonoBehaviour {
         GetComponent<GuardFSM_Action_MoveToAPoint>().isMoving = false;
     }
 
+    public void Start()
+    {
+        sm = new GuardFSM(this);
+    }
+
     public void Update()
     {
         if (PlayerToAttack != null)
@@ -47,11 +54,9 @@ public class EnemyController : MonoBehaviour {
             GetComponent<GuardFSM_Action_MoveToAPoint>().Destination =
                 GlobalVariables.singleton.GuardPoints[CurrentGuardPointIndex];
         }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            //GetComponent<GuardFSM_Action_GuardPoint>().DoAction();
-            GetComponent<GuardFSM_Action_MoveToAPoint>().DoAction();
-        }
+        sm.update();
+        Debug.Log(sm.CurrentState.Name);
+        textbox.text = sm.CurrentState.Name;
     }
 
     public GameObject GetPlayerToAttackFromPlayerList()

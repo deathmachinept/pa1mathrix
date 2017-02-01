@@ -88,6 +88,7 @@ public class MovimentoJogador : NetworkBehaviour
         terminalNetID.RemoveClientAuthority(terminalNetID.connectionToClient);
     }
 
+
     void Update()
     {
         if (isClient)
