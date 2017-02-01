@@ -84,6 +84,9 @@ TagManager:
   - name: Objects
     uniqueID: 108945479
     locked: 0
+  - name: SouthWalls
+    uniqueID: 1619140941
+    locked: 0
   - name: Roof
     uniqueID: 3072238119
     locked: 0

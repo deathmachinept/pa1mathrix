@@ -171,7 +171,8 @@ public class MapGenerator : MonoBehaviour
   public void initGrid()
   {
     grid = new byte[grid_width,grid_height];
-        guardarDir = new byte[grid_width, grid_height];
+    guardarDir = new byte[grid_width, grid_height];
+
         for (int j = 0; j < grid_height; j++) {
       for (int i = 0; i < grid_width; i++) {
         grid[i,j] = 0; // Initialize all cell as empty

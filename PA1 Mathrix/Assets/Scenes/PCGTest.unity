@@ -250,13 +250,13 @@ MonoBehaviour:
   floor: {fileID: 1000012143804816, guid: 04ab2773f6f72814481356451aa12bf6, type: 2}
   corridor: {fileID: 0}
   wall: {fileID: 0}
-  numeroMaximoQuartos: 7
+  numeroMaximoQuartos: 8
   room_type: 1
   room_min_size: 9
   room_max_size: 18
   corridor_num: 1
   corridor_weight: 7
-  turning_weight: 4
+  turning_weight: 6
   grid_width: 90
   grid_height: 110
 --- !u!4 &751367034
