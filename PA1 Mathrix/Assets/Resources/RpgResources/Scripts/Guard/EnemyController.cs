@@ -54,8 +54,14 @@ public class EnemyController : NetworkBehaviour {
             GetComponent<GuardFSM_Action_MoveToAPoint>().Destination =
                 GlobalVariables.singleton.GuardPoints[CurrentGuardPointIndex];
         }
+
+        if (Input.GetKeyDown(KeyCode.P) && !GetComponent<GuardFSM_Action_GuardPoint>().CoroutineIsRunning)
+        {
+            GetComponent<GuardFSM_Action_GuardPoint>().DoAction();
+        }
+        //textbox.text = GetComponent<GuardFSM_Action_GuardPoint>().CoroutineIsRunning.ToString();
+
         sm.update();
-        Debug.Log(sm.CurrentState.Name);
         textbox.text = sm.CurrentState.Name;
     }
 

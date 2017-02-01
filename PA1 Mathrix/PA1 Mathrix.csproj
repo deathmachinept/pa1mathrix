@@ -109,6 +109,7 @@
     <Compile Include="Assets\MaterialUI\Scripts\ToggleConfig.cs" />
     <Compile Include="Assets\MaterialUI\Scripts\ToggleTextChanger.cs" />
     <Compile Include="Assets\MoveTrain.cs" />
+    <Compile Include="Assets\OpenDoor.cs" />
     <Compile Include="Assets\RangeFloat.cs" />
     <Compile Include="Assets\RangeInt.cs" />
     <Compile Include="Assets\Resources\MainMenuResources\Scripts\MainMenuController.cs" />

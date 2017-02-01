@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Xml.Serialization;
 using JetBrains.Annotations;
+using UnityEditor;
 using UnityEngine.Networking;
 
 //Componentes Principais das Máquina de Estados
@@ -252,13 +253,18 @@ public class GuardFSM : SM
         States.Add(new GuardFSM_State_Move(enemy, this));
         States.Add(new GuardFSM_State_Pursuit(enemy, this));
         States.Add(new GuardFSM_State_Attack(enemy, this));
-        States[0].transitions[0].targetState = States[2];
-        States[0].transitions[1].targetState = States[1];
+
+        States[0].transitions[0].targetState = States[1];
+        //States[0].transitions[1].targetState = States[2];
+
         States[1].transitions[0].targetState = States[0];
-        States[1].transitions[1].targetState = States[2];
+        //States[1].transitions[1].targetState = States[2];
+
         States[2].transitions[0].targetState = States[1];
         States[2].transitions[1].targetState = States[3];
+
         States[3].transitions[0].targetState = States[1];
+        States[3].transitions[1].targetState = States[2];
         this.InitialState = States[0];
         this.CurrentState = null;
     }
@@ -279,8 +285,8 @@ public class GuardFSM_State_Guard : State
         EntryAction = null;
         ExitAction = null;
         transitions = new List<Transition>();
+        transitions.Add(new GuardFSM_Transition_TimeToRelocate(parentMachine, enemy));
         transitions.Add(new GuardFSM_Transition_PlayerWasDetected(parentMachine, enemy));
-        transitions.Add(new GuardFSM_Transition_TimeToRelocate(parentMachine,enemy));
     }
 }
 public class GuardFSM_State_Move : State
@@ -292,7 +298,7 @@ public class GuardFSM_State_Move : State
     {
         parentMachine = parent;
         enemy = thisEnemy;
-        Name = "PURSUIT STATE";
+        Name = "MOVE STATE";
         Actions = new List<IAction>();
         Actions.Add(new GuardFSM_Action_Move(enemy, GlobalVariables.singleton.GuardPoints[enemy.ClosestGuardPointIndex]));
         EntryAction = null;
@@ -554,6 +560,7 @@ public class GuardFSM_Action_MoveToAPoint : MonoBehaviour, IAction
     public Vector2 Destination;
     public float TimeToTake;
     public bool isMoving;
+    public int previousClosestPoint=0;
 
     public GuardFSM_Action_MoveToAPoint(EnemyController Enemy,Vector2 Destination)
     {
@@ -565,8 +572,21 @@ public class GuardFSM_Action_MoveToAPoint : MonoBehaviour, IAction
         enemy.HasGuardedPoint=false;
         if (!isMoving)
         {
+            Destination = GlobalVariables.singleton.GuardPoints[GetClosestPointIndex()];
             StartCoroutine(Move());
         }
+    }
+
+    public int GetClosestPointIndex()
+    {
+        int indexOfClosestPoint = 0;
+        for (int i = 0; i < GlobalVariables.singleton.GuardPoints.Count; i++)
+        {
+            if (Vector2.Distance(enemy.transform.position, GlobalVariables.singleton.GuardPoints[i]) <
+                Vector2.Distance(enemy.transform.position, GlobalVariables.singleton.GuardPoints[indexOfClosestPoint]) && i!=previousClosestPoint)
+                indexOfClosestPoint = i;
+        }
+        return indexOfClosestPoint;
     }
 
     public IEnumerator Move()
@@ -682,7 +702,10 @@ public class GuardFSM_Action_PointGuard : IAction
     }
     public void DoAction()
     {
-        enemy.GetComponent<GuardFSM_Action_GuardPoint>().DoAction();
+        if (!enemy.GetComponent<GuardFSM_Action_GuardPoint>().CoroutineIsRunning)
+        {
+            enemy.GetComponent<GuardFSM_Action_GuardPoint>().DoAction();
+        }
     }
 }
 //Classe Principal deste script (NÃO APAGAR)
