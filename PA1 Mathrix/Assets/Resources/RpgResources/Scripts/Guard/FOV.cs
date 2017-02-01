@@ -11,15 +11,18 @@ public class FOV : MonoBehaviour {
 
     public LayerMask targetMask;
     public LayerMask obstacleMask;
-
-    [HideInInspector]
+    
     public List<Transform> visibleTargets = new List<Transform>();
 
     void Start()
     {
-        StartCoroutine("FindTargetsWithDelay", .2f);
+        //StartCoroutine("FindTargetsWithDelay", .2f);
     }
 
+    void Update()
+    {
+        FindVisibleTargets();
+    }
 
     IEnumerator FindTargetsWithDelay(float delay)
     {

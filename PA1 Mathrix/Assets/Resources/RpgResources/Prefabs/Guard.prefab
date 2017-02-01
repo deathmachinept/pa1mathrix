@@ -44,7 +44,6 @@ GameObject:
   - 61: {fileID: 61000010018594726}
   - 114: {fileID: 114000014201865266}
   - 114: {fileID: 114000013675723516}
-  - 114: {fileID: 114000013167374282}
   m_Layer: 0
   m_Name: Guard
   m_TagString: Untagged
@@ -105,7 +104,7 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012533284284}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: c7b1c322d80a89f4b8f9106a214e89a6, type: 2}
   m_CullingMode: 0
@@ -204,17 +203,6 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
---- !u!114 &114000013167374282
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012533284284}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdf748b374a1c34469dc453c14d512ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114000013675723516
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -289,7 +277,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: (Current State)
+  m_Text: 
 --- !u!114 &114000014201865266
 MonoBehaviour:
   m_ObjectHideFlags: 1
