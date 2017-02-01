@@ -93,7 +93,7 @@ public class MapGenerator : MonoBehaviour
 
   void renderGridCell(int x, int y)
   {
-        // portas 0south 1west 2north 3east paredes 4south 5 east 6 north 7 west
+        // portas 0south 1west 2north 3east paredes 4south 5 east 6 north 7 west 9 Corner West Wall 10 corner East Wall
         // Render grid cell content
         switch (grid[x, y])
         {
@@ -120,7 +120,7 @@ public class MapGenerator : MonoBehaviour
                 SouthDoor.transform.position = new Vector3(x, y, 0);
                 break;
             case 1: // West Door
-                GameObject WestDoor = Instantiate(Resources.Load("WestWall")) as GameObject;
+                GameObject WestDoor = Instantiate(Resources.Load("EastWallClose")) as GameObject;
                 WestDoor.transform.SetParent(TilesHolder.transform);
                 WestDoor.name = "West Door";
                 WestDoor.transform.position = new Vector3(x, y, 0);
@@ -132,7 +132,7 @@ public class MapGenerator : MonoBehaviour
               Wall.transform.position = new Vector3(x, y, 0);
               break;
           case 3: // East Door
-              GameObject Door = Instantiate(Resources.Load("CorridorPanel0")) as GameObject;
+              GameObject Door = Instantiate(Resources.Load("WestWallClose")) as GameObject;
               Door.transform.SetParent(TilesHolder.transform);
               Door.name = "East Door";
               Door.transform.position = new Vector3(x, y, 0);
@@ -150,7 +150,7 @@ public class MapGenerator : MonoBehaviour
                 EastWall.transform.position = new Vector3(x, y, 0);
               break;
             case 6: // NorthWall
-                GameObject northWall = Instantiate(Resources.Load("CorridorPanel0")) as GameObject;
+                GameObject northWall = Instantiate(Resources.Load("NorthWallPanel")) as GameObject;
                 northWall.transform.SetParent(TilesHolder.transform);
                 northWall.name = "North Wall";
                 northWall.transform.position = new Vector3(x, y, 0);
@@ -163,6 +163,21 @@ public class MapGenerator : MonoBehaviour
                 break;
             case 8: // Empty
 
+                break;
+
+            case 9: // Empty
+                GameObject WestWallCorner = Instantiate(Resources.Load("NorthWestCornerPanel")) as GameObject;
+                WestWallCorner.transform.SetParent(TilesHolder.transform);
+                WestWallCorner.name = "West Wall Corner";
+                WestWallCorner.transform.position = new Vector3(x, y, 0);
+                break;
+                break;
+            case 10: // Empty
+                GameObject EastWallCorner = Instantiate(Resources.Load("NorthEastCornerPanel")) as GameObject;
+                EastWallCorner.transform.SetParent(TilesHolder.transform);
+                EastWallCorner.name = "West Wall Corner";
+                EastWallCorner.transform.position = new Vector3(x, y, 0);
+                break;
                 break;
         }
   }

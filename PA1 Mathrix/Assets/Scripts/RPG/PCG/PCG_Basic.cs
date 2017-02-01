@@ -99,13 +99,63 @@ public class PCG_Basic : PCG{
         initCorridors(); // Initialize corridors
     }
 
+    public void insertCell()
+    {
+        int posY = 10; // apenas alguma celulas abaixo do limite top
+        int posX = (pcgrid_width / 4);
+        Vector2 coordenadaDeQuarto = new Vector2(posX, posY);
+
+        Room Cela = new Room(pcgrid_width, pcgrid_height, 0, 0, 1, R, 2, 4, 5, coordenadaDeQuarto);
+        rooms.Add(Cela);
+
+        for (int j = Cela.room_y1; j <= Cela.room_y2; j++)
+        {
+            for (int i = Cela.room_x1; i <= Cela.room_x2; i++)
+            {
+                pcgrid[i, j] = 1;
+                //Debug.Log("Contando cells" + i) ;
+            }
+        }
+
+        for (int i = Cela.wall_x1; i <= Cela.wall_x2; i++)
+        {
+            if (pcgrid[i, Cela.wall_y1] != 1) //wall de baixo
+            {
+                pcgrid[i, Cela.wall_y1] = 2;
+                guardarDir[i, Cela.wall_y1] = 4;
+            }
+            if (pcgrid[i, Cela.wall_y2] != 1)
+            {
+                pcgrid[i, Cela.wall_y2] = 2;
+                guardarDir[i, Cela.wall_y2] = 6;
+
+            }
+        }
+
+        for (int j = Cela.wall_y1; j <= Cela.wall_y2; j++)
+        {
+            if (pcgrid[Cela.wall_x1, j] != 1) //side walls west
+            {
+                pcgrid[Cela.wall_x1, j] = 2;
+                guardarDir[Cela.wall_x1, j] = 7;
+            }
+            if (pcgrid[Cela.wall_x2, j] != 1)
+            {
+                pcgrid[Cela.wall_x2, j] = 2;
+                guardarDir[Cela.wall_x2, j] = 5;
+            }
+        }
+
+
+    }
+
     public void insertMetro()
     {
-        int posY = pcgrid_height - 12;
+        int posY = pcgrid_height - 14;
         int posX = (pcgrid_width / 2);
         Vector2 coordenadaDeQuarto = new Vector2(posX, posY);
 
-        Room Metro = new Room(pcgrid_width, pcgrid_height, 0, 0, 1, R, true, 12, 15, coordenadaDeQuarto);
+        Room Metro = new Room(pcgrid_width, pcgrid_height, 0, 0, 1, R, 1, 30,14, coordenadaDeQuarto);
         rooms.Add(Metro);
 
         for (int j = Metro.room_y1; j <= Metro.room_y2; j++)
@@ -172,10 +222,11 @@ public class PCG_Basic : PCG{
             if (!buildMetro)
             {
                 insertMetro();
+                insertCell();
                 buildMetro = true;
             }
             else { 
-            Room rm = new Room(pcgrid_width, pcgrid_height, room_base, room_radix, corridor_num, R, false, 0, 0,
+            Room rm = new Room(pcgrid_width, pcgrid_height, room_base, room_radix, corridor_num, R, 0, 0, 0,
                 Vector2.zero); // Create new room
             room_blocked = blockRoom(rm); // Check if room is blocked
 
@@ -208,6 +259,7 @@ public class PCG_Basic : PCG{
                         {
                             pcgrid[i, rm.wall_y1] = 2;
                             guardarDir[i, rm.wall_y1] = 4;
+
                         }
                         if (pcgrid[i, rm.wall_y2] != 1) {
                             pcgrid[i, rm.wall_y2] = 2;
@@ -227,6 +279,11 @@ public class PCG_Basic : PCG{
                             guardarDir[rm.wall_x2, j] = 5;
                         }
                     }
+
+                guardarDir[rm.wall_x1, rm.wall_y2] = 9;
+                guardarDir[rm.wall_x2, rm.wall_y2] = 10;
+
+
                 // Place openings
                 for (int k = 0; k < rm.opening_num; k++)
                 {

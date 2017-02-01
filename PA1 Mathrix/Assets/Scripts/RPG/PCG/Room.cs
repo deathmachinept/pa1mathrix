@@ -25,19 +25,20 @@ public class Room
     private System.Random RandomG;
     public int InitialWorldSeed;
 
-    private bool isMetro;
+    private int typeAutobuild;
     //int based = int((room_min + 1)*0.5); room_min = tamanho min do quarto eg. (9+1) *0.5 = 5 
     //int radix = int((room_max - room_min)*0.5 + 1); (18 - 9) * 0.5f +1 = 5.5f
 
-    public Room(int w, int h, int based, int radix, int c_num, System.Random seed, bool preBuild, int width, int height, Vector2 coordenada )
+    public Room(int w, int h, int based, int radix, int c_num, System.Random seed, int preBuild, int width, int height, Vector2 coordenada )
     {
         RandomG = seed;
-        isMetro = preBuild;
+        typeAutobuild = preBuild;
         //Random.InitState(InitialWorldSeed);
         int[,] novo = new int[2,2];
         pcgrid_width = w;
         pcgrid_height = h;
-        if (!preBuild)
+
+        if (typeAutobuild == 0)
         {
             room_width = (int)(NextFloat(RandomG, 0, radix) + based);
             room_height = (int)(NextFloat(RandomG, 0, radix) + based);
@@ -55,7 +56,7 @@ public class Room
         else
         {
             room_width = width;
-            room_height = 24;
+            room_height = height;
             room_x = (int) coordenada.x;
             room_y = (int) coordenada.y;
             room_x1 = (int) coordenada.x - width;
@@ -110,7 +111,7 @@ public class Room
         while (count != 0)
         {
 
-            if (isMetro)
+            if (typeAutobuild != 0)
             {
                 opening[count - 1, 2] = 0;
             }
@@ -122,10 +123,14 @@ public class Room
             {
                 case 0: // South wall
                     int x1;
-                    if (isMetro)
+                    if (typeAutobuild ==2) // metro
                     {
                         x1 = (int)((wall_x2 - wall_x1) / 2) + wall_x1;
 
+                    }
+                    else if (typeAutobuild == 1) //cela
+                    {
+                        x1 = wall_x1 + 2;
                     }
                     else{
                          x1 = (int)NextFloat(RandomG, wall_x1, wall_x2);

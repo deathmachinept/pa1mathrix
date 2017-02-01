@@ -109,6 +109,7 @@
     <Compile Include="Assets\MaterialUI\Scripts\ToggleConfig.cs" />
     <Compile Include="Assets\MaterialUI\Scripts\ToggleTextChanger.cs" />
     <Compile Include="Assets\MoveTrain.cs" />
+    <Compile Include="Assets\OpenDoor.cs" />
     <Compile Include="Assets\RangeFloat.cs" />
     <Compile Include="Assets\RangeInt.cs" />
     <Compile Include="Assets\Resources\MainMenuResources\Scripts\MainMenuController.cs" />
@@ -133,6 +134,8 @@
     <Compile Include="Assets\Resources\RpgResources\Scripts\Guard\EnemyController.cs" />
     <Compile Include="Assets\Resources\RpgResources\Scripts\Guard\EnemyHFSM.cs" />
     <Compile Include="Assets\Resources\RpgResources\Scripts\Guard\EnemySpawner.cs" />
+    <Compile Include="Assets\Resources\RpgResources\Scripts\Guard\FOV.cs" />
+    <Compile Include="Assets\Resources\RpgResources\Scripts\Guard\FOVEditor.cs" />
     <Compile Include="Assets\Resources\RpgResources\Scripts\Guard\GlobalVariables.cs" />
     <Compile Include="Assets\Resources\RpgResources\Scripts\MyNetworkManager.cs" />
     <Compile Include="Assets\Resources\RpgResources\Scripts\PlayerController.cs" />

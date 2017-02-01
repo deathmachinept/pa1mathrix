@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ac84bc0db0bd9f34b870df945aeff3ad
-timeCreated: 1484102352
+timeCreated: 1485960782
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -1706,32 +1706,6 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: WallCement0_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 464
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: WallCement0_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 464
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
       name: indoor_90
       rect:
         serializedVersion: 2
@@ -1802,32 +1776,6 @@ TextureImporter:
         serializedVersion: 2
         x: 112
         y: 464
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: WallCement1_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 448
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: WallCement1_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 448
         width: 16
         height: 16
       alignment: 0
@@ -1997,23 +1945,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 432
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: WallCement2_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 432
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 32
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.32}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

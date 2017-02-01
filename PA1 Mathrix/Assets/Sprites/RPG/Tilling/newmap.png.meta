@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 4aca904b678e33a4c81bf8684f1af483
-timeCreated: 1485919252
+timeCreated: 1485967080
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -255,7 +255,7 @@ TextureImporter:
     21300496: newmap_256
     21300498: CorridorPanel0
     21300500: newmap_258
-    21300502: newmap_259
+    21300502: NorthWall
     21300504: newmap_260
     21300506: newmap_261
     21300508: newmap_262
@@ -304,7 +304,7 @@ TextureImporter:
     21300594: newmap_306
     21300596: newmap_307
     21300598: newmap_308
-    21300600: newmap_309
+    21300600: WestWallOpen
     21300602: newmap_310
     21300604: newmap_311
     21300606: newmap_313
@@ -356,7 +356,7 @@ TextureImporter:
     21300698: newmap_359
     21300700: newmap_360
     21300702: newmap_361
-    21300704: newmap_362
+    21300704: NorthWestCornerPanel
     21300706: newmap_363
     21300708: newmap_364
     21300710: newmap_365
@@ -369,7 +369,7 @@ TextureImporter:
     21300724: EastWall
     21300726: newmap_373
     21300728: newmap_374
-    21300730: newmap_375
+    21300730: EastWallClose
     21300732: newmap_376
     21300734: newmap_377
     21300736: newmap_378
@@ -396,7 +396,7 @@ TextureImporter:
     21300778: newmap_399
     21300780: newmap_400
     21300782: newmap_401
-    21300784: newmap_402
+    21300784: NorthEastPanelRight
     21300786: newmap_403
     21300788: newmap_404
     21300790: newmap_405
@@ -414,7 +414,7 @@ TextureImporter:
     21300814: newmap_417
     21300816: newmap_418
     21300818: newmap_419
-    21300820: newmap_420
+    21300820: WestWallClose
     21300822: newmap_421
     21300824: newmap_422
     21300826: newmap_423
@@ -3393,19 +3393,6 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: newmap_228
-      rect:
-        serializedVersion: 2
-        x: 209
-        y: 585
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
       name: newmap_229
       rect:
         serializedVersion: 2
@@ -3731,13 +3718,13 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: newmap_259
+      name: NorthWall
       rect:
         serializedVersion: 2
-        x: 209
-        y: 547
+        x: 189
+        y: 540
         width: 32
-        height: 32
+        height: 72
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -4173,19 +4160,6 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: newmap_295
-      rect:
-        serializedVersion: 2
-        x: 209
-        y: 509
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
       name: newmap_296
       rect:
         serializedVersion: 2
@@ -4342,13 +4316,13 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: newmap_309
+      name: WestWallOpen
       rect:
         serializedVersion: 2
-        x: 867
-        y: 414
-        width: 32
-        height: 32
+        x: 884
+        y: 373
+        width: 66
+        height: 72
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -4360,19 +4334,6 @@ TextureImporter:
         serializedVersion: 2
         x: 893
         y: 509
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: newmap_313
-      rect:
-        serializedVersion: 2
-        x: 1014
-        y: 399
         width: 32
         height: 32
       alignment: 0
@@ -4706,19 +4667,6 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: newmap_339
-      rect:
-        serializedVersion: 2
-        x: 741
-        y: 471
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
       name: newmap_342
       rect:
         serializedVersion: 2
@@ -4979,15 +4927,15 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: newmap_362
+      name: NorthWestCornerPanel
       rect:
         serializedVersion: 2
-        x: 399
-        y: 433
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 392
+        y: 400
+        width: 40
+        height: 72
+      alignment: 9
+      pivot: {x: -0.38, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -5096,24 +5044,11 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: newmap_371
-      rect:
-        serializedVersion: 2
-        x: 741
-        y: 433
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
       name: EastWall
       rect:
         serializedVersion: 2
         x: 784
-        y: 440
+        y: 351
         width: 32
         height: 32
       alignment: 0
@@ -5122,28 +5057,15 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: newmap_374
+      name: EastWallClose
       rect:
         serializedVersion: 2
-        x: 888
-        y: 365
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: newmap_375
-      rect:
-        serializedVersion: 2
-        x: 930
-        y: 386
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 965
+        y: 298
+        width: 66
+        height: 72
+      alignment: 9
+      pivot: {x: 0.65, y: 0.45}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -5151,23 +5073,10 @@ TextureImporter:
       name: newmap_376
       rect:
         serializedVersion: 2
-        x: 976
-        y: 411
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: newmap_377
-      rect:
-        serializedVersion: 2
-        x: 1007
-        y: 433
-        width: 32
-        height: 32
+        x: 965
+        y: 373
+        width: 66
+        height: 72
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -5476,8 +5385,8 @@ TextureImporter:
       name: newmap_401
       rect:
         serializedVersion: 2
-        x: 703
-        y: 395
+        x: 752
+        y: 400
         width: 32
         height: 32
       alignment: 0
@@ -5486,28 +5395,15 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: newmap_402
+      name: NorthEastPanelRight
       rect:
         serializedVersion: 2
-        x: 741
-        y: 395
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: newmap_403
-      rect:
-        serializedVersion: 2
-        x: 779
-        y: 395
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 752
+        y: 400
+        width: 40
+        height: 72
+      alignment: 9
+      pivot: {x: 1.2, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -5583,7 +5479,7 @@ TextureImporter:
         x: 368
         y: 376
         width: 32
-        height: 32
+        height: 55
       alignment: 9
       pivot: {x: 0.28, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -5720,15 +5616,15 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: newmap_420
+      name: WestWallClose
       rect:
         serializedVersion: 2
-        x: 779
-        y: 357
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 884
+        y: 298
+        width: 66
+        height: 72
+      alignment: 9
+      pivot: {x: 0.24, y: 0.45}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

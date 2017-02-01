@@ -35,6 +35,7 @@ TagManager:
   - CorridorPanel0
   - CorridorDoor
   - CorridorTile
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -84,14 +85,14 @@ TagManager:
   - name: Objects
     uniqueID: 108945479
     locked: 0
+  - name: Characters
+    uniqueID: 87880377
+    locked: 0
   - name: SouthWalls
     uniqueID: 1619140941
     locked: 0
   - name: Roof
     uniqueID: 3072238119
-    locked: 0
-  - name: Characters
-    uniqueID: 87880377
     locked: 0
   - name: Minigames
     uniqueID: 2046187743
