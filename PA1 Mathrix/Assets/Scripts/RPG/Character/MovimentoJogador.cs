@@ -379,7 +379,7 @@ public class MovimentoJogador : NetworkBehaviour
             //endPos = new Vector3(startPos.x + System.Math.Sign(inputAuto.x), startPos.y + System.Math.Sign(inputAuto.y),
             //    startPos.z);
 
-            endPos = new Vector3(startPos.x + inputAuto.x, startPos.y + inputAuto.y,startPos.z);
+            endPos = new Vector3(startPos.x + inputAuto.x, startPos.y +2f ,startPos.z);
 
             if (!orderToStop)
                 isAllowedToMove = true;
