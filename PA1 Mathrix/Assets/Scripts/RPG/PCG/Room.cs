@@ -55,6 +55,9 @@ public class Room
         }
         else
         {
+                Debug.Log("Prebuild! 2");
+            
+
             room_width = width;
             room_height = height;
             room_x = (int) coordenada.x;
@@ -125,12 +128,13 @@ public class Room
                     int x1;
                     if (typeAutobuild ==2) // metro
                     {
-                        x1 = (int)((wall_x2 - wall_x1) / 2) + wall_x1;
+                        x1 = wall_x1 + 19;
+                        Debug.Log(" HELL !!" +wall_x1);
 
                     }
                     else if (typeAutobuild == 1) //cela
                     {
-                        x1 = wall_x1 + 3;
+                        x1 = wall_x1 + 2;
                     }
                     else{
                          x1 = (int)NextFloat(RandomG, wall_x1, wall_x2);

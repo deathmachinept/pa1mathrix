@@ -8,16 +8,13 @@ public class ReturnScript : MonoBehaviour
     public void ReturnToMainScene()
     {
         SceneManager.UnloadScene(GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().CurrentSceneName);
-        GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().MainSceneObjects.SetActive(true);
+        GameObject.Find("GameObjectManager").GetComponent<GameController>().MainSceneObjects.SetActive(true);
     }
 
     public void ReturnToMainScene(string MinigameName,bool isVictory)
     {
         SceneManager.UnloadScene(GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().CurrentSceneName);
-        GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().MainSceneObjects.SetActive(true);
-        GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().players.SetActive(true);
-        GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().Chat.SetActive(true);
-        GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().CurrentSceneName = "Rpg";
+        GameObject.Find("GameObjectManager").GetComponent<MyNetworkManager>().MainSceneObjects.SetActive(true);
         if (isVictory)
         {
             if (MinigameName == "Polygon Game")

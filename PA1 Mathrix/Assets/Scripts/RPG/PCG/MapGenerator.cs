@@ -17,16 +17,16 @@ public class MapGenerator : MonoBehaviour
     public GameObject corridor;
     public GameObject wall;
     public int numeroMaximoQuartos;
-  public int room_type, room_min_size, room_max_size, corridor_num, corridor_weight, turning_weight;
-  int pcg_type; // PCG type
-  
-  byte[,] grid; // Grid array
+    public int room_type, room_min_size, room_max_size, corridor_num, corridor_weight, turning_weight;
+
+    public byte[,] floors; //1 para chao gerados 2 para wall gerados , 3 para centro de metro, 4 centro cela
+    public byte[,] grid; // Grid array
     public byte[,] guardarDir; // portas 0south 1west 2north 3east paredes 4south 5 east 6 north 7 west
     public int grid_width; // Grid width
-  public int grid_height; // Grid height
+    public int grid_height; // Grid height
 
     private bool once = true;
-  public bool debug = false; // Debug mode
+    public bool debug = false; // Debug mode
   
   // World parameters  
     public MapGenerator()
@@ -42,7 +42,7 @@ public class MapGenerator : MonoBehaviour
         TilesHolder = new GameObject(); 
         TilesHolder.transform.position = Vector3.zero;
         TilesHolder.name = "Tiles Holder";
-
+        DontDestroyOnLoad(TilesHolder);
         generateWorld( grid_width, grid_height);
     }
 
@@ -57,24 +57,17 @@ public class MapGenerator : MonoBehaviour
     }
       public void generateWorld( int g_w, int g_h)
       {
-        // PGC type
+
         grid_width = g_w; // Grid width
         grid_height = g_h; // Grid height
     
-        initGrid(); // Initialize empty grid
+        initGrid(); // Initialize 
     
-        //// Generate PCG
-        //switch (pcg_type) {
-        //    case 0: pcg = new PCG();
-        //        pcg.updateParam(grid_width, grid_height);
-        //        pcg.generatePCG(grid);
-        //          break;
-          //case 1: 
-          pcgb = new PCG_Basic();
-          pcgb.updateParam(grid_width, grid_height, room_type, room_min_size, room_max_size, corridor_num, corridor_weight, turning_weight, numeroMaximoQuartos);
-                  pcgb.generatePCGBasic(grid, guardarDir);
-                  //break;
-        //}
+
+        pcgb = new PCG_Basic();
+        pcgb.updateParam(grid_width, grid_height, room_type, room_min_size, room_max_size, corridor_num, corridor_weight, turning_weight, numeroMaximoQuartos);
+        pcgb.generatePCGBasic(grid, guardarDir,floors);
+
       }
 
 
@@ -121,8 +114,8 @@ public class MapGenerator : MonoBehaviour
                     DoorDebug.name = "Door Tile";
                     DoorDebug.transform.position = new Vector3(x, y, 0);
                     break;
-                case 4: // Corridor
-                    GameObject Corridor = Instantiate(Resources.Load("Floor")) as GameObject;
+                case 4: // Cella
+                    GameObject Corridor = Instantiate(Resources.Load("Extracorridor")) as GameObject;
                     Corridor.transform.SetParent(TilesHolder.transform);
                     Corridor.name = "Corredor Tile";
                     Corridor.transform.position = new Vector3(x, y, 0);
@@ -134,8 +127,28 @@ public class MapGenerator : MonoBehaviour
                     ExtraCorridor.transform.position = new Vector3(x, y, 0);
                     break;
             }
-        }else { 
-        switch (grid[x, y])
+
+            switch (grid[x,y])
+            {
+                case 2: // Door
+                    GameObject WallDebug = Instantiate(Resources.Load("Wall")) as GameObject;
+                    WallDebug.transform.SetParent(TilesHolder.transform);
+                    WallDebug.name = "Wall Tile";
+                    WallDebug.transform.position = new Vector3(x, y, 0);
+                    break;
+            }
+        }else {
+
+            switch (grid[x, y])
+            {
+                case 4: // Door
+                    GameObject Corridor = Instantiate(Resources.Load("Corridor2x2Test")) as GameObject;
+                    Corridor.transform.SetParent(TilesHolder.transform);
+                    Corridor.name = "Wall Tile";
+                    Corridor.transform.position = new Vector3(x, y, 0);
+                    break;
+            }
+        switch (floors[x, y])
         {
             case 1: // Corridor
                 GameObject Floor = Instantiate(Resources.Load("CorridorTile")) as GameObject;
@@ -143,36 +156,43 @@ public class MapGenerator : MonoBehaviour
                 Floor.name = "Chao";
                 Floor.transform.position = new Vector3(x, y, 0);
                 break;
+            case 3: // Corridor
+                GameObject Metro = Instantiate(Resources.Load("CustomPivot 1")) as GameObject;
+                Metro.transform.SetParent(TilesHolder.transform);
+                Metro.name = "Door Tile";
+                Metro.transform.position = new Vector3(x, y, 0);
+                break;
             case 4: // Corridor
-                GameObject Corridor = Instantiate(Resources.Load("Corridor2x2Test")) as GameObject;
+                GameObject Corridor = Instantiate(Resources.Load("Cell 1 1 1 1")) as GameObject;
                 Corridor.transform.SetParent(TilesHolder.transform);
                 Corridor.name = "Door Tile";
                 Corridor.transform.position = new Vector3(x, y, 0);
                 break;
         }
+
         switch (guardarDir[x,y])
       {
-
             case 0: // South Door
-                GameObject SouthDoor = Instantiate(Resources.Load("CorridorDoor")) as GameObject;
+              GameObject SouthDoor = Instantiate(Resources.Load("CorridorDoor2 1")) as GameObject;
                 SouthDoor.transform.SetParent(TilesHolder.transform);
-                SouthDoor.name = "South Door";
-                SouthDoor.transform.position = new Vector3(x, y, 0);
+                SouthDoor.name = "South Door11";
+                SouthDoor.transform.position = new Vector3(x, y+0.6f, 0);
+                Debug.Log("X Y" + x + y + " " + SouthDoor.transform.position);
                 break;
             case 1: // West Door
-                GameObject WestDoor = Instantiate(Resources.Load("EastWallClose")) as GameObject;
+                GameObject WestDoor = Instantiate(Resources.Load("WestWallClose")) as GameObject;
                 WestDoor.transform.SetParent(TilesHolder.transform);
                 WestDoor.name = "West Door";
                 WestDoor.transform.position = new Vector3(x, y, 0);
               break;
           case 2: // North door
-              GameObject Wall = Instantiate(Resources.Load("CorridorDoor")) as GameObject;
+              GameObject Wall = Instantiate(Resources.Load("CorridorDoor2 1")) as GameObject;
               Wall.transform.SetParent(TilesHolder.transform);
               Wall.name = "North door";
               Wall.transform.position = new Vector3(x, y, 0);
               break;
           case 3: // East Door
-              GameObject Door = Instantiate(Resources.Load("WestWallClose")) as GameObject;
+              GameObject Door = Instantiate(Resources.Load("EastWallClose")) as GameObject;
               Door.transform.SetParent(TilesHolder.transform);
               Door.name = "East Door";
               Door.transform.position = new Vector3(x, y, 0);
@@ -211,14 +231,13 @@ public class MapGenerator : MonoBehaviour
                 WestWallCorner.name = "West Wall Corner";
                 WestWallCorner.transform.position = new Vector3(x, y, 0);
                 break;
-                break;
             case 10: // Empty
                 GameObject EastWallCorner = Instantiate(Resources.Load("NorthEastCornerPanel")) as GameObject;
                 EastWallCorner.transform.SetParent(TilesHolder.transform);
                 EastWallCorner.name = "West Wall Corner";
                 EastWallCorner.transform.position = new Vector3(x, y, 0);
                 break;
-                break;
+
         }
         }
     }
@@ -228,11 +247,13 @@ public class MapGenerator : MonoBehaviour
   {
     grid = new byte[grid_width,grid_height];
     guardarDir = new byte[grid_width, grid_height];
+    floors = new byte[grid_width, grid_height];
 
         for (int j = 0; j < grid_height; j++) {
       for (int i = 0; i < grid_width; i++) {
         grid[i,j] = 0; // Initialize all cell as empty
           guardarDir[i, j] = 8;
+          floors[i, j] = 0;
       }
     }
   }
