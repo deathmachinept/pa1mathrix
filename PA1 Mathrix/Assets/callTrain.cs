@@ -10,8 +10,8 @@ public class callTrain : MonoBehaviour
 
 	// Update is called once per frame
 	void Update () {
-	    if (Terminal1.GetComponent<PoligonHackTerminal>().IsMinigameDone &&
-            Terminal2.GetComponent<PoligonHackTerminal>().IsMinigameDone && !trainWasCalled)
+	    if (Terminal1.GetComponent<PoligonHackTerminal2>().IsMinigameDone &&
+            Terminal2.GetComponent<PoligonHackTerminal2>().IsMinigameDone && !trainWasCalled)
 	    {
 	        trainWasCalled = true;
 	        GameObject train = GameObject.FindGameObjectWithTag("Train");

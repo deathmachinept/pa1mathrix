@@ -7,6 +7,7 @@ public class PCG  {
     
     public byte[,] pcgrid; // Grid array
     public byte[,] guardarDir; // Grid array
+    public byte[,] floorsBase; // 1 para chao gerados 2 para wall gerados , 3 para centro de metro, 4 centro cela
     public int pcgrid_width; // Grid width
     public int pcgrid_height; // Grid height
 
@@ -18,10 +19,15 @@ public class PCG  {
         pcgrid_height = g_height; // Get grid width
     }
 
-    public void generatePCG(byte[,] g, byte[,] gdir)
+
+
+    public void generatePCG(byte[,] g, byte[,] gdir, byte[,]floorsInfo)
     {
         pcgrid = g; // Copy grid
         guardarDir = gdir;
+        floorsBase = floorsInfo;
+
+
     }
 
     public bool bounded(int x, int y)

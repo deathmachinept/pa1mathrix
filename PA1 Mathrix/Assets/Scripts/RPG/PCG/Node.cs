@@ -5,8 +5,8 @@ public class Node {
 
     private int x;
     private int y;
-    private int f;
-    private int g;
+    private int f; //total score
+    private int g; //current node score
     private int h;  // herustic score
     private int dir;
     public Node parent;

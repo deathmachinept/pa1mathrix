@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class PoligonHackTerminal2 : MonoBehaviour {
 
 	// Use this for initialization
     // Use this for initialization
 
-    [SyncVar(hook = "MinigameWasDone")]
+    //[SyncVar(hook = "MinigameWasDone")]
     public bool IsMinigameDone;
     public int ID;
     public bool podeCarregar = false;
@@ -22,16 +24,16 @@ public class PoligonHackTerminal2 : MonoBehaviour {
 
     public void Start()
     {
-        if (isServer)
-        {
+        //if (isServer)
+        //{
             IsMinigameDone = false;
-        }
+        //}
     }
 
     public void OnTriggerEnter2D(Collider2D collider)
     {
         Debug.Log("Colision");
-        interactingPlayerIdentity = collider.gameObject.GetComponent<NetworkIdentity>();
+        //interactingPlayerIdentity = collider.gameObject.GetComponent<NetworkIdentity>();
         podeCarregar = true;
     }
 
@@ -47,7 +49,7 @@ public class PoligonHackTerminal2 : MonoBehaviour {
 
     public void OnTriggerExit2D()
     {
-        interactingPlayerIdentity = null;
+        //interactingPlayerIdentity = null;
         podeCarregar = false;
     }
 
@@ -59,17 +61,16 @@ public class PoligonHackTerminal2 : MonoBehaviour {
             {
                 //Camera.main.enabled = false;
                 //camerasOnScene[0].tag = "Untagged";
-                if (interactingPlayerIdentity.isLocalPlayer)
-                {
+                //if (interactingPlayerIdentity.isLocalPlayer)
+                //{
                     SceneManager.LoadSceneAsync("Desenho Polígono", LoadSceneMode.Additive);
-                    GameObject.Find("MainSceneObjectsHolder").SetActive(false);
                     GameObject.Find("Players").SetActive(false);
                     GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().CurrentSceneName =
                         "Desenho Polígono";
                     transform.position = Vector3.zero;
                     GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().players.SetActive(false);
                     GameObject.Find("ChatCanvas").SetActive(false);
-                }
+                //}
 
                 //loadCameraOnce = true;
                 //carregou = true;
@@ -80,7 +81,7 @@ public class PoligonHackTerminal2 : MonoBehaviour {
         {
             if (podeCarregar && IsMinigameDone)
             {
-                interactingPlayerIdentity.GetComponent<MovimentoJogador>().SolvedHackID = ID;
+                //interactingPlayerIdentity.GetComponent<MovimentoJogador>().SolvedHackID = ID;
             }
         }
 

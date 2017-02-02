@@ -90,11 +90,11 @@ public class PCG_Basic : PCG{
         turning_weight = t_weight;
     }
 
-    public void generatePCGBasic(byte[,] g, byte[,] objectsDir)
+    public void generatePCGBasic(byte[,] g, byte[,] objectsDir, byte[,] floorInfo)
     {
 
 
-        base.generatePCG(g, objectsDir); // Init grid 
+        base.generatePCG(g, objectsDir, floorInfo); // Init grid 
         initRooms(); // Initialize rooms
         initCorridors(); // Initialize corridors
     }
@@ -105,7 +105,7 @@ public class PCG_Basic : PCG{
         int posX = (pcgrid_width / 4);
         Vector2 coordenadaDeQuarto = new Vector2(posX, posY);
 
-        Room Cela = new Room(pcgrid_width, pcgrid_height, 0, 0, 1, R, 3, 4, 5, coordenadaDeQuarto);
+        Room Cela = new Room(pcgrid_width, pcgrid_height, 0, 0, 1, R, 1, 3, 4, coordenadaDeQuarto);
         rooms.Add(Cela);
 
         for (int j = Cela.room_y1; j <= Cela.room_y2; j++)
@@ -113,10 +113,17 @@ public class PCG_Basic : PCG{
             for (int i = Cela.room_x1; i <= Cela.room_x2; i++)
             {
                 pcgrid[i, j] = 1;
+
                 //Debug.Log("Contando cells" + i) ;
             }
         }
+        int centerX, centerY;
+        centerX = (((Cela.wall_x2) - 1) + (Cela.wall_x1 + 1)) /2 ;
+        centerY = (((Cela.wall_y2) - 1)+(Cela.wall_y1 + 1)) /2;
 
+        Debug.Log("Cela.wall_x1  " + Cela.wall_x1 + " Cela.wall_y1  " + Cela.wall_y1 + " Cela.room_height " + Cela.room_height + "  Cela.room_width " + Cela.room_width + "  Cela.room_x " + Cela.room_x + " Cela.room_y " + Cela.room_y);
+        
+        floorsBase[centerX, centerY] = 4;
         for (int i = Cela.wall_x1; i <= Cela.wall_x2; i++)
         {
             if (pcgrid[i, Cela.wall_y1] != 1) //wall de baixo
@@ -164,7 +171,7 @@ public class PCG_Basic : PCG{
         int posX = (pcgrid_width / 2);
         Vector2 coordenadaDeQuarto = new Vector2(posX, posY);
 
-        Room Metro = new Room(pcgrid_width, pcgrid_height, 0, 0, 1, R, 1, 30,14, coordenadaDeQuarto);
+        Room Metro = new Room(pcgrid_width, pcgrid_height, 0, 0, 1, R, 2, 28,14, coordenadaDeQuarto);
         rooms.Add(Metro);
 
         for (int j = Metro.room_y1; j <= Metro.room_y2; j++)
@@ -205,6 +212,10 @@ public class PCG_Basic : PCG{
             }
         }
 
+        int centerXM, centerYM;
+        centerXM = (((Metro.wall_x2) - 1) + (Metro.wall_x1 + 1)) / 2;
+        centerYM = (((Metro.wall_y2) - 1) + (Metro.wall_y1 + 1)) / 2;
+        floorsBase[centerXM, centerYM] = 3;
 
         // Place openings
         for (int k = 0; k < Metro.opening_num; k++)
@@ -235,9 +246,9 @@ public class PCG_Basic : PCG{
                 buildMetro = true;
             }
             else { 
-            Room rm = new Room(pcgrid_width, pcgrid_height, room_base, room_radix, corridor_num, R, 0, 0, 0,
+            Room room = new Room(pcgrid_width, pcgrid_height, room_base, room_radix, corridor_num, R, 0, 0, 0,
                 Vector2.zero); // Criar Room
-            room_blocked = blockRoom(rm); // ve se e possivel
+            room_blocked = blockRoom(room); // ve se e possivel
 
             if (room_blocked)
             {
@@ -251,57 +262,63 @@ public class PCG_Basic : PCG{
             }
             else
             {
-                rooms.Add(rm);
+                rooms.Add(room);
 
                 // Create room
-                for (int j = rm.room_y1; j <= rm.room_y2; j++)
+                for (int j = room.room_y1; j <= room.room_y2; j++)
                 {
-                    for (int i = rm.room_x1; i <= rm.room_x2; i++)
+                    for (int i = room.room_x1; i <= room.room_x2; i++)
                     {
                         pcgrid[i, j] = 1;
+                        floorsBase[i, j] = 1;
                     }
                 }
                 // Create room walls
-                for (int i = rm.wall_x1; i <= rm.wall_x2; i++)
+                for (int i = room.wall_x1; i <= room.wall_x2; i++)
                 {
-                    if (pcgrid[i, rm.wall_y1] != 1) //wall de baixo
+                    if (pcgrid[i, room.wall_y1] != 1) //wall de baixo
                         {
-                            pcgrid[i, rm.wall_y1] = 2;
-                            guardarDir[i, rm.wall_y1] = 4;
+                            pcgrid[i, room.wall_y1] = 2;
+                            guardarDir[i, room.wall_y1] = 4; // south walls
+                            floorsBase[i, room.wall_y1] = 2;
 
                         }
-                        if (pcgrid[i, rm.wall_y2] != 1) {
-                            pcgrid[i, rm.wall_y2] = 2;
-                            guardarDir[i, rm.wall_y2] = 6;
+                        if (pcgrid[i, room.wall_y2] != 1) {
+                            pcgrid[i, room.wall_y2] = 2;
+                            floorsBase[i, room.wall_y2] = 2;
+                            guardarDir[i, room.wall_y2] = 6; // north walls
 
                         }
                     }
-                for (int j = rm.wall_y1; j <= rm.wall_y2; j++)
+                for (int j = room.wall_y1; j <= room.wall_y2; j++)
                 {
-                    if (pcgrid[rm.wall_x1, j] != 1) {
-                            pcgrid[rm.wall_x1, j] = 2;
-                            guardarDir[rm.wall_x1, j] = 7;
+                    if (pcgrid[room.wall_x1, j] != 1) {
+                            pcgrid[room.wall_x1, j] = 2;
+                            floorsBase[room.wall_x1, j] = 2;
+
+                            guardarDir[room.wall_x1, j] = 7;
                         }
-                        if (pcgrid[rm.wall_x2, j] != 1)
+                        if (pcgrid[room.wall_x2, j] != 1)
                         {
-                            pcgrid[rm.wall_x2, j] = 2;
-                            guardarDir[rm.wall_x2, j] = 5;
+                            pcgrid[room.wall_x2, j] = 2;
+                            floorsBase[room.wall_x2, j] = 2;
+                            guardarDir[room.wall_x2, j] = 5;
                         }
                     }
 
-                guardarDir[rm.wall_x1, rm.wall_y2] = 9;
-                guardarDir[rm.wall_x2, rm.wall_y2] = 10;
+                guardarDir[room.wall_x1, room.wall_y2] = 9;
+                guardarDir[room.wall_x2, room.wall_y2] = 10;
 
 
                 // Place openings
-                for (int k = 0; k < rm.opening_num; k++)
+                for (int k = 0; k < room.opening_num; k++)
                 {
                     //1
 
-                    if (pcgrid[rm.opening[k, 0], rm.opening[k, 1]] != 1)
+                    if (pcgrid[room.opening[k, 0], room.opening[k, 1]] != 1)
                         {
-                            pcgrid[rm.opening[k, 0], rm.opening[k, 1]] = 3; // coordenadaX , coordenadaY, porta 
-                            guardarDir[rm.opening[k, 0], rm.opening[k, 1]] = (byte)rm.opening[k, 2];
+                            pcgrid[room.opening[k, 0], room.opening[k, 1]] = 3; // coordenadaX , coordenadaY, porta 
+                            guardarDir[room.opening[k, 0], room.opening[k, 1]] = (byte)room.opening[k, 2];
                         }
                     }
             }
