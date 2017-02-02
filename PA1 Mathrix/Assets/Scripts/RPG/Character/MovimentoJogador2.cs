@@ -334,7 +334,7 @@ public class MovimentoJogador2 : MonoBehaviour {
                     anim.SetBool("Stop", true);
                     anim.SetFloat("Xvalue", 0);
                     anim.SetFloat("Yvalue", 0);
-                    this.GetComponentInChildren<Canvas>().enabled = false;
+                    //this.GetComponentInChildren<Canvas>().enabled = false;
                     GameObject.FindGameObjectWithTag("Train").GetComponent<MoveTrain>().checkPlayerInTrain();
                 }
                 yield return null;

@@ -129,12 +129,12 @@ public class PCG_Basic : PCG{
             if (pcgrid[i, Cela.wall_y1] != 1) //wall de baixo
             {
                 pcgrid[i, Cela.wall_y1] = 2;
-                guardarDir[i, Cela.wall_y1] = 4;
+                //guardarDir[i, Cela.wall_y1] = 4;
             }
             if (pcgrid[i, Cela.wall_y2] != 1)
             {
                 pcgrid[i, Cela.wall_y2] = 2;
-                guardarDir[i, Cela.wall_y2] = 6;
+                //guardarDir[i, Cela.wall_y2] = 6;
 
             }
         }
@@ -144,12 +144,12 @@ public class PCG_Basic : PCG{
             if (pcgrid[Cela.wall_x1, j] != 1) //side walls west
             {
                 pcgrid[Cela.wall_x1, j] = 2;
-                guardarDir[Cela.wall_x1, j] = 7;
+                //guardarDir[Cela.wall_x1, j] = 7;
             }
             if (pcgrid[Cela.wall_x2, j] != 1)
             {
                 pcgrid[Cela.wall_x2, j] = 2;
-                guardarDir[Cela.wall_x2, j] = 5;
+                //guardarDir[Cela.wall_x2, j] = 5;
             }
         }
         // Place openings
@@ -158,7 +158,7 @@ public class PCG_Basic : PCG{
 
             {
                 pcgrid[Cela.opening[0, 0], Cela.opening[0, 1]] = 3;
-                guardarDir[Cela.opening[0, 0], Cela.opening[0, 1]] = (byte)Cela.opening[0, 2];
+                //guardarDir[Cela.opening[0, 0], Cela.opening[0, 1]] = (byte)Cela.opening[0, 2];
 
             }
         
@@ -188,12 +188,12 @@ public class PCG_Basic : PCG{
             if (pcgrid[i, Metro.wall_y1] != 1) //wall de baixo
             {
                 pcgrid[i, Metro.wall_y1] = 2;
-                guardarDir[i, Metro.wall_y1] = 4;
+                //guardarDir[i, Metro.wall_y1] = 4;
             }
             if (pcgrid[i, Metro.wall_y2] != 1)
             {
                 pcgrid[i, Metro.wall_y2] = 2;
-                guardarDir[i, Metro.wall_y2] = 6;
+                //guardarDir[i, Metro.wall_y2] = 6;
 
             }
         }
@@ -203,12 +203,12 @@ public class PCG_Basic : PCG{
             if (pcgrid[Metro.wall_x1, j] != 1) //side walls west
             {
                 pcgrid[Metro.wall_x1, j] = 2;
-                guardarDir[Metro.wall_x1, j] = 7;
+                //guardarDir[Metro.wall_x1, j] = 7;
             }
             if (pcgrid[Metro.wall_x2, j] != 1)
             {
                 pcgrid[Metro.wall_x2, j] = 2;
-                guardarDir[Metro.wall_x2, j] = 5;
+                //guardarDir[Metro.wall_x2, j] = 5;
             }
         }
 
@@ -226,7 +226,7 @@ public class PCG_Basic : PCG{
 
             {
                 pcgrid[Metro.opening[k, 0], Metro.opening[k, 1]] = 3;
-                guardarDir[Metro.opening[k, 0], Metro.opening[k, 1]] = (byte)Metro.opening[k, 2];
+                //guardarDir[Metro.opening[k, 0], Metro.opening[k, 1]] = (byte)Metro.opening[k, 2];
 
             }
         }
@@ -381,37 +381,9 @@ public class PCG_Basic : PCG{
                 // Connect rooms
                 basicAStar(pcgrid, rm1.opening[0, 0], rm1.opening[0, 1], rm2.opening[0, 0], rm2.opening[0, 1], corridor_weight, turning_weight);
 
-                // Random tunneling
-                //for (int j = 1; j < rm1.opening_num; j++)
-                //{
-                //    Debug.Log("Random TUNNEL0!");
-                //    tunnelRandom(rm1.opening[j, 0], rm1.opening[j, 1], rm1.opening[j, 2], 3);
-                //}
             }
         }
-        else
-        { // If complex
-            Room rm1 = (Room)rooms[0];
-            for (int i = 1; i < rooms.Count; i++)
-            {
-                // Go through each room and connect its first opening to the first opening of the first room
-                Room rm2 = (Room)rooms[i];
-                // Connect rooms
-                basicAStar(pcgrid, rm1.opening[0, 0], rm1.opening[0, 1], rm2.opening[0, 0], rm2.opening[0, 1], corridor_weight, turning_weight);
-            }
-            // Random tunneling
-            for (int i = 0; i < rooms.Count; i++)
-            {
-                Room rm3 = (Room)rooms[i];
-                for (int j = 1; j < rm3.opening_num; j++)
-                {
-                    Debug.Log("DIR " + rm3.opening[j, 2]);
-                    Debug.Log("Random TUNNEL1!");
 
-                    tunnelRandom(rm3.opening[j, 0], rm3.opening[j, 1], rm3.opening[j, 2], 3);
-                }
-            }
-        }
     }
     private void tunnelRandom(int x, int y, int dir, int iteration)
     {

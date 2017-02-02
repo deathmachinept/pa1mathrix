@@ -103,12 +103,12 @@ public class MoveTrain : MonoBehaviour {
 	            {
 	                trainPos = new Vector3(trainPos.x - 0.05f, trainPos.y, trainPos.z);
 	                this.transform.localPosition = trainPos;
-	                foreach (Transform player in GameObject.FindGameObjectWithTag("ManagerPlayers").transform)
+	                foreach (Transform player in GameObject.FindGameObjectWithTag("Player").transform)
 	                {
-	                    if (player.gameObject.name == "Player(Clone)")
-	                    {
+                        //if (player.gameObject.name == "Player(Clone)")
+                        //{
 	                        player.gameObject.GetComponent<SpriteRenderer>().enabled = false;
-	                    }
+                        //}
 	                }
 	                GameObject.FindGameObjectWithTag("Win").transform.position =
 	                    GameObject.FindGameObjectWithTag("MainCamera").transform.position;
@@ -155,7 +155,7 @@ public class MoveTrain : MonoBehaviour {
         }
         else
         {
-            foreach (Transform player in GameObject.FindGameObjectWithTag("ManagerPlayers").transform)
+            foreach (Transform player in GameObject.FindGameObjectWithTag("Player").transform)
             {
                 if (player.gameObject.name == "Player(Clone)")
                 {

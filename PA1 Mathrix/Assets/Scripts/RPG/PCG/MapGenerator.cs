@@ -137,7 +137,17 @@ public class MapGenerator : MonoBehaviour
                     WallDebug.transform.position = new Vector3(x, y, 0);
                     break;
             }
-        }else { 
+        }else {
+
+            switch (grid[x, y])
+            {
+                case 4: // Door
+                    GameObject Corridor = Instantiate(Resources.Load("Corridor2x2Test")) as GameObject;
+                    Corridor.transform.SetParent(TilesHolder.transform);
+                    Corridor.name = "Wall Tile";
+                    Corridor.transform.position = new Vector3(x, y, 0);
+                    break;
+            }
         switch (floors[x, y])
         {
             case 1: // Corridor
@@ -146,13 +156,20 @@ public class MapGenerator : MonoBehaviour
                 Floor.name = "Chao";
                 Floor.transform.position = new Vector3(x, y, 0);
                 break;
+            case 3: // Corridor
+                GameObject Metro = Instantiate(Resources.Load("CustomPivot 1")) as GameObject;
+                Metro.transform.SetParent(TilesHolder.transform);
+                Metro.name = "Door Tile";
+                Metro.transform.position = new Vector3(x, y, 0);
+                break;
             case 4: // Corridor
-                GameObject Corridor = Instantiate(Resources.Load("Corridor2x2Test")) as GameObject;
+                GameObject Corridor = Instantiate(Resources.Load("Cell 1 1 1 1")) as GameObject;
                 Corridor.transform.SetParent(TilesHolder.transform);
                 Corridor.name = "Door Tile";
                 Corridor.transform.position = new Vector3(x, y, 0);
                 break;
         }
+
         switch (guardarDir[x,y])
       {
             case 0: // South Door
