@@ -53,7 +53,7 @@ public class OpenDoor : MonoBehaviour
 	        {
 	            isdoorOpen = true;
 	            this.animDoor.SetBool("IsDoorClosed", isdoorOpen);
-                if(this.name == "CorridorDoor")
+                if(this.name == "CorridorDoor2")
                 {
                     transform.GetComponent<BoxCollider2D>().enabled = false;
                 }else {
@@ -65,7 +65,7 @@ public class OpenDoor : MonoBehaviour
 
 	            isdoorOpen = false;
                 this.animDoor.SetBool("IsDoorClosed", isdoorOpen);
-                if (this.name == "CorridorDoor")
+                if (this.name == "CorridorDoor2")
                 {
                     transform.GetComponent<BoxCollider2D>().enabled = false;
                 }

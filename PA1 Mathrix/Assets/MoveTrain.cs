@@ -111,6 +111,12 @@ public class MoveTrain : MonoBehaviour {
 	                        player.gameObject.GetComponent<SpriteRenderer>().enabled = false;
 	                    }
 	                }
+	                GameObject.FindGameObjectWithTag("Win").transform.position =
+	                    GameObject.FindGameObjectWithTag("MainCamera").transform.position;
+	                Animator play = GameObject.FindGameObjectWithTag("Win").transform.GetComponent<Animator>();
+	                play.SetBool("Venceu", true);
+
+
 	            }
 
 	            timerToLeave -= Time.deltaTime;
