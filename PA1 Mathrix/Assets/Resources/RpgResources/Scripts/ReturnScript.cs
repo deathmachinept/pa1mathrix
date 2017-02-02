@@ -9,9 +9,6 @@ public class ReturnScript : MonoBehaviour
     {
         SceneManager.UnloadScene(GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().CurrentSceneName);
         GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().MainSceneObjects.SetActive(true);
-        GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().players.SetActive(true);
-        GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().Chat.SetActive(true);
-        GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().CurrentSceneName = "Rpg";
     }
 
     public void ReturnToMainScene(string MinigameName,bool isVictory)

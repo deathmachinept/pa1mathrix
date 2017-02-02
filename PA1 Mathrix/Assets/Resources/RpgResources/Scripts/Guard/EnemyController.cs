@@ -31,7 +31,7 @@ public class EnemyController : MonoBehaviour {
         gameObject.AddComponent<GuardFSM_Action_GuardPoint>();
         GetComponent<GuardFSM_Action_GuardPoint>().enemy=this;
         GetComponent<GuardFSM_Action_GuardPoint>().CoroutineIsRunning= false;
-        GetComponent<GuardFSM_Action_GuardPoint>().Seconds = 5;
+        GetComponent<GuardFSM_Action_GuardPoint>().Seconds = 3;
 
         gameObject.AddComponent<GuardFSM_Action_MoveToAPoint>();
         GetComponent<GuardFSM_Action_MoveToAPoint>().enemy = this;
@@ -60,7 +60,7 @@ public class EnemyController : MonoBehaviour {
         {
             GetComponent<GuardFSM_Action_GuardPoint>().DoAction();
         }
-        textbox.text = PlayerVisible.ToString();
+        textbox.text = (!gameObject.GetComponent<GuardFSM_Action_GuardPoint>().CoroutineIsRunning).ToString();
         sm.update();
     }
 }

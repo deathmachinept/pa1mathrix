@@ -54,12 +54,7 @@ public class PoligonHackTerminal2 : MonoBehaviour
             {
                 SceneManager.LoadSceneAsync("Desenho Polígono", LoadSceneMode.Additive);
                 GameObject.Find("MainSceneObjectsHolder").SetActive(false);
-                GameObject.Find("Players").SetActive(false);
-                GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().CurrentSceneName =
-                    "Desenho Polígono";
                 transform.position = Vector3.zero;
-                GameObject.Find("Network Manager").GetComponent<MyNetworkManager>().players.SetActive(false);
-                GameObject.Find("ChatCanvas").SetActive(false);
             }
         }
         else
