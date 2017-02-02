@@ -5,7 +5,6 @@ using System;
 using System.Linq;
 using System.Xml.Serialization;
 using JetBrains.Annotations;
-using UnityEditor;
 using UnityEngine.Networking;
 
 //Componentes Principais das Máquina de Estados

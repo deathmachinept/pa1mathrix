@@ -10,13 +10,30 @@ public class callTrain : MonoBehaviour
 
 	// Update is called once per frame
 	void Update () {
-	    if (Terminal1.GetComponent<PoligonHackTerminal>().IsMinigameDone &&
-	        Terminal2.GetComponent<triggerSimplificacao>().IsMinigameDone&&!trainWasCalled)
+	    if (((Terminal1.GetComponent<PoligonHackTerminal>().IsMinigameDone ==
+	        Terminal2.GetComponent<triggerSimplificacao>().IsMinigameDone)||CheckforGameCompletion())&&!trainWasCalled)
 	    {
 	        trainWasCalled = true;
-            GameObject train = GameObject.FindGameObjectWithTag("Train");
-            // endPos = startPos;
-            train.GetComponent<MoveTrain>().triggerMove = true;
-        }
+	        GameObject train = GameObject.FindGameObjectWithTag("Train");
+	        // endPos = startPos;
+	        train.GetComponent<MoveTrain>().triggerMove = true;
+	    }
 	}
+
+    bool CheckforGameCompletion()
+    {
+        GameObject playersHolder=GameObject.Find("Players");
+        bool solvedA = false;
+        bool solvedB = false;
+        foreach (Transform t in playersHolder.transform)
+        {
+            if (t.GetComponent<MovimentoJogador>().SolvedHackID == 0)
+                solvedA = true;
+            if (t.GetComponent<MovimentoJogador>().SolvedHackID == 1)
+                solvedB = true;
+        }
+        if ((playersHolder.transform.childCount==2 && (solvedA&&solvedB))|| (playersHolder.transform.childCount == 1 && (solvedA || solvedB)))
+            return true;
+        return false;
+    }
 }

@@ -10016,7 +10016,7 @@ Prefab:
     - target: {fileID: 224000012286451818, guid: 7f821c08ae4df6e4889a8bf1cbdb9691,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 224000010736609008, guid: 7f821c08ae4df6e4889a8bf1cbdb9691,
         type: 2}
@@ -17137,6 +17137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactingPlayerIdentity: {fileID: 0}
   IsMinigameDone: 0
+  ID: 0
   podeCarregar: 0
   camerasOnScene: []
 --- !u!114 &595627104
@@ -44179,6 +44180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactingPlayerIdentity: {fileID: 0}
   IsMinigameDone: 0
+  ID: 0
   podeCarregar: 0
   camerasOnScene:
   - {fileID: 907126735}
@@ -51261,6 +51263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactingPlayerIdentity: {fileID: 0}
   IsMinigameDone: 0
+  ID: 1
   podeCarregar: 0
   camerasOnScene:
   - {fileID: 907126735}
