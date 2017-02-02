@@ -16,16 +16,15 @@ public class OpenDoor : MonoBehaviour
     {
         Debug.Log("Colision");
         podeCarregar = true;
-        Vector3 posicaoPorta = collider.transform.parent.FindChild("Cell_South_Door1_close").position;
-        Vector3 posicaoJogador = collider.transform.position;
-        if (posicaoJogador.y < posicaoPorta.y)
-        {
-            collider.transform.GetComponent<SpriteRenderer>().sortingOrder = 3;
-        }
-        else
-        {
-            collider.transform.GetComponent<SpriteRenderer>().sortingOrder = 0;
-        }
+
+        //if (posicaoJogador.y < posicaoPorta.y)
+        //{
+        //    collider.transform.GetComponent<SpriteRenderer>().sortingOrder = 3;
+        //}
+        //else
+        //{
+        //    collider.transform.GetComponent<SpriteRenderer>().sortingOrder = 0;
+        //}
 
         //if (  GetComponent<SpriteRenderer>().sortingOrder == 3)
         //{
@@ -38,29 +37,43 @@ public class OpenDoor : MonoBehaviour
         //}
 
     }
+    public void OnTriggerExit2D(Collider2D collider)
+    {
+        podeCarregar = false;
+        Debug.Log("Falha Colision");
+    }
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update () {
        // 
         if (podeCarregar && Input.GetKeyDown(KeyCode.F))
 	    {
-            Debug.Log("Entro!");
             isdoorOpen = animDoor.GetBool("IsDoorClosed");
 	        if (!isdoorOpen)
 	        {
 	            isdoorOpen = true;
 	            this.animDoor.SetBool("IsDoorClosed", isdoorOpen);
+                if(this.name == "CorridorDoor")
+                {
+                    transform.GetComponent<BoxCollider2D>().enabled = false;
+                }else {
                 this.transform.parent.FindChild("DoorCollider").GetComponent<BoxCollider2D>().enabled = false;
-
-	        }
+                }
+            }
 	        else
 	        {
 
 	            isdoorOpen = false;
                 this.animDoor.SetBool("IsDoorClosed", isdoorOpen);
-                this.transform.parent.FindChild("DoorCollider").GetComponent<BoxCollider2D>().enabled = true;
-
-	        }
+                if (this.name == "CorridorDoor")
+                {
+                    transform.GetComponent<BoxCollider2D>().enabled = false;
+                }
+                else
+                {
+                    this.transform.parent.FindChild("DoorCollider").GetComponent<BoxCollider2D>().enabled = true;
+                }
+            }
 
 	    }
 	}

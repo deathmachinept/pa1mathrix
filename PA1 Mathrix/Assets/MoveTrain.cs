@@ -13,6 +13,7 @@ public class MoveTrain : MonoBehaviour {
     private bool partir;
     private float timerToLeave;
     private int children;
+    float countMovement = 0f;
 	// Update is called once per frame
 
     public void OnTriggerEnter2D(Collider2D other)
@@ -79,10 +80,11 @@ public class MoveTrain : MonoBehaviour {
 	    if (triggerMove)
 	    {
 
-	        if (trainPos.x > -18.3)
+	        if (countMovement < 17)
 	        {
 	            trainPos = new Vector3(trainPos.x - 0.05f, trainPos.y, trainPos.z);
 	            this.transform.localPosition = trainPos;
+                countMovement+= 0.05f;
 	        }
 	        else
 	        {
@@ -132,12 +134,13 @@ public class MoveTrain : MonoBehaviour {
     public void checkPlayerInTrain()
     {
         Debug.Log("Devia executar aqui!1 " + children);
+        int contar = 0;
 
-        if (children == 2)
+        if (children ==1)
         {
             if (
                 GameObject.FindGameObjectWithTag("ManagerPlayers")
-                    .transform.GetChild(1)
+                    .transform.GetChild(0)
                     .gameObject.GetComponent<MovimentoJogador>()
                     .estaDentroDoComboio)
             {
@@ -147,7 +150,6 @@ public class MoveTrain : MonoBehaviour {
         }
         else
         {
-            int contar = 0;
             foreach (Transform player in GameObject.FindGameObjectWithTag("ManagerPlayers").transform)
             {
                 if (player.gameObject.name == "Player(Clone)")
@@ -156,12 +158,14 @@ public class MoveTrain : MonoBehaviour {
                     if (player.gameObject.GetComponent<MovimentoJogador>().estaDentroDoComboio)
                     {
                         contar++;
-                        if (contar + 1 == children) // por causa de jogador no NetworkManagers Player
-                        {
-                            partir = true;
-                        }
+                           
+                        
                     }
                 }
+            }
+            if(contar == children)
+            {
+                partir = true;
             }
         }
 

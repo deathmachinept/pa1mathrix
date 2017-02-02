@@ -270,7 +270,11 @@ public class MovimentoJogador : NetworkBehaviour
         if (other.transform.GetComponent<SpriteRenderer>() != null)
         {
             if (other.transform.GetComponent<SpriteRenderer>().sortingLayerName != "Floor")
+            {
+                Debug.Log("Pare!");
                 collided = true;
+
+            }
         }
 
            // endPos = startPos;
@@ -368,6 +372,7 @@ public class MovimentoJogador : NetworkBehaviour
         //Debug.Log("Old direction : " + oldDirection + " currentDir " + currentDir);
         if (isAllowedToMove)
         {
+            Debug.Log("Allowed to move!");
             //endPos = new Vector3(startPos.x + System.Math.Sign(inputAuto.x), startPos.y + System.Math.Sign(inputAuto.y),
             //    startPos.z);
 
@@ -381,6 +386,7 @@ public class MovimentoJogador : NetworkBehaviour
             Debug.Log("is not allowed to move");
         }
 
+        collided = false;
         if (!collided)
         {
             while (t < 1f)
@@ -392,7 +398,10 @@ public class MovimentoJogador : NetworkBehaviour
                     inputAuto = Vector2.zero;
  
                     estaDentroDoComboio = true;
-                    Debug.Log("Aqui!");
+                    anim.SetBool("Stop", true);
+                    anim.SetFloat("Xvalue", 0);
+                    anim.SetFloat("Yvalue", 0);
+                    this.GetComponentInChildren<Canvas>().enabled = false;
                     GameObject.FindGameObjectWithTag("Train").GetComponent<MoveTrain>().checkPlayerInTrain();
                 }
                 yield return null;
