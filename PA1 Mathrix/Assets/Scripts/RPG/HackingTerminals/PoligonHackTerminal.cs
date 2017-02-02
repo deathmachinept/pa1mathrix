@@ -13,7 +13,7 @@ public class PoligonHackTerminal : NetworkBehaviour
 
     [SyncVar(hook = "MinigameWasDone")]
     public bool IsMinigameDone;
-
+    public int ID;
     public bool podeCarregar = false;
     private bool carregou = false;
     private bool loadCameraOnce = false;
@@ -82,17 +82,12 @@ public class PoligonHackTerminal : NetworkBehaviour
                 Debug.Log("Corre!");
             }
         }
-        else if (Input.GetKeyDown(KeyCode.F))
+        else
         {
-            if (carregou) // pressionar uma segunda fez sai do jogo
+            if (podeCarregar && IsMinigameDone)
             {
-                //camerasOnScene[1].GetComponent<Camera>().enabled = false;
-                //camerasOnScene[0].tag = "MainCamera";
-
-                //camerasOnScene[0].GetComponent<Camera>().enabled = true;
-                //carregou = false;
+                interactingPlayerIdentity.GetComponent<MovimentoJogador>().SolvedHackID = ID;
             }
-
         }
 
         if (loadCameraOnce && carregou)

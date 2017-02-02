@@ -20,6 +20,8 @@ public class MovimentoJogador : NetworkBehaviour
     [SyncVar]
     public string PLAYERNAME;
 
+    [SyncVar] public int SolvedHackID=-1;
+
     private Animator anim;
     private string layerTemporario, tagColliderTemporario;
     private Direction currentDir;
@@ -60,6 +62,7 @@ public class MovimentoJogador : NetworkBehaviour
             .transform.FindChild("Scroll View")
             .FindChild("InputField")
             .GetComponent<InputField>();
+        SolvedHackID = -1;
     }
 
     void Start()
@@ -85,6 +88,7 @@ public class MovimentoJogador : NetworkBehaviour
         NetworkIdentity terminalNetID = GameObject.Find("HackObect").GetComponent<NetworkIdentity>();
         terminalNetID.AssignClientAuthority(terminalNetID.connectionToClient);
         terminalNetID.GetComponent<PoligonHackTerminal>().RpcSwitch(true);
+        SolvedHackID = terminalNetID.GetComponent<PoligonHackTerminal>().ID;
         terminalNetID.RemoveClientAuthority(terminalNetID.connectionToClient);
     }
 
@@ -102,7 +106,6 @@ public class MovimentoJogador : NetworkBehaviour
             CheckIfIsInFrontOfPolygonTerminal();
         transform.SetParent(GameObject.Find("Players").transform);
         isAllowedToMove = !chatInput.isFocused;
-        
         if (!automatic)
         {
             ProcessMovement();
