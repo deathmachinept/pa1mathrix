@@ -6,9 +6,9 @@ using System.Runtime.CompilerServices;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class EnemyController : NetworkBehaviour {
+public class EnemyController : MonoBehaviour {
     public int Health;
-    public NetworkIdentity PlayerToAttack;
+    public GameObject Player;
     public float AttackRange;
     public int AttackStrength;
     public int TimeBetweenAttacks;
@@ -18,13 +18,14 @@ public class EnemyController : NetworkBehaviour {
     public int SecondsToGuardPoint;
     public bool HasGuardedPoint = false;
 
+    public bool PlayerVisible;
+
     public GameObject Players;
     public Text textbox;
     public GuardFSM sm;
-
     public void Awake()
     {
-        Players = GameObject.Find("Players");
+        Player = GameObject.Find("Player");
         textbox = transform.FindChild("Canvas").FindChild("Text").GetComponent<Text>();
 
         gameObject.AddComponent<GuardFSM_Action_GuardPoint>();
@@ -45,9 +46,9 @@ public class EnemyController : NetworkBehaviour {
 
     public void Update()
     {
-        if (PlayerToAttack != null)
+        if (Player != null)
         {
-            GetComponent<GuardFSM_Action_MoveToAPoint>().Destination = PlayerToAttack.transform.position;
+            GetComponent<GuardFSM_Action_MoveToAPoint>().Destination = Player.transform.position;
         }
         else
         {
@@ -59,21 +60,7 @@ public class EnemyController : NetworkBehaviour {
         {
             GetComponent<GuardFSM_Action_GuardPoint>().DoAction();
         }
-        //textbox.text = GetComponent<GuardFSM_Action_GuardPoint>().CoroutineIsRunning.ToString();
-
+        textbox.text = PlayerVisible.ToString();
         sm.update();
-        textbox.text = sm.CurrentState.Name;
-    }
-
-    public GameObject GetPlayerToAttackFromPlayerList()
-    {
-        foreach (Transform player in Players.transform)
-        {
-            if (player.gameObject.GetComponent<NetworkIdentity>() == PlayerToAttack)
-            {
-                return player.gameObject;
-            }
-        }
-        return null;
     }
 }

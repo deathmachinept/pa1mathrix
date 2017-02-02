@@ -16,14 +16,8 @@ public class GlobalVariables : MonoBehaviour {
         }
         singleton = this;
 
-        GuardPoints.Add(new Vector2(-13,-24));
-        GuardPoints.Add(new Vector2(-3, -25));
-        GuardPoints.Add(new Vector2(1, -25));
-        GuardPoints.Add(new Vector2(5, -14));
-        GuardPoints.Add(new Vector2(-12, -11));
-        GuardPoints.Add(new Vector2(-5, 2));
-        GuardPoints.Add(new Vector2(-18, -3));
-        GuardPoints.Add(new Vector2(-30, -6));
+        GuardPoints.Add(new Vector2(20,85));
+        GuardPoints.Add(new Vector2(25, 88));
 
         foreach (Transform t in transform)
         {

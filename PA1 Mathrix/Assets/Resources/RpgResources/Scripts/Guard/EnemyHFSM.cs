@@ -6,6 +6,7 @@ using System.Linq;
 using System.Xml.Serialization;
 using JetBrains.Annotations;
 using UnityEngine.Networking;
+using PlayerController = UnityEngine.Networking.PlayerController;
 
 //Componentes Principais das Máquina de Estados
 //Interfaces
@@ -91,7 +92,7 @@ public class HSMTransition : ITransition
 public class HSMController
 {
     public EnemyController enemy;
-    public PlayerController player;
+    public MovimentoJogador player;
 
     public HSM MainHSM;//Guarda-se a Máquina de Estados Mãe
     public HSMState currentState;//Para se saber onde se está neste momento
@@ -254,10 +255,10 @@ public class GuardFSM : SM
         States.Add(new GuardFSM_State_Attack(enemy, this));
 
         States[0].transitions[0].targetState = States[1];
-        //States[0].transitions[1].targetState = States[2];
+        States[0].transitions[1].targetState = States[2];
 
         States[1].transitions[0].targetState = States[0];
-        //States[1].transitions[1].targetState = States[2];
+        States[1].transitions[1].targetState = States[2];
 
         States[2].transitions[0].targetState = States[1];
         States[2].transitions[1].targetState = States[3];
@@ -444,15 +445,7 @@ public class GuardFSM_Transition_PlayerWasKilled : Transition
         PlayersHolder = Players;
         Actions = new List<IAction>();
         ConditionsList = new List<ICondition>();
-        //IMPORTANTE: ACTUALIZAR O JOGADOR EM QUESTÃO SEMPRE QUE O GUARDA VAI ATACAR
-        foreach (Transform player in PlayersHolder.transform)
-        {
-            if (player.GetComponent<NetworkIdentity>()==Enemy.PlayerToAttack)
-            {
-                ConditionsList.Add(new GuardFSM_Condition_IsPlayerDead(player.GetComponent<MovimentoJogador>()));
-                break;
-            }
-        }
+        ConditionsList.Add(new GuardFSM_Condition_IsPlayerDead(Enemy.Player.GetComponent<MovimentoJogador2>()));
         targetState = null;
     }
 }
@@ -484,11 +477,11 @@ public class GuardFSM_Condition_IsAPlayerInsideARange : ICondition
 
     public bool test()
     {
-        if (Enemy.PlayerToAttack != null)
+        if (Enemy.Player!= null)
         {
-            if (Vector2.Distance(Enemy.transform.position, Enemy.PlayerToAttack.transform.position) < Range)
+            if (Vector2.Distance(Enemy.transform.position, Enemy.Player.transform.position) < Range)
             {
-                Enemy.PlayerToAttack = Enemy.PlayerToAttack.transform.GetComponent<NetworkIdentity>();
+                Enemy.Player = GameObject.Find("Player");
                 return true;
             }
         }
@@ -507,13 +500,12 @@ public class GuardFSM_Condition_IsAPlayerVisible:ICondition
 
     public bool test()
     {
-        return Enemy.PlayerToAttack == null;
+        return Enemy.PlayerVisible;
     }
 }
 public class GuardFSM_Condition_AreThereNoPlayersInRange : ICondition
 {
     public GameObject Enemy;
-
     public GuardFSM_Condition_AreThereNoPlayersInRange(GameObject enemy)
     {
         Enemy = enemy;
@@ -521,14 +513,14 @@ public class GuardFSM_Condition_AreThereNoPlayersInRange : ICondition
 
     public bool test()
     {
-        return Enemy.GetComponent<EnemyController>().PlayerToAttack==null;
+        return !Enemy.GetComponent<EnemyController>().PlayerVisible;
     }
 }
 public class GuardFSM_Condition_IsPlayerDead : ICondition
 {
-    public MovimentoJogador Player;
+    public MovimentoJogador2 Player;
 
-    public GuardFSM_Condition_IsPlayerDead(MovimentoJogador player)
+    public GuardFSM_Condition_IsPlayerDead(MovimentoJogador2 player)
     {
         Player = player;
     }
@@ -582,7 +574,7 @@ public class GuardFSM_Action_MoveToAPoint : MonoBehaviour, IAction
         for (int i = 0; i < GlobalVariables.singleton.GuardPoints.Count; i++)
         {
             if (Vector2.Distance(enemy.transform.position, GlobalVariables.singleton.GuardPoints[i]) <
-                Vector2.Distance(enemy.transform.position, GlobalVariables.singleton.GuardPoints[indexOfClosestPoint]) && i!=previousClosestPoint)
+                Vector2.Distance(enemy.transform.position, GlobalVariables.singleton.GuardPoints[indexOfClosestPoint]))
                 indexOfClosestPoint = i;
         }
         return indexOfClosestPoint;
@@ -630,12 +622,13 @@ public class GuardFSM_Action_PursuePlayer : IAction
 
     public void DoAction()
     {
-        if (enemy.GetComponent<EnemyController>().PlayerToAttack != null)
-        {
-            enemy.GetComponent<GuardFSM_Action_MoveToAPoint>().Destination =
-                enemy.GetComponent<EnemyController>().PlayerToAttack.transform.position;
-            enemy.GetComponent<GuardFSM_Action_MoveToAPoint>().DoAction();
-        }
+        //if (enemy.GetComponent<EnemyController>().Player != null)
+        //{
+        //    enemy.GetComponent<GuardFSM_Action_MoveToAPoint>().Destination =
+        //        enemy.GetComponent<EnemyController>().Player.transform.position;
+        //    enemy.GetComponent<GuardFSM_Action_MoveToAPoint>().DoAction();
+        //}
+        enemy.transform.position = enemy.Player.transform.position;
     }
 }
 public class GuardFSM_Action_AttackAPlayer : IAction
@@ -649,8 +642,8 @@ public class GuardFSM_Action_AttackAPlayer : IAction
 
     public void DoAction()
     {
-        if(enemy.PlayerToAttack!=null)
-            enemy.PlayerToAttack.GetComponent<MovimentoJogador>().Health -= enemy.AttackStrength;
+        if(enemy.Player != null)
+            enemy.Player.GetComponent<MovimentoJogador2>().Health -= enemy.AttackStrength;
     }
 }
 public class GuardFSM_Action_ForgetPlayer : IAction
@@ -663,7 +656,7 @@ public class GuardFSM_Action_ForgetPlayer : IAction
     }
     public void DoAction()
     {
-        enemy.PlayerToAttack = null;
+        enemy.Player = null;
     }
 }
 public class GuardFSM_Action_GuardPoint : MonoBehaviour, IAction

@@ -9,15 +9,11 @@ public class FOV : MonoBehaviour {
     [Range(0, 360)]
     public float viewAngle;
 
+    private Collider2D targetInViewRadius;
     public LayerMask targetMask;
     public LayerMask obstacleMask;
     
     public List<Transform> visibleTargets = new List<Transform>();
-
-    void Start()
-    {
-        //StartCoroutine("FindTargetsWithDelay", .2f);
-    }
 
     void Update()
     {
@@ -36,7 +32,7 @@ public class FOV : MonoBehaviour {
     void FindVisibleTargets()
     {
         visibleTargets.Clear();
-        Collider2D targetInViewRadius = Physics2D.OverlapCircle(new Vector2(transform.position.x,transform.position.y), viewRadius, targetMask);
+        targetInViewRadius = Physics2D.OverlapCircle(new Vector2(transform.position.x,transform.position.y), viewRadius, targetMask);
         if (targetInViewRadius != null)
         {
             Transform target = targetInViewRadius.transform;
@@ -47,14 +43,17 @@ public class FOV : MonoBehaviour {
 
                 if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask))
                 {
-                    gameObject.GetComponent<EnemyController>().PlayerToAttack =
-                        targetInViewRadius.gameObject.GetComponent<NetworkIdentity>();
+                    gameObject.GetComponent<EnemyController>().PlayerVisible = true;
+                }
+                else
+                {
+                    gameObject.GetComponent<EnemyController>().PlayerVisible = true;
                 }
             }
         }
         else
         {
-            gameObject.GetComponent<EnemyController>().PlayerToAttack = null;
+            gameObject.GetComponent<EnemyController>().PlayerVisible = false;
         }
     }
 
