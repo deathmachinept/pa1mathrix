@@ -39,7 +39,7 @@ public class BinaryHeap {
     {
         while (pos < h.Count / 2)
         {
-            int child = 2 * pos + 1;
+            int child = 2 * pos + 1; // divide a arvore e cria novos ramos 
             Node n = (Node)h[pos];
             Node nc = (Node)h[child];
             Node nc2;

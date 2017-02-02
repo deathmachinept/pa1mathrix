@@ -11,9 +11,6 @@ public class PCG  {
     public int pcgrid_height; // Grid height
 
 
-    public PCG()
-    {
-    }
 
     public void updateParam(int g_width, int g_height)
     {

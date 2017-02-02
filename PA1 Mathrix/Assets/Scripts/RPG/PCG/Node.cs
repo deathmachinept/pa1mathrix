@@ -7,7 +7,7 @@ public class Node {
     private int y;
     private int f;
     private int g;
-    private int h;
+    private int h;  // herustic score
     private int dir;
     public Node parent;
 

@@ -16,7 +16,7 @@ public class PCG_Basic : PCG{
     private int room_base;
     private int room_radix;
     private bool room_blocked = false; // If room is blocked
-    int redo = 3500; // Recursion limit
+    int tenativas = 3500; // limite de tentativa de meter quartos
     ArrayList rooms; // Room arraylist
     int corridor_num;
     int corridor_weight;
@@ -105,7 +105,7 @@ public class PCG_Basic : PCG{
         int posX = (pcgrid_width / 4);
         Vector2 coordenadaDeQuarto = new Vector2(posX, posY);
 
-        Room Cela = new Room(pcgrid_width, pcgrid_height, 0, 0, 1, R, 2, 4, 5, coordenadaDeQuarto);
+        Room Cela = new Room(pcgrid_width, pcgrid_height, 0, 0, 1, R, 3, 4, 5, coordenadaDeQuarto);
         rooms.Add(Cela);
 
         for (int j = Cela.room_y1; j <= Cela.room_y2; j++)
@@ -145,7 +145,16 @@ public class PCG_Basic : PCG{
                 guardarDir[Cela.wall_x2, j] = 5;
             }
         }
+        // Place openings
 
+            if (pcgrid[Cela.opening[0, 0], Cela.opening[0, 1]] != 1)
+
+            {
+                pcgrid[Cela.opening[0, 0], Cela.opening[0, 1]] = 3;
+                guardarDir[Cela.opening[0, 0], Cela.opening[0, 1]] = (byte)Cela.opening[0, 2];
+
+            }
+        
 
     }
 
@@ -216,10 +225,10 @@ public class PCG_Basic : PCG{
     {
 
         rooms = new ArrayList(); // New room arraylist
-        for (int n = 0; n < roomMax; n++)
+        for (int n = 0; n < roomMax; n++) // tenta meter quartos ate atingir limite
         {
             room_blocked = false; // Unblock
-            if (!buildMetro)
+            if (!buildMetro) // meter metro e cela
             {
                 insertMetro();
                 insertCell();
@@ -227,17 +236,17 @@ public class PCG_Basic : PCG{
             }
             else { 
             Room rm = new Room(pcgrid_width, pcgrid_height, room_base, room_radix, corridor_num, R, 0, 0, 0,
-                Vector2.zero); // Create new room
-            room_blocked = blockRoom(rm); // Check if room is blocked
+                Vector2.zero); // Criar Room
+            room_blocked = blockRoom(rm); // ve se e possivel
 
             if (room_blocked)
             {
                 n--; // Remake room
-                redo--; // Stops if taking too long
-                if (redo == 0)
+                    tenativas--; // Stops if taking too long
+                if (tenativas == 0)
                 {
                     room_num--;
-                    redo = 3500; // Recursion limit
+                        tenativas = 3500; // Recursion limit
                 }
             }
             else
@@ -291,7 +300,7 @@ public class PCG_Basic : PCG{
 
                     if (pcgrid[rm.opening[k, 0], rm.opening[k, 1]] != 1)
                         {
-                            pcgrid[rm.opening[k, 0], rm.opening[k, 1]] = 3; // coordenadaX , coordenada porta 
+                            pcgrid[rm.opening[k, 0], rm.opening[k, 1]] = 3; // coordenadaX , coordenadaY, porta 
                             guardarDir[rm.opening[k, 0], rm.opening[k, 1]] = (byte)rm.opening[k, 2];
                         }
                     }
@@ -356,11 +365,11 @@ public class PCG_Basic : PCG{
                 basicAStar(pcgrid, rm1.opening[0, 0], rm1.opening[0, 1], rm2.opening[0, 0], rm2.opening[0, 1], corridor_weight, turning_weight);
 
                 // Random tunneling
-                for (int j = 1; j < rm1.opening_num; j++)
-                {
-                    Debug.Log("Random TUNNEL0!");
-                    tunnelRandom(rm1.opening[j, 0], rm1.opening[j, 1], rm1.opening[j, 2], 3);
-                }
+                //for (int j = 1; j < rm1.opening_num; j++)
+                //{
+                //    Debug.Log("Random TUNNEL0!");
+                //    tunnelRandom(rm1.opening[j, 0], rm1.opening[j, 1], rm1.opening[j, 2], 3);
+                //}
             }
         }
         else
@@ -753,9 +762,9 @@ public class PCG_Basic : PCG{
             if (grid[x, y, 1] != 1)
             { // If not in open list
                 int g_score = current.getH + 10; // Calculate g score
-                if (grid[x, y, 0] == 4 || grid[x, y, 0] == 5) g_score = g_score - corr_wt; // Added weight for joining corridors
+                if (grid[x, y, 0] == 4 || grid[x, y, 0] == 5) g_score = g_score - corr_wt; // juntar corredor peso
                 if (dir == current.getDir) g_score = g_score - trn_wt; // Added weight for keep straight
-                int h_score = heuristic(x, y, x2, y2, 0); // Calculate h score
+                int h_score = heuristic(x, y, x2, y2); // Calculate h score
                 Node child = new Node(x, y, g_score, h_score, dir);
                 child.parent = current; // Assign parent
                 open_list.insert(child); // Add to open list
@@ -786,19 +795,12 @@ public class PCG_Basic : PCG{
         }
     }
 
-    private int heuristic(int x, int y, int x2, int y2, int method)
+    private int heuristic(int x, int y, int x2, int y2)
     {
         int h_score = 0;
-        switch (method)
-        {
-            case 0: h_score = 10 * (Mathf.Abs(x - x2) + Mathf.Abs(y - y2));
-                break; // Manhattan
-            case 1: int xDistance = Mathf.Abs(x - x2);
-                int yDistance = Mathf.Abs(y - y2);
-                if (xDistance > yDistance) h_score = 14 * yDistance + 10 * (xDistance - yDistance);
-                else h_score = 14 * xDistance + 10 * (yDistance - xDistance);
-                break; // Diagonal
-        }
+
+        h_score = 10 * (Mathf.Abs(x - x2) + Mathf.Abs(y - y2));
+
         return h_score;
     }
 

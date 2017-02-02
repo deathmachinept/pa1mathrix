@@ -61,7 +61,7 @@ public class Room
             room_y = (int) coordenada.y;
             room_x1 = (int) coordenada.x - width;
             room_y1 = (int)coordenada.y - height;
-            room_x2 = (int)coordenada.x + width;
+            room_x2 = (int)coordenada.x;
             room_y2 = (int) coordenada.y ;
 
             wall_x1 = room_x1 - 1;
@@ -130,7 +130,7 @@ public class Room
                     }
                     else if (typeAutobuild == 1) //cela
                     {
-                        x1 = wall_x1 + 2;
+                        x1 = wall_x1 + 3;
                     }
                     else{
                          x1 = (int)NextFloat(RandomG, wall_x1, wall_x2);

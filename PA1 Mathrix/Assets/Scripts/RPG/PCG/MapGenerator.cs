@@ -26,7 +26,7 @@ public class MapGenerator : MonoBehaviour
   public int grid_height; // Grid height
 
     private bool once = true;
-  bool debug = true; // Debug mode
+  public bool debug = false; // Debug mode
   
   // World parameters  
     public MapGenerator()
@@ -95,6 +95,46 @@ public class MapGenerator : MonoBehaviour
   {
         // portas 0south 1west 2north 3east paredes 4south 5 east 6 north 7 west 9 Corner West Wall 10 corner East Wall
         // Render grid cell content
+
+        if (debug)
+        {
+            switch (grid[x, y])
+            {
+                case 0: // Corridor
+
+                    break;
+                case 1: // floor
+                    GameObject Floor = Instantiate(Resources.Load("Empty")) as GameObject;
+                    Floor.transform.SetParent(TilesHolder.transform);
+                    Floor.name = "Chao";
+                    Floor.transform.position = new Vector3(x, y, 0);
+                    break;
+                case 2: // Door
+                    GameObject WallDebug = Instantiate(Resources.Load("Wall")) as GameObject;
+                    WallDebug.transform.SetParent(TilesHolder.transform);
+                    WallDebug.name = "Wall Tile";
+                    WallDebug.transform.position = new Vector3(x, y, 0);
+                    break;
+                case 3: // Door
+                    GameObject DoorDebug = Instantiate(Resources.Load("Door")) as GameObject;
+                    DoorDebug.transform.SetParent(TilesHolder.transform);
+                    DoorDebug.name = "Door Tile";
+                    DoorDebug.transform.position = new Vector3(x, y, 0);
+                    break;
+                case 4: // Corridor
+                    GameObject Corridor = Instantiate(Resources.Load("Floor")) as GameObject;
+                    Corridor.transform.SetParent(TilesHolder.transform);
+                    Corridor.name = "Corredor Tile";
+                    Corridor.transform.position = new Vector3(x, y, 0);
+                    break;
+                case 5: // Corridor
+                    GameObject ExtraCorridor = Instantiate(Resources.Load("Extracorridor")) as GameObject;
+                    ExtraCorridor.transform.SetParent(TilesHolder.transform);
+                    ExtraCorridor.name = "Corredor Tile";
+                    ExtraCorridor.transform.position = new Vector3(x, y, 0);
+                    break;
+            }
+        }else { 
         switch (grid[x, y])
         {
             case 1: // Corridor
@@ -180,7 +220,8 @@ public class MapGenerator : MonoBehaviour
                 break;
                 break;
         }
-  }
+        }
+    }
 
 
   public void initGrid()
