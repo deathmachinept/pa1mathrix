@@ -52,7 +52,7 @@ public class MoveTrain : MonoBehaviour {
 
         if (!checkNofPlayerOnce)
         {
-            children = GameObject.FindGameObjectWithTag("ManagerPlayers").transform.childCount;
+            children = GameObject.FindGameObjectWithTag("Player").transform.childCount;
             checkNofPlayerOnce = true;
         }
 
@@ -60,14 +60,14 @@ public class MoveTrain : MonoBehaviour {
 	    {
 	        if (Input.GetKeyDown(KeyCode.F))
 	        {
-                Debug.Log("Pos " + playerTriggered.transform.localPosition + " " + playerTriggered.GetComponent<MovimentoJogador>().isAllowedToMove);
-	            playerTriggered.GetComponent<MovimentoJogador>().isMoving = true;
-	            playerTriggered.GetComponent<MovimentoJogador>().inputAuto.y = 3f;
-	            playerTriggered.GetComponent<MovimentoJogador>().automatic = true;
+                Debug.Log("Pos " + playerTriggered.transform.localPosition + " " + playerTriggered.GetComponent<MovimentoJogador2>().isAllowedToMove);
+	            playerTriggered.GetComponent<MovimentoJogador2>().isMoving = true;
+	            playerTriggered.GetComponent<MovimentoJogador2>().inputAuto.y = 3f;
+	            playerTriggered.GetComponent<MovimentoJogador2>().automatic = true;
 
 
 
-                Debug.Log("Pos " + playerTriggered.transform.localPosition + " " + playerTriggered.GetComponent<MovimentoJogador>().isAllowedToMove);
+                Debug.Log("Pos " + playerTriggered.transform.localPosition + " " + playerTriggered.GetComponent<MovimentoJogador2>().isAllowedToMove);
 
 	                carregouOnce = true;
 	 
@@ -79,7 +79,6 @@ public class MoveTrain : MonoBehaviour {
 
 	    if (triggerMove)
 	    {
-
 	        if (countMovement < 17)
 	        {
 	            trainPos = new Vector3(trainPos.x - 0.05f, trainPos.y, trainPos.z);

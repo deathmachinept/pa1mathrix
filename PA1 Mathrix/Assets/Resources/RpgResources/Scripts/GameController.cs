@@ -5,29 +5,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
-
-
-public class GameController : NetworkBehaviour
+public class GameController : MonoBehaviour
 {
-    public GameObject PlayersHolder;
-
     public void Awake()
     {
-        PlayersHolder = transform.FindChild("Players").gameObject;
+        DontDestroyOnLoad(gameObject);
     }
 
     public void Update()
     {
 
-    }
-
-    void UpdatePlayerNames()
-    {
-        if(!isServer)
-        { return;}
-        foreach (var VARIABLE in PlayersHolder.transform)
-        {
-            
-        }
     }
 }
